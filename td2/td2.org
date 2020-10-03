@@ -1,0 +1,710 @@
+# -*- coding: utf-8 -*-
+
+#+TITLE: L'environnement de développement Python
+#+AUTHOR: Roland Donat
+#+EMAIL: roland.donat@univ-ubs.fr
+#+DATE: licences professionnelles - SDM/SIS
+# Modélisation Stochastique par Réseaux Bayésiens 
+
+#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
+#+MACRO: HTMLFONTSIZE @@html:<font size="$2">$1</font>@@
+#+MACRO: SUBTITLE @@html:<div class="slidesubtitle">$1</div>@@
+
+# Org-mode general options
+# ------------------------
+#+LANGUAGE: fr
+#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil timestamp:nil
+#+OPTIONS: html-postamble:nil
+#+DRAWERS: OPTIONS CACHE MACROS
+#+STARTUP: content 
+#+STARTUP: hidestars
+#+TODO: TODO(t) INPROGRESS(p) | DONE(d)
+#+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+
+# HTML options
+# ------------
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/edgemind.css" />
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/ensibs.css" />
+# CSS to get the ReadTheDoc style
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+# #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+# #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+# LaTeX options
+# -------------
+:OPTIONS:
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt]
+
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[french]{babel}
+#+LATEX_HEADER: \usepackage[default,scale=0.95]{opensans}
+
+#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
+
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: % Graphics path
+#+LATEX_HEADER: \graphicspath{ 
+#+LATEX_HEADER:   {./fig/}
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amsfonts}
+
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: % EdgeMind Colors
+#+LATEX_HEADER: \definecolor{UBSOrange}         {HTML}{e46c0a}
+#+LATEX_HEADER: \definecolor{UBSYellow}         {HTML}{ffe000}
+#+LATEX_HEADER: \definecolor{almostwhite}        {rgb}{0.85,0.85,0.85}
+#+LATEX_HEADER: \usepackage{verbatim}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{lmodern}
+
+#+LATEX_HEADER: \usepackage[pdfborder={0 0 0},bookmarks=true,bookmarksnumbered=true,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,colorlinks=true,linkcolor=UBSOrange,urlcolor=UBSOrange,citecolor=UBSOrange]{hyperref}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{subfig}
+#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
+#+LATEX_HEADER: \usepackage{booktabs}
+
+#+LATEX_HEADER: \usepackage{minted}
+# To control spaces between minted block
+#+LATEX_HEADER: \AtBeginEnvironment{snugshade*}{\vspace{-1.5\FrameSep}}
+#+LATEX_HEADER: \AfterEndEnvironment{snugshade*}{\vspace{-3\FrameSep}}
+# #+LATEX_HEADER: \usemintedstyle{monokai}
+# #+LATEX_HEADER: \renewcommand{\theFancyVerbLine}{\sffamily \footnotesize {\color{EMLogoBlue}\oldstylenums{\arabic{FancyVerbLine}}}}
+
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \geometry{
+#+LATEX_HEADER: %  nohead,
+#+LATEX_HEADER:   top=2.25cm, 
+#+LATEX_HEADER:   bottom=2.25cm, 
+#+LATEX_HEADER:  left=2.5cm, 
+#+LATEX_HEADER:  right=2.5cm}
+
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: % Supprime l'indentation
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: % Espacement entre les paragraphes
+#+LATEX_HEADER: \setlength{\parskip}{2ex}
+
+
+:END:
+
+* Configuration                                                    :noexport:
+# Latex command to work with minted
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports none
+#+BEGIN_SRC emacs-lisp 
+(setq org-latex-listings 'minted
+      org-latex-minted-options nil ;; '(("frame" "lines")))
+      org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+#+END_SRC
+:END:
+
+
+# Publishing configuration
+# ------------------------
+:CACHE:
+#+HEADER: :eval yes
+#+HEADER: :results silent
+#+HEADER: :exports none
+#+BEGIN_SRC emacs-lisp 
+;; Define some export options here since in org-publish-project-alist some of them are not taken into account
+;; e.g. with-toc nil
+(defun my-html-export-options (plist backend)
+  (cond 
+    ((equal backend 'html)
+     (plist-put plist :with-toc t)
+     (plist-put plist :section-numbers nil)
+     (plist-put plist :with-author t)
+     (plist-put plist :with-email t)
+     (plist-put plist :with-date t)
+     ))
+  plist)
+
+(setq org-publish-project-alist
+      '(
+	
+        ("main"
+         :base-directory "./"
+         :include ("rb_mod_stoch.org")
+         :publishing-directory "./"
+         :recursive nil
+         :publishing-function org-html-publish-to-html
+         :preparation-function (lambda () (setq org-export-filter-options-functions '(my-html-export-options)))
+         :auto-preamble t
+         :html-head  "<link rel='stylesheet' type='text/css' href='edgemind.css' />"
+         :htmlized-source 
+	 :section-numbers nil
+         )
+        ("td-html"
+         :base-directory "./td/"
+         :base-extension "org"
+         :publishing-directory "./td"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :preparation-function (lambda () (setq org-export-filter-options-functions '(my-html-export-options)))
+         :auto-preamble t
+         :html-head  "<link rel='stylesheet' type='text/css' href='edgemind.css' />"
+         :htmlized-source 
+         )
+
+	 ;; pdf
+        ("td-pdf"
+         :base-directory "./td/"
+         :base-extension "org"
+         :publishing-directory "./td"
+         :recursive t
+         :publishing-function org-latex-publish-to-pdf
+         )
+
+	 ("td-attach"
+	 :base-directory "./td/"
+	 :base-extension "xdsl\\|txt\\|csv\\|py\\|png"
+         :publishing-directory "./td"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+
+	 ("cours-attach"
+	 :base-directory "./cours/"
+	 :base-extension "pdf\\|xdsl\\|txt\\|csv\\|py"
+         :publishing-directory "./cours"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+
+        ("projet-html"
+         :base-directory "./projet/"
+         :base-extension "org"
+         :publishing-directory "./projet"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :preparation-function (lambda () (setq org-export-filter-options-functions '(my-html-export-options)))
+         :auto-preamble t
+         :html-head  "<link rel='stylesheet' type='text/css' href='edgemind.css' />"
+         :htmlized-source 
+         )
+
+	 ("projet-attach"
+	 :base-directory "./projet/"
+	 :base-extension "xdsl\\|txt\\|csv"
+         :publishing-directory "./projet"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+
+	 ("css"
+         :base-directory "./css/"
+         :base-extension "css"
+         :publishing-directory "./www/css"
+         :publishing-function org-publish-attachment)
+	 
+	 ;("rb_mod_stoch" :components ("main" "td-pdf" "td-html" "td-attach" "cours-attach" "projet-html" "projet-attach" "css"))
+	 ;("rb_mod_stoch" :components ("main" "td-pdf" "td-html" "projet-html"))
+	 ("rb_mod_stoch" :components ("main"))
+
+      ))
+#+END_SRC
+:END:
+
+
+* Objectif
+
+Ce TD a pour objectif de vous donner un aperçu des concepts de base du langage =Python=. Nous
+abordons ainsi les notions de type, opérateur mathématique et variable. Nous terminons avec une
+section dédiée à la manipulation des chaînes de caractères.
+
+Pour réaliser ce TD, créez un /notebook/ =Jupyter= dans le lequel vous allez exécuter votre code
+=Python=. Vous pourrez ainsi commenter votre travail en utilisant des blocs =Markdown=.
+
+* Les types usuels
+
+Un type correspond à la façon dont =Python= représente certaines catégories de données
+homogènes. Dans ce TD, nous étudierons certains types largement utilisés en =Python=. 
+
+Il existe de nombreux types prédéfinis en =Python= tels que :
+- les nombres entiers comme 11 ;
+- les nombres réels comme 21.213 ;
+- les chaînes de caractères comme "Bonjour".
+
+Les nombres entiers, les nombres réels et les chaînes de caractères sont associés à un type de
+données =Python= particulier. Le Tableau [[ref:tab_python_type_example]] illustre la notion de type avec
+quelques exemples. La première colonne indique l'expression et la seconde colonne indique le type de
+donnée correspondant.
+
+#+CAPTION: Exemples de types =Python= usuels. label:tab_python_type_example
+#+ATTR_LATEX: :environment tabular :align ll
+#+ATTR_LATEX: :center t
+#+ATTR_LATEX: :font \normalsize
+#+ATTR_LATEX: :booktabs t
+| Expression | Type =Python= |
+|------------+---------------|
+|         11 | =int=         |
+|     21.213 | =float=       |
+|  "Bonjour" | =str=         |
+
+Pour connaître le type d'une expression, il faut utiliser la fonction =type= comme suit :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type(11)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines 
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type(21.213)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type("Bonjour")
+#+END_SRC
+
+_Remarques :_
+- Le type =str= correspond aux chaînes de caractères que l'on définit en =Python= entre guillemets
+  ou entre apostrophes, e.g. ="abc", 'abc', "01 - Introduction au typage"=.  
+- Les nombres entiers peuvent être négatifs ou positifs, e.g. =-1015, -5, 0, 1, 37=
+- Les flottants sont des nombres réels, e.g. =-5.0, 13.4586, -1.87e-11=. Ils incluent donc les entiers et les nombres 
+  entre les entiers. 
+
+Il est possible de changer le type d'une expression en =Python=, c'est ce qu'on appelle le
+/typecasting/. Vous pouvez par exemple convertir un =int= en =float= en utilisant la fonction
+=float= :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+float(2)
+#+END_SRC
+Le résultat ne change pas vraiment mais notez que =Python= affiche =2.0= au lieu de =2= indiquant
+que la conversion a bien eu lieu.
+
+Il n'est pas toujours possible de changer le type d'une expression. Par exemple, essayez de transformer une
+chaîne de caractères en =float= :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :exports code :eval no
+float("Ça va faire mal")
+#+END_SRC
+En revanche si la chaîne représente un nombre flottant, la conversion fonctionne ! Par exemple :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+float("3.14")
+#+END_SRC
+
+Par ailleurs, certaines conversions sont possibles mais entraînent des changements ou perte
+d'information qu'il convient de bien maîtriser. La fonction =int= permet par exemple de transformer des nombres en entier. Pour
+illustrer le comportement de cette fonction, essayez de convertir les nombres flottants suivants :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+int(2.7)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+int(-2.7)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+int(-1.2)
+#+END_SRC
+La fonction =int= revient dans ce cas à calculer la partie entière d'un nombre.
+
+La fonction =str= permet de convertir une expression en chaîne de caractères. Cette fonction peut
+être appliquée sur toutes les expressions =Python=. Autrement dit, =Python= peut tout convertir en
+chaîne de caractères. Exemples :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+str(63)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+str(-78.1)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+str(1.43e-12)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+str("Bonjour")
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+str(type("Bonjour"))
+#+END_SRC
+
+
+Le type booléen est un autre type important en =Python=. Un booléen peut prendre deux valeurs. La
+première valeur est =True= (vrai) avec un =T= majuscule et la seconde est =False= avec une =F=
+majuscule. En utilisant la fonction =type= sur une valeur booléenne, nous obtenons le type =bool= :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type(True)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type(False)
+#+END_SRC
+
+Il est possible de convertir un booléen en entier et vice-versa. Expérimentez vous même ces
+conversions pour en déduire la règle sous-jacente :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+int(False)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+int(True)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+bool(0)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+bool(1)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+bool(0.5)
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+bool(-10)
+#+END_SRC
+
+* Opérations mathématiques
+
+L'interpréteur =Python= est capable de réaliser toutes les opérations arithmétiques usuelles. Le
+Tableau [[ref:tab_python_arithmetic_operations]] présente la syntaxe pour réaliser ces opérations.
+
+#+CAPTION: Opérations mathématiques usuelles. label:tab_python_arithmetic_operations
+#+ATTR_LATEX: :environment tabular :align llll
+#+ATTR_LATEX: :center t
+#+ATTR_LATEX: :font \normalsize
+#+ATTR_LATEX: :booktabs t
+| Opération                       | Opérateur | Exemple   | Résultat |
+|---------------------------------+-----------+-----------+----------|
+| addition                        | =+=       | =4 + 7.1= | =11.1=   |
+| soustraction                    | =-=       | =10 - 23= | =-13=    |
+| multiplication                  | =*=       | =3.0 * 2= | =6.0=    |
+| division réelle                 | =/=       | =5 / 2=   | =2.5=    |
+| division euclidienne (quotient) | =//=      | =5 // 2=  | =2=      |
+| division euclidienne (reste)    | =%=       | =5 % 2=   | =1=      |
+| puissance                       | =**=      | =3**4=    | =81=     |
+
+=Python= suit les conventions mathématiques standards suivante pour évaluer les expressions
+mathématiques :
+- Les opérations entre parenthèses sont effectuées en premier en débutant par le niveau de
+  parenthèses le plus imbriqué et en remontant itérativement vers le moins imbriqué.
+- À un niveau donné, les multiplications et les divisions sont calculées en premier suivies des
+  additions et soustractions.
+- Deux opérations successives ayant la même priorité sont réalisées de gauche à droite.
+
+Dans l'exemple suivant :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+(3 + 4*2)*(10/(3*5-5))
+#+END_SRC
+
+L'interpréteur =Python= procède dans cet ordre :
+1. =(3*5 - 5) = (15 - 5) = 10= ;
+2. =(3 + 4*2) = (3 + 8) = 11= ;
+3. =(10/10) = 1.0= ;
+4. =11/1.0 = 11.0=.
+
+* Les variables
+
+Comme dans la plupart des langages de programmation, les variables servent simplement à stocker des
+valeurs pour en faciliter la réutilisation.
+
+Prenons l'exemple suivant :  
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+ma_variable = 1
+#+END_SRC
+Nous attribuons ici la valeur de 1 à la variable =ma_variable= en utilisant l'opérateur
+d'affectation, c'est-à-dire le signe égal. Nous pouvons ensuite utiliser la valeur ailleurs dans le
+code en tapant le nom exact de la variable :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+ma_variable - 10
+#+END_SRC
+
+Nous pouvons bien sûr stocker le résultat d'expressions plus complexes faisant éventuellement
+intervenir d'autres variables. Par exemple : 
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+seconde_variable = 2*ma_variable/3 + ma_variable
+print(seconde_variable)
+#+END_SRC
+Notez au passage l'utilisation de la fonction =print= permettant d'afficher le contenu d'une
+variable. 
+
+Il est souvent très utile de mettre à jour la valeur d'une variable en utilisant sa valeur
+courante :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+seconde_variable = seconde_variable + 1
+print(seconde_variable)
+#+END_SRC
+N'hésitez pas à utiliser régulièrement la fonction =type= sur vos variables afin de bien comprendre
+la nature des objets =Python= que vous manipulez.
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+type(seconde_variable)
+#+END_SRC
+
+_Exercice :_
+
+Supposons que nous disposons d'une variable dont la valeur est un nombre de secondes :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+nombre_secondes = 3569
+#+END_SRC
+
+Écrivez un petit code =Python= permettant de convertir ce nombre de secondes en heures, minutes et
+secondes. Vous devez bien sûr utiliser la variable =nombre_secondes= dans vos calculs.
+ 
+_Remarques pour avoir du style :_
+- Il est important de créer vos variables avec des noms ayant du sens. Il est largement préférable
+  de manipuler des variables ayant de longs noms explicites plutôt que des variables ayant des noms
+  courts mais obscurs. Autrement dit, ne pas hésiter à utiliser =nombre_heures= pour une variable
+  contenant un nombre d'heures plutôt que =nb_h= ou pire =h=.
+- En =Python=, il est recommandé d'écrire les variables en minuscules en sépérant les mots par des
+  /underscore/. 
+ 
+
+* Manipulation des chaînes de caractères
+** Définition
+Nous rappelons qu'en =Python=, une chaîne de caractères (de type =str=) est définie par une
+expression contenue entre deux guillemets ou deux apostrophes, e.g. ="Kawhi Leonard"= ou ='Kawhi
+Leonard'=. 
+
+Une chaîne de caractères peut contenir tous types de caractères (lettres, espaces, chiffres,
+ caractères spéciaux), e.g. ="Kawhi Leonard, N°2 @ LA-C !"=. Il est même possible de définir une
+ chaîne vide par =""=.
+
+La fonction =len= permet de calculer la longueur d'une chaîne de caractère. 
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+len("")
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+len("Bonjour")
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+joueur_basket = "Kawhi Leonard, N°2 @ LA-C !"
+len(joueur_basket)
+#+END_SRC
+
+
+** Indexation basique
+En =Python= (et comme dans bien d'autres langages de programmation), une chaîne de caractères est
+une suite (ou séquence) ordonnée de caractères indexée par des nombres entiers. Autrement dit,
+chaque caractère d'une chaîne est accessible par son index. La correspondance caractère/index pour
+la chaîne ="Kawhi Leonard, N°2"= est présentée dans le tableau suivant :
+#+ATTR_LATEX: :environment tabular :align |l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|
+#+ATTR_LATEX: :center t
+#+ATTR_LATEX: :font \footnotesize
+|-----------+---+---+---+---+---+---+---+---+---+---+----+----+----+----+----+----+----+----|
+| Caractère | K | a | w | h | i |   | L | e | o | n |  a |  r |  d |  , |    |  N |  ° |  2 |
+|-----------+---+---+---+---+---+---+---+---+---+---+----+----+----+----+----+----+----+----|
+| Index     | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
+|-----------+---+---+---+---+---+---+---+---+---+---+----+----+----+----+----+----+----+----|
+
+Pour accéder à un caractère d'une chaîne par son index, il faut utiliser l'opérateur =[]= (crochets)
+comme suit :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+joueur_basket = "Kawhi Leonard, N°2"
+print(joueur_basket[0])
+print(joueur_basket[1])
+print(joueur_basket[12])
+print(joueur_basket[14])
+print(joueur_basket[17])
+#+END_SRC
+
+_Remarque geek :_ =Python= fait partie de la grande famille des langages qui indexe les
+listes/séquences à partir de l'indice 0 comme le =C=, =C++=, =Java=. Par comparaison, le langage =R= indexe
+les listes à partir de l'indice 1.
+
+_Note :_ Une chaîne de caractères est un objet invariable (en =Python=, on parle d'objet
+/immutable/). Cela signifie qu'il est impossible de modifier un caractère d'une chaîne à partir de
+son index. L'opération =joueur_basket[1] = "A"= n'est pas autorisée et renvoie une erreur. 
+
+
+En outre, =Python= offre la possibilité d'utiliser une indexation négative afin
+d'accéder aux éléments d'une chaîne de caractères par la fin. Le tableau suivant reprend l'exemple
+de la chaîne précédent en y ajoutant l'indexation négative :
+#+ATTR_LATEX: :environment tabular :align |l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|
+#+ATTR_LATEX: :center t
+#+ATTR_LATEX: :font \footnotesize
+|---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+----+----+----+----+----+----+----+----+----|
+| Caractère     |   K |   a |   w |   h |   i |     |   L |   e |   o |  n |  a |  r |  d |  , |    |  N |  ° |  2 |
+|---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+----+----+----+----+----+----+----+----+----|
+| Index         |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |   8 |  9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
+|---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+----+----+----+----+----+----+----+----+----|
+| Index négatif | -18 | -17 | -16 | -15 | -14 | -13 | -12 | -11 | -10 | -9 | -8 | -7 | -6 | -5 | -4 | -3 | -2 | -1 |
+|---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+----+----+----+----+----+----+----+----+----|
+
+_Exercice :_
+
+Afficher les caractères de l'exemple précédent en utilisant l'indexation négative.
+# #+attr_latex: :options bgcolor=almostwhite, frame=lines
+# #+BEGIN_SRC ipython :session :results raw drawer code :exports code
+# joueur_basket = "Kawhi Leonard, N°2"
+# print(joueur_basket[-18])
+# print(joueur_basket[-17])
+# print(joueur_basket[-6])
+# print(joueur_basket[-4])
+# print(joueur_basket[-1])
+# #+END_SRC
+
+** Indexation avancée
+
+=Python= offre la possibilité d'accéder rapidement à des morceaux (ou sous-chaînes) d'une chaîne de
+caractères grâce aux fonctionnalités de /slicing/. Les opérations de /slicing/ font intervenir
+l'opérateur =:= afin de définir la plage d'éléments auxquels nous souhaitons accéder. Par exemple,
+pour accéder à la sous-chaîne ="Kawhi"=, il faut écrire :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+joueur_basket = "Kawhi Leonard, N°2"
+prenom = joueur_basket[0:5]
+print(prenom)
+#+END_SRC
+L'opération de /slicing/ =0:5= signifie "récupérer les caractères de l'indice 0 à l'indice 5 non inclus",
+autrement dit, "récupérer les caractères des indices 0, 1, 2, 3, 4".
+
+Il est également possible de réaliser des opérations de /slicing/ en indiquant le "pas" de parcours
+de la chaîne. Par exemple, pour accéder à un caractère sur trois en démarrant du ="w"= et en allant
+jusqu'à la virgule, il faut écrire :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+joueur_basket = "Kawhi Leonard, N°2"
+un_sur_trois = joueur_basket[2:15:3]
+print(un_sur_trois)
+#+END_SRC
+L'opération de /slicing/ =2:15:3= se lit "récupérer les caractères de l'indice 2 à l'indice 15 non
+inclus avec un pas de 3, autrement dit, récupérer les caractères des indices 2, 5, 8, 11 et 14.
+
+_Exercices :_
+En utilisant la chaîne ="Kawhi Leonard, N°2"=, utiliser une opération de /slicing/ pour récupérer :
+1. la chaîne "Leonard" ;
+2. la chaîne "Load N2".
+
+** Opérations sur les chaînes
+
+Pour concaténer deux chaînes de caractères, il faut utiliser l'opérateur =+= de la façon suivante :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+joueur_basket = "Kawhi Leonard, N°2"
+verite_absolue = joueur_basket + " est le meilleur"
+print(verite_absolue)
+#+END_SRC
+
+Il est également possible de répliquer une chaîne de caractères avec l'opérateur =*=. Par exemple :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+3*"Kawhi ! "
+#+END_SRC
+
+** Les séquences d'échappement 
+
+Les séquences d'échappement désignent des séquences de caractères particulières qui sont
+interprétées par les fonctions d'affichage (e.g. =print=) pour formater la chaîne d'une certaine
+manière.  
+
+La séquence ="\n"= sert à insérer un saut de ligne.
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+chaine = "Encore une tempête en\nBretagne..."
+print(chaine)
+#+END_SRC
+
+La séquence ="\t"= sert à insérer une tabulation.
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+chaine = "Encore une tempête en\tBretagne..."
+print(chaine)
+#+END_SRC
+
+La séquence ="\r"= sert à insérer un retour en début de ligne.
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+chaine = "Encore une tempête en\rBretagne..."
+print(chaine)
+#+END_SRC
+
+_Remarque :_ Si vous souhaitez utiliser le caractère ="\"= dans une chaîne de caractères sans pour
+autant que ce dernier ne soit interprété dans une séquence d'échappement, il suffit de doubler le
+caractère ="\"=. Par exemple :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+chaine = "Encore une tempête en\\nBretagne..."
+print(chaine)
+#+END_SRC
+
+** Méthodes de chaînes de caractères
+
+En =Python=, il existe deux façons de réaliser des traitements sur un élément :
+1. Avec une fonction, e.g. =len=, =type=, =int=, =print=, etc. Dans ce cas, on passe l'élément en
+   argument de la fonction entre parenthèses et on récupère le résultat, e.g. =len("abc")= retourne
+   la valeur 3.
+2. Avec une méthode disponible pour le type de l'élément manipulé. Les méthodes s'utilisent avec la
+   syntaxe suivante =<nom de l'élément>.<nom de la méthode>(arguments de la méthode)=.
+
+Le type "chaîne de caractères" (i.e. type =str=) possède de nombreuses méthodes permettant de
+manipuler et transformer les chaînes de caractères. Les paragraphes suivants en abordent quelques-unes.
+
+La méthode =upper= permet de transformer une chaîne en majuscules :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+mon_texte = "Encore une tempête en Bretagne..."
+mon_texte.upper()
+#+END_SRC
+Quelques remarques :
+1. La méthode =upper= n'a pas besoin d'argument, d'où les parenthèses vides.  
+2. La méthode =upper= renvoie une nouvelle chaîne de caractères. Le contenu de la variable
+   =mon_texte= n'est pas modifié.
+3. Écrire directement ="Encore une tempête en Bretagne...".upper()=
+   amène au même résultat.
+
+La méthode =lower= transforme une chaîne en minuscules.
+
+La méthode =replace= permet de remplacer une partie d'une chaîne par une autre :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+mon_texte = "Encore une tempête en Bretagne..."
+nouveau_texte = mon_texte.replace("une tempête", "du beau temps")
+print(nouveau_texte)
+#+END_SRC
+À noter que la méthode =replace= ne modifie pas la chaîne sur laquelle la méthode est appliquée mais
+renvoie une nouvelle chaîne modifiée.
+
+La méthode =find= permet de rechercher si une chaîne est contenue dans la chaîne sur laquelle la
+méthode est appliquée :
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+mon_texte = "Encore une tempête en Bretagne..."
+indice = mon_texte.find("temp")
+#+END_SRC
+#+attr_latex: :options bgcolor=almostwhite, frame=lines
+#+BEGIN_SRC ipython :session :results raw drawer code :exports code
+mon_texte = "Encore une tempête en Bretagne..."
+indice = mon_texte.find("Normandie")
+#+END_SRC
+La méthode =find= renvoie l'indice du premier caractère de la chaîne recherché si cette dernière est
+présente et la valeur =-1= si la chaîne recherchée n'est pas trouvée.
+
