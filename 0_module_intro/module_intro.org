@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#+TITLE: introduction au langage Python pour la science des données {{{NEWLINE}}} {{{HTMLFONTSIZE(Organisation du module,10)}}}
+#+TITLE: introduction au langage =Python= pour la science des données {{{NEWLINE}}} {{{HTMLFONTSIZE(Organisation du module,10)}}}
 #+AUTHOR: {{{NEWLINE}}} Roland Donat
 #+EMAIL: roland.donat@univ-ubs.fr
 #+DATE: licences professionnelles - SDM/SIS
@@ -235,34 +235,52 @@ dans le cadre d'applications en science des données. Ce cours est à destinatio
 Licence pro Statistiques Décisionnelles en Marketing et de Licence pro Statistique et Informatique
 pour la Santé. 
 
-* 
-
-Former les étudiants à l'utilisation du langage Python afin de traiter, modéliser et visualiser les données
-
-
 * Objectifs pédagogiques
-- Installer et configurer un environnement Python
+- Installer et configurer un environnement =Python=
 - Maîtriser les concepts de base du langage
-- Connaître les principales structures de données Python 
-- Savoir écrire un programme Python
-- Être capable de manipuler des fichiers textes
-- Connaître les principales fonctionnalités de la librairie Pandas
-- Réaliser une régression logistique avec la librairie SciKit Learn
-- Construire des visualisations interactives avec la libraire Plotly
+- Connaître les principales structures de données =Python= 
+- Savoir écrire un programme =Python=
+- Mettre en place une démarche de /data management/ avec la librairie =Pandas=
+- Construire des visualisations interactives avec la libraire =Plotly=
 
 * Organisation du cours
 
-- Le module s'étend sur les périodes 1 et 2
-- Chaque période correspond à 6 heures (2 sessions de 3 heures) de travaux dirigés
-- Le matériel pédagogique 
+- Le module s'étend sur les périodes 1 et 2 du cursus
+- 6 heures (2 sessions de 3 heures) de travaux dirigés sur chaque période
+- Ressources pédagogiques : https://moodle.univ-ubs.fr/course/view.php?id=6476
+
 
 * Pré-requis
 
-Aucun.
-
+- Savoir lire et compter
 
 * Évaluation
 
+- Un quiz à la fin de la première période
+- Participation à un challenge data en fin de période 2 :
+  - Remise d'un rapport synthétique + code =Python= (/notebook/)
+  - Restitution orale 
 
-* Pourquoi Python ?
+* Mais au fait, pourquoi =Python= ?
+
+- =Python= a été initialement créé par =Guido van Rossum= à la fin des années 1980
+- Les grands principes du langage sont :
+  - Lisibilité : Syntaxe et grammaire intuitive favorisant la productivité 
+  - Évolutivité : Noyau =Python= réduit avec une librairie standard riche et évolutive
+  - Maintainabilité:  La devise =Python= “il ne devrait y avoir qu'une - et de préférence seulement
+    une - façon évidente de le faire
+
+* =Python= dans l'industrie
+
+#+ATTR_HTML: :width 40% :alt context_background
+[[./fig/python_trends.jpeg]]
+
+
+* À vos claviers :)
+
+#+ATTR_HTML: :width 60% :alt context_background
+[[./fig/itchy_effect.jpg]]
+
+
+
 

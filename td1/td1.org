@@ -3,81 +3,77 @@
 #+TITLE: L'environnement de développement Python
 #+AUTHOR: Roland Donat
 #+EMAIL: roland.donat@univ-ubs.fr
-#+DATE: licences professionnelles - SDM/SIS
-# Modélisation Stochastique par Réseaux Bayésiens 
+# #+DATE: 
 
-#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
-#+MACRO: HTMLFONTSIZE @@html:<font size="$2">$1</font>@@
-#+MACRO: SUBTITLE @@html:<div class="slidesubtitle">$1</div>@@
-
-# Org-mode general options
-# ------------------------
+# ==============================================
+# Document Configuration
+# ======================
+# Orgmode
+:CONFIG:
 #+LANGUAGE: fr
-#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil timestamp:nil
+#+OPTIONS: H:3 num:t toc:nil \n:nil @:t ::t |:t ^:{} f:t TeX:t author:t d:nil timestamp:nil
 #+OPTIONS: html-postamble:nil
-#+DRAWERS: OPTIONS CACHE MACROS
 #+STARTUP: content 
 #+STARTUP: hidestars
+#+DRAWERS: CONFIG OPTIONS CACHE MACROS
 #+TODO: TODO(t) INPROGRESS(p) | DONE(d)
 #+BIND: org-latex-table-scientific-notation "{%s}E{%s}"
+:END:
 
-# HTML options
-# ------------
-# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/edgemind.css" />
-# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/ensibs.css" />
-# CSS to get the ReadTheDoc style
-# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
-# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
-# #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-# #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
-# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
-
-# LaTeX options
-# -------------
-:OPTIONS:
-#+LaTeX_CLASS: article
+# LaTeX
+# -----
+# Class parameters
+:CONFIG:
+#+LaTeX_CLASS: ubs-note
 #+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt]
-
-#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \thelang{FR}
+#+LATEX_HEADER: \thesubtitle{}
+#+LATEX_HEADER: \institution{IUT Vannes}
+#+LATEX_HEADER: \course{Intoduction à \texttt{Python}}
+#+LATEX_HEADER: \cursus{Licences professionnelles SDM/SIS}
+#+LATEX_HEADER: \version{1.0}
+:END:
+# Packages
+:CONFIG:
 #+LATEX_HEADER: \usepackage[french]{babel}
-#+LATEX_HEADER: \usepackage[default,scale=0.95]{opensans}
-
-#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
-
 #+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amsfonts}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{verbatim}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{float}
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage{natbib}
+#+LATEX_HEADER: \usepackage{subfig}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{minted}
+:END:
+# Layout
+:CONFIG:
+# Figures path
 #+LATEX_HEADER: % Graphics path
 #+LATEX_HEADER: \graphicspath{ 
 #+LATEX_HEADER:   {./fig/}
 #+LATEX_HEADER: }
 
-#+LATEX_HEADER: \usepackage{amssymb}
-#+LATEX_HEADER: \usepackage{amsmath}
-#+LATEX_HEADER: \usepackage{amsfonts}
+# Colors
+#+LATEX_HEADER: \definecolor{almostwhite}        {rgb}{0.85,0.85,0.85}
 
-#+LATEX_HEADER: \usepackage{color}
-#+LATEX_HEADER: % EdgeMind Colors
-#+LATEX_HEADER: \definecolor{UBSOrange}         {HTML}{e46c0a}
-#+LATEX_HEADER: \definecolor{UBSYellow}         {HTML}{ffe000}
-#+LATEX_HEADER: \definecolor{almostwhite}        {rgb}{0.95,0.95,0.95}
-#+LATEX_HEADER: \usepackage{verbatim}
-#+LATEX_HEADER: \usepackage{tabularx}
-#+LATEX_HEADER: \usepackage{float}
-#+LATEX_HEADER: \usepackage{lmodern}
-
-#+LATEX_HEADER: \usepackage[pdfborder={0 0 0},bookmarks=true,bookmarksnumbered=true,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,colorlinks=true,linkcolor=EMBrown,urlcolor=EMBrown,citecolor=EMBrown]{hyperref}
-#+LATEX_HEADER: \usepackage{natbib}
-#+LATEX_HEADER: \usepackage{subfig}
-#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
-#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
-#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
-#+LATEX_HEADER: \usepackage{booktabs}
-
-#+LATEX_HEADER: \usepackage{minted}
-#+LATEX_HEADER: \usepackage{xcolor}
+# Minted
+# To control spaces between minted block
+#+LATEX_HEADER: \AtBeginEnvironment{snugshade*}{\vspace{-1.25\FrameSep}}
+#+LATEX_HEADER: \AfterEndEnvironment{snugshade*}{\vspace{-2\FrameSep}}
 # #+LATEX_HEADER: \usemintedstyle{monokai}
 # #+LATEX_HEADER: \renewcommand{\theFancyVerbLine}{\sffamily \footnotesize {\color{EMLogoBlue}\oldstylenums{\arabic{FancyVerbLine}}}}
 
+# Captions
+#+LATEX_HEADER: \captionsetup[table]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[figure]{position=bottom,margin=90pt,font=small,labelfont=bf,labelsep=endash,format=plain}
+#+LATEX_HEADER: \captionsetup[subfloat]{margin=0pt,font=footnotesize}
+
+# Geometry
 #+LATEX_HEADER: \usepackage{geometry}
 #+LATEX_HEADER: \geometry{
 #+LATEX_HEADER: %  nohead,
@@ -93,18 +89,17 @@
 #+LATEX_HEADER: % Espacement entre les paragraphes
 #+LATEX_HEADER: \setlength{\parskip}{2ex}
 
+# List layout
+#+LATEX_HEADER: \frenchbsetup{ListOldLayout=true} %FBReduceListSpacing=true,CompactItemize=false}
 
+# References
+#+LATEX: \renewcommand*{\refname}{}*
 :END:
-
-* Configuration                                                    :noexport:
-# Latex command to work with minted
-:CACHE:
-#+HEADER: :eval yes
-#+HEADER: :results silent
-#+HEADER: :exports none
-#+BEGIN_SRC emacs-lisp 
+# LaTeX Compilator
+:CONFIG:
+#+BEGIN_SRC emacs-lisp :results silent :exports none
 (setq org-latex-listings 'minted
-      org-latex-packages-alist '(("newfloat" "minted"))
+      org-latex-minted-options nil ;; '(("frame" "lines")))
       org-latex-pdf-process
       '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "bibtex %b"
@@ -113,14 +108,31 @@
 #+END_SRC
 :END:
 
+# HTML
+# ----
+:CONFIG:
+# Org HTML Macros
+#+MACRO: NEWLINE @@latex:\\@@ @@html:<br>@@
+#+MACRO: HTMLFONTSIZE @@html:<font size="$2">$1</font>@@
+#+MACRO: SUBTITLE @@html:<div class="slidesubtitle">$1</div>@@
 
-# Publishing configuration
-# ------------------------
-:CACHE:
-#+HEADER: :eval yes
-#+HEADER: :results silent
-#+HEADER: :exports none
-#+BEGIN_SRC emacs-lisp 
+# HTML options
+# ------------
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/edgemind.css" />
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/ensibs.css" />
+# CSS to get the ReadTheDoc style
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+# #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+# #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+:END:
+
+# Publishing
+# ----------
+:CONFIG:
+#+BEGIN_SRC emacs-lisp :results silent :exports none
 ;; Define some export options here since in org-publish-project-alist some of them are not taken into account
 ;; e.g. with-toc nil
 (defun my-html-export-options (plist backend)
@@ -220,6 +232,9 @@
 #+END_SRC
 :END:
 
+# ==============================================
+# Document starts here
+# ====================
 
 * Objectif
 
@@ -442,3 +457,9 @@ seront disponibles dans les autres.
 # y = 'bar'
 # x + ' ' + y
 # #+END_SRC
+
+* TODO Outils collaboratifs                                        :noexport:
+
+* TODO Références                                                  :noexport:
+
+
