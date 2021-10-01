@@ -192,6 +192,14 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -243,8 +251,8 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Utilisation des <i>notebooks</i> pour développer en <code>Python</code></h1>
 
-<div id="outline-container-org5996b27" class="outline-2">
-<h2 id="org5996b27"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org360fc2d" class="outline-2">
+<h2 id="org360fc2d"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de ce premier TD est de se familiariser avec le concept des <i>notebooks</i> et les
@@ -254,11 +262,11 @@ environnements de développement collaboratif tels que <a href="https://colab.re
 </div>
 
 
-<div id="outline-container-org3dafe14" class="outline-2">
-<h2 id="org3dafe14"><span class="section-number-2">2</span> Les <i>Notebooks</i></h2>
+<div id="outline-container-org36df063" class="outline-2">
+<h2 id="org36df063"><span class="section-number-2">2</span> Les <i>Notebooks</i></h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<a id="orgf10a520"></a>
+<a id="org4006ba8"></a>
 </p>
 
 <p>
@@ -285,8 +293,8 @@ scientifiques usuels aujourd'hui (e.g. <code>R</code>, <code>Ruby</code>, <code>
 </div>
 </div>
 
-<div id="outline-container-org608c3a2" class="outline-2">
-<h2 id="org608c3a2"><span class="section-number-2">3</span> L'environnement Google Colab</h2>
+<div id="outline-container-org4261ab8" class="outline-2">
+<h2 id="org4261ab8"><span class="section-number-2">3</span> L'environnement Google Colab</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Google Colab est une plateforme de développement collaboratif intégrée à l'écosystème Google. Cette
@@ -295,8 +303,8 @@ plateforme est gratuite sous réserve de disposer d'un compte Google.
 </div>
 
 
-<div id="outline-container-org4137062" class="outline-3">
-<h3 id="org4137062"><span class="section-number-3">3.1</span> Création d'un premier <i>notebook</i></h3>
+<div id="outline-container-org04e3abc" class="outline-3">
+<h3 id="org04e3abc"><span class="section-number-3">3.1</span> Création d'un premier <i>notebook</i></h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Se rendre à l'adresse suivante :
@@ -307,8 +315,8 @@ plateforme est gratuite sous réserve de disposer d'un compte Google.
 </div>
 </div>
 
-<div id="outline-container-orgf78f983" class="outline-3">
-<h3 id="orgf78f983"><span class="section-number-3">3.2</span> Interface d'un <i>notebook</i></h3>
+<div id="outline-container-org421d6cc" class="outline-3">
+<h3 id="org421d6cc"><span class="section-number-3">3.2</span> Interface d'un <i>notebook</i></h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les <i>notebooks</i> doivent être vus comme un outil d'édition de texte avancé. Tout au long
@@ -317,17 +325,17 @@ de ce cours, nous explorerons ses principales fonctionnalités.
 
 <p>
 En parcourant l'interface, deux termes assez importants et probablement nouveaux pour
-vous apparaissent : les cellules (cf. Section <a href="#org3c74de7">3.2.1</a>) et les noyaux (cf. Section
-<a href="#orgd81c05d">3.2.2</a>). Ces deux notions sont essentielles pour 
+vous apparaissent : les cellules (cf. Section <a href="#org1fca045">3.2.1</a>) et les noyaux (cf. Section
+<a href="#org0a6ebcf">3.2.2</a>). Ces deux notions sont essentielles pour 
 comprendre en quoi <code>Google Colab</code> est bien plus qu'un simple éditeur de texte.
 </p>
 </div>
 
-<div id="outline-container-org6735f95" class="outline-4">
-<h4 id="org6735f95"><span class="section-number-4">3.2.1</span> Les cellules</h4>
+<div id="outline-container-org75f8d8b" class="outline-4">
+<h4 id="org75f8d8b"><span class="section-number-4">3.2.1</span> Les cellules</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
-<a id="org3c74de7"></a>
+<a id="org1fca045"></a>
 </p>
 
 <p>
@@ -336,7 +344,7 @@ de cellules :
 </p>
 <ul class="org-ul">
 <li>Les cellules de code qui contiennent donc du code <code>Python</code> à exécuter dans le noyau (cf. Section
-<a href="#orgd81c05d">3.2.2</a>. Lorsque le code est exécuté, le <i>notebook</i> affiche le résultat produit par
+<a href="#org0a6ebcf">3.2.2</a>. Lorsque le code est exécuté, le <i>notebook</i> affiche le résultat produit par
 <code>Python</code> sous la cellule du code correspondant.</li>
 <li>Une cellule de texte contient du texte formaté à l'aide du langage <code>Markdown</code> et affiche le rendu
 lorsque la cellule <code>Markdown</code> est exécutée.</li>
@@ -344,11 +352,11 @@ lorsque la cellule <code>Markdown</code> est exécutée.</li>
 </div>
 </div>
 
-<div id="outline-container-org1c37348" class="outline-4">
-<h4 id="org1c37348"><span class="section-number-4">3.2.2</span> Les noyaux</h4>
+<div id="outline-container-org3740d7e" class="outline-4">
+<h4 id="org3740d7e"><span class="section-number-4">3.2.2</span> Les noyaux</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
-<a id="orgd81c05d"></a>
+<a id="org0a6ebcf"></a>
 </p>
 
 <p>
@@ -370,12 +378,12 @@ seront disponibles dans les autres cellules de votre <i>notebook</i>.
 </div>
 
 
-<div id="outline-container-orgdf3040a" class="outline-2">
-<h2 id="orgdf3040a"><span class="section-number-2">4</span> Annexe : Travailler en local avec <code>Jupyter</code></h2>
+<div id="outline-container-org5fe104f" class="outline-2">
+<h2 id="org5fe104f"><span class="section-number-2">4</span> Annexe : Travailler en local avec <code>Jupyter</code></h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org34ccb0f" class="outline-3">
-<h3 id="org34ccb0f"><span class="section-number-3">4.1</span> Installation de l'environnement <code>Python</code></h3>
+<div id="outline-container-orgbdfdb9a" class="outline-3">
+<h3 id="orgbdfdb9a"><span class="section-number-3">4.1</span> Installation de l'environnement <code>Python</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Si vous êtes débutant et quel que soit votre système d'exploitation, le plus simple est d'installer
@@ -440,8 +448,8 @@ programme <code>Python</code><sup><a id="fnr.2" class="footref" href="#fn.2">2</
 </div>
 
 
-<div id="outline-container-org7a57b93" class="outline-4">
-<h4 id="org7a57b93"><span class="section-number-4">4.1.1</span> Lancer <code>Jupyter Notebook</code></h4>
+<div id="outline-container-org7ea187b" class="outline-4">
+<h4 id="org7ea187b"><span class="section-number-4">4.1.1</span> Lancer <code>Jupyter Notebook</code></h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Lancez tout d'abord le programme <code>Anaconda Navigator</code>, puis cliquez sur le bouton <code>Launch</code> du cadre
@@ -490,8 +498,8 @@ ordinateur local).</li>
 </div>
 </div>
 
-<div id="outline-container-org9c621a0" class="outline-4">
-<h4 id="org9c621a0"><span class="section-number-4">4.1.2</span> Créer un nouveau <i>notebook</i></h4>
+<div id="outline-container-org739bcc3" class="outline-4">
+<h4 id="org739bcc3"><span class="section-number-4">4.1.2</span> Créer un nouveau <i>notebook</i></h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 L'interface du tableau de bord est relativement intuitive. Pour créer votre premier <i>notebook</i>,
