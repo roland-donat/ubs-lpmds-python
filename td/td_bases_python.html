@@ -254,37 +254,56 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0da8229">1. Objectif</a></li>
-<li><a href="#orgd5c2325">2. Variables et opérations arithmétiques</a></li>
-<li><a href="#org95d406b">3. Chaînes de caractères</a>
+<li><a href="#org529c78d">1. Objectif</a></li>
+<li><a href="#org2ff59dc">2. Variables et opérations arithmétiques</a></li>
+<li><a href="#orgf47363b">3. Chaînes de caractères</a>
 <ul>
-<li><a href="#org6e4ea64">3.1. Indexation</a></li>
-<li><a href="#orga85c1f8">3.2. Formatage</a></li>
+<li><a href="#orgdff367f">3.1. Indexation</a></li>
+<li><a href="#org1e0e22d">3.2. Formatage avec la méthode <code>.format</code></a></li>
+<li><a href="#orgb7e5698">3.3. Formatage avec une <code>f-string</code></a></li>
 </ul>
 </li>
+<li><a href="#orgad12fd9">4. <i>The Classic Fizz Buzz Problem</i></a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org0da8229" class="outline-2">
-<h2 id="org0da8229"><span class="section-number-2">1</span> Objectif</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-Cette activité a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
-résolvant une série d'exercices illustrant les concepts de base du langage. 
-</p>
+
+
 
 
 <div class="figure">
 <p><img src="https://imgs.xkcd.com/comics/python.png" alt="python.png" />
 </p>
 </div>
+
+<div id="outline-container-org529c78d" class="outline-2">
+<h2 id="org529c78d"><span class="section-number-2">1</span> Objectif</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cette activité a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
+résolvant une série d'exercices illustrant les concepts de base du langage. 
+</p>
+
+<p>
+Pour réaliser cette activité, créez un <i>notebook</i> dans le lequel vous allez écrire, exécuter et
+documenter votre code <code>Python</code>. 
+</p>
+
+<p>
+<b>Note importante :</b>
+</p>
+
+<p>
+Prenez le temps de bien présenter et bien rédiger vos <i>notebooks</i>. Rappel : vous devez considérer un 
+<i>notebook</i> comme un rapport technique susceptible d'être communiqué à des tiers.
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgd5c2325" class="outline-2">
-<h2 id="orgd5c2325"><span class="section-number-2">2</span> Variables et opérations arithmétiques</h2>
+<div id="outline-container-org2ff59dc" class="outline-2">
+<h2 id="org2ff59dc"><span class="section-number-2">2</span> Variables et opérations arithmétiques</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Supposons que nous disposons d'une variable dont la valeur est un nombre de secondes :
@@ -301,12 +320,12 @@ secondes. Vous devez bien sûr utiliser la variable <code>nombre_secondes</code>
 </div>
 </div>
 
-<div id="outline-container-org95d406b" class="outline-2">
-<h2 id="org95d406b"><span class="section-number-2">3</span> Chaînes de caractères</h2>
+<div id="outline-container-orgf47363b" class="outline-2">
+<h2 id="orgf47363b"><span class="section-number-2">3</span> Chaînes de caractères</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org6e4ea64" class="outline-3">
-<h3 id="org6e4ea64"><span class="section-number-3">3.1</span> Indexation</h3>
+<div id="outline-container-orgdff367f" class="outline-3">
+<h3 id="orgdff367f"><span class="section-number-3">3.1</span> Indexation</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Considérons la chaîne de caractères suivante :
@@ -324,30 +343,74 @@ Considérons la chaîne de caractères suivante :
 </div>
 </div>
 
-<div id="outline-container-orga85c1f8" class="outline-3">
-<h3 id="orga85c1f8"><span class="section-number-3">3.2</span> Formatage</h3>
+<div id="outline-container-org1e0e22d" class="outline-3">
+<h3 id="org1e0e22d"><span class="section-number-3">3.2</span> Formatage avec la méthode <code>.format</code></h3>
 <div class="outline-text-3" id="text-3-2">
-<ol class="org-ol">
-<li><p>
+<p>
+<a id="orgf5a95dc"></a>
+</p>
+
+<p>
 Considérons les variables suivantes :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #DFAF8F;">num</span> = 2
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #DFAF8F;">ts</span> = 52312.5764
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #DFAF8F;">owner</span> = 655
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #DFAF8F;">occ_pct</span> = 0.001
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #DFAF8F;">size</span> = 154232332
+<pre class="src src-ipython"><span style="color: #DFAF8F;">num</span> = 2
+<span style="color: #DFAF8F;">ts</span> = 52312.5764
+<span style="color: #DFAF8F;">owner</span> = 655
+<span style="color: #DFAF8F;">occ_pct</span> = 0.001
+<span style="color: #DFAF8F;">size</span> = 154232332
 </pre>
 </div>
+
 <p>
-Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante
+Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+05"</span>
+<pre class="src src-ipython"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+05"</span>
 </pre>
-</div></li>
-</ol>
 </div>
+</div>
+</div>
+
+<div id="outline-container-orgb7e5698" class="outline-3">
+<h3 id="orgb7e5698"><span class="section-number-3">3.3</span> Formatage avec une <code>f-string</code></h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Refaire l'Exercice <a href="#orgf5a95dc">3.2</a> en utilisant la technique de <code>f-string</code> à la place de la méthode
+<code>.format</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgad12fd9" class="outline-2">
+<h2 id="orgad12fd9"><span class="section-number-2">4</span> <i>The Classic Fizz Buzz Problem</i></h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Thème(s) : Structures de contrôle.
+</p>
+
+<p>
+Le <a href="http://c2.com/cgi/wiki?FizzBuzzTest"><i>Fizz Buzz</i></a> est un problème classique en informatique. Ce dernier est souvent utilisé pour tester
+des candidats lors d'un entretien d'embauche.
+</p>
+
+<p>
+La légende raconte que de nombreuses personnes échouent à ce test lors des entretiens.
+</p>
+
+<p>
+Objectif : Écrire un programme qui affiche les nombres de 1 à 100 mais :
+</p>
+<ul class="org-ul">
+<li>pour les multiples de 3, affiche <i>Fizz</i> à la place du nombre.</li>
+<li>pour les multiples de 5, affiche <i>Buzz</i> à la place du nombre.</li>
+<li>Pour les multiples de 3 et 5, affiche <i>FizzBuzz</i> à la place du nombre.</li>
+</ul>
+
+<p>
+<span class="underline">Aide :</span> Penser à l'opérateur <code>%</code>.
+</p>
 </div>
 </div>
 </div>
