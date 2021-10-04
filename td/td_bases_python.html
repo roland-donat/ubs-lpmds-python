@@ -254,16 +254,12 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org529c78d">1. Objectif</a></li>
-<li><a href="#org2ff59dc">2. Variables et opérations arithmétiques</a></li>
-<li><a href="#orgf47363b">3. Chaînes de caractères</a>
-<ul>
-<li><a href="#orgdff367f">3.1. Indexation</a></li>
-<li><a href="#org1e0e22d">3.2. Formatage avec la méthode <code>.format</code></a></li>
-<li><a href="#orgb7e5698">3.3. Formatage avec une <code>f-string</code></a></li>
-</ul>
-</li>
-<li><a href="#orgad12fd9">4. <i>The Classic Fizz Buzz Problem</i></a></li>
+<li><a href="#org5e6ed88">1. Objectif</a></li>
+<li><a href="#org60e8c6f">2. Exercice : Conversion des durées</a></li>
+<li><a href="#org2946ceb">3. Exercice : indexation des chaînes de caractères</a></li>
+<li><a href="#orgff10089">4. Exercice : Formatage des chaînes de caractères</a></li>
+<li><a href="#org6cc127f">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
+<li><a href="#orgd404b63">6. Exercice : Traitement de données textuelles</a></li>
 </ul>
 </div>
 </div>
@@ -278,8 +274,8 @@ for the JavaScript code in this tag.
 </p>
 </div>
 
-<div id="outline-container-org529c78d" class="outline-2">
-<h2 id="org529c78d"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org5e6ed88" class="outline-2">
+<h2 id="org5e6ed88"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Cette activité a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
@@ -302,9 +298,13 @@ Prenez le temps de bien présenter et bien rédiger vos <i>notebooks</i>. Rappel
 </div>
 </div>
 
-<div id="outline-container-org2ff59dc" class="outline-2">
-<h2 id="org2ff59dc"><span class="section-number-2">2</span> Variables et opérations arithmétiques</h2>
+<div id="outline-container-org60e8c6f" class="outline-2">
+<h2 id="org60e8c6f"><span class="section-number-2">2</span> Exercice : Conversion des durées</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+<span class="underline">Thème</span>: Variables, opérations arithmétiques
+</p>
+
 <p>
 Supposons que nous disposons d'une variable dont la valeur est un nombre de secondes :
 </p>
@@ -314,19 +314,23 @@ Supposons que nous disposons d'une variable dont la valeur est un nombre de seco
 </div>
 
 <p>
-Écrivez un petit code <code>Python</code> permettant de convertir ce nombre de secondes en jours, heures, minutes et
-secondes. Vous devez bien sûr utiliser la variable <code>nombre_secondes</code> dans vos calculs.
+Écrivez un code <code>Python</code> permettant de convertir ce nombre de secondes en jours, heures, minutes et
+secondes et d'afficher le résultat. Vous devez bien sûr utiliser la variable <code>nombre_secondes</code> dans vos calculs.
+</p>
+
+<p>
+<span class="underline">Aides</span>: Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf47363b" class="outline-2">
-<h2 id="orgf47363b"><span class="section-number-2">3</span> Chaînes de caractères</h2>
+<div id="outline-container-org2946ceb" class="outline-2">
+<h2 id="org2946ceb"><span class="section-number-2">3</span> Exercice : indexation des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orgdff367f" class="outline-3">
-<h3 id="orgdff367f"><span class="section-number-3">3.1</span> Indexation</h3>
-<div class="outline-text-3" id="text-3-1">
+<p>
+<span class="underline">Thème</span>: Chaînes de caractères, indexation
+</p>
+
 <p>
 Considérons la chaîne de caractères suivante :
 </p>
@@ -336,19 +340,24 @@ Considérons la chaîne de caractères suivante :
 </div>
 
 <ul class="org-ul">
-<li>Utiliser l'indexation pour récupérer les caractères <code>KLN2</code>.</li>
+<li>Utiliser l'indexation pour construire la chaîne <code>"KLN2"</code>.</li>
 <li>Faire de même en utilisant une indexation négative.</li>
 <li>Utiliser une opération de <i>slicing</i> pour récupérer la chaîne <code>"Leonard"</code> et la chaîne <code>"Load °"</code>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1e0e22d" class="outline-3">
-<h3 id="org1e0e22d"><span class="section-number-3">3.2</span> Formatage avec la méthode <code>.format</code></h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orgff10089" class="outline-2">
+<h2 id="orgff10089"><span class="section-number-2">4</span> Exercice : Formatage des chaînes de caractères</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-<a id="orgf5a95dc"></a>
+<a id="orgd9416bd"></a>
 </p>
+
+<p>
+<span class="underline">Thème</span> : Format des chaînes de caractères.
+</p>
+
 
 <p>
 Considérons les variables suivantes :
@@ -362,32 +371,29 @@ Considérons les variables suivantes :
 </pre>
 </div>
 
-<p>
-Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :
-</p>
+<ul class="org-ul">
+<li>Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :</li>
+</ul>
 <div class="org-src-container">
 <pre class="src src-ipython"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+05"</span>
 </pre>
 </div>
-</div>
-</div>
 
-<div id="outline-container-orgb7e5698" class="outline-3">
-<h3 id="orgb7e5698"><span class="section-number-3">3.3</span> Formatage avec une <code>f-string</code></h3>
-<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Même question en utilisant la technique des <code>f-string</code> à la place de la méthode <code>.format</code>.</li>
+</ul>
+
 <p>
-Refaire l'Exercice <a href="#orgf5a95dc">3.2</a> en utilisant la technique de <code>f-string</code> à la place de la méthode
-<code>.format</code>.
+<span class="underline">Aide</span> : Consultez la <a href="https://docs.python.org/fr/3.5/library/string.html">documentation officielle</a>, en particulier la section 6.1.3.
 </p>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgad12fd9" class="outline-2">
-<h2 id="orgad12fd9"><span class="section-number-2">4</span> <i>The Classic Fizz Buzz Problem</i></h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org6cc127f" class="outline-2">
+<h2 id="org6cc127f"><span class="section-number-2">5</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
+<div class="outline-text-2" id="text-5">
 <p>
-Thème(s) : Structures de contrôle.
+<span class="underline">Thème</span> : Structures de contrôle.
 </p>
 
 <p>
@@ -410,6 +416,120 @@ Objectif : Écrire un programme qui affiche les nombres de 1 à 100 mais :
 
 <p>
 <span class="underline">Aide :</span> Penser à l'opérateur <code>%</code>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgd404b63" class="outline-2">
+<h2 id="orgd404b63"><span class="section-number-2">6</span> Exercice : Traitement de données textuelles</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<span class="underline">Source</span> : exercice adapté à partir de <a href="https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/file_lab.html">PythonCert</a>.
+</p>
+
+<p>
+<span class="underline">Thème</span> : fichiers, structures de données
+</p>
+
+
+<p>
+Télécharger le fichier <a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/students.txt">students.txt</a> dans votre espace de travail.
+</p>
+
+<p>
+Ce fichier contient une liste de personnes avec, pour chacune d'elles, les langages de
+programmations maîtrisés.
+</p>
+
+<p>
+Le format du fichier est le suivant :
+</p>
+<ul class="org-ul">
+<li>la première ligne du fichier est une entête rappelant le format ;</li>
+<li>chaque ligne est construite comme suit : <code>Lastname, Firstname: Nickname, languages</code> ;</li>
+<li>les éléments <code>Lastname</code> et <code>Firstname</code> sont toujours présents et sont séparés par une virgule et
+un espace ;</li>
+<li>après le <code>Firstname</code>, on trouve le caractère <code>:</code> ;</li>
+<li>le <code>Nickname</code> commence toujours par une majuscule ;</li>
+<li>les langages commencent toujours par une minuscule ;</li>
+<li>chaque personne peut avoir un <code>Nickname</code> ou aucun ;</li>
+<li>chaque personne peut maîtriser zéro ou un ou plusieurs langages.</li>
+</ul>
+
+<p>
+L'objectif général de l'exercice est de parcourir le fichier afin d'extraire les informations de
+chaque personne en les organisant dans une structure de données adéquates.
+</p>
+
+<p>
+Travail à réaliser :
+#. Ouvrir le fichier en lecture. <span class="underline">Aide</span> : fonction <code>open</code> et structure <code>with ... as</code>.
+#. Extraire pour chaque personne, son nom, prénom, surnom (si présent) et liste des langages (si
+  présente). <span class="underline">Aide</span> : méthodes <code>.split</code>, <code>.trim</code>
+#. Stocker ces éléments dans une structure adaptée.
+#. À partir de la structure construite à l'étape précédente :
+</p>
+<ul class="org-ul">
+<li></li>
+</ul>
+
+<p>
+Jagger, Michael: Mick, shell, python
+</p>
+
+<p>
+So a colon after the name, then the nickname, and then one or more languages.
+</p>
+
+<p>
+However, like real data files, the file is NOT well-formed. Only some lines have nicknames, and other small differences, so you will need to write some code to make sure you get it all correct.
+</p>
+
+
+<p>
+Write a little script that reads that file and generates a list of all the languages that have been used.
+</p>
+
+<p>
+<span class="underline">Aide</span> : 
+</p>
+
+<p>
+What might be the best data structure to use to keep track of bunch of values (the languages) without duplication?
+</p>
+
+<p>
+The file format:
+The first line of the file is:
+</p>
+
+<p>
+Name: Nickname, languages
+</p>
+
+<p>
+And each line looks something like this:
+</p>
+
+<p>
+Jagger, Michael: Mick, shell, python
+</p>
+
+<p>
+So a colon after the name, then the nickname, and then one or more languages.
+</p>
+
+<p>
+However, like real data files, the file is NOT well-formed. Only some lines have nicknames, and other small differences, so you will need to write some code to make sure you get it all correct.
+</p>
+
+<p>
+How can you tell the difference between a nickname and a language?
+</p>
+
+<p>
+Extra challenge: keep track of how many students specified each language.
 </p>
 </div>
 </div>
