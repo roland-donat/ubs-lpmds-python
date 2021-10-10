@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Data management et premières analyses descriptives</title>
+<title>Data management et premières analyses descriptives avec <code>Pandas</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Roland Donat" />
 <style type="text/css">
@@ -249,18 +249,20 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Data management et premières analyses descriptives</h1>
+<h1 class="title">Data management et premières analyses descriptives avec <code>Pandas</code></h1>
 <div id="table-of-contents">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6b24540">1. Contexte et objectif</a></li>
-<li><a href="#org89c1f80">2. Présentation des données</a>
+<li><a href="#orgf5839bd">1. Contexte et objectif</a></li>
+<li><a href="#org894bea6">2. Présentation des données</a>
 <ul>
-<li><a href="#orgb5e379e">2.1. Données <code>fixtures</code></a></li>
-<li><a href="#org3b347c1">2.2. Données <code>odds</code></a></li>
+<li><a href="#orgb95fc25">2.1. Données <code>fixtures</code></a></li>
+<li><a href="#org7913e83">2.2. Données <code>odds</code></a></li>
 </ul>
 </li>
+<li><a href="#orgcf4eaf9">3. Chargement des données</a></li>
+<li><a href="#orgf454095">4. Typage des données</a></li>
 </ul>
 </div>
 </div>
@@ -276,8 +278,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org6b24540" class="outline-2">
-<h2 id="org6b24540"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orgf5839bd" class="outline-2">
+<h2 id="orgf5839bd"><span class="section-number-2">1</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Rennes de vaincre Paris en Ligue 1 compte tenu des joueurs prévus pour la rencontre ? Messi est blessé, quel impact cela aura t-il sur la probabilité de victoire de Paris ?   
@@ -318,16 +320,16 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org89c1f80" class="outline-2">
-<h2 id="org89c1f80"><span class="section-number-2">2</span> Présentation des données</h2>
+<div id="outline-container-org894bea6" class="outline-2">
+<h2 id="org894bea6"><span class="section-number-2">2</span> Présentation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
 </div>
 
-<div id="outline-container-orgb5e379e" class="outline-3">
-<h3 id="orgb5e379e"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
+<div id="outline-container-orgb95fc25" class="outline-3">
+<h3 id="orgb95fc25"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données <code>fixtures</code> contienne un historique de matchs sur différents championnats (cf. Tableau
@@ -468,8 +470,8 @@ Les données <code>fixtures</code> contienne un historique de matchs sur différ
 </div>
 </div>
 
-<div id="outline-container-org3b347c1" class="outline-3">
-<h3 id="org3b347c1"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
+<div id="outline-container-org7913e83" class="outline-3">
+<h3 id="org7913e83"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Les données <code>odds</code> contiennent un historique de cotes de plusieurs bookmakers. Le Tableau
@@ -533,72 +535,104 @@ signifie 0, 1 ou 2 buts ont été inscrits et &gt;2.5 signifie au moins 3 buts o
 
 <tr>
 <td class="org-left">B365_1X2_H</td>
-<td class="org-left">Cote du bookmaker B365 pour le resultat H dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">B365_1X2_D</td>
-<td class="org-left">Cote du bookmaker B365 pour le resultat D dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">B365_1X2_A</td>
-<td class="org-left">Cote du bookmaker B365 pour le resultat A dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">GB_1X2_H</td>
-<td class="org-left">Cote du bookmaker GB pour le resultat H dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">GB_1X2_D</td>
-<td class="org-left">Cote du bookmaker GB pour le resultat D dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">GB_1X2_A</td>
-<td class="org-left">Cote du bookmaker GB pour le resultat A dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BW_1X2_H</td>
-<td class="org-left">Cote du bookmaker BW pour le resultat H dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BW_1X2_D</td>
-<td class="org-left">Cote du bookmaker BW pour le resultat D dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">BW_1X2_A</td>
-<td class="org-left">Cote du bookmaker BW pour le resultat A dans un pari de type 1X2</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">B365_UpUd_&lt;2.5</td>
-<td class="org-left">Cote du bookmaker B365 pour le resultat &lt;2.5 dans un pari de type UpUd</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">B365_UpUd_&gt;2.5</td>
-<td class="org-left">Cote du bookmaker B365 pour le resultat &gt;2.5 dans un pari de type UpUd</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">GB_UpUd_&lt;2.5</td>
-<td class="org-left">Cote du bookmaker GB pour le resultat &lt;2.5 dans un pari de type UpUd</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">GB_UpUd_&gt;2.5</td>
-<td class="org-left">Cote du bookmaker GB pour le resultat &gt;2.5 dans un pari de type UpUd</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
+
+<div id="outline-container-orgcf4eaf9" class="outline-2">
+<h2 id="orgcf4eaf9"><span class="section-number-2">3</span> Chargement des données</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Nous allons tout d'abord charger les deux jeux données <code>fixtures</code> et <code>odds</code> dans notre environnement
+<code>Python</code>. Ces données sont accessibles <i>via</i> les liens suivants :
+</p>
+<ul class="org-ul">
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a></li>
+</ul>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Importer la librairie <code>pandas</code> dans votre environnement. <span class="underline">Aide :</span> utiliser le mot-clé <code>import</code>.</li>
+<li>Afficher la version de la librairie <code>pandas</code> utilisée. <span class="underline">Aide :_</span> utiliser l'attribut de classe <code>__version__</code>.</li>
+<li>Utiliser la méthode <code>Pandas</code> <code>.read_csv</code> afin de lire les données directement depuis leur lien
+internet. Les données <code>fixtures</code> sont à stocker dans la variable <code>data_fixtures_df</code> et les données <code>odds</code> dans
+la variable <code>data_odds_df</code>. 
+<span class="underline">Aide :</span> Les données sont sépérées par des points-virgules et compressées en <code>bzip2</code>. Pensez donc
+à utiliser les arguments <code>sep</code> et <code>compression</code> afin de tenir compte de ces deux éléments.</li>
+<li>Utiliser les méthodes <code>.info</code> et <code>.describe</code> afin d'avoir un aperçu des données chargées.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf454095" class="outline-2">
+<h2 id="orgf454095"><span class="section-number-2">4</span> Typage des données</h2>
 </div>
 </div>
 </body>
