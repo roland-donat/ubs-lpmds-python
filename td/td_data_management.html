@@ -276,27 +276,27 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga0dd9e0">1. Contexte et objectif</a></li>
-<li><a href="#org7196089">2. Présentation des données</a>
+<li><a href="#orgd1ff4eb">1. Contexte et objectif</a></li>
+<li><a href="#org3a92e71">2. Présentation des données</a>
 <ul>
-<li><a href="#org2a6f2ed">2.1. Données <code>fixtures</code></a></li>
-<li><a href="#org0aee731">2.2. Données <code>odds</code></a></li>
+<li><a href="#org3cffa25">2.1. Données <code>fixtures</code></a></li>
+<li><a href="#org8631185">2.2. Données <code>odds</code></a></li>
 </ul>
 </li>
-<li><a href="#org410cec8">3. Premier contact avec les données</a>
+<li><a href="#org64c5d47">3. Premier contact avec les données</a>
 <ul>
-<li><a href="#org5e89897">3.1. Chargement des données</a></li>
-<li><a href="#org3ca8090">3.2. Manipulations basiques</a></li>
+<li><a href="#org2776397">3.1. Chargement des données</a></li>
+<li><a href="#orgd486fcc">3.2. Manipulations basiques</a></li>
 </ul>
 </li>
-<li><a href="#org4ac5228">4. Normalisation et nettoyage des données</a>
+<li><a href="#org7fdca0a">4. Normalisation et nettoyage des données</a>
 <ul>
-<li><a href="#org2d149ce">4.1. Typage des données</a></li>
-<li><a href="#org7a546cb">4.2. Traitement des données manquantes</a></li>
+<li><a href="#org548dfdd">4.1. Typage des données</a></li>
+<li><a href="#org2a399c7">4.2. Traitement des données manquantes</a></li>
 </ul>
 </li>
-<li><a href="#org6ce75b9">5. Premières analyses descriptives</a></li>
-<li><a href="#org93eb115">6. Réconciliation des données <code>fixtures</code> et <code>odds</code></a></li>
+<li><a href="#org8519c0b">5. Premières analyses descriptives</a></li>
+<li><a href="#orgd308840">6. Réconciliation des données <code>fixtures</code> et <code>odds</code></a></li>
 </ul>
 </div>
 </div>
@@ -307,13 +307,13 @@ for the JavaScript code in this tag.
 
 
 <div class="figure">
-<p><img src="https://imgs.xkcd.com/comics/python.png" alt="python.png" />
+<p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-orga0dd9e0" class="outline-2">
-<h2 id="orga0dd9e0"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orgd1ff4eb" class="outline-2">
+<h2 id="orgd1ff4eb"><span class="section-number-2">1</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Rennes de vaincre Paris en Ligue 1 compte tenu des joueurs prévus pour la rencontre ? Messi est blessé, quel impact cela aura t-il sur la probabilité de victoire de Paris ?   
@@ -354,16 +354,16 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org7196089" class="outline-2">
-<h2 id="org7196089"><span class="section-number-2">2</span> Présentation des données</h2>
+<div id="outline-container-org3a92e71" class="outline-2">
+<h2 id="org3a92e71"><span class="section-number-2">2</span> Présentation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
 </div>
 
-<div id="outline-container-org2a6f2ed" class="outline-3">
-<h3 id="org2a6f2ed"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
+<div id="outline-container-org3cffa25" class="outline-3">
+<h3 id="org3cffa25"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données <code>fixtures</code> contienne un historique de matchs sur différents championnats (cf. Tableau
@@ -504,8 +504,8 @@ Les données <code>fixtures</code> contienne un historique de matchs sur différ
 </div>
 </div>
 
-<div id="outline-container-org0aee731" class="outline-3">
-<h3 id="org0aee731"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
+<div id="outline-container-org8631185" class="outline-3">
+<h3 id="org8631185"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Les données <code>odds</code> contiennent un historique de cotes de plusieurs bookmakers. Le Tableau
@@ -637,12 +637,12 @@ signifie 0, 1 ou 2 buts ont été inscrits et &gt;2.5 signifie au moins 3 buts o
 </div>
 </div>
 
-<div id="outline-container-org410cec8" class="outline-2">
-<h2 id="org410cec8"><span class="section-number-2">3</span> Premier contact avec les données</h2>
+<div id="outline-container-org64c5d47" class="outline-2">
+<h2 id="org64c5d47"><span class="section-number-2">3</span> Premier contact avec les données</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org5e89897" class="outline-3">
-<h3 id="org5e89897"><span class="section-number-3">3.1</span> Chargement des données</h3>
+<div id="outline-container-org2776397" class="outline-3">
+<h3 id="org2776397"><span class="section-number-3">3.1</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous allons tout d'abord charger les deux jeux données <code>fixtures</code> et <code>odds</code> dans notre environnement
@@ -669,8 +669,8 @@ la variable <code>data_odds_df</code>.
 </div>
 </div>
 
-<div id="outline-container-org3ca8090" class="outline-3">
-<h3 id="org3ca8090"><span class="section-number-3">3.2</span> Manipulations basiques</h3>
+<div id="outline-container-orgd486fcc" class="outline-3">
+<h3 id="orgd486fcc"><span class="section-number-3">3.2</span> Manipulations basiques</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Il s'agit ici d'appréhender les objets que vous manipulez avec <code>Pandas</code>, à savoir les <code>DataFrame</code>
@@ -710,12 +710,12 @@ comporte l'attribut <code>.loc</code> dans ce cas.</li>
 </div>
 
 
-<div id="outline-container-org4ac5228" class="outline-2">
-<h2 id="org4ac5228"><span class="section-number-2">4</span> Normalisation et nettoyage des données</h2>
+<div id="outline-container-org7fdca0a" class="outline-2">
+<h2 id="org7fdca0a"><span class="section-number-2">4</span> Normalisation et nettoyage des données</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org2d149ce" class="outline-3">
-<h3 id="org2d149ce"><span class="section-number-3">4.1</span> Typage des données</h3>
+<div id="outline-container-org548dfdd" class="outline-3">
+<h3 id="org548dfdd"><span class="section-number-3">4.1</span> Typage des données</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -737,8 +737,8 @@ Utiliser l'attribut <code>.dt</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-org7a546cb" class="outline-3">
-<h3 id="org7a546cb"><span class="section-number-3">4.2</span> Traitement des données manquantes</h3>
+<div id="outline-container-org2a399c7" class="outline-3">
+<h3 id="org2a399c7"><span class="section-number-3">4.2</span> Traitement des données manquantes</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -783,8 +783,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-org6ce75b9" class="outline-2">
-<h2 id="org6ce75b9"><span class="section-number-2">5</span> Premières analyses descriptives</h2>
+<div id="outline-container-org8519c0b" class="outline-2">
+<h2 id="org8519c0b"><span class="section-number-2">5</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
@@ -798,15 +798,9 @@ données et d'agrégation.
 <ul class="org-ul">
 <li>Calculer le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
 l'extérieur, tout championnat confondu. <span class="underline">Aide</span> : Utiliser la méthode <code>.mean</code>.</li>
-<li>Ajouter une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
-pendant chaque rencontre.</li>
-<li>Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.max</code>.</li>
-<li>Trier les rencontres en fonction du nombre de buts inscrits. <span class="underline">Aide</span> : Utiliser la méthode
-<code>.sort_values</code>.</li>
 <li><p>
-Calculer le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
-l'extérieur, pour :
+Calculer le score moyen à la fin du match des équipes à domicile et à
+l'extérieur pour :
 </p>
 <ul class="org-ul">
 <li>chacun des championnats ;</li>
@@ -815,6 +809,25 @@ l'extérieur, pour :
 </ul>
 <p>
 <span class="underline">Aide</span> : Utiliser la méthode <code>.groupby</code>.
+</p></li>
+<li>Ajouter une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
+pendant chaque rencontre.</li>
+<li>Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits. <span class="underline">Aide</span> :
+Utiliser la méthode <code>.max</code>.</li>
+<li>Trier les rencontres en fonction du nombre de buts inscrits. <span class="underline">Aide</span> : Utiliser la méthode
+<code>.sort_values</code>.</li>
+<li><p>
+Calculer la proportion des différents résultats d'un match (<code>H</code>, <code>A</code>, <code>D</code>) pour :
+</p>
+<ul class="org-ul">
+<li>tout championnat confondu ;</li>
+<li>chacun des championnats ;</li>
+<li>chacune des saisons ;</li>
+<li>chacun des championnats et chacune des saisons.</li>
+</ul>
+<p>
+<span class="underline">Aide</span> : Utiliser la méthode <code>.value_counts</code> pour le calcul des proportions et la méthode
+<code>.unstack</code> pour la présentation des chiffres. 
 </p></li>
 <li>Pour chaque bookmaker et chaque type de paris, calculer la marge associée. <span class="underline">Aide</span> : La marge \(M\) d'un
 pari à \(n\) issus caractérisé par les cotes \(c_{1}, \ldots, c_{n}\) est définie par :
@@ -843,8 +856,8 @@ Quel est le bookmaker le plus rentable ?
 </div>
 </div>
 
-<div id="outline-container-org93eb115" class="outline-2">
-<h2 id="org93eb115"><span class="section-number-2">6</span> Réconciliation des données <code>fixtures</code> et <code>odds</code></h2>
+<div id="outline-container-orgd308840" class="outline-2">
+<h2 id="orgd308840"><span class="section-number-2">6</span> Réconciliation des données <code>fixtures</code> et <code>odds</code></h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Il s'agit ici de construire un unique <code>DataFrame</code> contenant à la fois les données de chaque match
