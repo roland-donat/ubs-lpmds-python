@@ -276,27 +276,27 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd1ff4eb">1. Contexte et objectif</a></li>
-<li><a href="#org3a92e71">2. Présentation des données</a>
+<li><a href="#orgab450a4">1. Contexte et objectif</a></li>
+<li><a href="#orgba07566">2. Présentation des données</a>
 <ul>
-<li><a href="#org3cffa25">2.1. Données <code>fixtures</code></a></li>
-<li><a href="#org8631185">2.2. Données <code>odds</code></a></li>
+<li><a href="#org173f51c">2.1. Données <code>fixtures</code></a></li>
+<li><a href="#orga1b194c">2.2. Données <code>odds</code></a></li>
 </ul>
 </li>
-<li><a href="#org64c5d47">3. Premier contact avec les données</a>
+<li><a href="#org2e407d4">3. Premier contact avec les données</a>
 <ul>
-<li><a href="#org2776397">3.1. Chargement des données</a></li>
-<li><a href="#orgd486fcc">3.2. Manipulations basiques</a></li>
+<li><a href="#org7c25a77">3.1. Chargement des données</a></li>
+<li><a href="#org0473106">3.2. Manipulations basiques</a></li>
 </ul>
 </li>
-<li><a href="#org7fdca0a">4. Normalisation et nettoyage des données</a>
+<li><a href="#orgd6bc0d7">4. Normalisation et nettoyage des données</a>
 <ul>
-<li><a href="#org548dfdd">4.1. Typage des données</a></li>
-<li><a href="#org2a399c7">4.2. Traitement des données manquantes</a></li>
+<li><a href="#org687b2e2">4.1. Typage des données</a></li>
+<li><a href="#org1b33461">4.2. Traitement des données manquantes</a></li>
 </ul>
 </li>
-<li><a href="#org8519c0b">5. Premières analyses descriptives</a></li>
-<li><a href="#orgd308840">6. Réconciliation des données <code>fixtures</code> et <code>odds</code></a></li>
+<li><a href="#orgbb2327c">5. Premières analyses descriptives</a></li>
+<li><a href="#orgc27f23f">6. Réconciliation des données <code>fixtures</code> et <code>odds</code></a></li>
 </ul>
 </div>
 </div>
@@ -312,8 +312,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgd1ff4eb" class="outline-2">
-<h2 id="orgd1ff4eb"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orgab450a4" class="outline-2">
+<h2 id="orgab450a4"><span class="section-number-2">1</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Rennes de vaincre Paris en Ligue 1 compte tenu des joueurs prévus pour la rencontre ? Messi est blessé, quel impact cela aura t-il sur la probabilité de victoire de Paris ?   
@@ -354,16 +354,16 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org3a92e71" class="outline-2">
-<h2 id="org3a92e71"><span class="section-number-2">2</span> Présentation des données</h2>
+<div id="outline-container-orgba07566" class="outline-2">
+<h2 id="orgba07566"><span class="section-number-2">2</span> Présentation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Deux sources de données sont mises à disposition dans ce projet :
 </p>
 </div>
 
-<div id="outline-container-org3cffa25" class="outline-3">
-<h3 id="org3cffa25"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
+<div id="outline-container-org173f51c" class="outline-3">
+<h3 id="org173f51c"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données <code>fixtures</code> contienne un historique de matchs sur différents championnats (cf. Tableau
@@ -504,8 +504,8 @@ Les données <code>fixtures</code> contienne un historique de matchs sur différ
 </div>
 </div>
 
-<div id="outline-container-org8631185" class="outline-3">
-<h3 id="org8631185"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
+<div id="outline-container-orga1b194c" class="outline-3">
+<h3 id="orga1b194c"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Les données <code>odds</code> contiennent un historique de cotes de plusieurs bookmakers. Le Tableau
@@ -637,12 +637,12 @@ signifie 0, 1 ou 2 buts ont été inscrits et &gt;2.5 signifie au moins 3 buts o
 </div>
 </div>
 
-<div id="outline-container-org64c5d47" class="outline-2">
-<h2 id="org64c5d47"><span class="section-number-2">3</span> Premier contact avec les données</h2>
+<div id="outline-container-org2e407d4" class="outline-2">
+<h2 id="org2e407d4"><span class="section-number-2">3</span> Premier contact avec les données</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org2776397" class="outline-3">
-<h3 id="org2776397"><span class="section-number-3">3.1</span> Chargement des données</h3>
+<div id="outline-container-org7c25a77" class="outline-3">
+<h3 id="org7c25a77"><span class="section-number-3">3.1</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous allons tout d'abord charger les deux jeux données <code>fixtures</code> et <code>odds</code> dans notre environnement
@@ -656,7 +656,7 @@ Nous allons tout d'abord charger les deux jeux données <code>fixtures</code> et
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Importer la librairie <code>pandas</code> dans votre environnement. <span class="underline">Aide :</span> Utiliser le mot-clé <code>import</code>.</li>
 <li>Afficher la version de la librairie <code>pandas</code> utilisée. <span class="underline">Aide :</span> Utiliser l'attribut de classe <code>__version__</code>.</li>
 <li>Utiliser la méthode <code>Pandas</code> <code>.read_csv</code> afin de lire les données directement depuis leur lien
@@ -665,12 +665,12 @@ la variable <code>data_odds_df</code>.
 <span class="underline">Aide :</span> Les données sont sépérées par des points-virgules et compressées en <code>bzip2</code>. Pensez donc
 à utiliser les arguments <code>sep</code> et <code>compression</code> afin de tenir compte de ces deux éléments.</li>
 <li>Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code> afin d'avoir un aperçu des données chargées.</li>
-</ul>
+</ol>
 </div>
 </div>
 
-<div id="outline-container-orgd486fcc" class="outline-3">
-<h3 id="orgd486fcc"><span class="section-number-3">3.2</span> Manipulations basiques</h3>
+<div id="outline-container-org0473106" class="outline-3">
+<h3 id="org0473106"><span class="section-number-3">3.2</span> Manipulations basiques</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Il s'agit ici d'appréhender les objets que vous manipulez avec <code>Pandas</code>, à savoir les <code>DataFrame</code>
@@ -681,7 +681,7 @@ comprendre comment accéder aux données avec les attributs <code>.loc</code>, <
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Quel est le type des variables <code>data_fixtures_df</code> et <code>data_odds_df</code>.</li>
 <li>Afficher le nom des lignes et le nom des colonnes des données <code>fixtures</code> et <code>odds</code>. <span class="underline">Aide :</span> Utiliser les attributs <code>.index</code> et <code>.columns</code>.</li>
 <li><p>
@@ -704,18 +704,18 @@ utilisant pour index (nom des lignes) les valeurs de la colonne <code>HomeTeam</
 comporte l'attribut <code>.loc</code> dans ce cas.</li>
 <li>Réinitialiser l'index du <code>DataFrame</code> <code>data_fixtures_bis_df</code>. <span class="underline">Aide :</span> Utiliser la méthode
 <code>.reset_index</code>.</li>
-</ul>
+</ol>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org7fdca0a" class="outline-2">
-<h2 id="org7fdca0a"><span class="section-number-2">4</span> Normalisation et nettoyage des données</h2>
+<div id="outline-container-orgd6bc0d7" class="outline-2">
+<h2 id="orgd6bc0d7"><span class="section-number-2">4</span> Normalisation et nettoyage des données</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org548dfdd" class="outline-3">
-<h3 id="org548dfdd"><span class="section-number-3">4.1</span> Typage des données</h3>
+<div id="outline-container-org687b2e2" class="outline-3">
+<h3 id="org687b2e2"><span class="section-number-3">4.1</span> Typage des données</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -727,18 +727,18 @@ les chaînes de caractères (<code>object</code>).
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Analyser les données <code>fixtures</code> et <code>odds</code> et affecter à chaque colonne le type approprié. <span class="underline">Aide</span> :
 Utiliser la méthode <code>.astype</code>.</li>
 <li>Explorer les fonctionnalités offerte par le type <code>datetime64</code> sur la colonne <code>Date</code>. <span class="underline">Aide</span> :
 Utiliser l'attribut <code>.dt</code>.</li>
 <li>Essayer d'affecter le type <code>int</code> aux colonnes <code>HTHG</code>, <code>HTAG</code>, <code>FTHG</code>, <code>FTAG</code>. Que constatez vous ?</li>
-</ul>
+</ol>
 </div>
 </div>
 
-<div id="outline-container-org2a399c7" class="outline-3">
-<h3 id="org2a399c7"><span class="section-number-3">4.2</span> Traitement des données manquantes</h3>
+<div id="outline-container-org1b33461" class="outline-3">
+<h3 id="org1b33461"><span class="section-number-3">4.2</span> Traitement des données manquantes</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -749,7 +749,7 @@ Les données manquantes dans les <code>DataFrame</code> et les <code>Series</cod
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Calculer le nombre de données manquantes pour chaque colonne des données <code>fixtures</code>. <span class="underline">Aide</span> :
 Utiliser la méthode <code>.is_null()</code> et <code>.sum()</code>.</li>
 <li>Calculer la proportion de données manquantes pour chaque colonne des données <code>fixtures</code>. <span class="underline">Aide</span> :
@@ -759,7 +759,7 @@ Utiliser la méthode <code>.plot</code>.</li>
 <li>Faire de même avec les données <code>odds</code>. Que constatez vous et que proposez vous ?</li>
 <li>Construire un nouveau <code>DataFrame</code>, nommé <code>data_odds_bis_df</code>, tenant compte du traitement des
 données manquantes réalisé à la question précédente.</li>
-</ul>
+</ol>
 
 <p>
 <b>Notes :</b> 
@@ -783,8 +783,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-org8519c0b" class="outline-2">
-<h2 id="org8519c0b"><span class="section-number-2">5</span> Premières analyses descriptives</h2>
+<div id="outline-container-orgbb2327c" class="outline-2">
+<h2 id="orgbb2327c"><span class="section-number-2">5</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
@@ -795,7 +795,7 @@ données et d'agrégation.
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Calculer le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
 l'extérieur, tout championnat confondu. <span class="underline">Aide</span> : Utiliser la méthode <code>.mean</code>.</li>
 <li><p>
@@ -852,12 +852,12 @@ Quel est le bookmaker le plus rentable ?
 <li>le plus de cartons rouges ;</li>
 <li>le moins de victoires à domicile.</li>
 </ul></li>
-</ul>
+</ol>
 </div>
 </div>
 
-<div id="outline-container-orgd308840" class="outline-2">
-<h2 id="orgd308840"><span class="section-number-2">6</span> Réconciliation des données <code>fixtures</code> et <code>odds</code></h2>
+<div id="outline-container-orgc27f23f" class="outline-2">
+<h2 id="orgc27f23f"><span class="section-number-2">6</span> Réconciliation des données <code>fixtures</code> et <code>odds</code></h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Il s'agit ici de construire un unique <code>DataFrame</code> contenant à la fois les données de chaque match
@@ -867,7 +867,7 @@ ainsi que ses différentes cotes associées. On parle dans ce cas de jointure en
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Déterminer tout d'abord les colonnes en commun entre les données <code>fixtures</code> et <code>odds</code> qui
 permettent d'identifier une rencontre sans ambiguïté.</li>
 <li>Fusionner les deux de données dans un nouveau <code>DataFrame</code> nommé <code>data_all_df</code>. <span class="underline">Aide</span> : Utiliser
@@ -875,7 +875,7 @@ la fonction <code>Pandas</code> <code>merge</code>.</li>
 <li>Réaliser la même opération que précédemment mais avec une jointure. <span class="underline">Aide</span> : Utiliser la méthode <code>.join</code>.</li>
 <li>Enregistrer dans un fichier <code>csv</code> les données contenues dans le <code>DataFrame</code>
 <code>data_all_df</code>. <span class="underline">Aide</span> : Utiliser la méthode <code>.to_csv</code>.</li>
-</ul>
+</ol>
 </div>
 </div>
 </div>
