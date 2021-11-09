@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Visualisation de données avec <code>Plotly</code></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Roland Donat" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Visualisation de données avec <code>Plotly</code></h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org61ec2cb">1. Contexte et objectif</a></li>
+<li><a href="#org8fda92c">2. Préparation des données</a></li>
+<li><a href="#orgbf2a619">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
+<li><a href="#org2b9371c">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
+<li><a href="#orgd3d868b">5. Restructuration des données de cotes</a></li>
+<li><a href="#org526af5a">6. Distribution des cotes</a>
+<ul>
+<li><a href="#orga8874d7">6.1. Utilisation d'un <i>boxplot</i></a></li>
+<li><a href="#orgd045f07">6.2. Utilisation d'un <i>histogramme</i></a></li>
+</ul>
+</li>
+<li><a href="#org21bcebf">7. Évolution des cotes moyennes au cours des saisons</a></li>
+<li><a href="#org3b6d6a5">8. Analyse des probabilités estimées par le bookmaker</a></li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+<div class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png" alt="1920px-Minard.png" />
+</p>
+</div>
+
+
+<div id="outline-container-org61ec2cb" class="outline-2">
+<h2 id="org61ec2cb"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+L'objectif de ce TD est de parcourir les principales fonctionnalités de la librairie <code>Plotly</code> afin
+d'explorer les données par le biais de techniques de visualisations modernes.
+</p>
+
+<p>
+Nous étudierons en particulier le sous-module <code>Plotly.express</code> qui offre la possibilité de
+construire aisément tous les graphiques usuels en y ajoutant des éléments d'interactivités.
+</p>
+
+<p>
+Pour ce faire, nous utiliserons de nouveau les données <code>fixtures</code> (matchs) et <code>odds</code> (cotes)
+introduites précédemment : 
+</p>
+<ul class="org-ul">
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8fda92c" class="outline-2">
+<h2 id="org8fda92c"><span class="section-number-2">2</span> Préparation des données</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Voici les instructions à suivre pour débuter ce TD :
+</p>
+<ul class="org-ul">
+<li>Ouvrir ce <i>notebook</i>.</li>
+<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
+<li>Veiller à bien comprendre les étapes de préparation de données réalisées.</li>
+</ul>
+
+<p>
+Note : il n'y a rien de nouveau par rapport aux TD précédents excepté l'utilisation de la commande
+<code>!pip install</code> permettant d'installer un module <code>Python</code> dans votre environnement de travail.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgbf2a619" class="outline-2">
+<h2 id="orgbf2a619"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
+toutes deux liées :
+</p>
+<ul class="org-ul">
+<li>En probabilité, la cote, notée \(g_{E}\), associée à l'occurrence d'un événement \(E\) est défini par
+le rapport des probabilités suivantes : 
+\[
+  g_{E} = \frac{\text{Prob}(\text{l'évenement $E$ ne se réalise pas})}{\text{Prob}(\text{l'événement
+  $E$ se réalise}),
+  \]
+que l'on peut réécrire comme suit :
+\[
+  g_{E} = \frac{1 - p_{E}}{p_{E}} = \frac{1}{p_{E}} - 1,
+  \]
+en notant $p<sub>E</sub> = \text{Prob}(\text{l'événement $E$ ne se réalise pas})$.</li>
+<li>Dans le monde des bookmakers, la cote associée à l'occurrence d'un événement \(E\) est notée \(c_{E}\)
+et a pour expression :
+\[
+  c_{E} = \frac{1}{p_{E}}.
+  \]
+On a donc la relation \(c_{E} = g_{E} + 1\) liant les deux notions de cotes.</li>
+</ul>
+
+<p>
+Il est important de comprendre à ce stade que la cote \(c_{E}\) fournie par un bookmaker pour un
+événement donné (e.g. l'équipe à domicile gagne le match) dépend de son estimation de la probabilité
+\(p_{E}\) de le l'événement en question. Le bookmaker, tout comme les joueurs, ne connaît évidement
+pas la vraie valeur de \(p_{E}\).  
+</p>
+
+<p>
+En tant que joueur, il sera donc intéressant de parier sur un événement pour lequel votre analyse
+conduit à une estimation de \(p_{E}\) plus importante que celle du bookmaker. Dans cette situation, on
+parle de <i>value bet</i> (pari rentable). L'identification des <i>value bets</i> est le critère fondamental
+permettant de prendre la décision de parier ou non sur la réalisation d'un événement.
+</p>
+
+<p>
+Prenons un petit exemple pour illustrer ces différentes notions. Considérons le match :
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">Date</td>
+<td class="org-left">HomeTeam</td>
+<td class="org-left">AwayTeam</td>
+<td class="org-right">B365_1X2_H</td>
+<td class="org-right">B365_1X2_D</td>
+<td class="org-right">B365_1X2_A</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-02-10</td>
+<td class="org-left">Ath Madrid</td>
+<td class="org-left">Barcelona</td>
+<td class="org-right">1.90</td>
+<td class="org-right">3.50</td>
+<td class="org-right">4.00</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Le bookmaker B365 offre une cote de 1.90 si Ath Madrid remporte le match, de 4.00 si
+c'est Barcelona qui gagne et 3.50 en cas de match nul. Autrement dit, B365 estime les probabilités
+suivantes pour chacune des issues possibles pour la rencontre :
+</p>
+<ul class="org-ul">
+<li>\(1/1.9 \simeq 0.53\) pour la victoire de l'Ath Madrid ;</li>
+<li>\(1/4 = 0.25\) pour la victoire de Barcelona ;</li>
+<li>$1/3.5 &cong; 0.28 pour le match nul.</li>
+</ul>
+
+<p>
+De votre côté, vous avez mis au point une méthode statistique fournissant les estimations des
+probabilités des issues du match suivantes :
+</p>
+<ul class="org-ul">
+<li>\(0.39\) pour la victoire de l'Ath Madrid ;</li>
+<li>\(0.21\) pour la victoire de Barcelona ;</li>
+<li>\(0.40\) pour le match nul.</li>
+</ul>
+
+<p>
+Vous notez alors que votre estimation pour la réalisation du match nul est plus importante que celle
+du bookmaker. Parier sur le match nul est donc dans ce cas un <i>value bet</i>.  
+</p>
+
+<p>
+Au final, il est important de comprendre que l'identification d'un <i>value bet</i> passe nécessairement par
+une comparaison entre la cote proposée par un bookmaker pour un événement donné et l'estimation de
+la probabilité de réalisation de l'événement issue de divers analyses statistiques.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b9371c" class="outline-2">
+<h2 id="org2b9371c"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Dans la suite de ce TD, nous travaillerons sur les cotes du bookmaker B365.
+</p>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li>Calculer la moyenne des cotes proposées par le bookmaker B365.</li>
+<li>Afficher un diagramme en barres des cotes moyennes pour les résultats <code>H</code>, <code>D</code>, <code>A</code>. <span class="underline">Aide :</span>
+Utiliser la fonction <code>px.bar</code>.</li>
+<li>Ajouter un titre et un label à chaque axe.</li>
+<li>Transformer les colonnes <code>B365_1X2_[A, D, H]</code> en colonnes <code>[A, D, H]</code> pour améliorer la
+lisibilité et éviter des redondances d'informations.</li>
+<li>Mettre à jour le diagramme en bar.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd3d868b" class="outline-2">
+<h2 id="orgd3d868b"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Afin de mettre en cohérence la structure des données <code>odds</code> avec celle des données <code>odds</code>, nous
+proposons de transformer les colonnes <code>A</code>, <code>D</code>, <code>H</code> sous la forme d'une colonne <code>FTR</code> et d'une
+colonne <code>cote</code> donnant respectivement, pour chaque match, une issue possible de la rencontre et la
+cote associée.
+</p>
+
+<p>
+Par exemple la ligne : 					
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">Date</td>
+<td class="org-left">league_id</td>
+<td class="org-right">season_id</td>
+<td class="org-left">HomeTeam</td>
+<td class="org-left">AwayTeam</td>
+<td class="org-right">A</td>
+<td class="org-right">D</td>
+<td class="org-right">H</td>
+</tr>
+
+<tr>
+<td class="org-right">2005-08-13</td>
+<td class="org-left">eng_pl</td>
+<td class="org-right">2005-2006</td>
+<td class="org-left">Aston Villa</td>
+<td class="org-left">Bolton</td>
+<td class="org-right">3.00</td>
+<td class="org-right">3.25</td>
+<td class="org-right">2.30</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+devient :
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">Date</td>
+<td class="org-left">league_id</td>
+<td class="org-right">season_id</td>
+<td class="org-left">HomeTeam</td>
+<td class="org-left">AwayTeam</td>
+<td class="org-left">FTR</td>
+<td class="org-right">cote</td>
+</tr>
+
+<tr>
+<td class="org-right">2005-08-13</td>
+<td class="org-left">eng_pl</td>
+<td class="org-right">2005-2006</td>
+<td class="org-left">Aston Villa</td>
+<td class="org-left">Bolton</td>
+<td class="org-left">A</td>
+<td class="org-right">3.00</td>
+</tr>
+
+<tr>
+<td class="org-right">2005-08-13</td>
+<td class="org-left">eng_pl</td>
+<td class="org-right">2005-2006</td>
+<td class="org-left">Aston Villa</td>
+<td class="org-left">Bolton</td>
+<td class="org-left">D</td>
+<td class="org-right">3.25</td>
+</tr>
+
+<tr>
+<td class="org-right">2005-08-13</td>
+<td class="org-left">eng_pl</td>
+<td class="org-right">2005-2006</td>
+<td class="org-left">Aston Villa</td>
+<td class="org-left">Bolton</td>
+<td class="org-left">H</td>
+<td class="org-right">2.30</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li>Mettre toutes les colonnes exceptées <code>H</code>, <code>D</code>, <code>A</code> en index. <span class="underline">Aide :</span> Utiliser méthode <code>.set_index</code>.</li>
+<li>Ajouter le label <code>FTR</code> au groupe de colonnes <code>H</code>, <code>D</code>, <code>A</code>. <span class="underline">Aide :</span> Changer la valeur de
+l'attribut <code>.columns.name</code>.</li>
+<li>Conversion du groupe de colonnes <code>H</code>, <code>D</code>, <code>A</code> en une colonne <code>FTR</code>. 
+<span class="underline">Aide :</span> Utiliser la méthode <code>.stack</code>.
+Vérifier le type du résultat renvoyé par la méthode <code>.stack</code>.</li>
+<li>Changer le nom de la <code>Series</code> obtenue. <span class="underline">Aide :</span> Utiliser la méthode <code>.rename</code>.</li>
+<li>Convertir la <code>Series</code> en <code>DataFrame</code>. <span class="underline">Aide :</span> Utiliser la méthode <code>.reset_index</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org526af5a" class="outline-2">
+<h2 id="org526af5a"><span class="section-number-2">6</span> Distribution des cotes</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Pour représenter une distribution on utilise usuellement les boites à moustaches (boxplot) et les
+histogrammes.
+</p>
+</div>
+
+<div id="outline-container-orga8874d7" class="outline-3">
+<h3 id="orga8874d7"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Construire un <i>boxplot</i> afin de visualiser la distribution des cotes pour chaque issue possible des recontres. <span class="underline">Aide :</span>
+Utiliser la fonction <code>px.box</code>.</li>
+<li>Explorer les fonctionnalités de visualisation interactive sur le graphique produit.</li>
+<li>Mettre à jour le <i>boxplot</i> précédent afin de visualiser les distributions de cotes par issue et
+par championnat (couleurs différentes).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd045f07" class="outline-3">
+<h3 id="orgd045f07"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Représenter les distributions de la section précédente à l'aide d'un histogramme. <span class="underline">Aide :</span>
+Utiliser la fonction <code>px.histogram</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org21bcebf" class="outline-2">
+<h2 id="org21bcebf"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Une carte de chaleur (<i>heatmap</i>) est un type de graphique permettant de réaliser une analyse bivariée sur un
+indicateur moyen (ici les cotes). 
+</p>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Calculer la cote moyenne pour chaque issue possible et chaque saison. <span class="underline">Aide :</span> Utiliser la
+méthode <code>.groupby</code>.</li>
+<li>Construire une <i>heatmap</i> afin de visualiser l'évolution des cotes moyennes pour chaque issue
+possible au fil des saisons. <span class="underline">Aide :</span> Utiliser la fonction <code>px.imshow</code>.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org3b6d6a5" class="outline-2">
+<h2 id="org3b6d6a5"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+La section de rappel sur les cotes explique comment passer d'une cote proposée par un bookmaker à
+l'estimation de la probabilité d'occurrence de l'événement sous-jacent correspondant.
+</p>
+
+<p>
+Travailler sur les probabilités estimées par le bookmaker est plus intuitif car plus facile à
+comparer avec nos propres calculs de probabilités. Par ailleurs, une probabilité est nécessairement
+encadrée entre 0 et 1 tandis qu'une cote n'est pas théoriquement pas bornée à droite entraînant des
+problèmes d'échelles liés aux valeurs extrêmes.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
