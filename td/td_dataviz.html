@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Visualisation de données avec <code>Plotly</code></title>
+<title>Visualisation des données avec <code>Plotly</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Roland Donat" />
 <style type="text/css">
@@ -271,24 +271,25 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Visualisation de données avec <code>Plotly</code></h1>
+<h1 class="title">Visualisation des données avec <code>Plotly</code></h1>
 <div id="table-of-contents">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org61ec2cb">1. Contexte et objectif</a></li>
-<li><a href="#org8fda92c">2. Préparation des données</a></li>
-<li><a href="#orgbf2a619">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
-<li><a href="#org2b9371c">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
-<li><a href="#orgd3d868b">5. Restructuration des données de cotes</a></li>
-<li><a href="#org526af5a">6. Distribution des cotes</a>
+<li><a href="#orga070ab0">1. Contexte et objectif</a></li>
+<li><a href="#org2772c7a">2. Préparation des données</a></li>
+<li><a href="#org51042a0">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
+<li><a href="#orgd41b20b">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
+<li><a href="#org547d7e4">5. Restructuration des données de cotes</a></li>
+<li><a href="#org408ca4e">6. Distribution des cotes</a>
 <ul>
-<li><a href="#orga8874d7">6.1. Utilisation d'un <i>boxplot</i></a></li>
-<li><a href="#orgd045f07">6.2. Utilisation d'un <i>histogramme</i></a></li>
+<li><a href="#org41e0cf1">6.1. Utilisation d'un <i>boxplot</i></a></li>
+<li><a href="#org8807c3c">6.2. Utilisation d'un <i>histogramme</i></a></li>
 </ul>
 </li>
-<li><a href="#org21bcebf">7. Évolution des cotes moyennes au cours des saisons</a></li>
-<li><a href="#org3b6d6a5">8. Analyse des probabilités estimées par le bookmaker</a></li>
+<li><a href="#org210d13b">7. Évolution des cotes moyennes au cours des saisons</a></li>
+<li><a href="#orgcfd18ce">8. Analyse des probabilités estimées par le bookmaker</a></li>
+<li><a href="#org1c64cef">9. Analyse préliminaire des <i>value bets</i></a></li>
 </ul>
 </div>
 </div>
@@ -301,11 +302,12 @@ for the JavaScript code in this tag.
 <div class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png" alt="1920px-Minard.png" />
 </p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Carte figurative des pertes successives en hommes de l’Armée française dans la campagne de Russie en 1812-1813. Auteur <a href="https://fr.wikipedia.org/wiki/Charles_Joseph_Minard">Charles Joseph Minard</a>.  <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png">Source</a>.</p>
 </div>
 
 
-<div id="outline-container-org61ec2cb" class="outline-2">
-<h2 id="org61ec2cb"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orga070ab0" class="outline-2">
+<h2 id="orga070ab0"><span class="section-number-2">1</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de ce TD est de parcourir les principales fonctionnalités de la librairie <code>Plotly</code> afin
@@ -328,28 +330,27 @@ introduites précédemment :
 </div>
 </div>
 
-<div id="outline-container-org8fda92c" class="outline-2">
-<h2 id="org8fda92c"><span class="section-number-2">2</span> Préparation des données</h2>
+<div id="outline-container-org2772c7a" class="outline-2">
+<h2 id="org2772c7a"><span class="section-number-2">2</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Voici les instructions à suivre pour débuter ce TD :
 </p>
 <ul class="org-ul">
-<li>Ouvrir ce <i>notebook</i>.</li>
+<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1Dp7cOAC-Y0A2B-d2JaxneJ8w3Tqj0tcY?usp=sharing"><i>notebook</i></a>.</li>
 <li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
 <li>Veiller à bien comprendre les étapes de préparation de données réalisées.</li>
 </ul>
 
 <p>
 Note : il n'y a rien de nouveau par rapport aux TD précédents excepté l'utilisation de la commande
-<code>!pip install</code> permettant d'installer un module <code>Python</code> dans votre environnement de travail.
+<code>!pip install</code> permettant d'installer une librairie <code>Python</code> dans votre environnement de travail.
 </p>
 </div>
 </div>
 
-
-<div id="outline-container-orgbf2a619" class="outline-2">
-<h2 id="orgbf2a619"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
+<div id="outline-container-org51042a0" class="outline-2">
+<h2 id="org51042a0"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
@@ -360,31 +361,31 @@ toutes deux liées :
 le rapport des probabilités suivantes : 
 \[
   g_{E} = \frac{\text{Prob}(\text{l'évenement $E$ ne se réalise pas})}{\text{Prob}(\text{l'événement
-  $E$ se réalise}),
+  $E$ se réalise})},
   \]
 que l'on peut réécrire comme suit :
 \[
   g_{E} = \frac{1 - p_{E}}{p_{E}} = \frac{1}{p_{E}} - 1,
   \]
-en notant $p<sub>E</sub> = \text{Prob}(\text{l'événement $E$ ne se réalise pas})$.</li>
+en notant \(p_{E} = \text{Prob}(\text{l'événement E se réalise})\).</li>
 <li>Dans le monde des bookmakers, la cote associée à l'occurrence d'un événement \(E\) est notée \(c_{E}\)
 et a pour expression :
 \[
   c_{E} = \frac{1}{p_{E}}.
   \]
-On a donc la relation \(c_{E} = g_{E} + 1\) liant les deux notions de cotes.</li>
+On a donc la relation \(c_{E} = g_{E} + 1\) permettant de relier les deux notions de cotes.</li>
 </ul>
 
 <p>
 Il est important de comprendre à ce stade que la cote \(c_{E}\) fournie par un bookmaker pour un
 événement donné (e.g. l'équipe à domicile gagne le match) dépend de son estimation de la probabilité
-\(p_{E}\) de le l'événement en question. Le bookmaker, tout comme les joueurs, ne connaît évidement
+\(p_{E}\) de l'événement \(E\) sous-jacent. En effet, tout comme les joueurs, le bookmaker ne connaît évidement
 pas la vraie valeur de \(p_{E}\).  
 </p>
 
 <p>
 En tant que joueur, il sera donc intéressant de parier sur un événement pour lequel votre analyse
-conduit à une estimation de \(p_{E}\) plus importante que celle du bookmaker. Dans cette situation, on
+conduit à une estimation de \(p_{E}\) plus importante que celle du bookmaker. Dans cette situation, on 
 parle de <i>value bet</i> (pari rentable). L'identification des <i>value bets</i> est le critère fondamental
 permettant de prendre la décision de parier ou non sur la réalisation d'un événement.
 </p>
@@ -441,8 +442,8 @@ suivantes pour chacune des issues possibles pour la rencontre :
 </ul>
 
 <p>
-De votre côté, vous avez mis au point une méthode statistique fournissant les estimations des
-probabilités des issues du match suivantes :
+De votre côté, vous avez mis au point une méthode statistique (dans laquelle vous avez toute
+confiance) qui vous donne les estimations de probabilités suivantes :
 </p>
 <ul class="org-ul">
 <li>\(0.39\) pour la victoire de l'Ath Madrid ;</li>
@@ -452,7 +453,7 @@ probabilités des issues du match suivantes :
 
 <p>
 Vous notez alors que votre estimation pour la réalisation du match nul est plus importante que celle
-du bookmaker. Parier sur le match nul est donc dans ce cas un <i>value bet</i>.  
+du bookmaker. Parier sur le match nul est donc dans ce cas un <i>value bet</i> de votre point de vue.  
 </p>
 
 <p>
@@ -460,16 +461,16 @@ Au final, il est important de comprendre que l'identification d'un <i>value bet<
 une comparaison entre la cote proposée par un bookmaker pour un événement donné et l'estimation de
 la probabilité de réalisation de l'événement issue de divers analyses statistiques.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org2b9371c" class="outline-2">
-<h2 id="org2b9371c"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
-<div class="outline-text-2" id="text-4">
 <p>
-Dans la suite de ce TD, nous travaillerons sur les cotes du bookmaker B365.
+<b>Dans la suite de ce TD, nous travaillerons sur les cotes du bookmaker B365.</b>
 </p>
+</div>
+</div>
 
+<div id="outline-container-orgd41b20b" class="outline-2">
+<h2 id="orgd41b20b"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
+<div class="outline-text-2" id="text-4">
 <p>
 <b>Travail à réaliser :</b>
 </p>
@@ -485,8 +486,8 @@ lisibilité et éviter des redondances d'informations.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd3d868b" class="outline-2">
-<h2 id="orgd3d868b"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
+<div id="outline-container-org547d7e4" class="outline-2">
+<h2 id="org547d7e4"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de mettre en cohérence la structure des données <code>odds</code> avec celle des données <code>odds</code>, nous
@@ -619,13 +620,13 @@ l'attribut <code>.columns.name</code>.</li>
 <span class="underline">Aide :</span> Utiliser la méthode <code>.stack</code>.
 Vérifier le type du résultat renvoyé par la méthode <code>.stack</code>.</li>
 <li>Changer le nom de la <code>Series</code> obtenue. <span class="underline">Aide :</span> Utiliser la méthode <code>.rename</code>.</li>
-<li>Convertir la <code>Series</code> en <code>DataFrame</code>. <span class="underline">Aide :</span> Utiliser la méthode <code>.reset_index</code>.</li>
+<li>Convertir la <code>Series</code> en un <code>DataFrame</code> que l'on nommera <code>data_odds_365_ev_df</code> dans la suite. <span class="underline">Aide :</span> Utiliser la méthode <code>.reset_index</code>.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org526af5a" class="outline-2">
-<h2 id="org526af5a"><span class="section-number-2">6</span> Distribution des cotes</h2>
+<div id="outline-container-org408ca4e" class="outline-2">
+<h2 id="org408ca4e"><span class="section-number-2">6</span> Distribution des cotes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Pour représenter une distribution on utilise usuellement les boites à moustaches (boxplot) et les
@@ -633,8 +634,8 @@ histogrammes.
 </p>
 </div>
 
-<div id="outline-container-orga8874d7" class="outline-3">
-<h3 id="orga8874d7"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
+<div id="outline-container-org41e0cf1" class="outline-3">
+<h3 id="org41e0cf1"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 <b>Travail à réaliser :</b>
@@ -649,8 +650,8 @@ par championnat (couleurs différentes).</li>
 </div>
 </div>
 
-<div id="outline-container-orgd045f07" class="outline-3">
-<h3 id="orgd045f07"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
+<div id="outline-container-org8807c3c" class="outline-3">
+<h3 id="org8807c3c"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -663,8 +664,8 @@ Utiliser la fonction <code>px.histogram</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-org21bcebf" class="outline-2">
-<h2 id="org21bcebf"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
+<div id="outline-container-org210d13b" class="outline-2">
+<h2 id="org210d13b"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Une carte de chaleur (<i>heatmap</i>) est un type de graphique permettant de réaliser une analyse bivariée sur un
@@ -684,8 +685,8 @@ possible au fil des saisons. <span class="underline">Aide :</span> Utiliser la f
 </div>
 
 
-<div id="outline-container-org3b6d6a5" class="outline-2">
-<h2 id="org3b6d6a5"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
+<div id="outline-container-orgcfd18ce" class="outline-2">
+<h2 id="orgcfd18ce"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 La section de rappel sur les cotes explique comment passer d'une cote proposée par un bookmaker à
@@ -695,9 +696,54 @@ l'estimation de la probabilité d'occurrence de l'événement sous-jacent corres
 <p>
 Travailler sur les probabilités estimées par le bookmaker est plus intuitif car plus facile à
 comparer avec nos propres calculs de probabilités. Par ailleurs, une probabilité est nécessairement
-encadrée entre 0 et 1 tandis qu'une cote n'est pas théoriquement pas bornée à droite entraînant des
+encadrée entre 0 et 1 tandis qu'une cote n'est théoriquement pas bornée à droite entraînant des
 problèmes d'échelles liés aux valeurs extrêmes.
 </p>
+
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Ajouter une colonne <code>prob</code> au DataFrame <code>data_odds_365_ev_df</code> contenant la probabilité estimée de
+chaque résultat par le bookmaker. <span class="underline">Aide :</span> Utiliser l'opérateur puissance <code>**</code>.</li>
+<li>Représenter graphiquement la distribution des probabilités estimées calculées précédemment pour
+chaque issue et chaque championnat.</li>
+<li>Améliorer la <i>tooltip</i> lors d'un survol d'une valeur extrême de manière à afficher la date et les équipes
+impliquées dans le match associé.</li>
+<li>Représenter, sous forme de courbe, l'évolution des probabilités estimées de chaque issue possible
+au cours des saisons, et ce, pour chaque championnat. Il est demandé de faire un graphique par
+issue possible en utilisant uniquement une commande <code>plotly.express</code>.  <span class="underline">Aide :</span> Utiliser la
+fonction <code>px.line</code> et son attribut <code>facet_col</code>.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1c64cef" class="outline-2">
+<h2 id="org1c64cef"><span class="section-number-2">9</span> Analyse préliminaire des <i>value bets</i></h2>
+<div class="outline-text-2" id="text-9">
+<p>
+L'objectif est à présent de comparer les probabilités estimées par le bookmaker avec des
+statistiques <i>a priori</i> sur le résultat des matchs afin d'identifier des situations potentielles de
+<i>value bets</i>.
+</p>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ul class="org-ul">
+<li>Estimer, pour chaque championnat et chaque saison, la probabilité <i>a priori</i> d'observer une
+victoire à domicile, à l'extérieur et un match nul (i.e. calcul de la proportion de <code>H</code>, <code>D</code>,
+<code>A</code>).</li>
+<li>Calculer un indicateur de <i>value bet</i> en faisant la différence entre les probabilités <i>a priori</i>
+estimées précédemment et les probabilités estimées par le bookmaker.</li>
+<li>Explorer graphiquement les résultats précédent. Que peut-on en déduire en termes de stratégie
+de pari contre ce bookmaker ?</li>
+<li>Calculer le résultat financier associé à la stratégie constant à parier 1 unité uniquement sur les
+situations où l'indicateur de <i>value bet</i> précédent est positif. Quelle critique fondamentale
+peut-on formuler sur cette stratégie ?</li>
+</ul>
 </div>
 </div>
 </div>
