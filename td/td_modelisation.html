@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mise en oeuvre de la démarche  modélisation décisionnelle avec <code>Python</code></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Roland Donat" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Mise en oeuvre de la démarche  modélisation décisionnelle avec <code>Python</code></h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbc838b0">1. Objectif</a></li>
+<li><a href="#org5b6a477">2. Modélisation statistique</a></li>
+<li><a href="#orgcdfce10">3. Préparation des données</a></li>
+<li><a href="#orgf069b03">4. Création des variables explicatives</a>
+<ul>
+<li><a href="#org5e0407e">4.1. Calcul du taux de tirs cadrés</a></li>
+<li><a href="#org2f50598">4.2. Calcul du taux d'arrêts décisifs</a></li>
+<li><a href="#orgaec2580">4.3. Calcul des taux moyens glissants</a>
+<ul>
+<li><a href="#org79c9155">4.3.1. Taux moyen de tirs cadrés glissant à domicile</a></li>
+<li><a href="#orgdde3c91">4.3.2. Généralisation aux autres taux moyens glissants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org36a553e">5. Création des jeux d'apprentissage et test</a></li>
+<li><a href="#orgf40cdc9">6. Modélisation logistique</a>
+<ul>
+<li><a href="#orgbfe5556">6.1. Formulation du modèle et mise en forme des données</a></li>
+<li><a href="#orgadfc975">6.2. Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</a>
+<ul>
+<li><a href="#orgba4b69a">6.2.1. Apprentissage</a></li>
+<li><a href="#orga980c4b">6.2.2. Prédiction/Décision</a></li>
+<li><a href="#org4b4bd05">6.2.3. Évaluation des performances</a></li>
+</ul>
+</li>
+<li><a href="#org00f667a">6.3. Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+<div class="figure">
+<p><img src="https://miro.medium.com/max/1000/1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" alt="1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Original comic by <a href="https://www.instagram.com/sandserifcomics/">sandserif</a></p>
+</div>
+
+
+<div id="outline-container-orgbc838b0" class="outline-2">
+<h2 id="orgbc838b0"><span class="section-number-2">1</span> Objectif</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin d'identifier des
+situations de paris intéressantes (<i>value bets</i>) pour les matchs nuls et les victoires à domicile.
+</p>
+
+<p>
+L'intérêt pour ces deux résultats provient du travail exploratoire réalisé dans les TD
+précédents qui ont permis d'aboutir aux observations suivantes :
+</p>
+<ul class="org-ul">
+<li>la variance des cotes des matchs nuls est plus faible comparée à celles des autres résultats ;</li>
+<li>les statistiques a priori montrent plus souvent des situations de value bets pour le match nul et
+la victoire à domicile.</li>
+</ul>
+
+<p>
+Nous nous plaçons donc dans le cadre d'un problème de classification supervisée pour lequel
+l'objectif est de décider s'il est intéressant de parier sur un match nul ou une victoire à
+domicile. 
+</p>
+
+<p>
+Nous construirons donc deux modèles de régression logistique : un pour le match nul et un pour la
+victoire à domicile.
+</p>
+
+<p>
+Pour ce faire, nous reprenons les données <code>fixtures</code> (matchs) et <code>odds</code> (cotes) introduites précédemment : 
+</p>
+<ul class="org-ul">
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a>.</li>
+</ul>
+
+<p>
+Les données <code>fixtures</code> servirons à entraîner nos modèles de décision et les données <code>odds</code> servirons
+à évaluer les performances des décisions prises. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5b6a477" class="outline-2">
+<h2 id="org5b6a477"><span class="section-number-2">2</span> Modélisation statistique</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
+les faits de jeu observés (e.g. nombre de tirs cadrés, corners, fautes, etc.) comme des
+réalisations de variables aléatoires.
+</p>
+
+<p>
+Dans notre étude, nous cherchons à expliquer/prévoir les réalisations des deux variables aléatoires
+suivantes :
+</p>
+<ul class="org-ul">
+<li>\(Y_{\text{D}}\) indiquant s'il y a eu match nul ;</li>
+<li>\(Y_{\text{H}}\) indiquant s'il y a eu victoire de l'équipe à domicile.</li>
+</ul>
+
+<p>
+Nous cherchons donc à estimer la probabilité \(P(Y_{\text{D}} = \text{vrai}| X_{1} = x_{1}, \ldots,
+X_{n} = x_{n})\) à partir de l'observation d'une série de réalisations de variables explicatives,
+notées \(x_{1}, \ldots, x_{n}\). Nous pourrons ainsi comparer notre estimation de \(P(Y_{\text{D}} = \text{vrai}| X_{1} = x_{1}, \ldots,
+X_{n} = x_{n})\) avec la cote du bookmaker afin d'identifier éventuellement une situation de <i>value
+bet</i>.
+</p>
+
+<p>
+Dans ce TD, nous allons modéliser les lois conditionnelles \(Y_{\text{D}} | X_{1}, \ldots, X_{n}\) et \(Y_{\text{H}} | X_{1}, \ldots, X_{n}\) à
+l'aide d'une fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de
+régression logistique. 
+</p>
+
+<p>
+<b>Attention :</b>
+Il est important d'utiliser des variables explicatives observables avant la rencontre étudiée. En
+effet, il n'est par exemple pas possible de se servir des faits de jeu observés à la fin d'une
+rencontre pour prédire les résultats de cette même rencontre. 
+</p>
+
+<p>
+Par conséquent, les données <code>fixtures</code> ne peuvent être utilisées directement. Il est nécessaire de
+créer de nouvelles variables permettant de caractériser au mieux chacun des protagonistes <b>avant</b> la
+rencontre.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcdfce10" class="outline-2">
+<h2 id="orgcdfce10"><span class="section-number-2">3</span> Préparation des données</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Voici les instructions à suivre pour débuter ce TD :
+</p>
+<ul class="org-ul">
+<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1Dp7cOAC-Y0A2B-d2JaxneJ8w3Tqj0tcY?usp=sharing"><i>notebook</i></a>.</li>
+<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf069b03" class="outline-2">
+<h2 id="orgf069b03"><span class="section-number-2">4</span> Création des variables explicatives</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Nous proposons d'utiliser les variables explicatives suivantes dans nos modèles :
+</p>
+<ol class="org-ol">
+<li>Le taux moyen de tirs cadrés sur les cinq dernières rencontres des équipes impliquées.</li>
+<li>Le taux moyen d'arrêts décisifs sur les cinq dernières rencontres des équipes impliquées.</li>
+</ol>
+</div>
+
+<div id="outline-container-org5e0407e" class="outline-3">
+<h3 id="org5e0407e"><span class="section-number-3">4.1</span> Calcul du taux de tirs cadrés</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Le taux de tirs cadrés est défini comme le rapport entre le nombre de tirs cadrés et le nombre de
+tirs tentés par une équipe. 
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+Ajouter aux données <code>fixtures</code> :
+</p>
+<ol class="org-ol">
+<li>la colonne <code>HSTR</code> (<i>Home Shot on Target Rate</i>) contenant le taux de tirs cadrés de l'équipe à domicile.</li>
+<li>la colonne <code>ASTR</code> (<i>Away Shot on Target Rate</i>) contenant le taux de tirs cadrés de l'équipe à l'extérieur.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2f50598" class="outline-3">
+<h3 id="org2f50598"><span class="section-number-3">4.2</span> Calcul du taux d'arrêts décisifs</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Le nombre d'arrêts décisifs de l'équipe à domicile, noté <code>HDB</code> (<i>Home Decisive Block</i>), est défini
+par le nombre de tirs cadrés de l'équipe à l'extérieur moins le nombre de buts marqués par l'équipe
+à l'extérieur. 
+</p>
+
+<p>
+De même, le nombre d'arrêts décisifs de l'équipe à l'extérieur, noté <code>ADB</code> (<i>Away Decisive Block</i>),
+est défini par le nombre de tirs cadrés de l'équipe à domicile moins le nombre de buts marqués par
+l'équipe à domicile.
+</p>
+
+<p>
+Enfin, le taux d'arrêts décisifs d'une équipe est défini comme le rapport entre son nombre d'arrêts
+décisifs et le nombre de tirs cadrés de son adversaire.
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+Ajouter aux données <code>fixtures</code> :
+</p>
+<ol class="org-ol">
+<li>les colonnes <code>HDB</code> et <code>ADB</code> contenant les arrêts décisifs de l'équipe à domicile et de
+l'équipe à l'extérieur.</li>
+<li>les colonnes <code>HDBR</code> et <code>ADBR</code> contenant les taux d'arrêts décisifs de l'équipe à domicile et de
+l'équipe à l'extérieur.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgaec2580" class="outline-3">
+<h3 id="orgaec2580"><span class="section-number-3">4.3</span> Calcul des taux moyens glissants</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Nous venons de calculer les taux de tirs cadrés <code>HSTR</code>, <code>ASTR</code> et les taux d'arrêts décisifs <code>HDBR</code>,
+<code>ADBR</code> pour chaque rencontre et chacune des équipes. Ces informations sont disponibles à l'issue de
+chaque rencontre et ne sont donc pas directement utilisables en tant que variables explicatives d'un
+modèle permettant de pronostiquer le résultat d'un match. 
+</p>
+
+<p>
+Aussi, nous proposons de calculer le taux moyens de tirs cadrés et d'arrêts décisifs à domicile et à 
+l'extérieur sur les \(N\) derniers matchs des équipes impliquées dans chaque
+rencontre. Mathématiquement, il s'agit d'un calcul de moyenne mobile (ou glissante) sur une fenêtre
+de longueur \(N\). 
+</p>
+</div>
+
+<div id="outline-container-org79c9155" class="outline-4">
+<h4 id="org79c9155"><span class="section-number-4">4.3.1</span> Taux moyen de tirs cadrés glissant à domicile</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+Par exemple, le taux moyen de tirs cadrés glissant à domicile sur les
+\(N\) derniers matchs à domicile de l'équipe E est défini par : 
+\[
+\overline{\text{HSTR}}_{K, N}^{\text{E}} = \frac{1}{N} \sum_{n = 1}^{N}
+\text{HSTR}^{\text{E}}_{K - n},
+\] 
+où :
+</p>
+<ul class="org-ul">
+<li>\(K\) désigne le numéro du match à domicile courant de l'équipe E.</li>
+<li>\(\text{HSTR}^{\text{E}}_{K - n}\) est le taux de tirs cadrés observé de l'équipe E lors du \(n\) -ème
+dernier match à domicile.</li>
+</ul>
+
+<p>
+On notera <code>HSTR_M[N]</code> la colonne de données qui contiendra les valeurs des taux moyen de tirs cadrés
+glissant à domicile sur les \(N\) derniers matchs.
+</p>
+
+<p>
+Prenons l'exemple de l'équipe <code>Rennes</code> dans le championnat <code>fra_l1</code> de la saison <code>2005-2006</code>. Le
+calcul du taux moyen glissants sur les \(N=3\) dernier match à domicile est donné dans la colonne
+<code>HSTR_M3</code> :
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">league_id</th>
+<th scope="col" class="org-right">season_id</th>
+<th scope="col" class="org-right">Date</th>
+<th scope="col" class="org-left">HomeTeam</th>
+<th scope="col" class="org-left">AwayTeam</th>
+<th scope="col" class="org-right">HS</th>
+<th scope="col" class="org-right">HST</th>
+<th scope="col" class="org-right">HSTR</th>
+<th scope="col" class="org-right">HSTR_M3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">fra_l1</td>
+<td class="org-right">2005-2006</td>
+<td class="org-right">2005-07-08</td>
+<td class="org-left">Rennes</td>
+<td class="org-left">Nantes</td>
+<td class="org-right">10.0</td>
+<td class="org-right">6.0</td>
+<td class="org-right">0.600000</td>
+<td class="org-right">NaN</td>
+</tr>
+
+<tr>
+<td class="org-left">fra_l1</td>
+<td class="org-right">2005-2006</td>
+<td class="org-right">2005-08-20</td>
+<td class="org-left">Rennes</td>
+<td class="org-left">Marseille</td>
+<td class="org-right">15.0</td>
+<td class="org-right">10.0</td>
+<td class="org-right">0.666667</td>
+<td class="org-right">NaN</td>
+</tr>
+
+<tr>
+<td class="org-left">fra_l1</td>
+<td class="org-right">2005-2006</td>
+<td class="org-right">2005-10-09</td>
+<td class="org-left">Rennes</td>
+<td class="org-left">Auxerre</td>
+<td class="org-right">10.0</td>
+<td class="org-right">7.0</td>
+<td class="org-right">0.700000</td>
+<td class="org-right">NaN</td>
+</tr>
+
+<tr>
+<td class="org-left">fra_l1</td>
+<td class="org-right">2005-2006</td>
+<td class="org-right">2005-09-21</td>
+<td class="org-left">Rennes</td>
+<td class="org-left">Bordeaux</td>
+<td class="org-right">7.0</td>
+<td class="org-right">3.0</td>
+<td class="org-right">0.428571</td>
+<td class="org-right">0.655556</td>
+</tr>
+
+<tr>
+<td class="org-left">fra_l1</td>
+<td class="org-right">2005-2006</td>
+<td class="org-right">2005-02-10</td>
+<td class="org-left">Rennes</td>
+<td class="org-left">Lyon</td>
+<td class="org-right">6.0</td>
+<td class="org-right">2.0</td>
+<td class="org-right">0.333333</td>
+<td class="org-right">0.598413</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+On remarque naturellement que le calcul de <code>HSTR_M3</code> n'est possible qu'après avoir observé au moins
+\(N=3\) match de <code>Rennes</code> à domicile.
+</p>
+
+<p>
+Note : Le calcul des statistiques glissantes avec <code>Pandas</code> est possible avec la méthode <code>.rolling</code>
+(voir aide). Nous verrons dans la suite qu'il est possible de coupler l'utilisation d'un <code>groupby</code>
+avec un calcul glissant <i>via</i> <code>rolling</code>. 
+</p>
+
+<p>
+Calculons la colonne <code>HSTR_M3</code> donnant le taux moyen de tirs cadrés glissant à domicile sur une
+fenêtre de \(N = 3\) matchs, et ce, pour chaque championnat et chaque saison :
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Regrouper les données par championnat, saison et équipe à domicile.</li>
+<li>Utiliser la méthode <code>.rolling</code> pour calculer la moyenne glissante de la colonne <code>HSTR</code>. Analyser
+la structure du résultat.</li>
+<li>Modifier la structure du résultat précédent de manière à ajouter dans <code>data_fixtures_df</code> la
+colonne <code>HSTR_M3</code>.</li>
+<li>Vérifier le traitement sur les matchs à domicile de <code>Rennes</code>. Le traitement est-il correct ?</li>
+<li>Refaire le traitement précédent à partir du taux de tirs cadrés décalé d'une rencontre calculé
+avec la méthode <code>.shift</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgdde3c91" class="outline-4">
+<h4 id="orgdde3c91"><span class="section-number-4">4.3.2</span> Généralisation aux autres taux moyens glissants</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<p>
+Calculer les autres taux moyens glissants par analogie avec les traitements réalisés dans la section
+précédente. L'utilisation d'une boucle <code>for</code> bien construite facilitera le grandement le travail
+demandé.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org36a553e" class="outline-2">
+<h2 id="org36a553e"><span class="section-number-2">5</span> Création des jeux d'apprentissage et test</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Il convient à ce stade de rappeler de nouveau l'objectif de nos travaux. Nous cherchons à développer
+un modèle statistique permettant d'estimer la probabilité que le résultat d'une rencontre soit ou
+non un match nul à partir de l'observation de variables explicatives (cf. section précédente).
+</p>
+
+<p>
+Pour ajuster les paramètres de notre modèle de décision, nous allons utiliser l'historique des
+matchs à disposition dans lequel nous sommes à la fois en mesure d'observer les variables
+explicatives et également le résultat des rencontres. Lorsque ces deux informations sont disponibles
+(variables explicatives et variable cible), on parle couramment de problématique de classification
+supervisée. La régression logistique fait Par exemple partie des méthodes de classification
+supervisée pour lesquelles la variable cible est binaire (ex : match nul ou match non nul).
+</p>
+
+<p>
+La démarche traditionnellement mise en oeuvre afin d'estimer les paramètres du modèle de
+classification utilisé consiste à séparer les données disponibles en deux échantillons :
+</p>
+<ol class="org-ol">
+<li>un échantillon d'apprentissage servant à ajuster les paramètres du modèle ;</li>
+<li>un échantillon de test sur lequel nous allons évaluer les performances prédictives du modèle.</li>
+</ol>
+
+<p>
+La proportion entre données d'apprentissage et données de test est usuellement de 2/3, 1/3 mais tout
+dépend en pratique de l'application considérée.  
+</p>
+
+<p>
+<b>Note :</b> dans les problématiques où les données dépendent du temps (comme c'est le cas pour les
+pronostics sportifs), il est important de veiller à ce que les données d'apprentissage soient bien
+antérieures aux données de test.
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Construire un DataFrame <code>data_fixtures_clean_df</code> ne contenant que les variables de contexte d'un
+match, les variables explicatives
+observables avant les rencontres et la variable cible. Les données <code>data_fixtures_clean_df</code>
+seront triées par date de rencontre croissante et les données manquantes seront 
+supprimées.</li>
+<li>Créer les données d'apprentissage <code>data_fixtures_train_df</code> en prenant les deux premiers tiers des
+données <code>data_fixtures_clean_df</code>.</li>
+<li>Créer les données de test <code>data_fixtures_test_df</code> en prenant le dernier tiers des
+données <code>data_fixtures_clean_df</code>.</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgf40cdc9" class="outline-2">
+<h2 id="orgf40cdc9"><span class="section-number-2">6</span> Modélisation logistique</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Pour réaliser nos régressions logistiques, nous allons utiliser la librairie <code>statsmodels</code> qui donne
+accès à la fonction <code>Logit</code> permettant de créer un modèle logistique.
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Importer le module <code>statsmodels.api</code>.</li>
+<li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
+</ol>
+</div>
+
+<div id="outline-container-orgbfe5556" class="outline-3">
+<h3 id="orgbfe5556"><span class="section-number-3">6.1</span> Formulation du modèle et mise en forme des données</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Pour créer notre modèle logistique, nous allons utiliser le module <code>patsy</code> et en particulier la
+fonction <code>dmatrices</code> permettant de préparer les données à la modélisation en fournissant une formule (<i>formula</i>)
+comme dans <code>R</code>.
+</p>
+
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Importer le module <code>patsy</code>. Regarder l'aide de la fonction <code>dmatrice</code>.</li>
+<li>Préparer les données d'apprentissage en utilisant la formule <code>FTR ~ HSTR_M5 + ASTR_M5 + HDBR_M5 +
+   ADBR_M5</code> dans la fonction <code>patsy.dmatrice</code>.</li>
+<li>Faire de même pour mettre en forme les données de test.</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgadfc975" class="outline-3">
+<h3 id="orgadfc975"><span class="section-number-3">6.2</span> Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-orgba4b69a" class="outline-4">
+<h4 id="orgba4b69a"><span class="section-number-4">6.2.1</span> Apprentissage</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Utiliser la fonction <code>Logit</code> pour créer un modèle logistique à partir des données
+d'apprentissage.</li>
+<li>Utiliser la méthode <code>.fit</code> pour ajuster le modèle aux données.</li>
+<li>Analyser les caractéristiques du modèle obtenu avec la méthode <code>.summary</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orga980c4b" class="outline-4">
+<h4 id="orga980c4b"><span class="section-number-4">6.2.2</span> Prédiction/Décision</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Utiliser la méthode <code>.predict</code> pour calculer la probabilité <i>a posteriori</i> de match nul pour les
+rencontres des données de test.</li>
+<li>En utilisant les données de cotes (<code>odds</code>), identifier les situations de <i>value bets</i>. Pour ce
+faire, calculer le score de <i>value bet</i>, i.e. différence entre la probabilité de match nul
+estimée par le modèle et la probabilité de match nul déduite de la cote du bookmaker.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org4b4bd05" class="outline-4">
+<h4 id="org4b4bd05"><span class="section-number-4">6.2.3</span> Évaluation des performances</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Évaluer le gain obtenu en pariant 1 unité sur les matchs nuls en situation de <i>value bets</i> <i>a posteriori</i>.</li>
+<li>Évaluer le gain obtenu en pariant le score de <i>value bet</i> sur les matchs nuls en situation de <i>value bets</i> <i>a posteriori</i>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org00f667a" class="outline-3">
+<h3 id="org00f667a"><span class="section-number-3">6.3</span> Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+<b>Travail à réaliser :</b> Appliquer la démarche de la section précédente à la prévision des victoires à
+domicile 
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

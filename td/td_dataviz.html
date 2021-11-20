@@ -276,20 +276,20 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga070ab0">1. Contexte et objectif</a></li>
-<li><a href="#org2772c7a">2. Préparation des données</a></li>
-<li><a href="#org51042a0">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
-<li><a href="#orgd41b20b">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
-<li><a href="#org547d7e4">5. Restructuration des données de cotes</a></li>
-<li><a href="#org408ca4e">6. Distribution des cotes</a>
+<li><a href="#orgc92ee2a">1. Contexte et objectif</a></li>
+<li><a href="#org18bcc0a">2. Préparation des données</a></li>
+<li><a href="#org6ffaccf">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
+<li><a href="#org983df97">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
+<li><a href="#org70822cb">5. Restructuration des données de cotes</a></li>
+<li><a href="#org9dcd830">6. Distribution des cotes</a>
 <ul>
-<li><a href="#org41e0cf1">6.1. Utilisation d'un <i>boxplot</i></a></li>
-<li><a href="#org8807c3c">6.2. Utilisation d'un <i>histogramme</i></a></li>
+<li><a href="#org2fa81cb">6.1. Utilisation d'un <i>boxplot</i></a></li>
+<li><a href="#org336c112">6.2. Utilisation d'un <i>histogramme</i></a></li>
 </ul>
 </li>
-<li><a href="#org210d13b">7. Évolution des cotes moyennes au cours des saisons</a></li>
-<li><a href="#orgcfd18ce">8. Analyse des probabilités estimées par le bookmaker</a></li>
-<li><a href="#org1c64cef">9. Analyse préliminaire des <i>value bets</i></a></li>
+<li><a href="#org9dd6fc4">7. Évolution des cotes moyennes au cours des saisons</a></li>
+<li><a href="#org779190d">8. Analyse des probabilités estimées par le bookmaker</a></li>
+<li><a href="#orgde27925">9. Analyse préliminaire des <i>value bets</i></a></li>
 </ul>
 </div>
 </div>
@@ -306,8 +306,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orga070ab0" class="outline-2">
-<h2 id="orga070ab0"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orgc92ee2a" class="outline-2">
+<h2 id="orgc92ee2a"><span class="section-number-2">1</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de ce TD est de parcourir les principales fonctionnalités de la librairie <code>Plotly</code> afin
@@ -330,8 +330,8 @@ introduites précédemment :
 </div>
 </div>
 
-<div id="outline-container-org2772c7a" class="outline-2">
-<h2 id="org2772c7a"><span class="section-number-2">2</span> Préparation des données</h2>
+<div id="outline-container-org18bcc0a" class="outline-2">
+<h2 id="org18bcc0a"><span class="section-number-2">2</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Voici les instructions à suivre pour débuter ce TD :
@@ -349,8 +349,8 @@ Note : il n'y a rien de nouveau par rapport aux TD précédents excepté l'utili
 </div>
 </div>
 
-<div id="outline-container-org51042a0" class="outline-2">
-<h2 id="org51042a0"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
+<div id="outline-container-org6ffaccf" class="outline-2">
+<h2 id="org6ffaccf"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
@@ -468,8 +468,8 @@ la probabilité de réalisation de l'événement issue de divers analyses statis
 </div>
 </div>
 
-<div id="outline-container-orgd41b20b" class="outline-2">
-<h2 id="orgd41b20b"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
+<div id="outline-container-org983df97" class="outline-2">
+<h2 id="org983df97"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
 <div class="outline-text-2" id="text-4">
 <p>
 <b>Travail à réaliser :</b>
@@ -486,8 +486,8 @@ lisibilité et éviter des redondances d'informations.</li>
 </div>
 </div>
 
-<div id="outline-container-org547d7e4" class="outline-2">
-<h2 id="org547d7e4"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
+<div id="outline-container-org70822cb" class="outline-2">
+<h2 id="org70822cb"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de mettre en cohérence la structure des données <code>odds</code> avec celle des données <code>odds</code>, nous
@@ -625,8 +625,8 @@ Vérifier le type du résultat renvoyé par la méthode <code>.stack</code>.</li
 </div>
 </div>
 
-<div id="outline-container-org408ca4e" class="outline-2">
-<h2 id="org408ca4e"><span class="section-number-2">6</span> Distribution des cotes</h2>
+<div id="outline-container-org9dcd830" class="outline-2">
+<h2 id="org9dcd830"><span class="section-number-2">6</span> Distribution des cotes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Pour représenter une distribution on utilise usuellement les boites à moustaches (boxplot) et les
@@ -634,8 +634,8 @@ histogrammes.
 </p>
 </div>
 
-<div id="outline-container-org41e0cf1" class="outline-3">
-<h3 id="org41e0cf1"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
+<div id="outline-container-org2fa81cb" class="outline-3">
+<h3 id="org2fa81cb"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 <b>Travail à réaliser :</b>
@@ -650,8 +650,8 @@ par championnat (couleurs différentes).</li>
 </div>
 </div>
 
-<div id="outline-container-org8807c3c" class="outline-3">
-<h3 id="org8807c3c"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
+<div id="outline-container-org336c112" class="outline-3">
+<h3 id="org336c112"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -664,8 +664,8 @@ Utiliser la fonction <code>px.histogram</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-org210d13b" class="outline-2">
-<h2 id="org210d13b"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
+<div id="outline-container-org9dd6fc4" class="outline-2">
+<h2 id="org9dd6fc4"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Une carte de chaleur (<i>heatmap</i>) est un type de graphique permettant de réaliser une analyse bivariée sur un
@@ -685,8 +685,8 @@ possible au fil des saisons. <span class="underline">Aide :</span> Utiliser la f
 </div>
 
 
-<div id="outline-container-orgcfd18ce" class="outline-2">
-<h2 id="orgcfd18ce"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
+<div id="outline-container-org779190d" class="outline-2">
+<h2 id="org779190d"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 La section de rappel sur les cotes explique comment passer d'une cote proposée par un bookmaker à
@@ -720,8 +720,8 @@ fonction <code>px.line</code> et son attribut <code>facet_col</code>.</li>
 </div>
 
 
-<div id="outline-container-org1c64cef" class="outline-2">
-<h2 id="org1c64cef"><span class="section-number-2">9</span> Analyse préliminaire des <i>value bets</i></h2>
+<div id="outline-container-orgde27925" class="outline-2">
+<h2 id="orgde27925"><span class="section-number-2">9</span> Analyse préliminaire des <i>value bets</i></h2>
 <div class="outline-text-2" id="text-9">
 <p>
 L'objectif est à présent de comparer les probabilités estimées par le bookmaker avec des
@@ -740,7 +740,7 @@ victoire à domicile, à l'extérieur et un match nul (i.e. calcul de la proport
 estimées précédemment et les probabilités estimées par le bookmaker.</li>
 <li>Explorer graphiquement les résultats précédent. Que peut-on en déduire en termes de stratégie
 de pari contre ce bookmaker ?</li>
-<li>Calculer le résultat financier associé à la stratégie constant à parier 1 unité uniquement sur les
+<li>Calculer le résultat financier associé à la stratégie consistant à parier 1 unité uniquement sur les
 situations où l'indicateur de <i>value bet</i> précédent est positif. Quelle critique fondamentale
 peut-on formuler sur cette stratégie ?</li>
 </ul>
