@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mise en oeuvre de la démarche  modélisation décisionnelle avec <code>Python</code></title>
+<title>Mise en oeuvre de la démarche de modélisation décisionnelle avec <code>Python</code></title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Roland Donat" />
 <style type="text/css">
@@ -271,38 +271,38 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Mise en oeuvre de la démarche  modélisation décisionnelle avec <code>Python</code></h1>
+<h1 class="title">Mise en oeuvre de la démarche de modélisation décisionnelle avec <code>Python</code></h1>
 <div id="table-of-contents">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbc838b0">1. Objectif</a></li>
-<li><a href="#org5b6a477">2. Modélisation statistique</a></li>
-<li><a href="#orgcdfce10">3. Préparation des données</a></li>
-<li><a href="#orgf069b03">4. Création des variables explicatives</a>
+<li><a href="#org725ad38">1. Objectif</a></li>
+<li><a href="#org2143307">2. Modélisation statistique</a></li>
+<li><a href="#org1cb0a12">3. Préparation des données</a></li>
+<li><a href="#org5601361">4. Création des variables explicatives</a>
 <ul>
-<li><a href="#org5e0407e">4.1. Calcul du taux de tirs cadrés</a></li>
-<li><a href="#org2f50598">4.2. Calcul du taux d'arrêts décisifs</a></li>
-<li><a href="#orgaec2580">4.3. Calcul des taux moyens glissants</a>
+<li><a href="#orgcf54a18">4.1. Calcul du taux de tirs cadrés</a></li>
+<li><a href="#org1f184e0">4.2. Calcul du taux d'arrêts décisifs</a></li>
+<li><a href="#orgdb8fa31">4.3. Calcul des taux moyens glissants</a>
 <ul>
-<li><a href="#org79c9155">4.3.1. Taux moyen de tirs cadrés glissant à domicile</a></li>
-<li><a href="#orgdde3c91">4.3.2. Généralisation aux autres taux moyens glissants</a></li>
+<li><a href="#orgd6d22a0">4.3.1. Taux moyen de tirs cadrés glissant à domicile</a></li>
+<li><a href="#orgd05e22a">4.3.2. Généralisation aux autres taux moyens glissants</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org36a553e">5. Création des jeux d'apprentissage et test</a></li>
-<li><a href="#orgf40cdc9">6. Modélisation logistique</a>
+<li><a href="#org48c1575">5. Création des jeux d'apprentissage et test</a></li>
+<li><a href="#org4e3a066">6. Modélisation logistique</a>
 <ul>
-<li><a href="#orgbfe5556">6.1. Formulation du modèle et mise en forme des données</a></li>
-<li><a href="#orgadfc975">6.2. Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</a>
+<li><a href="#org7d7621f">6.1. Formulation du modèle et mise en forme des données</a></li>
+<li><a href="#orge1d1dbd">6.2. Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</a>
 <ul>
-<li><a href="#orgba4b69a">6.2.1. Apprentissage</a></li>
-<li><a href="#orga980c4b">6.2.2. Prédiction/Décision</a></li>
-<li><a href="#org4b4bd05">6.2.3. Évaluation des performances</a></li>
+<li><a href="#org643f14f">6.2.1. Apprentissage</a></li>
+<li><a href="#orge881266">6.2.2. Prédiction/Décision</a></li>
+<li><a href="#org56a6294">6.2.3. Évaluation des performances</a></li>
 </ul>
 </li>
-<li><a href="#org00f667a">6.3. Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</a></li>
+<li><a href="#org29ad472">6.3. Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</a></li>
 </ul>
 </li>
 </ul>
@@ -321,8 +321,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgbc838b0" class="outline-2">
-<h2 id="orgbc838b0"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org725ad38" class="outline-2">
+<h2 id="org725ad38"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin d'identifier des
@@ -365,8 +365,8 @@ Les données <code>fixtures</code> servirons à entraîner nos modèles de déci
 </div>
 </div>
 
-<div id="outline-container-org5b6a477" class="outline-2">
-<h2 id="org5b6a477"><span class="section-number-2">2</span> Modélisation statistique</h2>
+<div id="outline-container-org2143307" class="outline-2">
+<h2 id="org2143307"><span class="section-number-2">2</span> Modélisation statistique</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
@@ -412,21 +412,21 @@ rencontre.
 </div>
 </div>
 
-<div id="outline-container-orgcdfce10" class="outline-2">
-<h2 id="orgcdfce10"><span class="section-number-2">3</span> Préparation des données</h2>
+<div id="outline-container-org1cb0a12" class="outline-2">
+<h2 id="org1cb0a12"><span class="section-number-2">3</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Voici les instructions à suivre pour débuter ce TD :
 </p>
 <ul class="org-ul">
-<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1Dp7cOAC-Y0A2B-d2JaxneJ8w3Tqj0tcY?usp=sharing"><i>notebook</i></a>.</li>
+<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1begyvlOFA5nn4S7qlzxEVPZPItaLruOo#scrollTo=4jO_vSSxN_3m"><i>notebook</i></a>.</li>
 <li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf069b03" class="outline-2">
-<h2 id="orgf069b03"><span class="section-number-2">4</span> Création des variables explicatives</h2>
+<div id="outline-container-org5601361" class="outline-2">
+<h2 id="org5601361"><span class="section-number-2">4</span> Création des variables explicatives</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Nous proposons d'utiliser les variables explicatives suivantes dans nos modèles :
@@ -437,8 +437,8 @@ Nous proposons d'utiliser les variables explicatives suivantes dans nos modèles
 </ol>
 </div>
 
-<div id="outline-container-org5e0407e" class="outline-3">
-<h3 id="org5e0407e"><span class="section-number-3">4.1</span> Calcul du taux de tirs cadrés</h3>
+<div id="outline-container-orgcf54a18" class="outline-3">
+<h3 id="orgcf54a18"><span class="section-number-3">4.1</span> Calcul du taux de tirs cadrés</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Le taux de tirs cadrés est défini comme le rapport entre le nombre de tirs cadrés et le nombre de
@@ -456,8 +456,8 @@ Ajouter aux données <code>fixtures</code> :
 </div>
 </div>
 
-<div id="outline-container-org2f50598" class="outline-3">
-<h3 id="org2f50598"><span class="section-number-3">4.2</span> Calcul du taux d'arrêts décisifs</h3>
+<div id="outline-container-org1f184e0" class="outline-3">
+<h3 id="org1f184e0"><span class="section-number-3">4.2</span> Calcul du taux d'arrêts décisifs</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Le nombre d'arrêts décisifs de l'équipe à domicile, noté <code>HDB</code> (<i>Home Decisive Block</i>), est défini
@@ -489,8 +489,8 @@ l'équipe à l'extérieur.</li>
 </div>
 </div>
 
-<div id="outline-container-orgaec2580" class="outline-3">
-<h3 id="orgaec2580"><span class="section-number-3">4.3</span> Calcul des taux moyens glissants</h3>
+<div id="outline-container-orgdb8fa31" class="outline-3">
+<h3 id="orgdb8fa31"><span class="section-number-3">4.3</span> Calcul des taux moyens glissants</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Nous venons de calculer les taux de tirs cadrés <code>HSTR</code>, <code>ASTR</code> et les taux d'arrêts décisifs <code>HDBR</code>,
@@ -507,8 +507,8 @@ de longueur \(N\).
 </p>
 </div>
 
-<div id="outline-container-org79c9155" class="outline-4">
-<h4 id="org79c9155"><span class="section-number-4">4.3.1</span> Taux moyen de tirs cadrés glissant à domicile</h4>
+<div id="outline-container-orgd6d22a0" class="outline-4">
+<h4 id="orgd6d22a0"><span class="section-number-4">4.3.1</span> Taux moyen de tirs cadrés glissant à domicile</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 Par exemple, le taux moyen de tirs cadrés glissant à domicile sur les
@@ -665,8 +665,8 @@ avec la méthode <code>.shift</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-orgdde3c91" class="outline-4">
-<h4 id="orgdde3c91"><span class="section-number-4">4.3.2</span> Généralisation aux autres taux moyens glissants</h4>
+<div id="outline-container-orgd05e22a" class="outline-4">
+<h4 id="orgd05e22a"><span class="section-number-4">4.3.2</span> Généralisation aux autres taux moyens glissants</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <p>
 Calculer les autres taux moyens glissants par analogie avec les traitements réalisés dans la section
@@ -678,8 +678,8 @@ demandé.
 </div>
 </div>
 
-<div id="outline-container-org36a553e" class="outline-2">
-<h2 id="org36a553e"><span class="section-number-2">5</span> Création des jeux d'apprentissage et test</h2>
+<div id="outline-container-org48c1575" class="outline-2">
+<h2 id="org48c1575"><span class="section-number-2">5</span> Création des jeux d'apprentissage et test</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Il convient à ce stade de rappeler de nouveau l'objectif de nos travaux. Nous cherchons à développer
@@ -734,8 +734,8 @@ données <code>data_fixtures_clean_df</code>.</li>
 </div>
 
 
-<div id="outline-container-orgf40cdc9" class="outline-2">
-<h2 id="orgf40cdc9"><span class="section-number-2">6</span> Modélisation logistique</h2>
+<div id="outline-container-org4e3a066" class="outline-2">
+<h2 id="org4e3a066"><span class="section-number-2">6</span> Modélisation logistique</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Pour réaliser nos régressions logistiques, nous allons utiliser la librairie <code>statsmodels</code> qui donne
@@ -751,8 +751,8 @@ accès à la fonction <code>Logit</code> permettant de créer un modèle logisti
 </ol>
 </div>
 
-<div id="outline-container-orgbfe5556" class="outline-3">
-<h3 id="orgbfe5556"><span class="section-number-3">6.1</span> Formulation du modèle et mise en forme des données</h3>
+<div id="outline-container-org7d7621f" class="outline-3">
+<h3 id="org7d7621f"><span class="section-number-3">6.1</span> Formulation du modèle et mise en forme des données</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Pour créer notre modèle logistique, nous allons utiliser le module <code>patsy</code> et en particulier la
@@ -773,12 +773,12 @@ comme dans <code>R</code>.
 </div>
 
 
-<div id="outline-container-orgadfc975" class="outline-3">
-<h3 id="orgadfc975"><span class="section-number-3">6.2</span> Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</h3>
+<div id="outline-container-orge1d1dbd" class="outline-3">
+<h3 id="orge1d1dbd"><span class="section-number-3">6.2</span> Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</h3>
 <div class="outline-text-3" id="text-6-2">
 </div>
-<div id="outline-container-orgba4b69a" class="outline-4">
-<h4 id="orgba4b69a"><span class="section-number-4">6.2.1</span> Apprentissage</h4>
+<div id="outline-container-org643f14f" class="outline-4">
+<h4 id="org643f14f"><span class="section-number-4">6.2.1</span> Apprentissage</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <p>
 <b>Travail à réaliser :</b> 
@@ -792,8 +792,8 @@ d'apprentissage.</li>
 </div>
 </div>
 
-<div id="outline-container-orga980c4b" class="outline-4">
-<h4 id="orga980c4b"><span class="section-number-4">6.2.2</span> Prédiction/Décision</h4>
+<div id="outline-container-orge881266" class="outline-4">
+<h4 id="orge881266"><span class="section-number-4">6.2.2</span> Prédiction/Décision</h4>
 <div class="outline-text-4" id="text-6-2-2">
 <p>
 <b>Travail à réaliser :</b> 
@@ -808,8 +808,8 @@ estimée par le modèle et la probabilité de match nul déduite de la cote du b
 </div>
 </div>
 
-<div id="outline-container-org4b4bd05" class="outline-4">
-<h4 id="org4b4bd05"><span class="section-number-4">6.2.3</span> Évaluation des performances</h4>
+<div id="outline-container-org56a6294" class="outline-4">
+<h4 id="org56a6294"><span class="section-number-4">6.2.3</span> Évaluation des performances</h4>
 <div class="outline-text-4" id="text-6-2-3">
 <p>
 <b>Travail à réaliser :</b> 
@@ -822,8 +822,8 @@ estimée par le modèle et la probabilité de match nul déduite de la cote du b
 </div>
 </div>
 
-<div id="outline-container-org00f667a" class="outline-3">
-<h3 id="org00f667a"><span class="section-number-3">6.3</span> Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</h3>
+<div id="outline-container-org29ad472" class="outline-3">
+<h3 id="org29ad472"><span class="section-number-3">6.3</span> Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 <b>Travail à réaliser :</b> Appliquer la démarche de la section précédente à la prévision des victoires à
