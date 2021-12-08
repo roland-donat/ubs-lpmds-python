@@ -192,6 +192,14 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -242,21 +250,48 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Étude de cas</h1>
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf361692">1. Objectifs</a></li>
+<li><a href="#org06a19ac">2. Constitution des groupes et attribution des sujets</a></li>
+<li><a href="#org0654daa">3. Travail demandé</a></li>
+<li><a href="#org3d168e3">4. Livrables</a></li>
+<li><a href="#orgc5ec744">5. Déroulement de l'étude</a></li>
+<li><a href="#org9fbeb1f">6. Évaluation</a>
+<ul>
+<li><a href="#org977f6e8">6.1. Évaluation technique</a></li>
+<li><a href="#orgc87d3c3">6.2. Évaluation de la restitution orale</a></li>
+</ul>
+</li>
+<li><a href="#orga75d915">7. Données</a>
+<ul>
+<li><a href="#org33a3f48">7.1. Données <code>bank</code></a></li>
+<li><a href="#org6941a84">7.2. Données <code>census_income</code></a></li>
+<li><a href="#orga339ee1">7.3. Données <code>weather_australia</code></a></li>
+<li><a href="#org88cc391">7.4. Données <code>diabetes</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
-<div id="outline-container-org59acf01" class="outline-2">
-<h2 id="org59acf01"><span class="section-number-2">1</span> Objectifs</h2>
+
+<div id="outline-container-orgf361692" class="outline-2">
+<h2 id="orgf361692"><span class="section-number-2">1</span> Objectifs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Cette étude de cas a pour objectif de mettre en oeuvre une démarche d'analyse de données afin de
 répondre à un problème de classification supervisée. Dans un tel problème, vous construisez vos
-modèles de classification à partir de données dans lesquelles la classe<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> des individus est observée<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. La régression logistique entre donc dans le
-cadre des méthodes de classification supervisée.
+modèles de classification à partir de données dans lesquelles la classe<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> des individus est observée<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Par exemple, la régression logistique fait
+donc partie des méthodes de classification supervisée. 
 </p>
 
 <p>
 Ce travail sera effectué par groupe de trois ou
-quatre étudiant-e-s et se déroulera sur une journée et demi à partir du jeudi 10 décembre après-midi
-et jusqu'au vendredi 11 décembre 2020 à 17h30. <b>L'ensemble du travail technique sera réalisé avec le
+quatre étudiant-e-s et se déroulera sur une journée et demi à partir du jeudi 16 décembre après-midi
+et jusqu'au vendredi 17 décembre 2021 à 17h30. <b>L'ensemble du travail technique sera réalisé avec le
 langage <code>Python</code>.</b>
 </p>
 
@@ -266,30 +301,85 @@ une contrainte temporelle forte. Il vous faudra donc faire preuve de lucidité d
 dimensionnement de vos travaux de façon à trouver un compromis entre ambition et pragmatisme. À
 titre indicatif, les conditions de cet exercice sont proches de celles d'un <i>hackathon</i>.
 </p>
-
-<p>
-Enfin, pour vous aider à démarrer, vous pouvez consulter à titre indicatif ce <a href="https://deepnote.com/project/df7fd96c-86a3-45aa-bb6f-2bc9cb955b3a"><i>notebook</i></a><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> 
-présentant un exemple minimal de régression logistique avec <code>Python</code> à partir des données Titanic.
-</p>
 </div>
 </div>
 
-<div id="outline-container-orgaeb7a8f" class="outline-2">
-<h2 id="orgaeb7a8f"><span class="section-number-2">2</span> Constitution des groupes et attribution des sujets</h2>
+<div id="outline-container-org06a19ac" class="outline-2">
+<h2 id="org06a19ac"><span class="section-number-2">2</span> Constitution des groupes et attribution des sujets</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-La constitution des groupes et l'attribution des sujets sont réalisées de manière aléatoire. Chaque
-sujet sera traité par deux ou trois groupes. 
+Le tableau suivant présente l'affectation des groupes à chaque sujet.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Id Sujet</th>
+<th scope="col" class="org-left">Équipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Weather Australia - I</td>
+<td class="org-left">Manon Corbel, Thierno Abdoulaye Sow, Pauline Dervieux, Giovanni Le Duigou</td>
+</tr>
+
+<tr>
+<td class="org-left">Weather Australia - II</td>
+<td class="org-left">Amine Neggal, Perrine Baudet, Paul Debuire</td>
+</tr>
+
+<tr>
+<td class="org-left">diabetes - I</td>
+<td class="org-left">Adrien Caradec, Tiphaine Delavet, Axel Le Guiner, Maxime Le Fur</td>
+</tr>
+
+<tr>
+<td class="org-left">diabetes - II</td>
+<td class="org-left">Mélanie Orellana, Gaëtan Sorin, Justine Cantus, Maxime Charrier</td>
+</tr>
+
+<tr>
+<td class="org-left">Bank - I</td>
+<td class="org-left">Amandine Le Bolloch, Pierre Sinquin, Alban Daniel, Loann Denis</td>
+</tr>
+
+<tr>
+<td class="org-left">Bank - II</td>
+<td class="org-left">Dylan Rungette, Clara Sturma, Bastien Guillet, Enora Nowak</td>
+</tr>
+
+<tr>
+<td class="org-left">Census Income - I</td>
+<td class="org-left">Kilian Jouannel, Floriane Okom'essono, Maxence Jégou</td>
+</tr>
+
+<tr>
+<td class="org-left">Census Income - II</td>
+<td class="org-left">Alban Hubert, Gwendal Boédec, Romain Castellani, Audrey Dos Santos</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+La constitution des groupes et l'attribution des sujets ont été réalisées de manière aléatoire. 
 </p>
 
 <p>
-Une brève description des données de chaque sujet est présentée dans la Section <a href="#orge552413">7</a>.
+Une brève description des données de chaque sujet est présentée dans la Section <a href="#orge48e99c">7</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org053f4fb" class="outline-2">
-<h2 id="org053f4fb"><span class="section-number-2">3</span> Travail demandé</h2>
+<div id="outline-container-org0654daa" class="outline-2">
+<h2 id="org0654daa"><span class="section-number-2">3</span> Travail demandé</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Votre étude de cas s'articulera autour des grandes phases suivantes :
@@ -298,17 +388,17 @@ Votre étude de cas s'articulera autour des grandes phases suivantes :
 <li>Analyse exploratoire des données :
 <ul class="org-ul">
 <li>Comprendre la signification des variables.</li>
-<li>Réaliser quelques statistiques descriptives.</li>
+<li>Réaliser quelques statistiques descriptives pertinentes pour votre étude.</li>
 </ul></li>
 <li>Préparation des données si nécessaire (nettoyage, mise en forme, gestion des valeurs manquantes).</li>
 <li>Réalisation d'un premier modèle de classification supervisée :
 <ul class="org-ul">
-<li>Indentifier (en argumentant) un premier jeu de variables explicatives à considérer.</li>
+<li>Identifier (en argumentant) un premier jeu de variables explicatives à considérer.</li>
 <li>Ajuster un premier modèle à partir de ces variables.</li>
 <li>Évaluer les performances de votre modèle.</li>
 <li>Commenter les résultats.</li>
 </ul></li>
-<li>(Bonus) Réalisation d'un second classifieur :
+<li>(Bonus) Réalisation d'un second modèle :
 <ul class="org-ul">
 <li>Tenter d'améliorer vos classifications en proposant un second modèle.</li>
 <li>Évaluer les performances de ce second modèle dans les mêmes conditions que le premier.</li>
@@ -319,7 +409,7 @@ Votre étude de cas s'articulera autour des grandes phases suivantes :
 <li>Proposer une ou plusieurs visualisations (si possible interactives) résumant vos résultats.</li>
 <li>Réaliser une présentation de 5 minutes maximum (i.e. 5 slides maximum) permettant de
 communiquer sur les points clés de votre étude (problématique, principales analyses
-descriptives, stratégies de modéliation, principaux résultats et conclusions).</li>
+descriptives, stratégies de modélisation, principaux résultats et conclusions).</li>
 </ul></li>
 </ol>
 <p>
@@ -333,47 +423,48 @@ le même niveau de détails. Vous serez en temps contraint, il vous faudra donc 
 <li>Ajouter des visualisations dans vos <i>notebooks</i> (la librairie <code>Plotly Express</code> est votre amie).</li>
 <li>Faites des slides épurés et attractifs visuellement lors de la restitution orale.</li>
 </ul></li>
-<li>Utilisez des outils de développements collaboratifs pour faciliter votre coopération, par
-exemple :
-<ul class="org-ul">
-<li><a href="https://deepnote.com/">Deepnote</a> : Gratuit sur inscription avec une limitation de quatre membres par projet (solution recommandée).</li>
-<li><a href="https://colab.research.google.com/notebooks/">Google Colab</a> : Gratuit avec un compte <code>Google</code>.</li>
-<li><a href="https://datalore.jetbrains.com/">Datalore</a> : Gratuit sur inscription.</li>
-</ul></li>
+<li>Utilisez un outil de développements collaboratif pour faciliter votre coopération, par
+exemple <a href="https://deepnote.com/">Deepnote</a> (solution recommandée) ou <a href="https://colab.research.google.com/notebooks/">Google Colab</a>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org98133df" class="outline-2">
-<h2 id="org98133df"><span class="section-number-2">4</span> Livrables</h2>
+<div id="outline-container-org3d168e3" class="outline-2">
+<h2 id="org3d168e3"><span class="section-number-2">4</span> Livrables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les deux livrables demandés sont :
 </p>
 <ol class="org-ol">
-<li>La présentation de votre restitution orale.</li>
-<li>Le <i>notebook</i> <code>Jupyter</code>, nommé <code>groupe_&lt;numéro_groupe&gt;.ipynb</code>, contenant vos développements.</li>
+<li>Le fichier de présentation de votre restitution orale nommé <code>etude_&lt;Id sujet&gt;.pptx ou .pdf</code> .</li>
+<li>Le <i>notebook</i> <code>Jupyter</code>, nommé <code>nb_&lt;Id sujet&gt;.ipynb</code>, contenant vos développements.</li>
 </ol>
+
+<p>
+<b>Ces éléments seront transmis à Chloé Friguet et Roland Donat par mail avec pour objet "Étude de
+cas &lt;Id sujet&gt;" le 17/12 à 15h30 au plus tard.</b> 
+</p>
 </div>
 </div>
 
-<div id="outline-container-org3b91b87" class="outline-2">
-<h2 id="org3b91b87"><span class="section-number-2">5</span> Déroulement de l'étude</h2>
+<div id="outline-container-orgc5ec744" class="outline-2">
+<h2 id="orgc5ec744"><span class="section-number-2">5</span> Déroulement de l'étude</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
-<li>Jeudi 10/12/2020 14h00-15h30 : Lancement de l'étude de cas.</li>
-<li>Jeudi 10/12/2020 à partir de 15h30 : Travail en autonomie.</li>
-<li>Vendredi 11/12/2020 09h00-12h00 : Tutorat et réponse aux questions selon les besoins.</li>
-<li><b>Vendredi 11/12/2020 15h45 : Remise de vos présentation pour la resitution orale <i>via</i> <code>Teams</code>.</b></li>
-<li>Vendredi 11/12/2020 15h45-17h15 : Séance de restitutions orales par groupe.</li>
-<li><b>Vendredi 11/12/2020 17h30 : Remise de vos <i>notebooks</i> <i>via</i> <code>Teams</code>.</b></li>
-<li>Vendredi 11/12/2020 17h31 : Bon week-end, bon retour en entreprise et bonnes fêtes !</li>
+<li>Jeudi 16/12 14h00-17h15 : Lancement de l'étude de cas avec tutorat.</li>
+<li>Vendredi 17/12 :
+<ul class="org-ul">
+<li>09h45-11h15 : Tutorat et réponse aux questions selon les besoins.</li>
+<li><b>15h30 : Envoi de votre présentation et de votre notebook par mail.</b></li>
+<li>15h35-17h : Séance de restitutions orales par groupe.</li>
+<li>17h31 : Bon week-end, bon retour en entreprise et bonnes fêtes !</li>
+</ul></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org177b8bc" class="outline-2">
-<h2 id="org177b8bc"><span class="section-number-2">6</span> Évaluation</h2>
+<div id="outline-container-org9fbeb1f" class="outline-2">
+<h2 id="org9fbeb1f"><span class="section-number-2">6</span> Évaluation</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Votre travail sera évalué à la fois sur la partie technique (<i>notebooks</i>) et sur la partie
@@ -381,8 +472,8 @@ restitution orale.
 </p>
 </div>
 
-<div id="outline-container-org94a36f7" class="outline-3">
-<h3 id="org94a36f7"><span class="section-number-3">6.1</span> Évaluation technique</h3>
+<div id="outline-container-org977f6e8" class="outline-3">
+<h3 id="org977f6e8"><span class="section-number-3">6.1</span> Évaluation technique</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Les principaux critères d'évaluation de vos <i>notebooks</i> sont :
@@ -396,8 +487,8 @@ Les principaux critères d'évaluation de vos <i>notebooks</i> sont :
 </div>
 </div>
 
-<div id="outline-container-org5cd1999" class="outline-3">
-<h3 id="org5cd1999"><span class="section-number-3">6.2</span> Évaluation de la resitution orale</h3>
+<div id="outline-container-orgc87d3c3" class="outline-3">
+<h3 id="orgc87d3c3"><span class="section-number-3">6.2</span> Évaluation de la restitution orale</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Lors de la restitution orale, vous serez principalement évaluer sur :
@@ -412,15 +503,15 @@ Lors de la restitution orale, vous serez principalement évaluer sur :
 </div>
 </div>
 
-<div id="outline-container-orgec48432" class="outline-2">
-<h2 id="orgec48432"><span class="section-number-2">7</span> Données</h2>
+<div id="outline-container-orga75d915" class="outline-2">
+<h2 id="orga75d915"><span class="section-number-2">7</span> Données</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-<a id="orge552413"></a>
+<a id="orge48e99c"></a>
 </p>
 
 <p>
-Le Tableau <a href="#tab_data">tab_data</a> liste les différents sujets de cette étude de cas. Une brève description des
+Le Tableau ci-dessous liste les différents sujets de cette étude de cas. Une brève description des
 données associées est fournie dans les sections suivantes. 
 </p>
 
@@ -462,8 +553,8 @@ données associées est fournie dans les sections suivantes.
 </table>
 </div>
 
-<div id="outline-container-org37e56f6" class="outline-3">
-<h3 id="org37e56f6"><span class="section-number-3">7.1</span> Données <code>bank</code></h3>
+<div id="outline-container-org33a3f48" class="outline-3">
+<h3 id="org33a3f48"><span class="section-number-3">7.1</span> Données <code>bank</code></h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Ces données sont liées à des campagnes de marketing d'une institution bancaire portugaise basées sur 
@@ -472,14 +563,18 @@ contactées ouvrent un compte de dépôt.
 </p>
 
 <p>
-L'objectif de l'étude est donc de prévoir si un client est susceptible d'ouvrir ou non un compte de dépôt (variable
-<code>y</code>).
+L'objectif de l'étude est donc de prévoir si un client est susceptible d'ouvrir ou non un compte de
+dépôt (variable <code>y</code>).
+</p>
+
+<p>
+Données : 
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf8298ce" class="outline-3">
-<h3 id="orgf8298ce"><span class="section-number-3">7.2</span> Données <code>census_income</code></h3>
+<div id="outline-container-org6941a84" class="outline-3">
+<h3 id="org6941a84"><span class="section-number-3">7.2</span> Données <code>census_income</code></h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Ces données fournissent des informations sur des ménages américains issues d'un recensement.
@@ -492,8 +587,8 @@ supérieur à $50k à partir de leurs caractéristiques sociales et économiques
 </div>
 </div>
 
-<div id="outline-container-org917e331" class="outline-3">
-<h3 id="org917e331"><span class="section-number-3">7.3</span> Données <code>weather_australia</code></h3>
+<div id="outline-container-orga339ee1" class="outline-3">
+<h3 id="orga339ee1"><span class="section-number-3">7.3</span> Données <code>weather_australia</code></h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Ce jeu de données contient des indicateurs météorologiques journaliers issus de différentes stations
@@ -505,8 +600,8 @@ L'objectif est de prévoir si oui ou non il va pleuvoir le lendemain (variable <
 </p>
 </div>
 </div>
-<div id="outline-container-org31b2b2c" class="outline-3">
-<h3 id="org31b2b2c"><span class="section-number-3">7.4</span> Données <code>diabetes</code></h3>
+<div id="outline-container-org88cc391" class="outline-3">
+<h3 id="org88cc391"><span class="section-number-3">7.4</span> Données <code>diabetes</code></h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 Context
@@ -537,9 +632,6 @@ exemple être non/oui ; malade/sain ; achat/pas d'achat, etc.</p></div></div>
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">Par
 opposition au problème de classification non supervisée dans lequel il faut segmenter/regrouper des
 individus sans information <i>a priori</i> sur ces groupes.</p></div></div>
-
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">Ce
-<i>notebook</i> a été mise au point sur la plateforme <a href="https://deepnote.com/">Deepnote</a>.</p></div></div>
 
 
 </div>
