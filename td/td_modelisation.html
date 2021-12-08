@@ -160,19 +160,6 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -205,7 +192,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -276,15 +263,15 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb7cb86a">1. Objectif</a></li>
-<li><a href="#org8461350">2. Préparation des données</a></li>
-<li><a href="#orgff1c8df">3. Modélisation statistique</a></li>
-<li><a href="#orgf26207d">4. Analyse exploratoire</a></li>
-<li><a href="#org43642dc">5. Modélisation logistique</a>
+<li><a href="#orgebfaeb8">1. Objectif</a></li>
+<li><a href="#org83dac39">2. Préparation des données</a></li>
+<li><a href="#org302fdfb">3. Modélisation statistique</a></li>
+<li><a href="#orgc067487">4. Analyse exploratoire</a></li>
+<li><a href="#orgf9d7f4e">5. Modélisation logistique</a>
 <ul>
-<li><a href="#org422e842">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
-<li><a href="#orgd505c77">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</a></li>
-<li><a href="#org85b4d27">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
+<li><a href="#orga708095">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
+<li><a href="#org4af14ad">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</a></li>
+<li><a href="#orgbc14860">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
 </ul>
 </li>
 </ul>
@@ -303,8 +290,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgb7cb86a" class="outline-2">
-<h2 id="orgb7cb86a"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-orgebfaeb8" class="outline-2">
+<h2 id="orgebfaeb8"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin prévoir
@@ -334,8 +321,8 @@ et des caractéristiques permettant d'expliquer les résultats observés.
 </div>
 </div>
 
-<div id="outline-container-org8461350" class="outline-2">
-<h2 id="org8461350"><span class="section-number-2">2</span> Préparation des données</h2>
+<div id="outline-container-org83dac39" class="outline-2">
+<h2 id="org83dac39"><span class="section-number-2">2</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Voici les instructions à suivre pour débuter ce TD :
@@ -384,8 +371,8 @@ performances de nos modèles et éventuellement affiner les prises de décision.
 </div>
 </div>
 
-<div id="outline-container-orgff1c8df" class="outline-2">
-<h2 id="orgff1c8df"><span class="section-number-2">3</span> Modélisation statistique</h2>
+<div id="outline-container-org302fdfb" class="outline-2">
+<h2 id="org302fdfb"><span class="section-number-2">3</span> Modélisation statistique</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
@@ -424,8 +411,8 @@ rencontre pour prédire les résultats de cette même rencontre.
 </div>
 </div>
 
-<div id="outline-container-orgf26207d" class="outline-2">
-<h2 id="orgf26207d"><span class="section-number-2">4</span> Analyse exploratoire</h2>
+<div id="outline-container-orgc067487" class="outline-2">
+<h2 id="orgc067487"><span class="section-number-2">4</span> Analyse exploratoire</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 <b>Travail à réaliser :</b> 
@@ -438,7 +425,7 @@ Réaliser une binarisation de la variable à expliquer à l'aide du module <code
 en utilisant la fonction <code>dmatrices</code> :
 </p>
 <div class="org-src-container">
-<pre class="src src-python">patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, return_type=<span style="color: #CC9393;">"dataframe"</span>)
+<pre class="src src-python"><span style="color: #DFAF8F;">FTR_bin_df</span>, <span style="color: #DFAF8F;">tmp</span> = patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, return_type=<span style="color: #CC9393;">"dataframe"</span>)
 </pre>
 </div></li>
 <li>Produire une ou deux visualisations de variables explicatives potentielles conditionnellement à
@@ -448,8 +435,8 @@ la variable cible considérée.</li>
 </div>
 
 
-<div id="outline-container-org43642dc" class="outline-2">
-<h2 id="org43642dc"><span class="section-number-2">5</span> Modélisation logistique</h2>
+<div id="outline-container-orgf9d7f4e" class="outline-2">
+<h2 id="orgf9d7f4e"><span class="section-number-2">5</span> Modélisation logistique</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Pour mettre en oeuvre la régression logistique, nous allons utiliser la librairie <code>statsmodels</code> qui donne
@@ -457,8 +444,8 @@ accès à la fonction <code>Logit</code> permettant de créer un modèle logisti
 </p>
 </div>
 
-<div id="outline-container-org422e842" class="outline-3">
-<h3 id="org422e842"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
+<div id="outline-container-orga708095" class="outline-3">
+<h3 id="orga708095"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
@@ -474,12 +461,24 @@ explicative pour expliquer la variable cible \(Y\).
 modèle. Interpréter la valeur de ce paramètre.</li>
 <li>Importer le module <code>statsmodels.api</code>.</li>
 <li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
-<li>Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.</li>
+<li><p>
+Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Pr&#233;paration des donn&#233;es</span>
+<span style="color: #DFAF8F;">FTR_bin_df</span>, <span style="color: #DFAF8F;">data_train_mod0_df</span> = patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+
 <li><p>
 Utiliser la fonction <code>Logit</code> pour entraîner votre modèle trivial :
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">mod0</span> = sm.Logit(&lt;Series variable cible&gt;, &lt;DataFrame variables explicatives&gt;).fit()
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">D&#233;claration du mod&#232;le</span>
+<span style="color: #DFAF8F;">mod0</span> = sm.Logit(FTR_bin_df, data_train_mod0_df)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apprentissage du mod&#232;le</span>
+<span style="color: #DFAF8F;">mod0</span> = mod0.fit()
 mod0.summary()
 </pre>
 </div></li>
@@ -488,8 +487,8 @@ mod0.summary()
 </div>
 </div>
 
-<div id="outline-container-orgd505c77" class="outline-3">
-<h3 id="orgd505c77"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</h3>
+<div id="outline-container-org4af14ad" class="outline-3">
+<h3 id="org4af14ad"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 <b>Travail à réaliser :</b> 
@@ -516,8 +515,8 @@ mod1.predict(data_test_mod1)
 </div>
 </div>
 
-<div id="outline-container-org85b4d27" class="outline-3">
-<h3 id="org85b4d27"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
+<div id="outline-container-orgbc14860" class="outline-3">
+<h3 id="orgbc14860"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 <b>Travail à réaliser :</b> 
