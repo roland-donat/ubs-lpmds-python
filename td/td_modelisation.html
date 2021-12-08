@@ -276,15 +276,15 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3c7e741">1. Objectif</a></li>
-<li><a href="#org5c14fe3">2. Préparation des données</a></li>
-<li><a href="#orgc76e23b">3. Modélisation statistique</a></li>
-<li><a href="#org60693cf">4. Analyse exploratoire</a></li>
-<li><a href="#org45e12b8">5. Modélisation logistique</a>
+<li><a href="#org4bf7bfc">1. Objectif</a></li>
+<li><a href="#org0f55a85">2. Préparation des données</a></li>
+<li><a href="#orgb0fc6d9">3. Modélisation statistique</a></li>
+<li><a href="#org6e8d8df">4. Analyse exploratoire</a></li>
+<li><a href="#org2f4974d">5. Modélisation logistique</a>
 <ul>
-<li><a href="#orgb0d5155">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
-<li><a href="#org2ecb603">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3</a></li>
-<li><a href="#orgabc60ba">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
+<li><a href="#org4092cf9">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
+<li><a href="#org0d35e00">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</a></li>
+<li><a href="#org6fe4c0e">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
 </ul>
 </li>
 </ul>
@@ -303,8 +303,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org3c7e741" class="outline-2">
-<h2 id="org3c7e741"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org4bf7bfc" class="outline-2">
+<h2 id="org4bf7bfc"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin prévoir
@@ -334,8 +334,8 @@ et des caractéristiques permettant d'expliquer les résultats observés.
 </div>
 </div>
 
-<div id="outline-container-org5c14fe3" class="outline-2">
-<h2 id="org5c14fe3"><span class="section-number-2">2</span> Préparation des données</h2>
+<div id="outline-container-org0f55a85" class="outline-2">
+<h2 id="org0f55a85"><span class="section-number-2">2</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Voici les instructions à suivre pour débuter ce TD :
@@ -384,8 +384,8 @@ performances de nos modèles et éventuellement affiner les prises de décision.
 </div>
 </div>
 
-<div id="outline-container-orgc76e23b" class="outline-2">
-<h2 id="orgc76e23b"><span class="section-number-2">3</span> Modélisation statistique</h2>
+<div id="outline-container-orgb0fc6d9" class="outline-2">
+<h2 id="orgb0fc6d9"><span class="section-number-2">3</span> Modélisation statistique</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
@@ -424,8 +424,8 @@ rencontre pour prédire les résultats de cette même rencontre.
 </div>
 </div>
 
-<div id="outline-container-org60693cf" class="outline-2">
-<h2 id="org60693cf"><span class="section-number-2">4</span> Analyse exploratoire</h2>
+<div id="outline-container-org6e8d8df" class="outline-2">
+<h2 id="org6e8d8df"><span class="section-number-2">4</span> Analyse exploratoire</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 <b>Travail à réaliser :</b> 
@@ -448,8 +448,8 @@ la variable cible considérée.</li>
 </div>
 
 
-<div id="outline-container-org45e12b8" class="outline-2">
-<h2 id="org45e12b8"><span class="section-number-2">5</span> Modélisation logistique</h2>
+<div id="outline-container-org2f4974d" class="outline-2">
+<h2 id="org2f4974d"><span class="section-number-2">5</span> Modélisation logistique</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Pour mettre en oeuvre la régression logistique, nous allons utiliser la librairie <code>statsmodels</code> qui donne
@@ -457,8 +457,8 @@ accès à la fonction <code>Logit</code> permettant de créer un modèle logisti
 </p>
 </div>
 
-<div id="outline-container-orgb0d5155" class="outline-3">
-<h3 id="orgb0d5155"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
+<div id="outline-container-org4092cf9" class="outline-3">
+<h3 id="org4092cf9"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
@@ -488,8 +488,8 @@ mod0.summary()
 </div>
 </div>
 
-<div id="outline-container-org2ecb603" class="outline-3">
-<h3 id="org2ecb603"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3</h3>
+<div id="outline-container-org0d35e00" class="outline-3">
+<h3 id="org0d35e00"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 <b>Travail à réaliser :</b> 
@@ -516,8 +516,8 @@ mod1.predict(data_test_mod1)
 </div>
 </div>
 
-<div id="outline-container-orgabc60ba" class="outline-3">
-<h3 id="orgabc60ba"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
+<div id="outline-container-org6fe4c0e" class="outline-3">
+<h3 id="org6fe4c0e"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 <b>Travail à réaliser :</b> 
@@ -526,7 +526,7 @@ mod1.predict(data_test_mod1)
 <li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
 <li>Entraîner le modèle.</li>
 <li>Interpréter les paramètres et les résultats.</li>
-<li>Réaliser quelques prévision à l'aide de la méthode <code>.predict</code>.</li>
+<li>Réaliser quelques prévisions à l'aide de la méthode <code>.predict</code>.</li>
 </ol>
 </div>
 </div>
