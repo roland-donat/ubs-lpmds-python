@@ -160,6 +160,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -192,7 +205,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -241,38 +254,38 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga273db9">1. Introduction</a></li>
-<li><a href="#org82fe71a">2. Mais au fait, pourquoi <code>Python</code> ?</a></li>
-<li><a href="#org0a7083c">3. Objectifs pédagogiques</a></li>
-<li><a href="#orgc89430d">4. Prérequis</a></li>
-<li><a href="#org5cf4b77">5. Organisation du cours</a>
+<li><a href="#org3537b5c">1. Introduction</a></li>
+<li><a href="#orgc1cfe30">2. Mais au fait, pourquoi <code>Python</code> ?</a></li>
+<li><a href="#org60ca8ef">3. Objectifs pédagogiques</a></li>
+<li><a href="#org0960d7d">4. Prérequis</a></li>
+<li><a href="#org134bd02">5. Organisation du cours</a>
 <ul>
-<li><a href="#org52f8437">5.1. Semaine 40</a></li>
-<li><a href="#org7c159b0">5.2. Semaine 41</a></li>
-<li><a href="#org701d93b">5.3. Semaine 42</a></li>
-<li><a href="#org1ef9302">5.4. Semaine 47</a></li>
-<li><a href="#orgac7a11c">5.5. Semaine 48</a></li>
-<li><a href="#org0890f5d">5.6. Semaine 49</a></li>
+<li><a href="#org5c15107">5.1. Semaine 40</a></li>
+<li><a href="#org508fcbe">5.2. Semaine 41</a></li>
+<li><a href="#org6e56b23">5.3. Semaine 42</a></li>
+<li><a href="#org1e24918">5.4. Semaine 47</a></li>
+<li><a href="#org18a82fb">5.5. Semaine 48</a></li>
+<li><a href="#orgbb12cc3">5.6. Semaine 49</a></li>
 </ul>
 </li>
-<li><a href="#orgeb521e3">6. Évaluation</a></li>
-<li><a href="#org4c84913">7. Moyens pédagogiques</a>
+<li><a href="#org030a0c2">6. Évaluation</a></li>
+<li><a href="#org0271782">7. Moyens pédagogiques</a>
 <ul>
-<li><a href="#org18a13ec">7.1. Plateforme <code>Teams</code></a></li>
-<li><a href="#org211f636">7.2. Où trouver de l'aide</a></li>
-<li><a href="#orgc4c5ca8">7.3. Plateformes de <i>notebooks</i> en ligne</a></li>
-<li><a href="#org16f39b1">7.4. Ressources pédagogiques et technique</a></li>
+<li><a href="#orgc1c715e">7.1. Plateforme <code>Teams</code></a></li>
+<li><a href="#org3a69cc1">7.2. Où trouver de l'aide</a></li>
+<li><a href="#org5b5a713">7.3. Plateformes de <i>notebooks</i> en ligne</a></li>
+<li><a href="#org74d0fe1">7.4. Ressources pédagogiques et technique</a></li>
 </ul>
 </li>
-<li><a href="#orgbf3f5e5">8. Démarche d'amélioration continue</a></li>
-<li><a href="#orgfeedcf5">9. À vos claviers :)</a></li>
+<li><a href="#orgfd3d68c">8. Démarche d'amélioration continue</a></li>
+<li><a href="#org761bc66">9. À vos claviers :)</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orga273db9" class="outline-2">
-<h2 id="orga273db9"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org3537b5c" class="outline-2">
+<h2 id="org3537b5c"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ce cours a pour objectif d'enseigner les principes de base de programmation avec le langage <code>Python</code>
@@ -283,8 +296,8 @@ pour la Santé.
 </div>
 </div>
 
-<div id="outline-container-org82fe71a" class="outline-2">
-<h2 id="org82fe71a"><span class="section-number-2">2</span> Mais au fait, pourquoi <code>Python</code> ?</h2>
+<div id="outline-container-orgc1cfe30" class="outline-2">
+<h2 id="orgc1cfe30"><span class="section-number-2">2</span> Mais au fait, pourquoi <code>Python</code> ?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Le langage <code>Python</code> a été initialement créé par Guido van Rossum à la fin des années 1980.
@@ -312,8 +325,8 @@ dans les applications relatives à la science des données.
 </div>
 </div>
 
-<div id="outline-container-org0a7083c" class="outline-2">
-<h2 id="org0a7083c"><span class="section-number-2">3</span> Objectifs pédagogiques</h2>
+<div id="outline-container-org60ca8ef" class="outline-2">
+<h2 id="org60ca8ef"><span class="section-number-2">3</span> Objectifs pédagogiques</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Maîtriser les concepts de base du langage <code>Python</code>.</li>
@@ -327,8 +340,8 @@ dans les applications relatives à la science des données.
 </div>
 </div>
 
-<div id="outline-container-orgc89430d" class="outline-2">
-<h2 id="orgc89430d"><span class="section-number-2">4</span> Prérequis</h2>
+<div id="outline-container-org0960d7d" class="outline-2">
+<h2 id="org0960d7d"><span class="section-number-2">4</span> Prérequis</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Avoir eu un contact plus ou moins direct avec un langage de programmation.</li>
@@ -338,12 +351,12 @@ segmentation et/ou classification.</li>
 </div>
 </div>
 
-<div id="outline-container-org5cf4b77" class="outline-2">
-<h2 id="org5cf4b77"><span class="section-number-2">5</span> Organisation du cours</h2>
+<div id="outline-container-org134bd02" class="outline-2">
+<h2 id="org134bd02"><span class="section-number-2">5</span> Organisation du cours</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org52f8437" class="outline-3">
-<h3 id="org52f8437"><span class="section-number-3">5.1</span> Semaine 40</h3>
+<div id="outline-container-org5c15107" class="outline-3">
+<h3 id="org5c15107"><span class="section-number-3">5.1</span> Semaine 40</h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/intro_notebooks.html">Introduction au concept de <i>notebook</i> et à la syntaxe <i>Markdown</i></a>.</li>
@@ -376,8 +389,8 @@ disposition pour vous entraîner :
 </div>
 </div>
 
-<div id="outline-container-org7c159b0" class="outline-3">
-<h3 id="org7c159b0"><span class="section-number-3">5.2</span> Semaine 41</h3>
+<div id="outline-container-org508fcbe" class="outline-3">
+<h3 id="org508fcbe"><span class="section-number-3">5.2</span> Semaine 41</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_data_management.html">Management des données et l'analyse descriptive avec <code>Pandas</code></a>. <a href="https://colab.research.google.com/drive/1-lJQuW4haYkxv1H4_hiQjs_s4w6Y5H8A?usp=sharing">!! Corrigé !!</a>
@@ -391,8 +404,8 @@ fonctionnalités de base de la librairie, est fait pour vous.
 </div>
 </div>
 
-<div id="outline-container-org701d93b" class="outline-3">
-<h3 id="org701d93b"><span class="section-number-3">5.3</span> Semaine 42</h3>
+<div id="outline-container-org6e56b23" class="outline-3">
+<h3 id="org6e56b23"><span class="section-number-3">5.3</span> Semaine 42</h3>
 <div class="outline-text-3" id="text-5-3">
 <ul class="org-ul">
 <li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=303636"><b>Quiz de programmation</b></a>.</li>
@@ -406,8 +419,8 @@ le devoir : <a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=302752">htt
 </div>
 </div>
 
-<div id="outline-container-org1ef9302" class="outline-3">
-<h3 id="org1ef9302"><span class="section-number-3">5.4</span> Semaine 47</h3>
+<div id="outline-container-org1e24918" class="outline-3">
+<h3 id="org1e24918"><span class="section-number-3">5.4</span> Semaine 47</h3>
 <div class="outline-text-3" id="text-5-4">
 <ul class="org-ul">
 <li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_dataviz.html">Visualisation des données avec <code>Plotly</code> (1/2)</a></li>
@@ -415,29 +428,29 @@ le devoir : <a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=302752">htt
 </div>
 </div>
 
-<div id="outline-container-orgac7a11c" class="outline-3">
-<h3 id="orgac7a11c"><span class="section-number-3">5.5</span> Semaine 48</h3>
+<div id="outline-container-org18a82fb" class="outline-3">
+<h3 id="org18a82fb"><span class="section-number-3">5.5</span> Semaine 48</h3>
 <div class="outline-text-3" id="text-5-5">
 <ul class="org-ul">
 <li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_dataviz.html">Visualisation des données avec <code>Plotly</code> (2/2)</a></li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Modélisation - Création de variables explicatives</a></li>
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Création de variables explicatives</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0890f5d" class="outline-3">
-<h3 id="org0890f5d"><span class="section-number-3">5.6</span> Semaine 49</h3>
+<div id="outline-container-orgbb12cc3" class="outline-3">
+<h3 id="orgbb12cc3"><span class="section-number-3">5.6</span> Semaine 49</h3>
 <div class="outline-text-3" id="text-5-6">
 <ul class="org-ul">
-<li><b>Quiz de programmation</b></li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Modélisation - Régression logistique</a></li>
+<li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=312582"><b>Quiz de programmation</b></a></li>
+<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Régression logistique</a></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgeb521e3" class="outline-2">
-<h2 id="orgeb521e3"><span class="section-number-2">6</span> Évaluation</h2>
+<div id="outline-container-org030a0c2" class="outline-2">
+<h2 id="org030a0c2"><span class="section-number-2">6</span> Évaluation</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 L'évaluation de ce module repose sur deux quiz de programmation et une étude de cas en équipe.
@@ -453,16 +466,16 @@ Note = 30%*Quiz1 + 30%*Quiz2 + 40%*Étude
 </div>
 </div>
 
-<div id="outline-container-org4c84913" class="outline-2">
-<h2 id="org4c84913"><span class="section-number-2">7</span> Moyens pédagogiques</h2>
+<div id="outline-container-org0271782" class="outline-2">
+<h2 id="org0271782"><span class="section-number-2">7</span> Moyens pédagogiques</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org18a13ec" class="outline-3">
-<h3 id="org18a13ec"><span class="section-number-3">7.1</span> Plateforme <code>Teams</code></h3>
+<div id="outline-container-orgc1c715e" class="outline-3">
+<h3 id="orgc1c715e"><span class="section-number-3">7.1</span> Plateforme <code>Teams</code></h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 En dehors des cours en présentiel, nous communiquerons <i>via</i> l'équipe <code>Teams</code>
-<a href="https://teams.microsoft.com/l/team/19:c9f2a07f63134c0eb75edd45f31f5370@thread.tacv2/conversations?groupId=1ef54a18-9fbb-4ccc-ba31-b22085727942&amp;tenantId=2fbd12a9-cbb9-49a2-9612-7af4096a6529">LP MDS Python pour la science des données</a>. <b>Les étudiant-e-s doivent donc impérativement demander
+<a href="https://teams.microsoft.com/l/team/19%3ac9f2a07f63134c0eb75edd45f31f5370%40thread.tacv2/conversations?groupId=1ef54a18-9fbb-4ccc-ba31-b22085727942&amp;tenantId=2fbd12a9-cbb9-49a2-9612-7af4096a6529">LP MDS Python pour la science des données</a>. <b>Les étudiant-e-s doivent donc impérativement demander
 l'accès à cette équipe.</b> 
 </p>
 
@@ -479,8 +492,8 @@ dépasser vos difficultés en <code>Python</code>.
 </div>
 </div>
 
-<div id="outline-container-org211f636" class="outline-3">
-<h3 id="org211f636"><span class="section-number-3">7.2</span> Où trouver de l'aide</h3>
+<div id="outline-container-org3a69cc1" class="outline-3">
+<h3 id="org3a69cc1"><span class="section-number-3">7.2</span> Où trouver de l'aide</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 En cas de soucis, Google ou autres sont vos amis. Pensez aux excellents forums d'entraide que sont : 
@@ -494,8 +507,8 @@ problème qui n'aurait jamais été traité sur le forum.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc4c5ca8" class="outline-3">
-<h3 id="orgc4c5ca8"><span class="section-number-3">7.3</span> Plateformes de <i>notebooks</i> en ligne</h3>
+<div id="outline-container-org5b5a713" class="outline-3">
+<h3 id="org5b5a713"><span class="section-number-3">7.3</span> Plateformes de <i>notebooks</i> en ligne</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Les travaux dirigés sont réalisées à partir de la plateforme de développement collaboratif <a href="https://colab.research.google.com/notebooks/">Google
@@ -505,8 +518,8 @@ Colab</a> (gratuit avec un compte <code>Google</code>). À noter que la platefor
 </div>
 </div>
 
-<div id="outline-container-org16f39b1" class="outline-3">
-<h3 id="org16f39b1"><span class="section-number-3">7.4</span> Ressources pédagogiques et technique</h3>
+<div id="outline-container-org74d0fe1" class="outline-3">
+<h3 id="org74d0fe1"><span class="section-number-3">7.4</span> Ressources pédagogiques et technique</h3>
 <div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li><a href="https://www.pierre-giraud.com/python-apprendre-programmer-cours/">Cours de Pierre Giraud</a> : cours généraliste pour maîtriser les bases du langage.</li>
@@ -525,8 +538,8 @@ explorations personnelles dans le monde du traitement de données avec <code>Pyt
 </div>
 
 
-<div id="outline-container-orgbf3f5e5" class="outline-2">
-<h2 id="orgbf3f5e5"><span class="section-number-2">8</span> Démarche d'amélioration continue</h2>
+<div id="outline-container-orgfd3d68c" class="outline-2">
+<h2 id="orgfd3d68c"><span class="section-number-2">8</span> Démarche d'amélioration continue</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Étant joueur, chaque année je me permets de mettre en place un petit jeu visant à améliorer la qualité des supports
@@ -552,8 +565,8 @@ paragraphe, etc. en expliquant le problème.</li>
 </div>
 </div>
 
-<div id="outline-container-orgfeedcf5" class="outline-2">
-<h2 id="orgfeedcf5"><span class="section-number-2">9</span> À vos claviers :)</h2>
+<div id="outline-container-org761bc66" class="outline-2">
+<h2 id="org761bc66"><span class="section-number-2">9</span> À vos claviers :)</h2>
 <div class="outline-text-2" id="text-9">
 
 <div class="figure">

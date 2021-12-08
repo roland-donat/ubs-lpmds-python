@@ -276,33 +276,15 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org725ad38">1. Objectif</a></li>
-<li><a href="#org2143307">2. Modélisation statistique</a></li>
-<li><a href="#org1cb0a12">3. Préparation des données</a></li>
-<li><a href="#org5601361">4. Création des variables explicatives</a>
+<li><a href="#org3c7e741">1. Objectif</a></li>
+<li><a href="#org5c14fe3">2. Préparation des données</a></li>
+<li><a href="#orgc76e23b">3. Modélisation statistique</a></li>
+<li><a href="#org60693cf">4. Analyse exploratoire</a></li>
+<li><a href="#org45e12b8">5. Modélisation logistique</a>
 <ul>
-<li><a href="#orgcf54a18">4.1. Calcul du taux de tirs cadrés</a></li>
-<li><a href="#org1f184e0">4.2. Calcul du taux d'arrêts décisifs</a></li>
-<li><a href="#orgdb8fa31">4.3. Calcul des taux moyens glissants</a>
-<ul>
-<li><a href="#orgd6d22a0">4.3.1. Taux moyen de tirs cadrés glissant à domicile</a></li>
-<li><a href="#orgd05e22a">4.3.2. Généralisation aux autres taux moyens glissants</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org48c1575">5. Création des jeux d'apprentissage et test</a></li>
-<li><a href="#org4e3a066">6. Modélisation logistique</a>
-<ul>
-<li><a href="#org7d7621f">6.1. Formulation du modèle et mise en forme des données</a></li>
-<li><a href="#orge1d1dbd">6.2. Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</a>
-<ul>
-<li><a href="#org643f14f">6.2.1. Apprentissage</a></li>
-<li><a href="#orge881266">6.2.2. Prédiction/Décision</a></li>
-<li><a href="#org56a6294">6.2.3. Évaluation des performances</a></li>
-</ul>
-</li>
-<li><a href="#org29ad472">6.3. Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</a></li>
+<li><a href="#orgb0d5155">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
+<li><a href="#org2ecb603">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3</a></li>
+<li><a href="#orgabc60ba">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
 </ul>
 </li>
 </ul>
@@ -321,514 +303,231 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org725ad38" class="outline-2">
-<h2 id="org725ad38"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org3c7e741" class="outline-2">
+<h2 id="org3c7e741"><span class="section-number-2">1</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin d'identifier des
-situations de paris intéressantes (<i>value bets</i>) pour les matchs nuls et les victoires à domicile.
+Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin prévoir
+l'occurrence des résultats d'une rencontre de football.
 </p>
 
 <p>
-L'intérêt pour ces deux résultats provient du travail exploratoire réalisé dans les TD
-précédents qui ont permis d'aboutir aux observations suivantes :
+Suite aux travaux exploratoires menés dans les TD précédents, nous avons remarqué les points
+suivants :
 </p>
 <ul class="org-ul">
 <li>la variance des cotes des matchs nuls est plus faible comparée à celles des autres résultats ;</li>
-<li>les statistiques a priori montrent plus souvent des situations de value bets pour le match nul et
+<li>les statistiques a priori montrent plus souvent des situations de <i>value bets</i> pour le match nul et
 la victoire à domicile.</li>
 </ul>
 
 <p>
-Nous nous plaçons donc dans le cadre d'un problème de classification supervisée pour lequel
-l'objectif est de décider s'il est intéressant de parier sur un match nul ou une victoire à
-domicile. 
+Pour ces raisons, nous nous intéresserons en priorité à la prévision des matchs nuls et des
+victoires à domicile.
 </p>
 
 <p>
-Nous construirons donc deux modèles de régression logistique : un pour le match nul et un pour la
-victoire à domicile.
+La problématique s'apparente donc à un problème de classification supervisée dans lequel nous allons
+entraîner un modèle statistique à partir de données contenant à la fois le résultat des rencontres
+et des caractéristiques permettant d'expliquer les résultats observés.
 </p>
+</div>
+</div>
 
+<div id="outline-container-org5c14fe3" class="outline-2">
+<h2 id="org5c14fe3"><span class="section-number-2">2</span> Préparation des données</h2>
+<div class="outline-text-2" id="text-2">
 <p>
-Pour ce faire, nous reprenons les données <code>fixtures</code> (matchs) et <code>odds</code> (cotes) introduites précédemment : 
+Voici les instructions à suivre pour débuter ce TD :
 </p>
 <ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a>.</li>
+<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1tFgkh9QywaFj6k5DVyG1oeggoI4dfT8J?usp=sharing"><i>notebook</i></a>.</li>
+<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
 </ul>
 
 <p>
-Les données <code>fixtures</code> servirons à entraîner nos modèles de décision et les données <code>odds</code> servirons
-à évaluer les performances des décisions prises. 
+Nous travaillerons à partir d'un historique de rencontres (<code>fixtures</code>) contenant, en plus des
+données de contexte bien connues à présent, une liste d'indicateurs caractérisant la rencontre.
+</p>
+
+<p>
+On rappelle que le nom des indicateurs est préfixé par les lettres <code>H</code> et <code>A</code> :
+</p>
+<ul class="org-ul">
+<li>le préfixe <code>H</code> désigne un indicateur concernant l'équipe à domicile ;</li>
+<li>le préfixe <code>A</code> désigne un indicateur concernant l'équipe à l'extérieur.</li>
+</ul>
+
+<p>
+Les indicateurs suivants sont disponibles à l'issue d'une rencontre :
+</p>
+<ul class="org-ul">
+<li><code>HS</code>, <code>AS</code> : nombre de tirs ;</li>
+<li><code>HST</code>, <code>AST</code> : nombre de tirs cadrés réalisés ;</li>
+<li><code>HDB</code>, <code>ADB</code> : nombre d'arrêts décisifs ;</li>
+<li><code>HGT</code>, <code>AGT</code> : nombre de tirs cadrés de l'adversaire ;</li>
+<li><code>HSTR</code>, <code>ASTR</code> : taux de tirs cadrés ;</li>
+<li><code>HDBR</code>, <code>ADBR</code> : taux d'arrêts décisifs.</li>
+</ul>
+
+<p>
+Nous disposons également d'une version "moyenne glissante" des indicateurs précédents permettant
+d'avoir une information sur l'état de performance moyen des équipes avant chaque rencontre. Chaque
+indicateur glissant est suffixé par <code>_M[N]</code> où N indique le nombre de rencontres passées utilisées
+pour calculer l'indicateur. 
+</p>
+
+<p>
+Enfin, nous utiliserons les données de cotes (<code>odds</code>) disponibles afin d'évaluer les
+performances de nos modèles et éventuellement affiner les prises de décision.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2143307" class="outline-2">
-<h2 id="org2143307"><span class="section-number-2">2</span> Modélisation statistique</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgc76e23b" class="outline-2">
+<h2 id="orgc76e23b"><span class="section-number-2">3</span> Modélisation statistique</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
-les faits de jeu observés (e.g. nombre de tirs cadrés, corners, fautes, etc.) comme des
+les faits de jeu observés (e.g. nombre moyen de tirs cadrés, corners, fautes, etc.) comme des
 réalisations de variables aléatoires.
 </p>
 
 <p>
-Dans notre étude, nous cherchons à expliquer/prévoir les réalisations des deux variables aléatoires
-suivantes :
+Dans notre étude, nous cherchons à expliquer/prévoir les réalisations d'une variable aléatoire
+\(Y_{\text{res}}\) indiquant un des résultats possibles de la rencontre. Par exemple :
 </p>
 <ul class="org-ul">
-<li>\(Y_{\text{D}}\) indiquant s'il y a eu match nul ;</li>
-<li>\(Y_{\text{H}}\) indiquant s'il y a eu victoire de l'équipe à domicile.</li>
+<li>\(Y_{\text{D}}\) est une variable aléatoire binaire qui vaut 1 s'il y a eu match nul et 0 sinon ;</li>
+<li>\(Y_{\text{H}}\) est une variable aléatoire binaire qui vaut 1 s'il y a eu victoire à domicile et 0 sinon.</li>
 </ul>
 
 <p>
-Nous cherchons donc à estimer la probabilité \(P(Y_{\text{D}} = \text{vrai}| X_{1} = x_{1}, \ldots,
+Nous cherchons donc à estimer la probabilité \(P(Y_{\text{res}} = 1| X_{1} = x_{1}, \ldots,
 X_{n} = x_{n})\) à partir de l'observation d'une série de réalisations de variables explicatives,
-notées \(x_{1}, \ldots, x_{n}\). Nous pourrons ainsi comparer notre estimation de \(P(Y_{\text{D}} = \text{vrai}| X_{1} = x_{1}, \ldots,
-X_{n} = x_{n})\) avec la cote du bookmaker afin d'identifier éventuellement une situation de <i>value
+notées \(x_{1}, \ldots, x_{n}\). Nous pourrons ainsi comparer nos estimation de \(\hat{P}(Y_{\text{res}} = 1| X_{1} = x_{1}, \ldots,
+X_{n} = x_{n})\) avec la cote du résultat correspondant du bookmaker afin d'identifier éventuellement une situation de <i>value
 bet</i>.
 </p>
 
 <p>
-Dans ce TD, nous allons modéliser les lois conditionnelles \(Y_{\text{D}} | X_{1}, \ldots, X_{n}\) et \(Y_{\text{H}} | X_{1}, \ldots, X_{n}\) à
-l'aide d'une fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de
+Dans ce TD, nous allons modéliser la loi conditionnelle \(Y_{\text{res}} | X_{1}, \ldots, X_{n}\) à l'aide d'une fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de
 régression logistique. 
 </p>
 
 <p>
 <b>Attention :</b>
-Il est important d'utiliser des variables explicatives observables avant la rencontre étudiée. En
+On rappelle qu'il est important d'utiliser des variables explicatives observables avant la rencontre étudiée. En
 effet, il n'est par exemple pas possible de se servir des faits de jeu observés à la fin d'une
 rencontre pour prédire les résultats de cette même rencontre. 
 </p>
-
-<p>
-Par conséquent, les données <code>fixtures</code> ne peuvent être utilisées directement. Il est nécessaire de
-créer de nouvelles variables permettant de caractériser au mieux chacun des protagonistes <b>avant</b> la
-rencontre.
-</p>
 </div>
 </div>
 
-<div id="outline-container-org1cb0a12" class="outline-2">
-<h2 id="org1cb0a12"><span class="section-number-2">3</span> Préparation des données</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-Voici les instructions à suivre pour débuter ce TD :
-</p>
-<ul class="org-ul">
-<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1begyvlOFA5nn4S7qlzxEVPZPItaLruOo#scrollTo=4jO_vSSxN_3m"><i>notebook</i></a>.</li>
-<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org5601361" class="outline-2">
-<h2 id="org5601361"><span class="section-number-2">4</span> Création des variables explicatives</h2>
+<div id="outline-container-org60693cf" class="outline-2">
+<h2 id="org60693cf"><span class="section-number-2">4</span> Analyse exploratoire</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Nous proposons d'utiliser les variables explicatives suivantes dans nos modèles :
-</p>
-<ol class="org-ol">
-<li>Le taux moyen de tirs cadrés sur les cinq dernières rencontres des équipes impliquées.</li>
-<li>Le taux moyen d'arrêts décisifs sur les cinq dernières rencontres des équipes impliquées.</li>
-</ol>
-</div>
-
-<div id="outline-container-orgcf54a18" class="outline-3">
-<h3 id="orgcf54a18"><span class="section-number-3">4.1</span> Calcul du taux de tirs cadrés</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-Le taux de tirs cadrés est défini comme le rapport entre le nombre de tirs cadrés et le nombre de
-tirs tentés par une équipe. 
-</p>
-
-<p>
-<b>Travail à réaliser :</b> 
-Ajouter aux données <code>fixtures</code> :
-</p>
-<ol class="org-ol">
-<li>la colonne <code>HSTR</code> (<i>Home Shot on Target Rate</i>) contenant le taux de tirs cadrés de l'équipe à domicile.</li>
-<li>la colonne <code>ASTR</code> (<i>Away Shot on Target Rate</i>) contenant le taux de tirs cadrés de l'équipe à l'extérieur.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org1f184e0" class="outline-3">
-<h3 id="org1f184e0"><span class="section-number-3">4.2</span> Calcul du taux d'arrêts décisifs</h3>
-<div class="outline-text-3" id="text-4-2">
-<p>
-Le nombre d'arrêts décisifs de l'équipe à domicile, noté <code>HDB</code> (<i>Home Decisive Block</i>), est défini
-par le nombre de tirs cadrés de l'équipe à l'extérieur moins le nombre de buts marqués par l'équipe
-à l'extérieur. 
-</p>
-
-<p>
-De même, le nombre d'arrêts décisifs de l'équipe à l'extérieur, noté <code>ADB</code> (<i>Away Decisive Block</i>),
-est défini par le nombre de tirs cadrés de l'équipe à domicile moins le nombre de buts marqués par
-l'équipe à domicile.
-</p>
-
-<p>
-Enfin, le taux d'arrêts décisifs d'une équipe est défini comme le rapport entre son nombre d'arrêts
-décisifs et le nombre de tirs cadrés de son adversaire.
-</p>
-
-<p>
-<b>Travail à réaliser :</b> 
-Ajouter aux données <code>fixtures</code> :
-</p>
-<ol class="org-ol">
-<li>les colonnes <code>HDB</code> et <code>ADB</code> contenant les arrêts décisifs de l'équipe à domicile et de
-l'équipe à l'extérieur.</li>
-<li>les colonnes <code>HDBR</code> et <code>ADBR</code> contenant les taux d'arrêts décisifs de l'équipe à domicile et de
-l'équipe à l'extérieur.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-orgdb8fa31" class="outline-3">
-<h3 id="orgdb8fa31"><span class="section-number-3">4.3</span> Calcul des taux moyens glissants</h3>
-<div class="outline-text-3" id="text-4-3">
-<p>
-Nous venons de calculer les taux de tirs cadrés <code>HSTR</code>, <code>ASTR</code> et les taux d'arrêts décisifs <code>HDBR</code>,
-<code>ADBR</code> pour chaque rencontre et chacune des équipes. Ces informations sont disponibles à l'issue de
-chaque rencontre et ne sont donc pas directement utilisables en tant que variables explicatives d'un
-modèle permettant de pronostiquer le résultat d'un match. 
-</p>
-
-<p>
-Aussi, nous proposons de calculer le taux moyens de tirs cadrés et d'arrêts décisifs à domicile et à 
-l'extérieur sur les \(N\) derniers matchs des équipes impliquées dans chaque
-rencontre. Mathématiquement, il s'agit d'un calcul de moyenne mobile (ou glissante) sur une fenêtre
-de longueur \(N\). 
-</p>
-</div>
-
-<div id="outline-container-orgd6d22a0" class="outline-4">
-<h4 id="orgd6d22a0"><span class="section-number-4">4.3.1</span> Taux moyen de tirs cadrés glissant à domicile</h4>
-<div class="outline-text-4" id="text-4-3-1">
-<p>
-Par exemple, le taux moyen de tirs cadrés glissant à domicile sur les
-\(N\) derniers matchs à domicile de l'équipe E est défini par : 
-\[
-\overline{\text{HSTR}}_{K, N}^{\text{E}} = \frac{1}{N} \sum_{n = 1}^{N}
-\text{HSTR}^{\text{E}}_{K - n},
-\] 
-où :
-</p>
-<ul class="org-ul">
-<li>\(K\) désigne le numéro du match à domicile courant de l'équipe E.</li>
-<li>\(\text{HSTR}^{\text{E}}_{K - n}\) est le taux de tirs cadrés observé de l'équipe E lors du \(n\) -ème
-dernier match à domicile.</li>
-</ul>
-
-<p>
-On notera <code>HSTR_M[N]</code> la colonne de données qui contiendra les valeurs des taux moyen de tirs cadrés
-glissant à domicile sur les \(N\) derniers matchs.
-</p>
-
-<p>
-Prenons l'exemple de l'équipe <code>Rennes</code> dans le championnat <code>fra_l1</code> de la saison <code>2005-2006</code>. Le
-calcul du taux moyen glissants sur les \(N=3\) dernier match à domicile est donné dans la colonne
-<code>HSTR_M3</code> :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">league_id</th>
-<th scope="col" class="org-right">season_id</th>
-<th scope="col" class="org-right">Date</th>
-<th scope="col" class="org-left">HomeTeam</th>
-<th scope="col" class="org-left">AwayTeam</th>
-<th scope="col" class="org-right">HS</th>
-<th scope="col" class="org-right">HST</th>
-<th scope="col" class="org-right">HSTR</th>
-<th scope="col" class="org-right">HSTR_M3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">fra_l1</td>
-<td class="org-right">2005-2006</td>
-<td class="org-right">2005-07-08</td>
-<td class="org-left">Rennes</td>
-<td class="org-left">Nantes</td>
-<td class="org-right">10.0</td>
-<td class="org-right">6.0</td>
-<td class="org-right">0.600000</td>
-<td class="org-right">NaN</td>
-</tr>
-
-<tr>
-<td class="org-left">fra_l1</td>
-<td class="org-right">2005-2006</td>
-<td class="org-right">2005-08-20</td>
-<td class="org-left">Rennes</td>
-<td class="org-left">Marseille</td>
-<td class="org-right">15.0</td>
-<td class="org-right">10.0</td>
-<td class="org-right">0.666667</td>
-<td class="org-right">NaN</td>
-</tr>
-
-<tr>
-<td class="org-left">fra_l1</td>
-<td class="org-right">2005-2006</td>
-<td class="org-right">2005-10-09</td>
-<td class="org-left">Rennes</td>
-<td class="org-left">Auxerre</td>
-<td class="org-right">10.0</td>
-<td class="org-right">7.0</td>
-<td class="org-right">0.700000</td>
-<td class="org-right">NaN</td>
-</tr>
-
-<tr>
-<td class="org-left">fra_l1</td>
-<td class="org-right">2005-2006</td>
-<td class="org-right">2005-09-21</td>
-<td class="org-left">Rennes</td>
-<td class="org-left">Bordeaux</td>
-<td class="org-right">7.0</td>
-<td class="org-right">3.0</td>
-<td class="org-right">0.428571</td>
-<td class="org-right">0.655556</td>
-</tr>
-
-<tr>
-<td class="org-left">fra_l1</td>
-<td class="org-right">2005-2006</td>
-<td class="org-right">2005-02-10</td>
-<td class="org-left">Rennes</td>
-<td class="org-left">Lyon</td>
-<td class="org-right">6.0</td>
-<td class="org-right">2.0</td>
-<td class="org-right">0.333333</td>
-<td class="org-right">0.598413</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-On remarque naturellement que le calcul de <code>HSTR_M3</code> n'est possible qu'après avoir observé au moins
-\(N=3\) match de <code>Rennes</code> à domicile.
-</p>
-
-<p>
-Note : Le calcul des statistiques glissantes avec <code>Pandas</code> est possible avec la méthode <code>.rolling</code>
-(voir aide). Nous verrons dans la suite qu'il est possible de coupler l'utilisation d'un <code>groupby</code>
-avec un calcul glissant <i>via</i> <code>rolling</code>. 
-</p>
-
-<p>
-Calculons la colonne <code>HSTR_M3</code> donnant le taux moyen de tirs cadrés glissant à domicile sur une
-fenêtre de \(N = 3\) matchs, et ce, pour chaque championnat et chaque saison :
-</p>
-
-<p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
-<li>Regrouper les données par championnat, saison et équipe à domicile.</li>
-<li>Utiliser la méthode <code>.rolling</code> pour calculer la moyenne glissante de la colonne <code>HSTR</code>. Analyser
-la structure du résultat.</li>
-<li>Modifier la structure du résultat précédent de manière à ajouter dans <code>data_fixtures_df</code> la
-colonne <code>HSTR_M3</code>.</li>
-<li>Vérifier le traitement sur les matchs à domicile de <code>Rennes</code>. Le traitement est-il correct ?</li>
-<li>Refaire le traitement précédent à partir du taux de tirs cadrés décalé d'une rencontre calculé
-avec la méthode <code>.shift</code>.</li>
+<li>Identifier et analyser rapidement la variable à expliquer. Quel est le problème ? Faites un choix
+sur les modalités \(y_{-}\) et \(y_{+}\) à considérer dans votre étude.</li>
+<li><p>
+Réaliser une binarisation de la variable à expliquer à l'aide du module <code>patsy</code> et en particulier
+en utilisant la fonction <code>dmatrices</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+<li>Produire une ou deux visualisations de variables explicatives potentielles conditionnellement à
+la variable cible considérée.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgd05e22a" class="outline-4">
-<h4 id="orgd05e22a"><span class="section-number-4">4.3.2</span> Généralisation aux autres taux moyens glissants</h4>
-<div class="outline-text-4" id="text-4-3-2">
-<p>
-Calculer les autres taux moyens glissants par analogie avec les traitements réalisés dans la section
-précédente. L'utilisation d'une boucle <code>for</code> bien construite facilitera le grandement le travail
-demandé.
-</p>
-</div>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org48c1575" class="outline-2">
-<h2 id="org48c1575"><span class="section-number-2">5</span> Création des jeux d'apprentissage et test</h2>
+<div id="outline-container-org45e12b8" class="outline-2">
+<h2 id="org45e12b8"><span class="section-number-2">5</span> Modélisation logistique</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-Il convient à ce stade de rappeler de nouveau l'objectif de nos travaux. Nous cherchons à développer
-un modèle statistique permettant d'estimer la probabilité que le résultat d'une rencontre soit ou
-non un match nul à partir de l'observation de variables explicatives (cf. section précédente).
-</p>
-
-<p>
-Pour ajuster les paramètres de notre modèle de décision, nous allons utiliser l'historique des
-matchs à disposition dans lequel nous sommes à la fois en mesure d'observer les variables
-explicatives et également le résultat des rencontres. Lorsque ces deux informations sont disponibles
-(variables explicatives et variable cible), on parle couramment de problématique de classification
-supervisée. La régression logistique fait Par exemple partie des méthodes de classification
-supervisée pour lesquelles la variable cible est binaire (ex : match nul ou match non nul).
-</p>
-
-<p>
-La démarche traditionnellement mise en oeuvre afin d'estimer les paramètres du modèle de
-classification utilisé consiste à séparer les données disponibles en deux échantillons :
-</p>
-<ol class="org-ol">
-<li>un échantillon d'apprentissage servant à ajuster les paramètres du modèle ;</li>
-<li>un échantillon de test sur lequel nous allons évaluer les performances prédictives du modèle.</li>
-</ol>
-
-<p>
-La proportion entre données d'apprentissage et données de test est usuellement de 2/3, 1/3 mais tout
-dépend en pratique de l'application considérée.  
-</p>
-
-<p>
-<b>Note :</b> dans les problématiques où les données dépendent du temps (comme c'est le cas pour les
-pronostics sportifs), il est important de veiller à ce que les données d'apprentissage soient bien
-antérieures aux données de test.
-</p>
-
-<p>
-<b>Travail à réaliser :</b> 
-</p>
-<ol class="org-ol">
-<li>Construire un DataFrame <code>data_fixtures_clean_df</code> ne contenant que les variables de contexte d'un
-match, les variables explicatives
-observables avant les rencontres et la variable cible. Les données <code>data_fixtures_clean_df</code>
-seront triées par date de rencontre croissante et les données manquantes seront 
-supprimées.</li>
-<li>Créer les données d'apprentissage <code>data_fixtures_train_df</code> en prenant les deux premiers tiers des
-données <code>data_fixtures_clean_df</code>.</li>
-<li>Créer les données de test <code>data_fixtures_test_df</code> en prenant le dernier tiers des
-données <code>data_fixtures_clean_df</code>.</li>
-</ol>
-</div>
-</div>
-
-
-<div id="outline-container-org4e3a066" class="outline-2">
-<h2 id="org4e3a066"><span class="section-number-2">6</span> Modélisation logistique</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Pour réaliser nos régressions logistiques, nous allons utiliser la librairie <code>statsmodels</code> qui donne
+Pour mettre en oeuvre la régression logistique, nous allons utiliser la librairie <code>statsmodels</code> qui donne
 accès à la fonction <code>Logit</code> permettant de créer un modèle logistique.
 </p>
+</div>
+
+<div id="outline-container-orgb0d5155" class="outline-3">
+<h3 id="orgb0d5155"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
+explicative pour expliquer la variable cible \(Y\).
+</p>
 
 <p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Donner l'expression de l'estimation de $&beta;<sub>0</sub>, notée \(\hat{beta}_{0}\), dans ce
+modèle. Interpréter la valeur de ce paramètre.</li>
 <li>Importer le module <code>statsmodels.api</code>.</li>
 <li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
+<li>Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.</li>
+<li><p>
+Utiliser la fonction <code>Logit</code> pour entraîner votre modèle trivial :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">mod0</span> = sm.Logit(&lt;Series variable cible&gt;, &lt;DataFrame variables explicatives&gt;).fit()
+mod0.summary()
+</pre>
+</div></li>
+<li>Interpréter les résultats.</li>
 </ol>
 </div>
+</div>
 
-<div id="outline-container-org7d7621f" class="outline-3">
-<h3 id="org7d7621f"><span class="section-number-3">6.1</span> Formulation du modèle et mise en forme des données</h3>
-<div class="outline-text-3" id="text-6-1">
-<p>
-Pour créer notre modèle logistique, nous allons utiliser le module <code>patsy</code> et en particulier la
-fonction <code>dmatrices</code> permettant de préparer les données à la modélisation en fournissant une formule (<i>formula</i>)
-comme dans <code>R</code>.
-</p>
-
+<div id="outline-container-org2ecb603" class="outline-3">
+<h3 id="org2ecb603"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
-<li>Importer le module <code>patsy</code>. Regarder l'aide de la fonction <code>dmatrice</code>.</li>
-<li>Préparer les données d'apprentissage en utilisant la formule <code>FTR ~ HSTR_M5 + ASTR_M5 + HDBR_M5 +
-   ADBR_M5</code> dans la fonction <code>patsy.dmatrice</code>.</li>
-<li>Faire de même pour mettre en forme les données de test.</li>
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>. Que
+remarquez vous par rapport aux données préparées du modèle \(\mathcal{M}_{0}\).</li>
+<li>Utiliser la fonction <code>Logit</code> pour entraîner le modèle.</li>
+<li>Interpréter les paramètres et les résultats.</li>
+<li><p>
+Représenter graphiquement l'évolution de la probabilité <i>a posteriori</i> \(P(Y=y_{+} | X_{1} =
+   x_{1} = \pi(x_{1})\) en fonction de valeurs de \(x_{1}\) dans le modèle \(\mathcal{M}_{1}\).
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">data_test_mod1</span> = patsy.dmatrix(<span style="color: #CC9393;">"HS_M3"</span>, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  pd.DataFrame({<span style="color: #CC9393;">"HS_M3"</span>: <span style="color: #DCDCCC; font-weight: bold;">range</span>(0,50,1)}), 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  return_type=<span style="color: #CC9393;">"dataframe"</span>)
+mod1.predict(data_test_mod1)
+</pre>
+</div></li>
+<li>Tenter d'expliquer la valeur de \(\pi(0)\).</li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orge1d1dbd" class="outline-3">
-<h3 id="orge1d1dbd"><span class="section-number-3">6.2</span> Modèle \(\mathcal{M}_{\text{D}}\) : prévision des matchs nuls</h3>
-<div class="outline-text-3" id="text-6-2">
-</div>
-<div id="outline-container-org643f14f" class="outline-4">
-<h4 id="org643f14f"><span class="section-number-4">6.2.1</span> Apprentissage</h4>
-<div class="outline-text-4" id="text-6-2-1">
+<div id="outline-container-orgabc60ba" class="outline-3">
+<h3 id="orgabc60ba"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta{1})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
-<li>Utiliser la fonction <code>Logit</code> pour créer un modèle logistique à partir des données
-d'apprentissage.</li>
-<li>Utiliser la méthode <code>.fit</code> pour ajuster le modèle aux données.</li>
-<li>Analyser les caractéristiques du modèle obtenu avec la méthode <code>.summary</code>.</li>
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Entraîner le modèle.</li>
+<li>Interpréter les paramètres et les résultats.</li>
+<li>Réaliser quelques prévision à l'aide de la méthode <code>.predict</code>.</li>
 </ol>
-</div>
-</div>
-
-<div id="outline-container-orge881266" class="outline-4">
-<h4 id="orge881266"><span class="section-number-4">6.2.2</span> Prédiction/Décision</h4>
-<div class="outline-text-4" id="text-6-2-2">
-<p>
-<b>Travail à réaliser :</b> 
-</p>
-<ol class="org-ol">
-<li>Utiliser la méthode <code>.predict</code> pour calculer la probabilité <i>a posteriori</i> de match nul pour les
-rencontres des données de test.</li>
-<li>En utilisant les données de cotes (<code>odds</code>), identifier les situations de <i>value bets</i>. Pour ce
-faire, calculer le score de <i>value bet</i>, i.e. différence entre la probabilité de match nul
-estimée par le modèle et la probabilité de match nul déduite de la cote du bookmaker.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org56a6294" class="outline-4">
-<h4 id="org56a6294"><span class="section-number-4">6.2.3</span> Évaluation des performances</h4>
-<div class="outline-text-4" id="text-6-2-3">
-<p>
-<b>Travail à réaliser :</b> 
-</p>
-<ol class="org-ol">
-<li>Évaluer le gain obtenu en pariant 1 unité sur les matchs nuls en situation de <i>value bets</i> <i>a posteriori</i>.</li>
-<li>Évaluer le gain obtenu en pariant le score de <i>value bet</i> sur les matchs nuls en situation de <i>value bets</i> <i>a posteriori</i>.</li>
-</ol>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org29ad472" class="outline-3">
-<h3 id="org29ad472"><span class="section-number-3">6.3</span> Modèle \(\mathcal{M}_{\text{H}}\) : Modélisation des victoires à domicile</h3>
-<div class="outline-text-3" id="text-6-3">
-<p>
-<b>Travail à réaliser :</b> Appliquer la démarche de la section précédente à la prévision des victoires à
-domicile 
-</p>
 </div>
 </div>
 </div>
