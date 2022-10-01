@@ -5,193 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Utilisation des <i>notebooks</i> pour développer en <code>Python</code></title>
-<meta name="generator" content="Org mode" />
+<title>Utilisation des /notebooks/ pour développer en =Python=</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,113 +16,53 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Utilisation des <i>notebooks</i> pour développer en <code>Python</code></h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb48feb9">1. Objectif</a></li>
-<li><a href="#org2aa6365">2. Les <i>Notebooks</i></a></li>
-<li><a href="#org262ec95">3. L'environnement Google Colab</a></li>
-<li><a href="#orgedaeb0c">4. Interface d'un <i>notebook</i></a>
+<li><a href="#orge0248d6">1. Objectif</a></li>
+<li><a href="#orga8cde7e">2. Les <i>Notebooks</i></a></li>
+<li><a href="#org4d8c9cc">3. L'environnement Deepnote</a></li>
+<li><a href="#org0998189">4. Interface d'un <i>notebook</i></a>
 <ul>
-<li>
-<ul>
-<li><a href="#org1cac4bc">4.0.1. Les cellules</a></li>
-<li><a href="#org7c7aec0">4.0.2. Les noyaux</a></li>
+<li><a href="#org6cfea1b">4.1. Les cellules</a></li>
+<li><a href="#orgc3d5835">4.2. Les noyaux</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#orgb8eccea">5. Quelques bonnes pratiques rédactionnelles</a></li>
-<li><a href="#org6cbb841">6. Annexe : Travailler en local avec <code>Jupyter</code></a>
-<ul>
-<li><a href="#org11a987a">6.1. Installation de l'environnement <code>Python</code></a>
-<ul>
-<li><a href="#org9a9a818">6.1.1. Lancer <code>Jupyter Notebook</code></a></li>
-<li><a href="#orgd36fffd">6.1.2. Créer un nouveau <i>notebook</i></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#org0a394f7">5. Quelques bonnes pratiques rédactionnelles</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgb48feb9" class="outline-2">
-<h2 id="orgb48feb9"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-orge0248d6" class="outline-2">
+<h2 id="orge0248d6"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de cette première activité est de se familiariser avec le concept des <i>notebooks</i> et les
-environnements de développement collaboratif tels que <a href="https://colab.research.google.com/notebooks/">Google Colab</a> ou <a href="https://deepnote.com/">Deepnote</a>.
+environnements de développement collaboratif.
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org2aa6365" class="outline-2">
-<h2 id="org2aa6365"><span class="section-number-2">2</span> Les <i>Notebooks</i></h2>
+<div id="outline-container-orga8cde7e" class="outline-2">
+<h2 id="orga8cde7e"><span class="section-number-2">2.</span> Les <i>Notebooks</i></h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<a id="org3b591d1"></a>
+<a id="org74f2a2b"></a>
 </p>
 
 <p>
 Un <i>notebooks</i> en programmation est une interface permettant de développer des programmes (ici en <code>Python</code>) et d'en présenter
 les résultats de manière interactive en y incluant de la documentation. Cette manière de programmer
-met en pratique la démarche de programmation lettrée[<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>] (<i>literate
+met en pratique la <a href="https://fr.wikipedia.org/wiki/Programmation_lettr%C3%A9e">démarche de programmation lettrée</a> (<i>literate
 programming</i>, en anglais). Cette démarche est particulièrement bien adaptée aux projets de science
-des données qui mèlent en général développements informatiques, visualisations et interprétations.
+des données qui mêlent en général développements informatiques, visualisations et interprétations.
 </p>
 
 <p>
@@ -318,36 +74,38 @@ scientifiques et techniques.
 
 <p>
 L'utilisation de <i>notebooks</i> est désormais une pratique classique dans les projets de science des
-données dans le monde académique et en entreprises. Bien que dans ce cours nous n'utiliserons que
+données dans le monde académique et en entreprises. Bien que dans ce cours, nous n'utiliserons que
 des <i>notebooks</i> <code>Python</code>, de nombreux outils proposent de travailler avec les principaux langages
 scientifiques usuels aujourd'hui (e.g. <code>R</code>, <code>Ruby</code>, <code>Julia</code>, etc).
 </p>
 </div>
 </div>
 
-<div id="outline-container-org262ec95" class="outline-2">
-<h2 id="org262ec95"><span class="section-number-2">3</span> L'environnement Google Colab</h2>
+<div id="outline-container-org4d8c9cc" class="outline-2">
+<h2 id="org4d8c9cc"><span class="section-number-2">3.</span> L'environnement Deepnote</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Google Colab est une plateforme de développement collaboratif intégrée à l'écosystème Google. Cette
-plateforme est gratuite sous réserve de disposer d'un compte Google. 
+Dans ce module, nous travaillerons essentiellement avec la plateforme Deepnote
+(<a href="https://deepnote.com/">https://deepnote.com/</a>). Il s'agit d'une plateforme de développement collaboratif gratuite
+permettant de développer en <code>Python</code>.
 </p>
 
 <p>
 <b>Travail à réaliser</b> : Créer un premier <i>notebook</i>
 </p>
 <ul class="org-ul">
-<li>Se rendre à l'adresse suivante :
-<a href="https://colab.research.google.com/notebooks/intro.ipynb#recent=true">https://colab.research.google.com/notebooks/intro.ipynb#recent=true</a>.</li>
-<li>Créer un compte Google (si nécessaire).</li>
-<li>Créer un nouveau nouveau <i>notebook</i>.</li>
-<li>Se familiariser avec l'environnement.</li>
+<li>Se rendre à l'adresse suivante : <a href="https://deepnote.com/">https://deepnote.com/</a></li>
+<li>Cliquer sur <code>Get started</code>, en haut à droite de l'écran.</li>
+<li>Si vous possédez un compte Google ou GitHub, cliquer sur <code>Continue with Google</code> ou <code>Continue with
+  Github</code>. Sinon, créer un compte en cliquant sur <code>Sign up with email</code>.</li>
+<li>Une fois votre compte créé, se connecter à Deepnote.</li>
+<li>Créer ensuite un nouveau nouveau <i>notebook</i> en cliquant sur <code>Create new</code>, en haut à droite.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgedaeb0c" class="outline-2">
-<h2 id="orgedaeb0c"><span class="section-number-2">4</span> Interface d'un <i>notebook</i></h2>
+<div id="outline-container-org0998189" class="outline-2">
+<h2 id="org0998189"><span class="section-number-2">4.</span> Interface d'un <i>notebook</i></h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les <i>notebooks</i> doivent être vus comme un outil d'édition de texte avancé. Tout au long
@@ -356,17 +114,17 @@ de ce cours, nous explorerons ses principales fonctionnalités.
 
 <p>
 En parcourant l'interface, deux termes assez importants et probablement nouveaux pour
-vous apparaissent : les cellules (cf. Section <a href="#orgac07088">4.0.1</a>) et les noyaux (cf. Section
-<a href="#org07b361d">4.0.2</a>). Ces deux notions sont essentielles pour 
-comprendre en quoi <code>Google Colab</code> est bien plus qu'un simple éditeur de texte.
+vous apparaissent : les cellules (cf. Section <a href="#org74a31fd">4.1</a>) et les noyaux (cf. Section
+<a href="#orga9ff463">4.2</a>). Ces deux notions sont essentielles pour 
+comprendre en quoi un <code>Deepnote</code> est bien plus qu'un simple éditeur de texte.
 </p>
 </div>
 
-<div id="outline-container-org1cac4bc" class="outline-4">
-<h4 id="org1cac4bc"><span class="section-number-4">4.0.1</span> Les cellules</h4>
-<div class="outline-text-4" id="text-4-0-1">
+<div id="outline-container-org6cfea1b" class="outline-3">
+<h3 id="org6cfea1b"><span class="section-number-3">4.1.</span> Les cellules</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
-<a id="orgac07088"></a>
+<a id="org74a31fd"></a>
 </p>
 
 <p>
@@ -375,20 +133,20 @@ de cellules :
 </p>
 <ul class="org-ul">
 <li>Les cellules de code qui contiennent donc du code <code>Python</code> à exécuter dans le noyau (cf. Section
-<a href="#org07b361d">4.0.2</a>. Lorsque le code est exécuté, le <i>notebook</i> affiche le résultat produit par
+<a href="#orga9ff463">4.2</a>. Lorsque le code est exécuté, le <i>notebook</i> affiche le résultat produit par
 <code>Python</code> sous la cellule du code correspondant.</li>
 <li>Une cellule de texte contient du texte formaté à l'aide du langage <code>Markdown</code> et affiche le rendu
-lorsque la cellule <code>Markdown</code> est exécutée (cf. <a href="https://colab.research.google.com/notebooks/markdown_guide.ipynb">guide <code>Markdown</code> avec Google Colab</a>).</li>
+lorsque la cellule <code>Markdown</code> est exécutée (cf. <a href="https://notebook.community/tschinz/iPython_Workspace/00_Admin/CheatSheet/Markdown%20CheatSheet">Aide mémoire <code>Markdown</code> pour notebook</a>).</li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org7c7aec0" class="outline-4">
-<h4 id="org7c7aec0"><span class="section-number-4">4.0.2</span> Les noyaux</h4>
-<div class="outline-text-4" id="text-4-0-2">
+<div id="outline-container-orgc3d5835" class="outline-3">
+<h3 id="orgc3d5835"><span class="section-number-3">4.2.</span> Les noyaux</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
-<a id="org07b361d"></a>
+<a id="orga9ff463"></a>
 </p>
 
 <p>
@@ -408,8 +166,8 @@ seront disponibles dans les autres cellules de votre <i>notebook</i>.
 </div>
 </div>
 
-<div id="outline-container-orgb8eccea" class="outline-2">
-<h2 id="orgb8eccea"><span class="section-number-2">5</span> Quelques bonnes pratiques rédactionnelles</h2>
+<div id="outline-container-org0a394f7" class="outline-2">
+<h2 id="org0a394f7"><span class="section-number-2">5.</span> Quelques bonnes pratiques rédactionnelles</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Un <i>notebook</i> est un excellent support pour réaliser un rapport technique présentant un travail
@@ -463,169 +221,6 @@ est donc impératif que votre <i>notebook</i> puisse rester lisible et cohérent
 </p>
 </div>
 </div>
-
-<div id="outline-container-org6cbb841" class="outline-2">
-<h2 id="org6cbb841"><span class="section-number-2">6</span> Annexe : Travailler en local avec <code>Jupyter</code></h2>
-<div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org11a987a" class="outline-3">
-<h3 id="org11a987a"><span class="section-number-3">6.1</span> Installation de l'environnement <code>Python</code></h3>
-<div class="outline-text-3" id="text-6-1">
-<p>
-Si vous êtes débutant et quel que soit votre système d'exploitation, le plus simple est d'installer
-la distribution <a href="https://www.anaconda.com/products/individual"><code>Anaconda</code></a> qui contient tous les outils dont vous aurez besoin pour travailler avec
-<code>Python</code> et en particulier l'interpréteur <code>Python 3.8</code> et <code>Jupyter</code>.
-</p>
-
-<p>
-Une fois <code>Anaconda</code> installée, lancez le programme <code>Anaconda Navigator</code> qui vous permettra d'avoir
-rapidement accès à tous les principaux outils de l'écosystème <code>Python</code>.
-</p>
-
-<p>
-Dans la case intitulée <code>Qt Console</code>, cliquez sur <code>Launch</code>. Vous devez voir apparaître une fenêtre de
-terminal apparaître avec à l'intérieur :
-</p>
-<div class="org-src-container">
-<pre class="src src-sh">IJupyter QtConsole 4.7.5
-Python 3.8.3 (default, Jul  2 2020, 16:21:59) 
-Type <span style="color: #CC9393;">'copyright'</span>, <span style="color: #CC9393;">'credits'</span> or <span style="color: #CC9393;">'license'</span> for more information
-IPython 7.17.0 -- An enhanced Interactive Python. Type <span style="color: #CC9393;">'?'</span> for help.
-
-In [1]: 
-</pre>
-</div>
-
-<p>
-Ce terminal est un interpréteur <code>Python</code>. C'est à dire que si vous écrivez une commande 
-<code>Python</code> correct, cet interpréteur est capable de l'évaluer et de renvoyer le résultat. Certains
-pourront voir cet interpréteur comme l'ancêtre un peu austère des <i>notebooks</i>.
-</p>
-
-<p>
-Par exemple, vous pouvez utiliser <code>Python</code> comme une machine à calculer :
-</p>
-<div class="org-src-container">
-<pre class="src src-sh">IJupyter QtConsole 4.7.5
-Python 3.8.3 (default, Jul  2 2020, 16:21:59) 
-Type <span style="color: #CC9393;">'copyright'</span>, <span style="color: #CC9393;">'credits'</span> or <span style="color: #CC9393;">'license'</span> for more information
-IPython 7.17.0 -- An enhanced Interactive Python. Type <span style="color: #CC9393;">'?'</span> for help.
-
-In [1]: 1 + 1
-Out[1]: 2
-</pre>
-</div>
-<p>
-Pour quitter l'interpréteur, tapez simplement <code>exit()</code>.
-</p>
-
-<p>
-Comme vous pouvez l'imaginer l'interpréteur <code>Python</code> (que l'on appelle également console <code>Python</code>)
- n'a pas pour vocation de servir de simple machine à calculer. En effet, cette console sert en
- pratique à écrire et évaluer n'importe quels programmes <code>Python</code>. Pour plus de confort lors du
- développement de grands programmes, il est possible de rédiger son code dans un fichier séparé puis
- de l'exécuter dans l'interpréteur.
-</p>
-
-<p>
-L'information a retenir est la suivante : sans interpréteur <code>Python</code>, impossible d'exécuter un
-programme <code>Python</code><sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.
-</p>
-</div>
-
-
-<div id="outline-container-org9a9a818" class="outline-4">
-<h4 id="org9a9a818"><span class="section-number-4">6.1.1</span> Lancer <code>Jupyter Notebook</code></h4>
-<div class="outline-text-4" id="text-6-1-1">
-<p>
-Lancez tout d'abord le programme <code>Anaconda Navigator</code>, puis cliquez sur le bouton <code>Launch</code> du cadre
-intitulé <code>Jupyter Notebook</code> (cf. Figure <a href="#fig_anaconda_navigator_launch_jupyter">fig_anaconda_navigator_launch_jupyter</a>)
-</p>
-
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/ubs-lpmds-python/td/fig/anaconda_navigator_launch_jupyter.png" alt="anaconda_navigator_launch_jupyter.png" width="100%" />
-</p>
-<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Lancement de <code>Jupyter Notebook</code> depuis <code>Anaconda Navigator</code>. <div id="fig_anaconda_navigator_launch_jupyter"></div></p>
-</div>
-
-<p>
-Une fois démarré, l'outil <code>Jupyter Notebook</code> affiche un tableau de bord (cf. Figure
-<a href="#fig_jupyter_dashboard">fig_jupyter_dashboard</a>) permettant d'explorer, créer
-et éditer vos <i>notebooks</i> <code>Jupyter</code>.
-</p>
-
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/ubs-lpmds-python/td/fig/jupyter_dashboard.png" alt="jupyter_dashboard.png" width="100%" />
-</p>
-<p><span class="figure-number">Figure&nbsp;2&nbsp;: </span>Tableau de bord de <code>Jupyter</code>. <div id="fig_jupyter_dashboard"></div></p>
-</div>
-
-
-<p>
-<span class="underline">Remarques geeks</span>: 
-</p>
-<ul class="org-ul">
-<li>Le tableau de bord vous donnera accès uniquement aux fichiers et sous-dossiers contenus dans le
-répertoire de démarrage de <code>Jupyter</code> (c'est-à-dire où <code>Jupyter</code> ou <code>Anaconda</code> est installé).</li>
-<li>Il est également possible de démarrer le tableau de bord sur n'importe quel système <i>via</i> l'invite
-de commande (ou le terminal sur les systèmes Unix) en entrant la commande <code>jupyter notebook</code>. Dans
-ce cas, le répertoire de travail courant sera le répertoire de démarrage.</li>
-<li><code>Jupyter Notebook</code> s'ouvre dans votre navigateur web à une adresse qui doit ressembler à
-<a href="http://localhost:8888/tree">http://localhost:8888/tree</a>. <code>Localhost</code> désigne ici votre propre machine et <code>8888</code> désigne le
-numéro d'un port de communication sur lequel "écoute" un serveur <code>Python</code> (autrement dit une sorte
-d'interpréteur <code>Python</code>) qui exécutera les commandes que vous saisirez dans vos <i>notebooks</i>.</li>
-<li>Les <i>notebooks</i> et le tableau de bord de <code>Jupyter</code> sont donc des applications Web mais il est
-important de comprendre qu'en utilisant <code>Jupyter</code> (et contrairement à <code>Google Colab</code>) vos
-<i>notebooks</i> ne sont pas réellement sur le Web (mais bien sur votre 
-ordinateur local).</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orgd36fffd" class="outline-4">
-<h4 id="orgd36fffd"><span class="section-number-4">6.1.2</span> Créer un nouveau <i>notebook</i></h4>
-<div class="outline-text-4" id="text-6-1-2">
-<p>
-L'interface du tableau de bord est relativement intuitive. Pour créer votre premier <i>notebook</i>,
-accédez au dossier dans lequel vous souhaitez travailler puis cliquez sur le bouton déroulant
-<code>Nouveau</code> en haut à droite et sélectionnez <code>Python 3</code> (cf. Figure <a href="#fig_jupyter_dashboard_new_notebook">fig_jupyter_dashboard_new_notebook</a>).
-</p>
-
-
-<div class="figure">
-<p><img src="https://roland-donat.github.io/ubs-lpmds-python/td/fig/jupyter_dashboard_new_notebook.png" alt="jupyter_dashboard_new_notebook.png" width="100%" />
-</p>
-<p><span class="figure-number">Figure&nbsp;3&nbsp;: </span>Création d'un nouveau <i>notebook</i>. <div id="fig_jupyter_dashboard_new_notebook"></div></p>
-</div>
-
-<p>
-Votre premier <i>notebook</i> <code>Jupyter</code> s'ouvre dans un nouvel onglet. À noter que chaque <i>notebook</i>
-utilise son propre onglet car vous pouvez ouvrir plusieurs <i>notebooks</i> simultanément. 
-</p>
-
-<p>
-En revenant au tableau de bord, vous verrez qu'un nouveau fichier <code>Untitled.ipynb</code> a été créé avec
-une icône verte et un texte <code>running</code> indiquant que votre <i>notebook</i> est en cours
-d'exécution. 
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="footnotes">
-<h2 class="footnotes">Notes de bas de page: </h2>
-<div id="text-footnotes">
-
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">cf. <a href="https://fr.wikipedia.org/wiki/Programmation_lettr%C3%A9e">https://fr.wikipedia.org/wiki/Programmation_lettr%C3%A9e</a> pour la culture</p></div></div>
-
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">Contrairement à un programme écrit dans un langage compilé comme le <code>C</code> ou <code>C++</code> pour
-lequel la présence du compilateur n'est pas nécessaire pourvu d'avoir le fichier
-exécutable.</p></div></div>
-
-
-</div>
-</div></div>
 </body>
 </html>

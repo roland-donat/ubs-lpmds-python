@@ -5,193 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Exercices sur les concepts de base du langage <code>Python</code></title>
-<meta name="generator" content="Org mode" />
+<title>Exercices sur les concepts de base du langage =Python=</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,67 +16,21 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Exercices sur les concepts de base du langage <code>Python</code></h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org132a03c">1. Objectif</a></li>
-<li><a href="#org45e8505">2. Exercice : Conversion des durées</a></li>
-<li><a href="#org4304cb8">3. Exercice : indexation des chaînes de caractères</a></li>
-<li><a href="#org4b29261">4. Exercice : Formatage des chaînes de caractères</a></li>
-<li><a href="#orga5c036f">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
-<li><a href="#org46ea828">6. Exercice : Traitement de données textuelles</a></li>
-<li><a href="#org26cc244">7. Exercice : Notion de compréhension</a></li>
+<li><a href="#orgf61c466">1. Objectif</a></li>
+<li><a href="#org0c99602">2. Exercice : Conversion des durées</a></li>
+<li><a href="#orgf06002a">3. Exercice : indexation des chaînes de caractères</a></li>
+<li><a href="#org6c46947">4. Exercice : Formatage des chaînes de caractères</a></li>
+<li><a href="#org585c5b9">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
+<li><a href="#orgb2d716c">6. Exercice : Traitement de données textuelles</a></li>
+<li><a href="#orgcb08f94">7. Exercice : Notion de compréhension</a></li>
 </ul>
 </div>
 </div>
@@ -270,13 +40,13 @@ for the JavaScript code in this tag.
 
 
 
-<div class="figure">
+<div id="orgea25314" class="figure">
 <p><img src="https://imgs.xkcd.com/comics/python.png" alt="python.png" />
 </p>
 </div>
 
-<div id="outline-container-org132a03c" class="outline-2">
-<h2 id="org132a03c"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-orgf61c466" class="outline-2">
+<h2 id="orgf61c466"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ce TD a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
@@ -299,35 +69,117 @@ Prenez le temps de bien présenter et bien rédiger vos <i>notebooks</i>. Rappel
 </div>
 </div>
 
-<div id="outline-container-org45e8505" class="outline-2">
-<h2 id="org45e8505"><span class="section-number-2">2</span> Exercice : Conversion des durées</h2>
+<div id="outline-container-org0c99602" class="outline-2">
+<h2 id="org0c99602"><span class="section-number-2">2.</span> Exercice : Conversion des durées</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<span class="underline">Thème</span>: Variables, opérations arithmétiques
+<span class="underline">Thème</span>: Variables, opérations arithmétiques, fonction, tuple, dictionnaire
 </p>
 
 <p>
 Supposons que nous disposons d'une variable dont la valeur est un nombre de secondes :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DFAF8F;">nombre_secondes</span> = 3569
+<pre class="src src-python"><span style="color: #DFAF8F;">nombre_secondes</span> = 3569
 </pre>
 </div>
 
 <p>
 <b>Travail à réaliser</b> : 
-Écrire un code <code>Python</code> permettant de convertir ce nombre de secondes en jours, heures, minutes et
-secondes et d'afficher le résultat. Vous devez bien sûr utiliser la variable <code>nombre_secondes</code> dans vos calculs.
+</p>
+<ol class="org-ol">
+<li><p>
+Écrire un code <code>Python</code> permettant de convertir ce nombre de secondes en jours, heures, minutes
+et secondes et d'afficher le résultat. Vous devez bien sûr utiliser la variable <code>nombre_secondes</code>
+dans vos calculs.
 </p>
 
 <p>
-<span class="underline">Aides</span>: Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
+<b>Aides</b> : Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
 </p>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
+<span style="color: #DFAF8F;">nombre_secondes_restantes</span> = nombre_secondes % 60
+<span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
+<span style="color: #DFAF8F;">nombre_minutes_restantes</span> = nombre_minutes % 60
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre d'heures = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_heures))
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de minutes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_minutes_restantes))
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de secondes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_secondes_restantes))
+</pre>
+</div></li>
+
+<li><p>
+Encapsuler votre code dans une fonction prenant en paramètre un nombre de secondes et qui
+retourne un tuple de taille 4 de la forme suivante <code>(&lt;nb jours&gt;, &lt;nb heures&gt;, &lt;nb_minutes&gt;,
+   &lt;nb_secondes&gt;)</code>. La structure de la fonction à constuire est :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes</span>(nombre_secondes):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Code &#224; &#233;crire</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> nb_jours, nb_heures, nb_minutes, nb_secondes
+</pre>
+</div>
+<p>
+Voici quelques exemples de résultats attendus :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">convertisseur_secondes(nombre_secondes=10)
+(0, 0, 0, 10)
+convertisseur_secondes(nombre_secondes=100)
+(0, 0, 1, 40)
+convertisseur_secondes(nombre_secondes=1000)
+(0, 0, 16, 40)
+convertisseur_secondes(nombre_secondes=10000)
+(0, 2, 46, 40)
+convertisseur_secondes(nombre_secondes=100000)
+(1, 3, 46, 40)
+</pre>
+</div>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes</span>(nombre_secondes):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_secondes</span> = nombre_secondes % 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_minutes</span> = nombre_minutes % 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span> = nombre_heures // 24
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_heures</span> = nombre_heures % 24
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> nb_jours, nb_heures, nb_minutes, nb_secondes
+</pre>
+</div></li>
+
+<li><p>
+Modifier la fonction précédente pour que le résultat soit fourni sous la forme d'un
+dictionnaire de la forme <code>{"jour": &lt;nb jours&gt;, "heures": &lt;nb heures&gt;, "minutes": &lt;nb_minutes&gt;,
+   "secondes": &lt;nb_secondes&gt;}</code>
+</p>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes_bis</span>(nombre_secondes):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span>, <span style="color: #DFAF8F;">nb_heures</span>, <span style="color: #DFAF8F;">nb_minutes</span>, <span style="color: #DFAF8F;">nb_secondes</span> = convertisseur_secondes(nombre_secondes)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> {<span style="color: #CC9393;">"jour"</span>: nb_jours,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"heures"</span>: nb_heures,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"minutes"</span>: nb_minutes,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"secondes"</span>: nb_secondes}
+</pre>
+</div></li>
+</ol>
 </div>
 </div>
 
-<div id="outline-container-org4304cb8" class="outline-2">
-<h2 id="org4304cb8"><span class="section-number-2">3</span> Exercice : indexation des chaînes de caractères</h2>
+<div id="outline-container-orgf06002a" class="outline-2">
+<h2 id="orgf06002a"><span class="section-number-2">3.</span> Exercice : indexation des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <span class="underline">Thème</span>: Chaînes de caractères, indexation
@@ -337,7 +189,7 @@ secondes et d'afficher le résultat. Vous devez bien sûr utiliser la variable <
 Considérons la chaîne de caractères suivante :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DFAF8F;">joueur_basket</span> = <span style="color: #CC9393;">"Kawhi Leonard, N&#176;2"</span>
+<pre class="src src-python"><span style="color: #DFAF8F;">dicton</span> = <span style="color: #CC9393;">"Le jour o&#249; j'ai d&#233;couvert Python, j'ai abandonn&#233; R !"</span>
 </pre>
 </div>
 
@@ -345,18 +197,91 @@ Considérons la chaîne de caractères suivante :
 <b>Travail à réaliser</b> :
 </p>
 <ol class="org-ol">
-<li>Utiliser l'indexation pour construire la chaîne <code>"KLN2"</code>.</li>
-<li>Faire de même en utilisant une indexation négative.</li>
-<li>Utiliser une opération de <i>slicing</i> pour récupérer la chaîne <code>"Leonard"</code> et la chaîne <code>"Load °"</code>.</li>
+<li><p>
+Utiliser l'indexation pour extraire la chaîne <code>j'ai abandonné R !</code> de la chaîne <code>dicton</code>.
+</p>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python">dicton[34:]
+</pre>
+</div></li>
+
+<li><p>
+Faire de même en utilisant une indexation négative.
+</p>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python">dicton[-18:]
+</pre>
+</div></li>
+
+<li><p>
+Utiliser la méthode <code>split</code> pour découper la chaîne <code>dicton</code> en utilisant le séparateur <code>" "</code> (un
+espace) en liste de termes :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">dicton.split(<span style="color: #CC9393;">" "</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  [<span style="color: #CC9393;">'Le'</span>, <span style="color: #CC9393;">'jour'</span>, <span style="color: #CC9393;">'o&#249;'</span>, <span style="color: #CC9393;">"j'ai"</span>, <span style="color: #CC9393;">'d&#233;couvert'</span>, <span style="color: #CC9393;">'Python,'</span>, <span style="color: #CC9393;">"j'ai"</span>, <span style="color: #CC9393;">'abandonn&#233;'</span>, <span style="color: #CC9393;">'R'</span>, <span style="color: #CC9393;">'!'</span>]
+</pre>
+</div></li>
+
+<li><p>
+Écrire une fonction <code>calcule_nb_mots</code> qui prend en argument une chaîne de caractères et renvoie le nombre de mots
+d'une phrase. On considère qu'un mot est une chaîne de caractères ne contenant ni ponctuation, ni
+espace. Voici quelques exemples de résultats attendus :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">calcule_nb_mots(dicton)
+9
+calcule_nb_mots(<span style="color: #CC9393;">"  Il fait beau  ce matin"</span>)
+5
+calcule_nb_mots(<span style="color: #CC9393;">"Voulez-vous un caf&#233; ?"</span>)
+4
+</pre>
+</div>
+<p>
+Penser à utiliser les méthodes suivantes <code>&lt;chaine&gt;.split</code> ; <code>&lt;chaine&gt;.replace</code> ; <code>&lt;chaine&gt;.strip</code>
+; <code>len(&lt;chaine&gt;)</code>.
+</p>
+
+<p>
+<b>Solution :</b>     
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">calcule_nb_mots</span>(chaine):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Nettoyage</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion des espaces multiples</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = chaine.replace(<span style="color: #CC9393;">"  "</span>, <span style="color: #CC9393;">""</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion de la ponctuation</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">ponc_list</span> = <span style="color: #CC9393;">",;.!?'-"</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> ponc <span style="color: #F0DFAF; font-weight: bold;">in</span> ponc_list:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = chaine_clean.replace(ponc, <span style="color: #CC9393;">""</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">liste_mots</span> = chaine_clean.strip().split(<span style="color: #CC9393;">" "</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(liste_mots)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org4b29261" class="outline-2">
-<h2 id="org4b29261"><span class="section-number-2">4</span> Exercice : Formatage des chaînes de caractères</h2>
+
+
+<div id="outline-container-org6c46947" class="outline-2">
+<h2 id="org6c46947"><span class="section-number-2">4.</span> Exercice : Formatage des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-<a id="org2ac18b0"></a>
+<a id="org425a925"></a>
 </p>
 
 <p>
@@ -368,7 +293,7 @@ Considérons la chaîne de caractères suivante :
 Considérons les variables suivantes :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DFAF8F;">num</span> = 2
+<pre class="src src-python"><span style="color: #DFAF8F;">num</span> = 2
 <span style="color: #DFAF8F;">ts</span> = 52312.5764
 <span style="color: #DFAF8F;">owner</span> = 655
 <span style="color: #DFAF8F;">occ_pct</span> = 0.001
@@ -383,7 +308,7 @@ Considérons les variables suivantes :
 <li>Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :</li>
 </ol>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+08"</span>
+<pre class="src src-python"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+08"</span>
 </pre>
 </div>
 <ol class="org-ol">
@@ -396,8 +321,8 @@ Considérons les variables suivantes :
 </div>
 </div>
 
-<div id="outline-container-orga5c036f" class="outline-2">
-<h2 id="orga5c036f"><span class="section-number-2">5</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
+<div id="outline-container-org585c5b9" class="outline-2">
+<h2 id="org585c5b9"><span class="section-number-2">5.</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <span class="underline">Thème</span> : Structures de contrôle.
@@ -429,8 +354,8 @@ La légende raconte que de nombreuses personnes échouent à ce test lors des en
 </div>
 
 
-<div id="outline-container-org46ea828" class="outline-2">
-<h2 id="org46ea828"><span class="section-number-2">6</span> Exercice : Traitement de données textuelles</h2>
+<div id="outline-container-orgb2d716c" class="outline-2">
+<h2 id="orgb2d716c"><span class="section-number-2">6.</span> Exercice : Traitement de données textuelles</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 <span class="underline">Source</span> : exercice adapté à partir de <a href="https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/file_lab.html">PythonCert</a>.
@@ -489,14 +414,14 @@ résultat des deux questions précédentes.</li>
 </div>
 </div>
 
-<div id="outline-container-org26cc244" class="outline-2">
-<h2 id="org26cc244"><span class="section-number-2">7</span> Exercice : Notion de compréhension</h2>
+<div id="outline-container-orgcb08f94" class="outline-2">
+<h2 id="orgcb08f94"><span class="section-number-2">7.</span> Exercice : Notion de compréhension</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Considérons la liste suivante :
 </p>
 <div class="org-src-container">
-<pre class="src src-ipython"><span style="color: #DFAF8F;">fruits</span> = [<span style="color: #CC9393;">'mangue'</span>, <span style="color: #CC9393;">'kiwi'</span>, <span style="color: #CC9393;">'framboise'</span>, <span style="color: #CC9393;">'noix de coco'</span>, 
+<pre class="src src-python"><span style="color: #DFAF8F;">fruits</span> = [<span style="color: #CC9393;">'mangue'</span>, <span style="color: #CC9393;">'kiwi'</span>, <span style="color: #CC9393;">'framboise'</span>, <span style="color: #CC9393;">'noix de coco'</span>, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #CC9393;">'goyave'</span>, <span style="color: #CC9393;">'pamplemousse'</span>, <span style="color: #CC9393;">'orange sanguine'</span>]
 </pre>
 </div>
