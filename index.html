@@ -5,193 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Introduction à <code>Python</code> pour la science des données</title>
-<meta name="generator" content="Org mode" />
+<title>Introduction à =Python= pour la science des données</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,93 +16,40 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Introduction à <code>Python</code> pour la science des données</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org82d1b98">1. Introduction</a></li>
-<li><a href="#orgac05fc7">2. Mais au fait, pourquoi <code>Python</code> ?</a></li>
-<li><a href="#orgc193ee7">3. Objectifs pédagogiques</a></li>
-<li><a href="#org789498e">4. Prérequis</a></li>
-<li><a href="#org9bbda48">5. Organisation du cours</a>
+<li><a href="#org59b201e">1. Introduction</a></li>
+<li><a href="#orgaf32c00">2. Mais au fait, pourquoi <code>Python</code> ?</a></li>
+<li><a href="#orgf2b56c6">3. Objectifs pédagogiques</a></li>
+<li><a href="#orgbc81be2">4. Prérequis</a></li>
+<li><a href="#org724577a">5. Organisation du cours</a>
 <ul>
-<li><a href="#orge5fd48d">5.1. Semaine 40</a></li>
-<li><a href="#orgab01c5f">5.2. Semaine 41</a></li>
-<li><a href="#orgb3a6dfd">5.3. Semaine 42</a></li>
-<li><a href="#orgb40a7c7">5.4. Semaine 47</a></li>
-<li><a href="#org98e4e13">5.5. Semaine 48</a></li>
-<li><a href="#org75e8c18">5.6. Semaine 49</a></li>
-<li><a href="#orgd9c7d5c">5.7. Semaine 50</a></li>
+<li><a href="#org7dff664">5.1. Semaine 40</a></li>
 </ul>
 </li>
-<li><a href="#org3c92511">6. Évaluation</a></li>
-<li><a href="#org86367a0">7. Moyens pédagogiques</a>
+<li><a href="#org92ca0e5">6. Évaluation</a></li>
+<li><a href="#orgf9d84c3">7. Moyens pédagogiques</a>
 <ul>
-<li><a href="#orgd17dd31">7.1. Plateforme <code>Teams</code></a></li>
-<li><a href="#org090461c">7.2. Où trouver de l'aide</a></li>
-<li><a href="#orgf030583">7.3. Plateformes de <i>notebooks</i> en ligne</a></li>
-<li><a href="#org47bd348">7.4. Ressources pédagogiques et technique</a></li>
+<li><a href="#org6d35724">7.1. Où trouver de l'aide</a></li>
+<li><a href="#org73ebad8">7.2. Plateformes de <i>notebooks</i> en ligne</a></li>
+<li><a href="#org33e49b4">7.3. Ressources pédagogiques et technique</a></li>
 </ul>
 </li>
-<li><a href="#orge9103c1">8. Démarche d'amélioration continue</a></li>
-<li><a href="#org70320f7">9. À vos claviers :)</a></li>
+<li><a href="#orgc5cbb0d">8. Démarche d'amélioration continue</a></li>
+<li><a href="#orgf47c36b">9. À vos claviers :)</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org82d1b98" class="outline-2">
-<h2 id="org82d1b98"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org59b201e" class="outline-2">
+<h2 id="org59b201e"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ce cours a pour objectif d'enseigner les principes de base de programmation avec le langage <code>Python</code>
@@ -297,8 +60,8 @@ pour la Santé.
 </div>
 </div>
 
-<div id="outline-container-orgac05fc7" class="outline-2">
-<h2 id="orgac05fc7"><span class="section-number-2">2</span> Mais au fait, pourquoi <code>Python</code> ?</h2>
+<div id="outline-container-orgaf32c00" class="outline-2">
+<h2 id="orgaf32c00"><span class="section-number-2">2.</span> Mais au fait, pourquoi <code>Python</code> ?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Le langage <code>Python</code> a été initialement créé par Guido van Rossum à la fin des années 1980.
@@ -319,15 +82,15 @@ Enfin, le langage <code>Python</code> prend une place de plus en plus importante
 dans les applications relatives à la science des données.
 </p>
 
-<div class="figure">
+<div id="org3437536" class="figure">
 <p><img src="https://roland-donat.github.io/ubs-lpmds-python/fig/python_trends.jpeg" alt="context_background" width="60%" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc193ee7" class="outline-2">
-<h2 id="orgc193ee7"><span class="section-number-2">3</span> Objectifs pédagogiques</h2>
+<div id="outline-container-orgf2b56c6" class="outline-2">
+<h2 id="orgf2b56c6"><span class="section-number-2">3.</span> Objectifs pédagogiques</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Maîtriser les concepts de base du langage <code>Python</code>.</li>
@@ -341,8 +104,8 @@ dans les applications relatives à la science des données.
 </div>
 </div>
 
-<div id="outline-container-org789498e" class="outline-2">
-<h2 id="org789498e"><span class="section-number-2">4</span> Prérequis</h2>
+<div id="outline-container-orgbc81be2" class="outline-2">
+<h2 id="orgbc81be2"><span class="section-number-2">4.</span> Prérequis</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Avoir eu un contact plus ou moins direct avec un langage de programmation.</li>
@@ -352,17 +115,15 @@ segmentation et/ou classification.</li>
 </div>
 </div>
 
-<div id="outline-container-org9bbda48" class="outline-2">
-<h2 id="org9bbda48"><span class="section-number-2">5</span> Organisation du cours</h2>
+<div id="outline-container-org724577a" class="outline-2">
+<h2 id="org724577a"><span class="section-number-2">5.</span> Organisation du cours</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orge5fd48d" class="outline-3">
-<h3 id="orge5fd48d"><span class="section-number-3">5.1</span> Semaine 40</h3>
+<div id="outline-container-org7dff664" class="outline-3">
+<h3 id="org7dff664"><span class="section-number-3">5.1.</span> Semaine 40</h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/intro_notebooks.html">Introduction au concept de <i>notebook</i> et à la syntaxe <i>Markdown</i></a>.</li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_bases_python.html">Exercices sur les bases du langage
-<code>Python</code></a>. <a href="https://colab.research.google.com/drive/1aWJX3lkPDyt9CFIPbe1Pk-VJRUu4FpQ1?usp=sharing">!! Corrigé (attention, il reste une question à faire) !!</a></li>
 </ul>
 
 <p>
@@ -377,90 +138,19 @@ la suite du cours.
 
 <p>
 Toutefois, pour celles et ceux qui n'ont jamais programmé et/ou qui souhaiteraient revenir un peu
-plus longuement sur les fondamentaux du langage, les <i>notebooks</i> suivants sont mis à votre
-disposition pour vous entraîner :  
+plus longuement sur les fondamentaux du langage, je vous encourage fortement à consulter au moins un
+de ces cours :
 </p>
 <ul class="org-ul">
-<li><a href="https://colab.research.google.com/drive/1akjtCEnEyDXNKwWBzGl-l7oqywKVzNNa?usp=sharing">Les bases du langage <code>Python</code></a>.</li>
-<li><a href="https://colab.research.google.com/drive/1i0oKAyjznMalWeG8QnS1vPzGvLNXJBxB?usp=sharing">Les structures de données en <code>Python</code></a>.</li>
-<li><a href="https://colab.research.google.com/drive/1_32wQhNHY41qDD2T5MlWPtCePznEFd_3?usp=sharing">Les structures de contrôle en <code>Python</code></a>.</li>
-<li><a href="https://colab.research.google.com/drive/1hiXDXYkUF92bqZod8odPS3ae1K4Q3fxR?usp=sharing">Les fonctions</a>.</li>
-<li><a href="https://colab.research.google.com/drive/1p7El7zKm2oLPCGXmHbujodUSJWeD_i0q?usp=sharing">Gestion des fichiers tabulaires</a>.</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orgab01c5f" class="outline-3">
-<h3 id="orgab01c5f"><span class="section-number-3">5.2</span> Semaine 41</h3>
-<div class="outline-text-3" id="text-5-2">
-<p>
-<a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_data_management.html">Management des données et l'analyse descriptive avec <code>Pandas</code></a>. <a href="https://colab.research.google.com/drive/1-lJQuW4haYkxv1H4_hiQjs_s4w6Y5H8A?usp=sharing">!! Corrigé !!</a>
-</p>
-
-<p>
-<b>Note : pour les fans de <code>Pandas</code></b>
-Si vous ne pouvez plus vous passer des <code>DataFrame</code> et des <code>Series</code>, <a href="https://colab.research.google.com/drive/1GwF6k_LVcKjuFsaduOvDY-gmZT9draQo?usp=sharing">ce <i>notebook</i></a>, reprenant les
-fonctionnalités de base de la librairie, est fait pour vous.
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgb3a6dfd" class="outline-3">
-<h3 id="orgb3a6dfd"><span class="section-number-3">5.3</span> Semaine 42</h3>
-<div class="outline-text-3" id="text-5-3">
-<ul class="org-ul">
-<li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=303636"><b>Quiz de programmation</b></a>.</li>
-</ul>
-
-<p>
-<b>Note :</b> 
-Le quiz suivant vous aidera afin de préparer votre environnement de programmation pour
-le devoir : <a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=302752">https://moodle.univ-ubs.fr/mod/quiz/view.php?id=302752</a>
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgb40a7c7" class="outline-3">
-<h3 id="orgb40a7c7"><span class="section-number-3">5.4</span> Semaine 47</h3>
-<div class="outline-text-3" id="text-5-4">
-<ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_dataviz.html">Visualisation des données avec <code>Plotly</code> (1/2)</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org98e4e13" class="outline-3">
-<h3 id="org98e4e13"><span class="section-number-3">5.5</span> Semaine 48</h3>
-<div class="outline-text-3" id="text-5-5">
-<ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_dataviz.html">Visualisation des données avec <code>Plotly</code> (2/2)</a></li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Création de variables explicatives</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org75e8c18" class="outline-3">
-<h3 id="org75e8c18"><span class="section-number-3">5.6</span> Semaine 49</h3>
-<div class="outline-text-3" id="text-5-6">
-<ul class="org-ul">
-<li><a href="https://moodle.univ-ubs.fr/mod/quiz/view.php?id=312582"><b>Quiz de programmation</b></a></li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_modelisation.html">Régression logistique</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orgd9c7d5c" class="outline-3">
-<h3 id="orgd9c7d5c"><span class="section-number-3">5.7</span> Semaine 50</h3>
-<div class="outline-text-3" id="text-5-7">
-<ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/etude_de_cas/etude_de_cas.html">Étude de cas</a></li>
+<li><a href="https://courspython.com/bases-python.html">Cours de David Casagne</a> : cours généraliste pour maîtriser les bases du langage.</li>
+<li><a href="https://www.fun-mooc.fr/fr/cours/python-3-des-fondamentaux-aux-concepts-avances-du-langage/">Module FUN sur sur <code>Python</code></a> : cours couvrant les fondamentaux du langage jusqu'aux concepts très avancés.</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org3c92511" class="outline-2">
-<h2 id="org3c92511"><span class="section-number-2">6</span> Évaluation</h2>
+<div id="outline-container-org92ca0e5" class="outline-2">
+<h2 id="org92ca0e5"><span class="section-number-2">6.</span> Évaluation</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 L'évaluation de ce module repose sur deux quiz de programmation et une étude de cas en équipe.
@@ -476,65 +166,43 @@ Note = 25%*Quiz1 + 25%*Quiz2 + 50%*Étude
 </div>
 </div>
 
-<div id="outline-container-org86367a0" class="outline-2">
-<h2 id="org86367a0"><span class="section-number-2">7</span> Moyens pédagogiques</h2>
+<div id="outline-container-orgf9d84c3" class="outline-2">
+<h2 id="orgf9d84c3"><span class="section-number-2">7.</span> Moyens pédagogiques</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orgd17dd31" class="outline-3">
-<h3 id="orgd17dd31"><span class="section-number-3">7.1</span> Plateforme <code>Teams</code></h3>
+<div id="outline-container-org6d35724" class="outline-3">
+<h3 id="org6d35724"><span class="section-number-3">7.1.</span> Où trouver de l'aide</h3>
 <div class="outline-text-3" id="text-7-1">
-<p>
-En dehors des cours en présentiel, nous communiquerons <i>via</i> l'équipe <code>Teams</code>
-<a href="https://teams.microsoft.com/l/team/19%3ac9f2a07f63134c0eb75edd45f31f5370%40thread.tacv2/conversations?groupId=1ef54a18-9fbb-4ccc-ba31-b22085727942&amp;tenantId=2fbd12a9-cbb9-49a2-9612-7af4096a6529">LP MDS Python pour la science des données</a>. <b>Les étudiant-e-s doivent donc impérativement demander
-l'accès à cette équipe.</b> 
-</p>
-
-<p>
-Il est à noter que je privilégie les échanges <code>Teams</code> plutôt que par mail, n'hésitez donc pas à
-surveiller le canal Général afin de vous tenir informé-e de l'actualité du cours. 
-</p>
-
-<p>
-Par ailleurs, vous êtes fortement encouragé-e-s à utiliser le canal <code>Entraide</code> afin de poser toutes
-vos questions sur le cours. Vous pourrez ainsi profiter de toute votre intelligence collective pour
-dépasser vos difficultés en <code>Python</code>.
-</p>
-</div>
-</div>
-
-<div id="outline-container-org090461c" class="outline-3">
-<h3 id="org090461c"><span class="section-number-3">7.2</span> Où trouver de l'aide</h3>
-<div class="outline-text-3" id="text-7-2">
 <p>
 En cas de soucis, Google ou autres sont vos amis. Pensez aux excellents forums d'entraide que sont : 
 </p>
 <ul class="org-ul">
 <li><a href="https://openclassrooms.com/fr/dashboard">Openclassroom</a> pour des ressources majoritairement en français.</li>
-<li>Le site de référence <a href="https://stackoverflow.com/">Stackoverflow</a> sur lequel il relève aujourd'hui du quasi exploit de trouver un 
+<li>Le site de référence <a href="https://stackoverflow.com/">Stackoverflow</a> sur lequel il relève aujourd'hui du quasi-exploit de trouver un 
 problème qui n'aurait jamais été traité sur le forum.</li>
-<li>Et si le blocage persiste, pensez à notre <a href="https://teams.microsoft.com/_#/school/conversations/Entraide?threadId=19:234d4170ee134a3ba1fe0365f76851a4@thread.tacv2&amp;ctx=channel">forum d'entraide sur Teams</a>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf030583" class="outline-3">
-<h3 id="orgf030583"><span class="section-number-3">7.3</span> Plateformes de <i>notebooks</i> en ligne</h3>
-<div class="outline-text-3" id="text-7-3">
+<div id="outline-container-org73ebad8" class="outline-3">
+<h3 id="org73ebad8"><span class="section-number-3">7.2.</span> Plateformes de <i>notebooks</i> en ligne</h3>
+<div class="outline-text-3" id="text-7-2">
 <p>
-Les travaux dirigés sont réalisées à partir de la plateforme de développement collaboratif <a href="https://colab.research.google.com/notebooks/">Google
-Colab</a> (gratuit avec un compte <code>Google</code>). À noter que la plateforme <a href="https://deepnote.com/">Deepnote</a> est une alternative
-équivalente et gratuite sur inscription (avec une limitation de quatre membres par projet).
+Les travaux dirigés sont réalisés à partir de la plateforme de développement collaboratif
+<a href="https://deepnote.com/">Deepnote</a>. À noter que la plateforme <a href="https://colab.research.google.com/notebooks/">Google Colab</a> est une alternative
+équivalente et gratuite.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org47bd348" class="outline-3">
-<h3 id="org47bd348"><span class="section-number-3">7.4</span> Ressources pédagogiques et technique</h3>
-<div class="outline-text-3" id="text-7-4">
+<div id="outline-container-org33e49b4" class="outline-3">
+<h3 id="org33e49b4"><span class="section-number-3">7.3.</span> Ressources pédagogiques et technique</h3>
+<div class="outline-text-3" id="text-7-3">
 <ul class="org-ul">
-<li><a href="https://www.pierre-giraud.com/python-apprendre-programmer-cours/">Cours de Pierre Giraud</a> : cours généraliste pour maîtriser les bases du langage.</li>
+<li><a href="https://courspython.com/bases-python.html">Cours de David Casagne</a> : cours généraliste pour maîtriser les bases du langage.</li>
+<li><a href="https://www.pierre-giraud.com/python-apprendre-programmer-cours/">Cours de Pierre Giraud</a> : un autre cours généraliste pour maîtriser les bases du langage.</li>
 <li><a href="https://www.coursera.org/learn/python-for-applied-data-science-ai">Module Coursera sur <code>Python</code> pour la data science</a> : cours de base orienté data science.</li>
-<li><a href="https://www.fun-mooc.fr/fr/cours/python-3-des-fondamentaux-aux-concepts-avances-du-langage/">Module FUN sur sur <code>Python</code></a> : cours couvrant les fondamentaux du langage jusqu'au concepts très avancés.</li>
+<li><a href="https://www.fun-mooc.fr/fr/cours/python-3-des-fondamentaux-aux-concepts-avances-du-langage/">Module FUN sur sur <code>Python</code></a> : cours couvrant les fondamentaux du langage jusqu'aux concepts très avancés.</li>
 <li><a href="http://eric.univ-lyon2.fr/~ricco/tanagra/fichiers/fr_Tanagra_Python_Regression_Logistique.pdf">Régression logistique avec <code>Python</code></a> : TD de régression logistique par Ricco Rakotomalala (Master SISE, Lyon 2)</li>
 <li><a href="https://www.youtube.com/channel/UCo01KLTiDA7JPX0B-Yk6IFg">Chaîne Youtube du Master Data Science Lyon 2</a> : Pour aller un peu plus loin avec Ricco Rakotomalala.</li>
 </ul>
@@ -548,8 +216,8 @@ explorations personnelles dans le monde du traitement de données avec <code>Pyt
 </div>
 
 
-<div id="outline-container-orge9103c1" class="outline-2">
-<h2 id="orge9103c1"><span class="section-number-2">8</span> Démarche d'amélioration continue</h2>
+<div id="outline-container-orgc5cbb0d" class="outline-2">
+<h2 id="orgc5cbb0d"><span class="section-number-2">8.</span> Démarche d'amélioration continue</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Étant joueur, chaque année je me permets de mettre en place un petit jeu visant à améliorer la qualité des supports
@@ -565,7 +233,7 @@ La règle est simple : chaque semaine celle ou celui qui repère le plus de coqu
 Comment signaler une ou plusieurs coquilles ?
 </p>
 <ol class="org-ol">
-<li>Envoyez moi un message dans le <a href="https://teams.microsoft.com/_#/school/conversations/Coquilles?threadId=19:d299e2fd49d246dc8c48f81edca556c1@thread.tacv2&amp;ctx=channel">canal "Coquilles" de notre équipe Teams</a>.</li>
+<li>Envoyez-moi un mail ayant pour objet "Python LP MDS : coquilles".</li>
 <li>Pour chaque coquille, précisez bien sa localisation, i.e. document concerné, page/slide,
 paragraphe, etc. en expliquant le problème.</li>
 <li>Le plus simple est de soumettre votre liste de coquilles détectées en une seule fois.</li>
@@ -575,11 +243,11 @@ paragraphe, etc. en expliquant le problème.</li>
 </div>
 </div>
 
-<div id="outline-container-org70320f7" class="outline-2">
-<h2 id="org70320f7"><span class="section-number-2">9</span> À vos claviers :)</h2>
+<div id="outline-container-orgf47c36b" class="outline-2">
+<h2 id="orgf47c36b"><span class="section-number-2">9.</span> À vos claviers :)</h2>
 <div class="outline-text-2" id="text-9">
 
-<div class="figure">
+<div id="org3a56503" class="figure">
 <p><img src="https://roland-donat.github.io/ubs-lpmds-python/fig/itchy_effect.jpg" alt="context_background" width="100%" />
 </p>
 </div>
