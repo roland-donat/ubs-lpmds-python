@@ -24,13 +24,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org009c0a4">1. Objectif</a></li>
-<li><a href="#orgc0d59d0">2. Exercice : Conversion des durées</a></li>
-<li><a href="#orgcb8d4bf">3. Exercice : indexation des chaînes de caractères</a></li>
-<li><a href="#org50b0535">4. Exercice : Formatage des chaînes de caractères</a></li>
-<li><a href="#org6aae76c">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
-<li><a href="#org05b7f27">6. Exercice : Traitement de données textuelles</a></li>
-<li><a href="#org5c96c18">7. Exercice : Notion de compréhension</a></li>
+<li><a href="#org52b6602">1. Objectif</a></li>
+<li><a href="#org15051f3">2. Exercice : Conversion des durées</a></li>
+<li><a href="#orge068a4e">3. Exercice : indexation des chaînes de caractères</a></li>
+<li><a href="#orgcfd9012">4. Exercice : Formatage des chaînes de caractères</a></li>
+<li><a href="#org326a02b">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
+<li><a href="#org57d414d">6. Exercice : Notion de compréhension</a></li>
+<li><a href="#org13f429e">7. Exercice : Traitement de données textuelles</a></li>
 </ul>
 </div>
 </div>
@@ -40,13 +40,13 @@
 
 
 
-<div id="orgbd72c1e" class="figure">
+<div id="orgc383587" class="figure">
 <p><img src="https://imgs.xkcd.com/comics/python.png" alt="python.png" />
 </p>
 </div>
 
-<div id="outline-container-org009c0a4" class="outline-2">
-<h2 id="org009c0a4"><span class="section-number-2">1.</span> Objectif</h2>
+<div id="outline-container-org52b6602" class="outline-2">
+<h2 id="org52b6602"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ce TD a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
@@ -69,8 +69,8 @@ Prenez le temps de bien présenter et bien rédiger vos <i>notebooks</i>. Rappel
 </div>
 </div>
 
-<div id="outline-container-orgc0d59d0" class="outline-2">
-<h2 id="orgc0d59d0"><span class="section-number-2">2.</span> Exercice : Conversion des durées</h2>
+<div id="outline-container-org15051f3" class="outline-2">
+<h2 id="org15051f3"><span class="section-number-2">2.</span> Exercice : Conversion des durées</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <span class="underline">Thème</span>: Variables, opérations arithmétiques, fonction, tuple, dictionnaire
@@ -95,22 +95,8 @@ dans vos calculs.
 </p>
 
 <p>
-<b>Aides</b> : Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
-</p>
-
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
-<span style="color: #DFAF8F;">nombre_secondes_restantes</span> = nombre_secondes % 60
-<span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
-<span style="color: #DFAF8F;">nombre_minutes_restantes</span> = nombre_minutes % 60
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre d'heures = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_heures))
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de minutes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_minutes_restantes))
-<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de secondes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_secondes_restantes))
-</pre>
-</div></li>
+<b>Aide</b> : Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
+</p></li>
 
 <li><p>
 Encapsuler votre code dans une fonction prenant en paramètre un nombre de secondes et qui
@@ -138,48 +124,18 @@ convertisseur_secondes(nombre_secondes=10000)
 convertisseur_secondes(nombre_secondes=100000)
 (1, 3, 46, 40)
 </pre>
-</div>
-
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes</span>(nombre_secondes):
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_secondes</span> = nombre_secondes % 60
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_minutes</span> = nombre_minutes % 60
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span> = nombre_heures // 24
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_heures</span> = nombre_heures % 24
-
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> nb_jours, nb_heures, nb_minutes, nb_secondes
-</pre>
 </div></li>
 
-<li><p>
-Modifier la fonction précédente pour que le résultat soit fourni sous la forme d'un
+<li>Modifier la fonction précédente pour que le résultat soit fourni sous la forme d'un
 dictionnaire de la forme <code>{"jour": &lt;nb jours&gt;, "heures": &lt;nb heures&gt;, "minutes": &lt;nb_minutes&gt;,
-   "secondes": &lt;nb_secondes&gt;}</code>
-</p>
-
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes_bis</span>(nombre_secondes):
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span>, <span style="color: #DFAF8F;">nb_heures</span>, <span style="color: #DFAF8F;">nb_minutes</span>, <span style="color: #DFAF8F;">nb_secondes</span> = convertisseur_secondes(nombre_secondes)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> {<span style="color: #CC9393;">"jour"</span>: nb_jours,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"heures"</span>: nb_heures,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"minutes"</span>: nb_minutes,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"secondes"</span>: nb_secondes}
-</pre>
-</div></li>
+   "secondes": &lt;nb_secondes&gt;}</code></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgcb8d4bf" class="outline-2">
-<h2 id="orgcb8d4bf"><span class="section-number-2">3.</span> Exercice : indexation des chaînes de caractères</h2>
+
+<div id="outline-container-orge068a4e" class="outline-2">
+<h2 id="orge068a4e"><span class="section-number-2">3.</span> Exercice : indexation des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <span class="underline">Thème</span>: Chaînes de caractères, indexation
@@ -197,29 +153,9 @@ Considérons la chaîne de caractères suivante :
 <b>Travail à réaliser</b> :
 </p>
 <ol class="org-ol">
-<li><p>
-Utiliser l'indexation pour extraire la chaîne <code>j'ai abandonné R !</code> de la chaîne <code>dicton</code>.
-</p>
+<li>Utiliser l'indexation pour extraire la chaîne <code>j'ai abandonné R !</code> de la chaîne <code>dicton</code>.</li>
 
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python">dicton[34:]
-</pre>
-</div></li>
-
-<li><p>
-Faire de même en utilisant une indexation négative.
-</p>
-
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python">dicton[-18:]
-</pre>
-</div></li>
+<li>Faire de même en utilisant une indexation négative.</li>
 
 <li><p>
 Utiliser la méthode <code>split</code> pour découper la chaîne <code>dicton</code> en utilisant le séparateur <code>" "</code> (un
@@ -252,42 +188,44 @@ calcule_nb_mots(<span style="color: #CC9393;">"Voulez-vous un caf&#233; ?"</span
 <p>
 Penser à utiliser les méthodes suivantes <code>&lt;chaine&gt;.split</code> ; <code>&lt;chaine&gt;.replace</code> ; <code>&lt;chaine&gt;.strip</code>
 ; <code>len(&lt;chaine&gt;)</code>.
-</p>
-
-<p>
-<b>Solution :</b>     
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">calcule_nb_mots</span>(chaine):
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Nettoyage</span>
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion des espaces multiples</span>
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = chaine.replace(<span style="color: #CC9393;">"  "</span>, <span style="color: #CC9393;">""</span>)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion de la ponctuation</span>
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">ponc_list</span> = <span style="color: #CC9393;">",;.!?'-"</span>
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> ponc <span style="color: #F0DFAF; font-weight: bold;">in</span> ponc_list:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = chaine_clean.replace(ponc, <span style="color: #CC9393;">""</span>)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">liste_mots</span> = chaine_clean.strip().split(<span style="color: #CC9393;">" "</span>)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(liste_mots)
-</pre>
-</div></li>
+</p></li>
 </ol>
 </div>
 </div>
 
 
-
-<div id="outline-container-org50b0535" class="outline-2">
-<h2 id="org50b0535"><span class="section-number-2">4.</span> Exercice : Formatage des chaînes de caractères</h2>
+<div id="outline-container-orgcfd9012" class="outline-2">
+<h2 id="orgcfd9012"><span class="section-number-2">4.</span> Exercice : Formatage des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-<a id="org638f050"></a>
+<a id="org6db5e4c"></a>
 </p>
 
 <p>
 <span class="underline">Thème</span> : Format des chaînes de caractères.
 </p>
 
+<p>
+Pour présenter des résultats, il souvent utile d'inclure des résultats dans des chaînes de
+caractères avec le format adéquat.
+</p>
+
+<p>
+Pour ce faire, les chaînes de caractères <code>Python</code> dispose de la méthode <code>.format</code>. Cette méthode
+s'utilise de la manière suivante :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9FC59F;">"La {texte_1} format c'est {texte_2}"</span>.<span style="color: #DCDCCC; font-weight: bold;">format</span>(texte_1=<span style="color: #9FC59F;">"m&#233;thode"</span>, texte_2=<span style="color: #9FC59F;">"super"</span>)
+</pre>
+</div>
+<p>
+Pour les nombres, vous pouvez également préciser le format affiché. Par exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #9FC59F;">"Un pourcentage {x:.2%} avec deux chiffres apr&#232;s la virgule"</span>.<span style="color: #DCDCCC; font-weight: bold;">format</span>(x=0.4535)
+<span style="color: #9FC59F;">"Un nombre entier sur 3 caract&#232;res {x:03} compl&#233;t&#233; avec des z&#233;ros"</span>.<span style="color: #DCDCCC; font-weight: bold;">format</span>(x=34)
+</pre>
+</div>
 
 <p>
 Considérons les variables suivantes :
@@ -302,30 +240,33 @@ Considérons les variables suivantes :
 </div>
 
 <p>
+Consultez la <a href="https://docs.python.org/fr/3.5/library/string.html">documentation officielle</a>, en particulier la section 6.1.3 pour connaître les
+différentes fonctionnalités de la méthode <code>.format</code>.
+</p>
+
+<p>
 <b>Travail à réaliser</b> :
 </p>
 <ol class="org-ol">
-<li>Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :</li>
-</ol>
+<li><p>
+Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :
+</p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+08"</span>
 </pre>
-</div>
-<ol class="org-ol">
+</div></li>
+
 <li>Même question en utilisant la technique des <code>f-string</code> à la place de la méthode <code>.format</code>.</li>
 </ol>
-
-<p>
-<span class="underline">Aide</span> : Consultez la <a href="https://docs.python.org/fr/3.5/library/string.html">documentation officielle</a>, en particulier la section 6.1.3.
-</p>
 </div>
 </div>
 
-<div id="outline-container-org6aae76c" class="outline-2">
-<h2 id="org6aae76c"><span class="section-number-2">5.</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
+
+<div id="outline-container-org326a02b" class="outline-2">
+<h2 id="org326a02b"><span class="section-number-2">5.</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
 <div class="outline-text-2" id="text-5">
 <p>
-<span class="underline">Thème</span> : Structures de contrôle.
+<span class="underline">Thème</span> : Structures de contrôle <code>if</code>, <code>elif</code>, <code>else</code>. boucle <code>for</code>.
 </p>
 
 <p>
@@ -338,25 +279,101 @@ La légende raconte que de nombreuses personnes échouent à ce test lors des en
 </p>
 
 <p>
-<b>Travail à réaliser :</b> Écrire un programme qui affiche les nombres de 1 à 100 mais :
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Écrire une programme qui affiche les nombres de 1 à 100 mais :
 </p>
 <ul class="org-ul">
-<li>pour les multiples de 3, affiche <i>Fizz</i> à la place du nombre.</li>
-<li>pour les multiples de 5, affiche <i>Buzz</i> à la place du nombre.</li>
+<li>pour les multiples de 3, affiche <i>Fizz</i> à la place du nombre ;</li>
+<li>pour les multiples de 5, affiche <i>Buzz</i> à la place du nombre ;</li>
 <li>Pour les multiples de 3 et 5, affiche <i>FizzBuzz</i> à la place du nombre.</li>
 </ul>
 
+<p>
+<b>Aide :</b> Penser à l'opérateur <code>%</code> et la fonction <code>range</code>.
+</p></li>
+
+<li><p>
+Encapsuler le programme précédent dans une fonction <code>fizzbuzz</code> prenant en entrée un nombre N et
+renvoyant une liste contenant des nombres, des = "Fizz" =, des = "Buzz" = et des = "FizzBuzz" =
+selon la règle de la question 1, et ce, pour les nombres de 1 à N.
+</p>
 
 <p>
-<span class="underline">Aide :</span> Penser à l'opérateur <code>%</code>.
+<b>Aide :</b> Penser à utiliser la méthode <code>.append</code> pour ajouter un élément dans une liste. Exemple 
 </p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">liste</span> = []
+liste.append(1)
+liste.append(2)
+liste.append(<span style="color: #CC9393;">"Fizz"</span>)
+liste.append(4)
+liste.append(<span style="color: #CC9393;">"Buzz"</span>)
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(liste)
+</pre>
+</div></li>
+</ol>
 </div>
 </div>
 
 
-<div id="outline-container-org05b7f27" class="outline-2">
-<h2 id="org05b7f27"><span class="section-number-2">6.</span> Exercice : Traitement de données textuelles</h2>
+
+<div id="outline-container-org57d414d" class="outline-2">
+<h2 id="org57d414d"><span class="section-number-2">6.</span> Exercice : Notion de compréhension</h2>
 <div class="outline-text-2" id="text-6">
+<p>
+<span class="underline">Thème</span> : Listes, dictionnaires, syntaxe de compréhension
+</p>
+
+<p>
+Le principe de compréhension en Python permet de construire des liste ou des dictionnaires "à la
+volée" à partir d'autres listes ou dictionnaires. 
+</p>
+
+<p>
+Considérons la liste suivante :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fruits</span> = [<span style="color: #CC9393;">'mangue'</span>, <span style="color: #CC9393;">'kiwi'</span>, <span style="color: #CC9393;">'framboise'</span>, <span style="color: #CC9393;">'noix de coco'</span>, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #CC9393;">'goyave'</span>, <span style="color: #CC9393;">'pamplemousse'</span>, <span style="color: #CC9393;">'orange sanguine'</span>]
+</pre>
+</div>
+
+<p>
+<b>Travail à réaliser :</b> En utilisant le mécanisme de compréhension sur la liste <code>fruits</code> :
+</p>
+<ol class="org-ol">
+<li><p>
+Construire une liste contenant les noms de fruits en majuscules.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">[fr.upper() <span style="color: #F0DFAF; font-weight: bold;">for</span> fr <span style="color: #F0DFAF; font-weight: bold;">in</span> fruits]
+</pre>
+</div></li>
+
+<li>Construire une liste contenant les fruits ayant un nom de plus de 10 caractères.</li>
+
+<li>Construire une liste contenant les fruits à noms composés.</li>
+
+<li>Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
+nombres de caractères des fruits correspondants.</li>
+<li><p>
+Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
+positions de ces fruits dans la liste.
+</p>
+
+<p>
+<b>Aide</b> : utiliser la fonction <code>enumerate</code>.
+</p></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org13f429e" class="outline-2">
+<h2 id="org13f429e"><span class="section-number-2">7.</span> Exercice : Traitement de données textuelles</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 <span class="underline">Source</span> : exercice adapté à partir de <a href="https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/file_lab.html">PythonCert</a>.
 </p>
@@ -398,45 +415,103 @@ chaque personne en les organisant dans une structure de données adéquates.
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Ouvrir le fichier en lecture. <span class="underline">Aide</span> : fonction <code>open</code> et structure <code>with ... as</code>.</li>
-<li>Extraire pour chaque personne, son nom, prénom, surnom (si présent) et liste des langages (si
-présente). <span class="underline">Aide</span> : méthodes <code>.readlines</code> <code>.split</code>, <code>.strip</code>.</li>
-<li>Stocker ces éléments dans une structure adaptée. Nous appellerons cette structure <code>data_struct</code>
-dans la suite.</li>
-<li>À partir de la structure <code>data_struct</code>, déterminer la liste des langages
-maîtrisés par les individus présents dans le fichier.</li>
-<li>À partir de la structure <code>data_struct</code>, calculer le nombre de personnes maîtrisant chaque langage.</li>
-<li>Créer deux fonctions prenant en entrée la structure <code>data_struct</code> et retournant respectivement le
-résultat des deux questions précédentes.</li>
-<li>Créer une fonction prenant en entrée le chemin d'un fichier respectant le format du fichier
-<code>student.txt</code> et retournant la structure <code>data_struct</code> correspondante.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org5c96c18" class="outline-2">
-<h2 id="org5c96c18"><span class="section-number-2">7.</span> Exercice : Notion de compréhension</h2>
-<div class="outline-text-2" id="text-7">
-<p>
-Considérons la liste suivante :
+<li><p>
+Ouvrir le fichier en lecture. <b>Aide</b> : fonction <code>open</code> et structure <code>with ... as</code>.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fruits</span> = [<span style="color: #CC9393;">'mangue'</span>, <span style="color: #CC9393;">'kiwi'</span>, <span style="color: #CC9393;">'framboise'</span>, <span style="color: #CC9393;">'noix de coco'</span>, 
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #CC9393;">'goyave'</span>, <span style="color: #CC9393;">'pamplemousse'</span>, <span style="color: #CC9393;">'orange sanguine'</span>]
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">with</span> <span style="color: #DCDCCC; font-weight: bold;">open</span>(<span style="color: #CC9393;">"students.txt"</span>) <span style="color: #F0DFAF; font-weight: bold;">as</span> <span style="color: #DCDCCC; font-weight: bold;">file</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readline())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apr&#232;s l'appel de readline(), le pointeur file a avanc&#233; d'une ligne</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readline())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readline())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Le pointeur &#233;tant sur la 4&#232;me du fichier, readlines lira le contenu du fichier </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">de la 4&#232;me ligne &#224; la fin</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readlines())
+</pre>
+</div>
+<p>
+Attention, dans <code>open</code> il faut adapter la chaîne avec le chemin où se trouve le fichier
+<code>students.txt</code> dans votre environnement de travail.
+</p>
+
+<p>
+On se rappelle que l'objet <code>file</code> doit être vu comme un pointeur qui parcourt le fichier pour lire
+les informations ligne à ligne en utilisant la méthode <code>.readline</code>. 
+</p>
+
+<p>
+En pratique, il est plus simple d'utiliser la méthode <code>.readlines</code> qui récupère d'un seul coup la
+liste des lignes du fichier :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">with</span> <span style="color: #DCDCCC; font-weight: bold;">open</span>(<span style="color: #CC9393;">"students.txt"</span>) <span style="color: #F0DFAF; font-weight: bold;">as</span> <span style="color: #DCDCCC; font-weight: bold;">file</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readlines())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apr&#232;s l'appel de readlines, le pointeur est positionn&#233; &#224; la fin du fichier.</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Par cons&#233;quent rappeler readlines renvoit une liste vide </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #DCDCCC; font-weight: bold;">file</span>.readlines())
 </pre>
 </div>
 
 <p>
-<b>Travail à réaliser :</b> En utilisant le mécanisme de compréhension sur la liste <code>fruits</code> :
+Au final, le code à utiliser pour lire les lignes du fichier sous forme de liste de chaîne de
+caractères est simplement :
 </p>
-<ol class="org-ol">
-<li>Construire une liste contenant les noms de fruits en majuscules.</li>
-<li>Construire une liste contenant les fruits ayant un nom de plus de 10 caractères.</li>
-<li>Construire une liste contenant les fruits à noms composés.</li>
-<li>Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
-nombres de caractères des fruits correspondants.</li>
-<li>Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
-positions de ces fruits dans la liste. <span class="underline">Aide</span> : utiliser la fonction <code>enumerate</code>.</li>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">with</span> <span style="color: #DCDCCC; font-weight: bold;">open</span>(<span style="color: #CC9393;">"students.txt"</span>) <span style="color: #F0DFAF; font-weight: bold;">as</span> <span style="color: #DCDCCC; font-weight: bold;">file</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">donnees_brutes</span> = <span style="color: #DCDCCC; font-weight: bold;">file</span>.readlines()
+</pre>
+</div></li>
+
+<li><p>
+Extraire pour chaque personne, son nom, prénom, surnom (si présent) et liste des langages (si
+présente). <span class="underline">Aide</span> : méthodes <code>.split</code>, <code>.strip</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">data_struct</span> = []
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On parcourt chaque ligne du fichier en ignorant la premi&#232;re ligne d'ent&#234;te</span>
+<span style="color: #F0DFAF; font-weight: bold;">for</span> donnee <span style="color: #F0DFAF; font-weight: bold;">in</span> donnees_brutes[1:]:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">donnee contient une cha&#238;ne de caract&#232;re repr&#233;sentant la ligne courante du fichier</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On s&#233;pare le ligne courante pour avoir d'un c&#244;t&#233; la partie avec le nom et le pr&#233;nom</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">et de l'autre le surnom et les langages.</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">donnee_split</span> = donnee.split(<span style="color: #CC9393;">":"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On s&#233;pare le nom et le pr&#233;nom</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">nom_prenom</span> = donnee_split[0].split(<span style="color: #CC9393;">","</span>)
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On r&#233;cup&#232;re dans des variables le nom et le pr&#233;nom en</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">utilisant la m&#233;thode strip pour enlever les espaces et les caract&#232;re \n</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">autour de la cha&#238;ne</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">nom</span> = nom_prenom[0].strip()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">prenom</span> = nom_prenom[1].strip()
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">A POURSUIVRE</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">...</span>
+</pre>
+</div></li>
+
+<li>Stocker ces éléments dans une structure adaptée. Nous appellerons cette structure <code>data_struct</code>
+dans la suite.</li>
+
+<li><p>
+À partir de la structure <code>data_struct</code>, déterminer la liste des langages
+maîtrisés par les individus présents dans le fichier.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On initialise langage avec l'ensemble vide. Cette structure ne peut pas contenir de doublons </span>
+<span style="color: #DFAF8F;">liste_langages</span> = <span style="color: #DCDCCC; font-weight: bold;">set</span>()
+<span style="color: #F0DFAF; font-weight: bold;">for</span> student <span style="color: #F0DFAF; font-weight: bold;">in</span> data_struct:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On transforme la liste de langages de l'&#233;tudiant courant et on l'ajoute &#224; la liste des langages</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">liste_langages</span> |= <span style="color: #DCDCCC; font-weight: bold;">set</span>(student[<span style="color: #CC9393;">"languages"</span>])
+
+<span style="color: #5F7F5F;">#</span><span style="color: #7F9F7F;">&#160;Ici on a un ensemble</span>
+liste_langages
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Mais on peut le convertir en liste</span>
+<span style="color: #DCDCCC; font-weight: bold;">list</span>(liste_langages)
+</pre>
+</div></li>
+
+<li>À partir de la structure <code>data_struct</code>, calculer le nombre de personnes maîtrisant chaque langage.</li>
 </ol>
 </div>
 </div>
