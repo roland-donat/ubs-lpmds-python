@@ -24,13 +24,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9853400">1. Objectif</a></li>
-<li><a href="#orgeca9258">2. Exercice : Conversion des durées</a></li>
-<li><a href="#orge0602a4">3. Exercice : indexation des chaînes de caractères</a></li>
-<li><a href="#orge68e181">4. Exercice : Formatage des chaînes de caractères</a></li>
-<li><a href="#orgbde05ac">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
-<li><a href="#orgb6ca766">6. Exercice : Notion de compréhension</a></li>
-<li><a href="#org84c166e">7. Exercice : Traitement de données textuelles</a></li>
+<li><a href="#orgf20700a">1. Objectif</a></li>
+<li><a href="#org774f2b8">2. Exercice : Conversion des durées</a></li>
+<li><a href="#orgca85194">3. Exercice : indexation des chaînes de caractères</a></li>
+<li><a href="#org59c94cb">4. Exercice : Formatage des chaînes de caractères</a></li>
+<li><a href="#org4a9ffb6">5. Exercice : <i>The Classic Fizz Buzz Problem</i></a></li>
+<li><a href="#orgb7aa7b5">6. Exercice : Notion de compréhension</a></li>
+<li><a href="#org7906abe">7. Exercice : Traitement de données textuelles</a></li>
 </ul>
 </div>
 </div>
@@ -40,13 +40,13 @@
 
 
 
-<div id="org92e04ae" class="figure">
+<div id="orgc6ee34c" class="figure">
 <p><img src="https://imgs.xkcd.com/comics/python.png" alt="python.png" />
 </p>
 </div>
 
-<div id="outline-container-org9853400" class="outline-2">
-<h2 id="org9853400"><span class="section-number-2">1.</span> Objectif</h2>
+<div id="outline-container-orgf20700a" class="outline-2">
+<h2 id="orgf20700a"><span class="section-number-2">1.</span> Objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ce TD a pour objectif de faire une mise à niveau sur la programmation en <code>Python</code> en
@@ -69,8 +69,8 @@ Prenez le temps de bien présenter et bien rédiger vos <i>notebooks</i>. Rappel
 </div>
 </div>
 
-<div id="outline-container-orgeca9258" class="outline-2">
-<h2 id="orgeca9258"><span class="section-number-2">2.</span> Exercice : Conversion des durées</h2>
+<div id="outline-container-org774f2b8" class="outline-2">
+<h2 id="org774f2b8"><span class="section-number-2">2.</span> Exercice : Conversion des durées</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <span class="underline">Thème</span>: Variables, opérations arithmétiques, fonction, tuple, dictionnaire
@@ -96,7 +96,19 @@ dans vos calculs.
 
 <p>
 <b>Aide</b> : Pensez aux opérateurs <code>//</code> et <code>%</code> et à la fonction <code>print</code>.
-</p></li>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
+<span style="color: #DFAF8F;">nombre_secondes_restantes</span> = nombre_secondes % 60
+<span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
+<span style="color: #DFAF8F;">nombre_minutes_restantes</span> = nombre_minutes % 60
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre d'heures = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_heures))
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de minutes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_minutes_restantes))
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"nombre de secondes = "</span> + <span style="color: #DCDCCC; font-weight: bold;">str</span>(nombre_secondes_restantes))
+</pre>
+</div></li>
 
 <li><p>
 Encapsuler votre code dans une fonction prenant en paramètre un nombre de secondes et qui
@@ -124,18 +136,43 @@ convertisseur_secondes(nombre_secondes=10000)
 convertisseur_secondes(nombre_secondes=100000)
 (1, 3, 46, 40)
 </pre>
-</div></li>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes</span>(nombre_secondes):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_minutes</span> = nombre_secondes // 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_secondes</span> = nombre_secondes % 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nombre_heures</span> = nombre_minutes // 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_minutes</span> = nombre_minutes % 60
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span> = nombre_heures // 24
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_heures</span> = nombre_heures % 24
 
-<li>Modifier la fonction précédente pour que le résultat soit fourni sous la forme d'un
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> nb_jours, nb_heures, nb_minutes, nb_secondes
+</pre>
+</div></li>
+<li><p>
+Modifier la fonction précédente pour que le résultat soit fourni sous la forme d'un
 dictionnaire de la forme <code>{"jour": &lt;nb jours&gt;, "heures": &lt;nb heures&gt;, "minutes": &lt;nb_minutes&gt;,
-   "secondes": &lt;nb_secondes&gt;}</code></li>
+   "secondes": &lt;nb_secondes&gt;}</code>   
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">convertisseur_secondes_bis</span>(nombre_secondes):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">nb_jours</span>, <span style="color: #DFAF8F;">nb_heures</span>, <span style="color: #DFAF8F;">nb_minutes</span>, <span style="color: #DFAF8F;">nb_secondes</span> = convertisseur_secondes(nombre_secondes)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> {<span style="color: #CC9393;">"jour"</span>: nb_jours,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"heures"</span>: nb_heures,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"minutes"</span>: nb_minutes,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"secondes"</span>: nb_secondes}
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orge0602a4" class="outline-2">
-<h2 id="orge0602a4"><span class="section-number-2">3.</span> Exercice : indexation des chaînes de caractères</h2>
+<div id="outline-container-orgca85194" class="outline-2">
+<h2 id="orgca85194"><span class="section-number-2">3.</span> Exercice : indexation des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <span class="underline">Thème</span>: Chaînes de caractères, indexation
@@ -153,9 +190,25 @@ Considérons la chaîne de caractères suivante :
 <b>Travail à réaliser</b> :
 </p>
 <ol class="org-ol">
-<li>Utiliser l'indexation pour extraire la chaîne <code>j'ai abandonné R !</code> de la chaîne <code>dicton</code>.</li>
+<li><p>
+Utiliser l'indexation pour extraire la chaîne <code>j'ai abandonné R !</code> de la chaîne <code>dicton</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+dicton[34:]
+</pre>
+</div></li>
 
-<li>Faire de même en utilisant une indexation négative.</li>
+<li><p>
+Faire de même en utilisant une indexation négative.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+dicton[-18:]
+</pre>
+</div></li>
 
 <li><p>
 Utiliser la méthode <code>split</code> pour découper la chaîne <code>dicton</code> en utilisant le séparateur <code>" "</code> (un
@@ -179,7 +232,7 @@ espace. Voici quelques exemples de résultats attendus :
 <div class="org-src-container">
 <pre class="src src-python">calcule_nb_mots(dicton)
 11
-calcule_nb_mots(<span style="color: #CC9393;">"  Il fait beau  ce matin"</span>)
+calcule_nb_mots(<span style="color: #CC9393;">"  Il fait    beau  ce matin"</span>)
 5
 calcule_nb_mots(<span style="color: #CC9393;">"Voulez-vous un caf&#233; ?"</span>)
 4
@@ -188,17 +241,51 @@ calcule_nb_mots(<span style="color: #CC9393;">"Voulez-vous un caf&#233; ?"</span
 <p>
 Penser à utiliser les méthodes suivantes <code>&lt;chaine&gt;.split</code> ; <code>&lt;chaine&gt;.replace</code> ; <code>&lt;chaine&gt;.strip</code>
 ; <code>len(&lt;chaine&gt;)</code>.
-</p></li>
+</p>
+
+<p>
+Astuce : Pour vous débarrasser des espaces multiples à l'intérieur d'une chaîne de caractère,
+observez et comprenez comment marche les commandes suivantes :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">texte_split</span> = <span style="color: #CC9393;">"  Il  fait     beau  ce matin    "</span>.split()
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(texte_split)
+<span style="color: #DFAF8F;">texte_join</span> = <span style="color: #CC9393;">" "</span>.join(texte_split())
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(texte_join)
+</pre>
+</div>
+<p>
+La méthode <code>.split</code> utilisée sans argument a en effet le bon goût de séparer une chaîne de
+caractères en supprimant les espaces multiples en les termes !   
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">calcule_nb_mots</span>(chaine):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Nettoyage</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion des espaces multiples</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = <span style="color: #CC9393;">" "</span>.join(chaine.split())
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Suppresion de la ponctuation</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">ponc_list</span> = <span style="color: #CC9393;">",;.!?'-"</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> ponc <span style="color: #F0DFAF; font-weight: bold;">in</span> ponc_list:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">chaine_clean</span> = chaine_clean.replace(ponc, <span style="color: #CC9393;">""</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">liste_mots</span> = chaine_clean.split()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(liste_mots)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
 
-<div id="outline-container-orge68e181" class="outline-2">
-<h2 id="orge68e181"><span class="section-number-2">4.</span> Exercice : Formatage des chaînes de caractères</h2>
+
+<div id="outline-container-org59c94cb" class="outline-2">
+<h2 id="org59c94cb"><span class="section-number-2">4.</span> Exercice : Formatage des chaînes de caractères</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-<a id="orgdbb9af0"></a>
+<a id="orgcac2774"></a>
 </p>
 
 <p>
@@ -254,16 +341,30 @@ Utiliser la méthode <code>.format</code> afin de produire la chaîne suivante :
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #9FC59F;">"fichier_002 :  52312.58, 655,   0.1%, 1.54e+08"</span>
 </pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">template</span> = <span style="color: #CC9393;">"fichier_{num:03} : {ts:9.2f}, {owner}, {occ_pct:7.1%}, {size:3.2e}"</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(template.<span style="color: #DCDCCC; font-weight: bold;">format</span>(num=num, ts=ts, owner=owner, occ_pct=occ_pct, size=size))
+</pre>
 </div></li>
 
-<li>Même question en utilisant la technique des <code>f-string</code> à la place de la méthode <code>.format</code>.</li>
+<li><p>
+Même question en utilisant la technique des <code>f-string</code> à la place de la méthode <code>.format</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(f<span style="color: #CC9393;">"fichier_{num:03} : {ts:9.2f}, {owner}, {occ_pct:7.1%}, {size:3.2e}"</span>)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orgbde05ac" class="outline-2">
-<h2 id="orgbde05ac"><span class="section-number-2">5.</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
+<div id="outline-container-org4a9ffb6" class="outline-2">
+<h2 id="org4a9ffb6"><span class="section-number-2">5.</span> Exercice : <i>The Classic Fizz Buzz Problem</i></h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <span class="underline">Thème</span> : Structures de contrôle <code>if</code>, <code>elif</code>, <code>else</code>. boucle <code>for</code>.
@@ -293,7 +394,21 @@ La légende raconte que de nombreuses personnes échouent à ce test lors des en
 
 <p>
 <b>Aide :</b> Penser à l'opérateur <code>%</code> et la fonction <code>range</code>.
-</p></li>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">for</span> i <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(1, 101):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> i % 15 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"FizzBuzz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">elif</span> i % 3 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"Fizz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">elif</span> i % 5 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(<span style="color: #CC9393;">"Buzz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">else</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">print</span>(i)
+</pre>
+</div></li>
 
 <li><p>
 Encapsuler le programme précédent dans une fonction <code>fizzbuzz</code> prenant en entrée un nombre N et
@@ -313,15 +428,30 @@ liste.append(4)
 liste.append(<span style="color: #CC9393;">"Buzz"</span>)
 <span style="color: #F0DFAF; font-weight: bold;">print</span>(liste)
 </pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">def</span> <span style="color: #93E0E3;">fizzbuzz</span>(N):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">liste</span> = []
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">for</span> i <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">range</span>(1, N + 1):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> i % 15 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   liste.append(<span style="color: #CC9393;">"FizzBuzz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">elif</span> i % 3 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   liste.append(<span style="color: #CC9393;">"Fizz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">elif</span> i % 5 == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   liste.append(<span style="color: #CC9393;">"Buzz"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">else</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   liste.append(i)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> liste
+</pre>
 </div></li>
 </ol>
 </div>
 </div>
 
-
-
-<div id="outline-container-orgb6ca766" class="outline-2">
-<h2 id="orgb6ca766"><span class="section-number-2">6.</span> Exercice : Notion de compréhension</h2>
+<div id="outline-container-orgb7aa7b5" class="outline-2">
+<h2 id="orgb7aa7b5"><span class="section-number-2">6.</span> Exercice : Notion de compréhension</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 <span class="underline">Thème</span> : Listes, dictionnaires, syntaxe de compréhension
@@ -353,12 +483,35 @@ Construire une liste contenant les noms de fruits en majuscules.
 </pre>
 </div></li>
 
-<li>Construire une liste contenant les fruits ayant un nom de plus de 10 caractères.</li>
+<li><p>
+Construire une liste contenant les fruits ayant un nom de plus de 10 caractères.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+[fr <span style="color: #F0DFAF; font-weight: bold;">for</span> fr <span style="color: #F0DFAF; font-weight: bold;">in</span> fruits <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(fr) &gt; 10]
+</pre>
+</div></li>
 
-<li>Construire une liste contenant les fruits à noms composés.</li>
+<li><p>
+Construire une liste contenant les fruits à noms composés.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">-----</span>
+[fr <span style="color: #F0DFAF; font-weight: bold;">for</span> fr <span style="color: #F0DFAF; font-weight: bold;">in</span> fruits <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(fr.split()) &gt;= 2]
+</pre>
+</div></li>
 
-<li>Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
-nombres de caractères des fruits correspondants.</li>
+<li><p>
+Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
+nombres de caractères des fruits correspondants.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">{fr: <span style="color: #DCDCCC; font-weight: bold;">len</span>(fr) <span style="color: #F0DFAF; font-weight: bold;">for</span> fr <span style="color: #F0DFAF; font-weight: bold;">in</span> fruits}
+</pre>
+</div></li>
+
 <li><p>
 Construire un dictionnaire ayant pour clés les fruits et pour valeurs les
 positions de ces fruits dans la liste.
@@ -366,13 +519,20 @@ positions de ces fruits dans la liste.
 
 <p>
 <b>Aide</b> : utiliser la fonction <code>enumerate</code>.
-</p></li>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+{fr: i <span style="color: #F0DFAF; font-weight: bold;">for</span> i, fr <span style="color: #F0DFAF; font-weight: bold;">in</span> <span style="color: #DCDCCC; font-weight: bold;">enumerate</span>(fruits)}
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org84c166e" class="outline-2">
-<h2 id="org84c166e"><span class="section-number-2">7.</span> Exercice : Traitement de données textuelles</h2>
+
+<div id="outline-container-org7906abe" class="outline-2">
+<h2 id="org7906abe"><span class="section-number-2">7.</span> Exercice : Traitement de données textuelles</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <span class="underline">Source</span> : exercice adapté à partir de <a href="https://uwpce-pythoncert.github.io/PythonCertDevel/exercises/file_lab.html">PythonCert</a>.
@@ -490,8 +650,82 @@ présente). <span class="underline">Aide</span> : méthodes <code>.split</code>,
 </pre>
 </div></li>
 
-<li>Stocker ces éléments dans une structure adaptée. Nous appellerons cette structure <code>data_struct</code>
-dans la suite.</li>
+<li><p>
+Stocker ces éléments dans une variable <code>data_struct</code> prenant la forme d'une liste de dictionnaires :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">data_struct</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   [{<span style="color: #CC9393;">"nom"</span>: &lt;nom_1&gt;, <span style="color: #CC9393;">"prenom"</span>: &lt;prenom_1&gt;, <span style="color: #CC9393;">"surnom"</span>: &lt;surnom_1&gt;, <span style="color: #CC9393;">"languages"</span>: [&lt;lang_1_1&gt;, ..., &lt;lang_1_k1&gt;]},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>{<span style="color: #CC9393;">"nom"</span>: &lt;nom_2&gt;, <span style="color: #CC9393;">"prenom"</span>: &lt;prenom_2&gt;, <span style="color: #CC9393;">"surnom"</span>: &lt;surnom_2&gt;, <span style="color: #CC9393;">"languages"</span>: [&lt;lang_2_1&gt;, ..., &lt;lang_1_k2&gt;]},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>...
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>{<span style="color: #CC9393;">"nom"</span>: &lt;nom_n&gt;, <span style="color: #CC9393;">"prenom"</span>: &lt;prenom_n&gt;, <span style="color: #CC9393;">"surnom"</span>: &lt;surnom_1&gt;, <span style="color: #CC9393;">"languages"</span>: [&lt;lang_n_1&gt;, ..., &lt;lang_1_kn&gt;]}]
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">data_struct</span> = []
+
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On parcourt chaque ligne du fichier en ignorant la premi&#232;re ligne d'ent&#234;te</span>
+<span style="color: #F0DFAF; font-weight: bold;">for</span> donnee <span style="color: #F0DFAF; font-weight: bold;">in</span> donnees_brutes[1:]:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">donnee contient une cha&#238;ne de caract&#232;re repr&#233;sentant la ligne courante du fichier</span>
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On s&#233;pare le ligne courante pour avoir d'un c&#244;t&#233; la partie avec le nom et le pr&#233;nom</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">et de l'autre le surnom et les langages.</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">donnee_split</span> = donnee.split(<span style="color: #CC9393;">":"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On s&#233;pare le nom et le pr&#233;nom</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">nom_prenom</span> = donnee_split[0].split(<span style="color: #CC9393;">","</span>)
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On r&#233;cup&#232;re dans des variables le nom et le pr&#233;nom en</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">utilisant la m&#233;thode strip pour enlever les espaces et les caract&#232;re \n</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">autour de la cha&#238;ne</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">nom</span> = nom_prenom[0].strip()
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">prenom</span> = nom_prenom[1].strip()
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On passe ensuite au traitement de la partie surnom + langages</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Traitements r&#233;alis&#233;s :</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">1. Nettoyage du contour de la cha&#238;ne (strip)</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;">#</span><span style="color: #7F9F7F;">&#160;2. Suppression des virgules (replace)</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">3. On s&#233;pare sur l'espace (split)</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">surnom_lang</span> = donnee_split[1].strip()\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .replace(<span style="color: #CC9393;">","</span>, <span style="color: #CC9393;">""</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .split(<span style="color: #CC9393;">" "</span>) 
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Note : on rappelle que l'on supprime les virgules pour traiter le cas</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">de la ligne o&#249; le surnom et les langages n'est pas s&#233;par&#233; par une virgule !</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cas o&#249; l'on n'a ni surnom, ni langages</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(surnom_lang[0]) == 0:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">surnom</span> = <span style="color: #BFEBBF;">None</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">languages</span> = []
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #F0DFAF; font-weight: bold;">else</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Test pour d&#233;tecter un surnom en regardant si le premier caract&#232;re est </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">une majuscule</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> surnom_lang[0][0].isupper():
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">surnom</span> = surnom_lang[0]
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">languages</span> = surnom_lang[1:]
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">else</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Cas o&#249; il n'y a pas de surnom</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">surnom</span> = <span style="color: #BFEBBF;">None</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">languages</span> = surnom_lang
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On v&#233;rifie enfin que si le langage r&#233;cup&#233;r&#233; est 'nothing', on fixe </span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">notre variable de langage &#224; la liste vide</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #DCDCCC; font-weight: bold;">len</span>(languages) &gt; 0 <span style="color: #F0DFAF; font-weight: bold;">and</span> languages[0] == <span style="color: #CC9393;">'nothing'</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">languages</span> = []
+
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On stocke toutes les informations extraites proprement dans un dictionnaire</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">donnee_propre</span> = {<span style="color: #CC9393;">"nom"</span>: nom, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"prenom"</span>: prenom, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"surnom"</span>: surnom, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"languages"</span>: languages}
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #5F7F5F;">#</span><span style="color: #7F9F7F;">&#160;Et on ajoute ce dictionnaire dans la liste des donn&#233;es finales</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> data_struct.append(donnee_propre)
+
+data_struct
+</pre>
+</div></li>
 
 <li><p>
 À partir de la structure <code>data_struct</code>, déterminer la liste des langages
@@ -511,7 +745,24 @@ liste_langages
 </pre>
 </div></li>
 
-<li>À partir de la structure <code>data_struct</code>, calculer le nombre de personnes maîtrisant chaque langage.</li>
+<li><p>
+À partir de la structure <code>data_struct</code>, calculer le nombre de personnes maîtrisant chaque langage. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">languages_freq</span> = {}
+<span style="color: #F0DFAF; font-weight: bold;">for</span> student <span style="color: #F0DFAF; font-weight: bold;">in</span> data_struct:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #F0DFAF; font-weight: bold;">for</span> lang <span style="color: #F0DFAF; font-weight: bold;">in</span> student[<span style="color: #CC9393;">"languages"</span>]:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">if</span> <span style="color: #F0DFAF; font-weight: bold;">not</span>(lang <span style="color: #F0DFAF; font-weight: bold;">in</span> languages_freq.keys()):
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">languages_freq</span>[lang] = 1
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">else</span>:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">languages_freq</span>[lang] += 1
+
+languages_freq                  
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
