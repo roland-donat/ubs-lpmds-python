@@ -5,180 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Data management et premières analyses descriptives avec <code>Pandas</code></title>
-<meta name="generator" content="Org mode" />
+<title>Data management et premières analyses descriptives avec =Pandas=</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -187,103 +16,26 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Data management et premières analyses descriptives avec <code>Pandas</code></h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6b96146">1. Contexte et objectif</a></li>
-<li><a href="#org1a7bc8c">2. Présentation des données</a>
+<li><a href="#orge23e3fc">1. Contexte et objectif</a></li>
+<li><a href="#orgb5eea07">2. Données historiques</a>
 <ul>
-<li><a href="#orga728bce">2.1. Données <code>fixtures</code></a></li>
-<li><a href="#orgea211f5">2.2. Données <code>odds</code></a></li>
+<li><a href="#org48bbef6">2.1. Présentation des données</a></li>
+<li><a href="#orgbf249cd">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#orgef95776">3. Premier contact avec les données</a>
-<ul>
-<li><a href="#orga587fa7">3.1. Chargement des données</a></li>
-<li><a href="#orgb538d20">3.2. Manipulations basiques</a></li>
-</ul>
-</li>
-<li><a href="#org3b31b0f">4. Normalisation et nettoyage des données</a>
-<ul>
-<li><a href="#org9a9638b">4.1. Typage des données</a></li>
-<li><a href="#org86e979c">4.2. Traitement des données manquantes</a></li>
-</ul>
-</li>
-<li><a href="#org45562da">5. Premières analyses descriptives</a></li>
-<li><a href="#orge59c595">6. Réconciliation de données</a></li>
+<li><a href="#org1a8ed78">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
+<li><a href="#org49c7ff3">4. Sélection des données</a></li>
+<li><a href="#org0b5b27e">5. Typage des données</a></li>
+<li><a href="#org7c39a0d">6. Traitement des données manquantes</a></li>
+<li><a href="#orgab4b0b7">7. Premières analyses descriptives</a></li>
 </ul>
 </div>
 </div>
@@ -293,17 +45,19 @@ for the JavaScript code in this tag.
 
 
 
-<div class="figure">
+<div id="org96625d7" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org6b96146" class="outline-2">
-<h2 id="org6b96146"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orge23e3fc" class="outline-2">
+<h2 id="orge23e3fc"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Quelle est la probabilité pour Rennes de vaincre Paris en Ligue 1 compte tenu des joueurs prévus pour la rencontre ? Messi est blessé, quel impact cela aura t-il sur la probabilité de victoire de Paris ?   
+Quelle est la probabilité pour Lorient de vaincre Paris en Ligue 1 compte tenu des joueurs prévus
+pour la rencontre ? Une star est blessée, quel impact cela aura t-il sur la probabilité de victoire
+de votre équipe préférée ?    
 </p>
 
 <p>
@@ -322,8 +76,6 @@ bookmakers. Le développement complet d'un tel outil nécessite la réalisation 
 <li>Analyse descriptive et visualisation.</li>
 <li>Construction d'indicateurs.</li>
 <li>Modélisation prévisionnelle et évaluation des performances.</li>
-<li>Déploiement de l'algorithme sous forme d'API.</li>
-<li>Développement d'un applicatif d'aide au pronostic.</li>
 </ol>
 
 <p>
@@ -341,24 +93,21 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org1a7bc8c" class="outline-2">
-<h2 id="org1a7bc8c"><span class="section-number-2">2</span> Présentation des données</h2>
+<div id="outline-container-orgb5eea07" class="outline-2">
+<h2 id="orgb5eea07"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-Deux sources de données sont mises à disposition dans ce projet :
-</p>
 </div>
-
-<div id="outline-container-orga728bce" class="outline-3">
-<h3 id="orga728bce"><span class="section-number-3">2.1</span> Données <code>fixtures</code></h3>
+<div id="outline-container-org48bbef6" class="outline-3">
+<h3 id="org48bbef6"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Les données <code>fixtures</code> contienne un historique de matchs sur différents championnats (cf. Tableau
-<a href="#data_soccer_fixtures_columns_desc">data_soccer_fixtures_columns_desc</a> pour une description des variables).
+Les données historiques, référencées dans la suite par données <code>fixtures</code>, contiennent un historique
+ de matchs sur différents championnats. Le Tableau <a href="#org3925ae4">1</a> présente
+ une description succintes des variables présentes.
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>. <div id="data_soccer_fixtures_columns_desc"></div></caption>
+<table id="org3925ae4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -446,278 +195,291 @@ Les données <code>fixtures</code> contienne un historique de matchs sur différ
 <td class="org-left">AST</td>
 <td class="org-left">Nombre de tirs cadrés par l'EE</td>
 </tr>
-
-<tr>
-<td class="org-left">HC</td>
-<td class="org-left">Nombre de corners pour l'ED</td>
-</tr>
-
-<tr>
-<td class="org-left">AC</td>
-<td class="org-left">Nombre de corners pour l'EE</td>
-</tr>
-
-<tr>
-<td class="org-left">HF</td>
-<td class="org-left">Nombre de fautes commises par l'ED</td>
-</tr>
-
-<tr>
-<td class="org-left">AF</td>
-<td class="org-left">Nombre de fautes commises par l'EE</td>
-</tr>
-
-<tr>
-<td class="org-left">HY</td>
-<td class="org-left">Nombre de cartons jaunes reçus par l'ED</td>
-</tr>
-
-<tr>
-<td class="org-left">AY</td>
-<td class="org-left">Nombre de cartons jaunes reçus par l'EE</td>
-</tr>
-
-<tr>
-<td class="org-left">HR</td>
-<td class="org-left">Nombre de cartons rouges reçus par l'ED</td>
-</tr>
-
-<tr>
-<td class="org-left">AR</td>
-<td class="org-left">Nombre de cartons rouges reçus par l'EE</td>
-</tr>
-
-<tr>
-<td class="org-left">HFKC</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">AFKC</td>
-<td class="org-left">&#xa0;</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-
-<div id="outline-container-orgea211f5" class="outline-3">
-<h3 id="orgea211f5"><span class="section-number-3">2.2</span> Données <code>odds</code></h3>
+<div id="outline-container-orgbf249cd" class="outline-3">
+<h3 id="orgbf249cd"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-Les données <code>odds</code> contiennent un historique de cotes de plusieurs bookmakers. Le Tableau
-<a href="#data_soccer_odds_columns_desc">data_soccer_odds_columns_desc</a> donne une description des variables des données 
-<code>odds</code>. Les premières variables <code>league_id</code>, <code>season_id</code>, <code>Date</code>, <code>HomeTeam</code> et <code>AwayTeam</code>
-permettent d'identifier une rencontre sans ambiguïté. Les variables suivantes sont codées suivant le
-motif &lt;bookmaker&gt;_&lt;type-pari&gt;_&lt;résultat&gt; où :
+Nous allons tout d'abord charger les données <code>fixtures</code> dans notre environnement
+<code>Python</code> en utilisant la librairie <code>Pandas</code>.
+Ces données sont accessibles <i>via</i> les liens suivants :
 </p>
-<ul class="org-ul">
-<li>&lt;bookmaker&gt; est l'identifiant d'un bookmaker, e.g. B365, GB, etc ;</li>
-<li>&lt;type-pari&gt; est l'identifiant d'un type de pari :
-<ul class="org-ul">
-<li>1X2 correspond aux paris sur l'issue d'un match : H, l'équipe à domicile gagne ; A, l'équipe à
-l'exterieur gagne ; D, match nul.</li>
-<li>UpUd (<i>Upper Under</i>) correspond aux paris sur le nombre de buts total dans un match : &lt;2.5
-signifie 0, 1 ou 2 buts ont été inscrits et &gt;2.5 signifie au moins 3 buts ont été inscrits pendant la rencontre.</li>
-</ul></li>
-<li>&lt;résultat&gt; est l'identifiant du résultat associé à la cote : A, H, D pour les paris 1X2 et &lt;2.5,
-&gt;2.5 pour les paris UpUd.</li>
-</ul>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>odds</code>. <div id="data_soccer_odds_columns_desc"></div></caption>
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Colonne</th>
-<th scope="col" class="org-left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">league_id</td>
-<td class="org-left">Identifiant du championnat</td>
-</tr>
-
-<tr>
-<td class="org-left">season_id</td>
-<td class="org-left">Identifiant de la saison</td>
-</tr>
-
-<tr>
-<td class="org-left">Date</td>
-<td class="org-left">Date du match au format %Y-%m-%d</td>
-</tr>
-
-<tr>
-<td class="org-left">HomeTeam</td>
-<td class="org-left">Équipe à domicile (ED)</td>
-</tr>
-
-<tr>
-<td class="org-left">AwayTeam</td>
-<td class="org-left">Équipe à l'exterieur (EE)</td>
-</tr>
-
-<tr>
-<td class="org-left">B365_1X2_H</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">B365_1X2_D</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">B365_1X2_A</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">GB_1X2_H</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">GB_1X2_D</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">GB_1X2_A</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">BW_1X2_H</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">BW_1X2_D</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">BW_1X2_A</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">B365_UpUd_&lt;2.5</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">B365_UpUd_&gt;2.5</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">GB_UpUd_&lt;2.5</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">GB_UpUd_&gt;2.5</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgef95776" class="outline-2">
-<h2 id="orgef95776"><span class="section-number-2">3</span> Premier contact avec les données</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orga587fa7" class="outline-3">
-<h3 id="orga587fa7"><span class="section-number-3">3.1</span> Chargement des données</h3>
-<div class="outline-text-3" id="text-3-1">
-<p>
-Nous allons tout d'abord charger les deux jeux données <code>fixtures</code> et <code>odds</code> dans notre environnement
-<code>Python</code>. Ces données sont accessibles <i>via</i> les liens suivants :
-</p>
-<ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a></li>
-</ul>
 
 <p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Importer la librairie <code>pandas</code> dans votre environnement. <span class="underline">Aide :</span> Utiliser le mot-clé <code>import</code>.</li>
-<li>Afficher la version de la librairie <code>pandas</code> utilisée. <span class="underline">Aide :</span> Utiliser l'attribut de classe <code>__version__</code>.</li>
-<li>Utiliser la méthode <code>Pandas</code> <code>.read_csv</code> afin de lire les données directement depuis leur lien
-internet. Les données <code>fixtures</code> sont à stocker dans la variable <code>data_fixtures_df</code> et les données <code>odds</code> dans
-la variable <code>data_odds_df</code>. 
-<span class="underline">Aide :</span> Les données sont sépérées par des points-virgules et compressées en <code>bzip2</code>. Pensez donc
-à utiliser les arguments <code>sep</code> et <code>compression</code> afin de tenir compte de ces deux éléments.</li>
-<li>Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code> afin d'avoir un aperçu des données chargées.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-orgb538d20" class="outline-3">
-<h3 id="orgb538d20"><span class="section-number-3">3.2</span> Manipulations basiques</h3>
-<div class="outline-text-3" id="text-3-2">
-<p>
-Il s'agit ici d'appréhender les objets que vous manipulez avec <code>Pandas</code>, à savoir les <code>DataFrame</code>
-(tableau de données) et les <code>Series</code> (colonne ou ligne de données). L'objectif est également de bien
-comprendre comment accéder aux données avec les attributs <code>.loc</code>, <code>.iloc</code>.
-</p>
-
-<p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li>Quel est le type des variables <code>data_fixtures_df</code> et <code>data_odds_df</code>.</li>
-<li>Afficher le nom des lignes et le nom des colonnes des données <code>fixtures</code> et <code>odds</code>. <span class="underline">Aide :</span> Utiliser les attributs <code>.index</code> et <code>.columns</code>.</li>
 <li><p>
-Sur les données <code>fixtures</code> :
+Importer la librairie <code>pandas</code> dans votre environnement.
 </p>
-<ul class="org-ul">
-<li>accéder à la ligne de <b>label <code>3</code></b> ;</li>
-<li>accéder à la colonne de <b>label <code>HomeTeam</code></b> ;</li>
-<li>accéder à la ligne de <b>position 3</b> ;</li>
-<li>accéder à la colonne de <b>position 2</b>.</li>
-</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+</pre>
+</div></li>
+
+<li><p>
+Afficher la version de la librairie <code>pandas</code> utilisée.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(f<span style="color: #CC9393;">"Pandas : {pd.__version__}"</span>)
+</pre>
+</div></li>
+
+<li><p>
+Utiliser la méthode <code>Pandas</code> <code>.read_csv</code> afin de lire les données directement depuis ce lien :
+<a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2">https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2"</span>
+<span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+</pre>
+</div>
 <p>
-Afficher à chaque fois le type des objets "ligne" et "colonne" produit.
-<span class="underline">Aide :</span> Utiliser les attributs <code>.loc</code> et <code>.iloc</code>.
+Note : Les données sont sépérées par des points-virgules et compressées en <code>bzip2</code>. Il faut donc penser
+à utiliser les arguments <code>sep</code> et <code>compression</code> afin de tenir compte de ces deux éléments.
 </p></li>
-<li>À partir des données <code>fixtures</code>, Créer un nouveau <code>DataFrame</code>, nommé <code>data_fixtures_bis_df</code>, en
-utilisant pour index (nom des lignes) les valeurs de la colonne <code>HomeTeam</code>. <span class="underline">Aide :</span> Utiliser la méthode
-<code>.set_index</code>.</li>
-<li>Analyser la structure du <code>DataFrame</code> <code>data_fixtures_bis_df</code> et essayer de comprendre comment se
-comporte l'attribut <code>.loc</code> dans ce cas.</li>
-<li>Réinitialiser l'index du <code>DataFrame</code> <code>data_fixtures_bis_df</code>. <span class="underline">Aide :</span> Utiliser la méthode
-<code>.reset_index</code>.</li>
+
+<li><p>
+Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code> afin d'avoir un aperçu des données chargées.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.head()
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.info()
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.describe()
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org3b31b0f" class="outline-2">
-<h2 id="org3b31b0f"><span class="section-number-2">4</span> Normalisation et nettoyage des données</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org1a8ed78" class="outline-2">
+<h2 id="org1a8ed78"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
+</p>
+<ul class="org-ul">
+<li>les tableaux de données appelés <code>DataFrame</code> ;</li>
+<li>les vecteurs de données appelés <code>Series</code>.</li>
+</ul>
+
+<p>
+Un <code>DataFrame</code> est composé :
+</p>
+<ul class="org-ul">
+<li>d'une ou plusieurs colonnes représentant les variables du jeu de données ;</li>
+<li>d'une ou plusieurs lignes représentant les individus du jeu de données.</li>
+</ul>
+
+<p>
+Chaque ligne et chaque colonne d'un <code>DataFrame</code> est donc un vecteur (une seule dimension) mis sous la
+forme d'une <code>Series</code>.
+</p>
+
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Quel est le type de la variable <code>fixtures_df</code> ?
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df)
+</pre>
+</div></li>
+
+<li><p>
+Dans un <code>DataFrame</code>, chaque valeur est identifiée grâce à un nom de ligne (appelé <code>index</code>) et
+un nom de colonne (appelé <code>column</code>). Afficher le nom des lignes et le nom des colonnes des
+données <code>fixtures</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.index
+</pre>
 </div>
-<div id="outline-container-org9a9638b" class="outline-3">
-<h3 id="org9a9638b"><span class="section-number-3">4.1</span> Typage des données</h3>
-<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.columns
+</pre>
+</div></li>
+
+<li><p>
+Vous pouvez accéder aux différents éléments d'un <code>DataFrame</code> en utilisant l'attribut <code>.loc</code>. Par
+exemple, pour récupérer la colonne <code>HomeTeam</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture explicite</span>
+fixtures_df.loc[:, <span style="color: #CC9393;">"HomeTeam"</span>]
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture implicite</span>
+fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>]
+</pre>
+</div>
+<p>
+La commande précédente permet de récupérer toutes les lignes (opérateur <code>:</code>) de la colonne
+appelée <code>"HomeTeam"</code>. 
+</p>
+
+<p>
+De la même manière, on peut accéder à la ligne de label <code>3</code> comme suit :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture explicite</span>
+fixtures_df.loc[3, :]
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture implicite</span>
+fixtures_df.loc[3]
+</pre>
+</div>
+
+<p>
+Enfin, vous pouvez accéder à plusieurs lignes et colonnes (sous-tableau) en utilisant des listes
+dans l'attribut <code>.loc</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python">fixtures_df.loc[3:7, [<span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>]]
+</pre>
+</div></li>
+
+<li>Sélectionner les 50 premiers matchs en prenant les colonnes du championnat, de la saison, de la
+date, des équipes et du score final.</li>
+<li>Quel est le type des objets suivants <code>fixtures_df.loc[:, "league_id"]</code> et
+<code>fixtures_df.loc[3]</code> ?</li>
+<li>Quelles sont les principales caractéristiques d'un objet de type <code>Series</code> ?</li>
+<li><p>
+Il est possible de changer l'index d'un <code>DataFrame</code> avec la méthode <code>set_index</code>. Par exemple, on
+peut créer un nouveau <code>DataFrame</code> dans lequel les colonnes <code>"HomeTeam"</code> et <code>"AwayTeam"</code> sont
+utilisées en tant qu'index :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_2_df</span> = fixtures_df.set_index([<span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>])
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_2_df)
+</pre>
+</div>
+<p>
+On obtient ainsi un index multidimensionnel. Les lignes du <code>DataFrame</code> <code>fixtures_bis_df</code> sont maintenant
+identifiées par la valeur d'une équipe à domicile et une équipe à l'extérieure :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_2_df.loc[(<span style="color: #CC9393;">"Rennes"</span>, <span style="color: #CC9393;">"Lorient"</span>), :])
+</pre>
+</div></li>
+
+<li>Créer un nouveau <code>DataFrame</code>, nommé <code>data_fixture_3_df</code>, indexé par les colonnes <code>["league_id", "season_id", "Date",
+   "HomeTeam", "AwayTeam"]</code>. Quelle est la particularité de cette indexation ?</li>
+<li><p>
+Vous pouvez revenir à l'indexation par défaut, c'est à dire une numérotation des lignes à partir
+de 0 avec la méthode <code>.reset_index</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_3_df.reset_index())
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org49c7ff3" class="outline-2">
+<h2 id="org49c7ff3"><span class="section-number-2">4.</span> Sélection des données</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
+en fonction des valeurs prises par certaines colonnes. Pour ce faire, il suffit d'utiliser les
+opérateurs de comparaison <code>Python</code> appliqués aux colonnes d'un <code>DataFrame</code>. 
+</p>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Nous allons commencer par récupérer tous les matchs joués à l'extérieur par l'équipe de
+Lorient. Pour ce faire il faut dans un premier temps créer une <code>Series</code> booléenne (c'est-à-dire
+dont les valeurs sont <code>True</code> ou <code>False</code>) permettant de repérer les matchs qui nous intéressent :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"AwayTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
+</pre>
+</div>
+<p>
+La <code>Serie</code> <code>condition</code> contient la valeur <code>True</code> lorsque la colonne <code>"AwayTeam"</code>
+vaut <code>"Lorient"</code> et <code>False</code> sinon.
+</p>
+
+<p>
+Il suffit ensuite d'utiliser cette <code>Series</code> afin de récupérer les lignes du <code>DataFrame</code>
+<code>fixtures_df</code> pour lesquelles la condition est vraie. Deux syntaxes sont possibles. Une
+syntaxe explicite (recommandée) utilise l'attribut <code>.loc</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">data_fixture_lorient_df</span> = fixtures_df.loc[condition]
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(data_fixture_lorient_df)
+</pre>
+</div>
+<p>
+Et une syntaxe implicite équivalente :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">data_fixture_lorient_bis_df</span> = fixtures_df[condition]
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(data_fixture_lorient_bis_df)
+</pre>
+</div></li>
+
+<li>Extraire les matchs au cours desquels l'équipe à domicile a réussi au moins 20 tirs cadrés
+(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;\=</code>.</li>
+<li><p>
+Il est possible de construire des conditions plus complexes en utilisant les opérateurs booléens
+de <code>Pandas</code> : <code>&amp;</code> (ET logique) <code>|</code> (OU logique) et <code>~</code> (NON logique). Par exemple, nous pouvons obtenir les
+matchs au cours desquels l'équipe à domicile mène à la mi-temps et perd à la fin du match :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">condition_mi_temps</span> = fixtures_df[<span style="color: #CC9393;">"HTR"</span>] == <span style="color: #CC9393;">"H"</span>
+<span style="color: #DFAF8F;">condition_fin</span> = fixtures_df[<span style="color: #CC9393;">"FTR"</span>] == <span style="color: #CC9393;">"A"</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df.loc[condition_mi_temps &amp; condition_fin])
+</pre>
+</div></li>
+
+<li>Extraire les matchs perdus à domicile par les joueurs de Lorient alors qu'ils ont réussi
+strictement plus de tirs cadrés que leur adversaire.</li>
+<li>Extraire à présent <b>tous les matchs</b> perdus par les joueurs de Lorient alors qu'ils ont réussi
+strictement plus de tirs cadrés que leur adversaire.</li>
+<li><p>
+Pour éviter d'enchaîner les opérateurs OU quand il s'agit d'un filtrage sur les valeurs d'une
+même colonne, il est commode d'utiliser la méthode pour les <code>Series</code> nommée <code>.isin</code> qui va tester
+si chaque donnée de la <code>Series</code> se trouve dans la liste de valeurs passée en argument de la
+méthode.
+</p>
+
+<p>
+Par exemple, le code suivant récupère les matchs des championnats de France :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].isin([<span style="color: #CC9393;">"fra_l2"</span>, <span style="color: #CC9393;">"fra_l1"</span>])
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df.loc[condition])
+</pre>
+</div></li>
+
+<li>Extraire les matchs qui ne concernent pas un championnat français.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org0b5b27e" class="outline-2">
+<h2 id="org0b5b27e"><span class="section-number-2">5.</span> Typage des données</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
 soit correctement typée. Les principaux types de données reconnus par <code>Pandas</code> sont les entiers (<code>int</code>), les
-nombres réels (<code>float</code>), les dates (<code>date</code> ou <code>datetime64</code>), les données catégorielles (<code>category</code>) et
+nombres réels (<code>float</code>), les dates (<code>date</code> ou <code>datetime64</code>), les données qualitatives (<code>category</code>) et
 les chaînes de caractères (<code>object</code>).
 </p>
 
@@ -725,39 +487,113 @@ les chaînes de caractères (<code>object</code>).
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Analyser les données <code>fixtures</code> et <code>odds</code> et affecter à chaque colonne le type approprié. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.astype</code>.</li>
-<li>Explorer les fonctionnalités offerte par le type <code>datetime64</code> sur la colonne <code>Date</code>. <span class="underline">Aide</span> :
-Utiliser l'attribut <code>.dt</code>.</li>
-<li>Essayer d'affecter le type <code>int</code> aux colonnes <code>HTHG</code>, <code>HTAG</code>, <code>FTHG</code>, <code>FTAG</code>. Que constatez vous ?</li>
+<li><p>
+La variable <code>league_id</code> ne prend qu'un nombre fini de valeurs, c'est donc une variable
+qualitative. Il convient de lui assigner le type <code>category</code> comme suit :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"league_id"</span>] = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].astype(<span style="color: #CC9393;">"category"</span>)
+</pre>
+</div>
+<p>
+Une variable de type <code>category</code> dispose d'un attribut spécial <code>.cat</code> apportant, entre autres, des
+fonctionnalités telles que :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Num&#233;risation des modalit&#233;s</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"league_id"</span>].cat.codes)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">R&#233;cup&#233;ration de la liste des modalit&#233;s</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"league_id"</span>].cat.categories)
+</pre>
+</div></li>
+
+<li>Transformer les autres variables qualitatives en <code>category</code>.</li>
+<li><p>
+Lorsque les modalités sont des labels textuels, les colonnes de type <code>category</code> ont également
+accès à l'attribut <code>.str</code> permettant de manipuler les chaînes de caractères. Cet attribut est
+également disponible sur les variables de type <code>object</code>. L'attribut <code>.str</code> donne accès à la
+plupart des fonctionnalités de traitement des chaînes offertes par <code>Python</code>, e.g. <code>strip</code>,
+<code>lower</code>, <code>upper</code>, <code>find</code>, <code>len</code>, etc. Exemple :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.upper())
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.split(<span style="color: #CC9393;">"_"</span>))
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.split(<span style="color: #CC9393;">"_"</span>, expand=<span style="color: #BFEBBF;">True</span>))
+</pre>
+</div></li>
+
+<li>Utiliser la méthode <code>.str.startswith</code> afin d'identifier les matchs des championnats français (à
+savoir <code>fra_l1</code> ou <code>fra_l2</code>) et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_df</code>.</li>
+<li><p>
+Convertir la colonne <code>Date</code> avec le type <code>"datetime64"</code>.
+Les colonnes de type <code>datetime64</code> possèdent un attribut <code>dt</code> apportant des fonctionnalités
+permettant de manipuler les dates. Vous pouvez, entre autres, extraire le jour, le mois ou l'année
+d'une date :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.day)
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.month)
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.year)
+</pre>
+</div></li>
+
+<li>Identifier les matchs des championnats français ayant eu lieu en 2010 et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_2010_df</code>.</li>
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org86e979c" class="outline-3">
-<h3 id="org86e979c"><span class="section-number-3">4.2</span> Traitement des données manquantes</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org7c39a0d" class="outline-2">
+<h2 id="org7c39a0d"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
 (<i>Not a Number</i>) ou <code>NaT</code> (<i>Not a Time</i>).
 </p>
 
-
 <p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Calculer le nombre de données manquantes pour chaque colonne des données <code>fixtures</code>. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.is_null()</code> et <code>.sum()</code>.</li>
-<li>Calculer la proportion de données manquantes pour chaque colonne des données <code>fixtures</code>. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.mean()</code>.</li>
-<li>Tracer un diagramme en barres pour représenter graphiquement les informations précédentes. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.plot</code>.</li>
-<li>Faire de même avec les données <code>odds</code>. Que constatez vous et que proposez vous ?</li>
-<li>Construire un nouveau <code>DataFrame</code>, nommé <code>data_odds_bis_df</code>, tenant compte du traitement des
-données manquantes réalisé à la question précédente.</li>
-</ol>
+<li><p>
+Les <code>DataFrame</code> et les <code>Series</code> dispose de la méthode <code>.isnull</code> permettant de repérer les données
+manquantes. Le code suivant construit un <code>DataFrame</code> booléen ayant pour valeur <code>True</code> si
+l'élément correspondant dans le <code>DataFrame</code> <code>fixtures_df</code> est manquant et <code>False</code> sinon :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">idx_na_df</span> = fixtures_df.isnull()
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(idx_na_df)
+</pre>
+</div>
 
+<p>
+À partir de ce résultat brut, nous pouvons déduire par exemple le nombre de valeurs manquantes
+par colonne avec la méthode <code>.sum</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">print</span>(idx_na_df.<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=0))
+</pre>
+</div>
+
+<p>
+<b>Note 1</b> : L'utilisation de l'argument <code>axis</code> dans la méthode <code>.sum</code> permet d'indiquer sur quelle
+dimension est réalisée l'opération de sommation. En indiquant <code>axis=0</code>, cela signifie que les
+valeurs du <code>DataFrame</code> sont sommées le long des lignes (<code>index</code>). Avec <code>axis=1</code>, la sommation sera
+réalisée le long des colonnes (<code>columns</code>) et donnera donc le nombre de valeurs manquantes de chaque ligne.
+</p>
+
+<p>
+<b>Note 2</b> : L'argument <code>axis</code> est présent dans de nombreuses méthodes pour <code>DataFrame</code> et
+<code>Series</code>. Le mode de fonctionnement est toujours le même : <code>axis=0</code> signifie que l'opération
+considérée est faite sur les lignes (<code>index</code>) et <code>axis=1</code> sur les colonnes (<code>columns</code>).
+</p>
+
+<p>
+<b>Note 3</b> : Lorsque des opérations numériques sur des booléens sont réalisées, <code>Pandas</code> remplace
+la valeur <code>True</code> par 1 et la valeur <code>False</code> par 0.
+</p></li>
+
+<li>Calculer à présent la proportion de données manquantes pour chaque colonne des données
+<code>fixtures_df</code> en utilisant la méthode <code>.means</code>.</li>
+</ol>
 <p>
 <b>Notes :</b> 
 Le traitement des données manquantes est toujours un sujet délicat pour lequel il n'y a pas de
@@ -765,7 +601,7 @@ réponse unique. De nombreux facteurs interviennent dans le choix de la stratég
 être exhaustif, nous pouvons nous poser les questions suivantes :
 </p>
 <ul class="org-ul">
-<li>Y a t-il des colonnes pour lesquelles les données sont largement manquantes. On peut dans ce cas
+<li>Y a-t-il des colonnes pour lesquelles les données sont largement manquantes. On peut dans ce cas
 se poser la question de la suppression de ces données.</li>
 <li>L'absence de données est-il très ponctuel ? La question de la suppression de ces données peut
 également se poser dans ce cas.</li>
@@ -777,42 +613,71 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </ul>
 </div>
 </div>
-</div>
 
 
-<div id="outline-container-org45562da" class="outline-2">
-<h2 id="org45562da"><span class="section-number-2">5</span> Premières analyses descriptives</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgab4b0b7" class="outline-2">
+<h2 id="orgab4b0b7"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
-d'aborder les fonctionnalités statistiques de <code>Pandas</code> ainsi que les techniques de filtrage de
-données et d'agrégation.
+d'aborder les fonctionnalités statistiques de <code>Pandas</code>.
 </p>
 
 <p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Calculer le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
-l'extérieur, tout championnat confondu. <span class="underline">Aide</span> : Utiliser la méthode <code>.mean</code>.</li>
 <li><p>
-Calculer le score moyen à la fin du match des équipes à domicile et à
-l'extérieur pour :
+Calculons dans un premier temps le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
+l'extérieur, tout championnat confondu :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">res_match_df</span> = fixtures_df.loc[:, [<span style="color: #CC9393;">"HTHG"</span>, <span style="color: #CC9393;">"HTAG"</span>, <span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]]
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(res_match_df.mean())
+</pre>
+</div></li>
+
+<li><p>
+Il est également possible de réaliser des traitements par sous-groupes de données en utilisant la
+méthode <code>.groupby</code>. Par exemple, pour calculer le score moyen à la fin du match des équipes à domicile et à
+l'extérieur sur chacun des championnats, on écrit :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Regroupement des donn&#233;es par championnat</span>
+<span style="color: #DFAF8F;">fixtures_league_id_grp</span> = fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcule des scores moyens</span>
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_league_id_grp[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>].mean())
+</pre>
+</div>
+<p>
+Le fonctionnement de la méthode <code>.groupby</code> est donc le suivant :
 </p>
 <ul class="org-ul">
-<li>chacun des championnats ;</li>
-<li>chacune des saisons ;</li>
-<li>chacun des championnats et chacune des saisons.</li>
-</ul>
-<p>
-<span class="underline">Aide</span> : Utiliser la méthode <code>.groupby</code>.
-</p></li>
-<li>Ajouter une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
-pendant chaque rencontre.</li>
-<li>Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits. <span class="underline">Aide</span> :
-Utiliser la méthode <code>.max</code>.</li>
-<li>Trier les rencontres en fonction du nombre de buts inscrits. <span class="underline">Aide</span> : Utiliser la méthode
+<li>on indique en argument du <code>.groupby</code> la liste des variables permettant de construire les
+groupes (ici <code>["league_id"]</code>) ;</li>
+<li>on obtient un objet de type <code>DataFrameGroupBy</code> sur lequel on va préciser les colonnes que l'on
+souhaite traiter (ici <code>"FTHG"</code> et <code>"FTAG"</code>) et l'opération à réaliser (ici <code>mean</code>).</li>
+</ul></li>
+
+<li>Calculer le score moyen à la fin du match des équipes à domicile et à l'extérieur sur chacun des
+championnats et chacune des saisons.</li>
+
+<li><p>
+Ajoutons au <code>DataFrame</code> <code>fixtures_df</code> une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
+pendant chaque rencontre :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"FTG"</span>] = fixtures_df[[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]].<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=1)
+fixtures_df.head()
+</pre>
+</div></li>
+
+<li>Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits.
+<b>Aide</b> : Utiliser la méthode <code>.max</code>.</li>
+
+<li>Trier les rencontres en fonction du nombre de buts inscrits. <b>Aide</b> : Utiliser la méthode
 <code>.sort_values</code>.</li>
+
 <li><p>
 Calculer la proportion des différents résultats d'un match (<code>H</code>, <code>A</code>, <code>D</code>) pour :
 </p>
@@ -824,29 +689,8 @@ Calculer la proportion des différents résultats d'un match (<code>H</code>, <c
 </ul>
 <p>
 <span class="underline">Aide</span> : Utiliser la méthode <code>.value_counts</code> pour le calcul des proportions et la méthode
-<code>.unstack</code> pour la présentation des chiffres. 
+<code>.unstack</code> pour la présentation des chiffres.
 </p></li>
-<li>Pour chaque bookmaker et chaque type de paris, calculer la marge associée. <span class="underline">Aide</span> : La marge \(M\) d'un
-pari à \(n\) issus caractérisé par les cotes \(c_{1}, \ldots, c_{n}\) est définie par :
-\[
-  M = \sum_{i=1}^{n} \frac{1}{c_{i}} - 1.
-  \]</li>
-
-<li><p>
-Calculer la marge moyenne de chaque bookmaker et chaque type de paris pour :
-</p>
-<ul class="org-ul">
-<li>tout championnat confondu ;</li>
-<li>chacun des championnats ;</li>
-<li>chacune des saisons ;</li>
-<li>chacun des championnats et chacune des saisons.</li>
-</ul>
-<p>
-Quel est le bookmaker le plus rentable en moyenne aujourd'hui ?
-</p></li>
-
-<li>Calculer la proportion de valeurs manquantes pour chaque bookmaker et chaque type de pari, et ce,
-sur chaque saison et chaque championnat.</li>
 
 <li>Déterminer le championnat où il y a :
 <ul class="org-ul">
@@ -854,37 +698,6 @@ sur chaque saison et chaque championnat.</li>
 <li>le plus de cartons rouges ;</li>
 <li>le moins de victoires à domicile.</li>
 </ul></li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-orge59c595" class="outline-2">
-<h2 id="orge59c595"><span class="section-number-2">6</span> Réconciliation de données</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Il s'agit ici de donner un aperçu des techniques permettant de fusionner deux <code>DataFrame</code> à partir d'informations communes (notion de clé).
-</p>
-
-<p>
-Pour ce faire, nous introduisons un nouveau jeu de données contenant des informations sur les stades dans lesquels se déroulent les rencontres.
-Les données sont accessibles en suivant le lien <a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/stadiums.csv">Données <code>stadiums</code></a>.
-</p>
-
-<p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li>Charger les données <code>stadiums</code> sous forme d'un <code>DataFrame</code> dans la variable <code>stadiums_df</code>. Analyser rapidement son contenu.</li>
-<li>Créer un nouveau <code>DataFrame</code> nommé <code>data_fixtures_2_df</code> qui ajoute les colonnes <code>stadium</code>, <code>Latitude</code> et, <code>Longitude</code> aux données <code>fixtures</code> indiquant le nom et les coordonnées GPS du stade dans lequel se déroule chaque rencontre. Il est à noter que l'information n'est pas toujours disponible et dans ce cas les colonnes précédentes prendront la valeur <code>NaN</code>. 
-<span class="underline">Aide</span> : 
-<ul class="org-ul">
-<li>Déterminer tout d'abord le ou les colonnes communes (clés) entre les données <code>fixtures</code> et <code>stadiums</code>.</li>
-<li>Utiliser la fonction <code>Pandas</code> <code>merge</code>.</li>
-</ul></li>
-<li>Réaliser l'opération précédente mais avec une jointure. <span class="underline">Aide</span> : Utiliser la méthode <code>.join</code>.</li>
-<li>Concaténer les données <code>data_fixtures_2_df</code> et <code>data_odds_df</code> dans un nouveau <code>DataFrame</code> nommé <code>data_all_df</code>. <span class="underline">Aide</span> : utiliser la fonction <code>Pandas</code> <code>concat</code>.</li>
-<li>Enregistrer dans un fichier <code>csv</code> les données contenues dans le <code>DataFrame</code>
-<code>data_all_df</code>. <span class="underline">Aide</span> : Utiliser la méthode <code>.to_csv</code>.</li>
 </ol>
 </div>
 </div>
