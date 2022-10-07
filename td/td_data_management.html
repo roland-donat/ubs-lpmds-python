@@ -24,18 +24,18 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7b954aa">1. Contexte et objectif</a></li>
-<li><a href="#org95836b2">2. Données historiques</a>
+<li><a href="#org41fa032">1. Contexte et objectif</a></li>
+<li><a href="#org13f0bc0">2. Données historiques</a>
 <ul>
-<li><a href="#org4775318">2.1. Présentation des données</a></li>
-<li><a href="#org32cff38">2.2. Chargement des données</a></li>
+<li><a href="#org568a0cc">2.1. Présentation des données</a></li>
+<li><a href="#orgab957b5">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#orgf05838d">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
-<li><a href="#org93dfeff">4. Sélection des données</a></li>
-<li><a href="#orgc0bca72">5. Typage des données</a></li>
-<li><a href="#orgf5e3252">6. Traitement des données manquantes</a></li>
-<li><a href="#org4825971">7. Premières analyses descriptives</a></li>
+<li><a href="#orga94ce61">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
+<li><a href="#org4864a54">4. Sélection des données</a></li>
+<li><a href="#org7a1fdc7">5. Typage des données</a></li>
+<li><a href="#org30089b2">6. Traitement des données manquantes</a></li>
+<li><a href="#orgc631df5">7. Premières analyses descriptives</a></li>
 </ul>
 </div>
 </div>
@@ -45,14 +45,14 @@
 
 
 
-<div id="org0d5ea4b" class="figure">
+<div id="org891699b" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org7b954aa" class="outline-2">
-<h2 id="org7b954aa"><span class="section-number-2">1.</span> Contexte et objectif</h2>
+<div id="outline-container-org41fa032" class="outline-2">
+<h2 id="org41fa032"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Lorient de vaincre Paris en Ligue 1 compte tenu des joueurs prévus
@@ -93,20 +93,20 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org95836b2" class="outline-2">
-<h2 id="org95836b2"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-org13f0bc0" class="outline-2">
+<h2 id="org13f0bc0"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org4775318" class="outline-3">
-<h3 id="org4775318"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-org568a0cc" class="outline-3">
+<h3 id="org568a0cc"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données historiques, référencées dans la suite par données <code>fixtures</code>, contiennent un historique
- de matchs sur différents championnats. Le Tableau <a href="#orga6a7551">1</a> présente
+ de matchs sur différents championnats. Le Tableau <a href="#orgb8e4dfd">1</a> présente
  une description succintes des variables présentes.
 </p>
 
-<table id="orga6a7551" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgb8e4dfd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -199,8 +199,8 @@ Les données historiques, référencées dans la suite par données <code>fixtur
 </table>
 </div>
 </div>
-<div id="outline-container-org32cff38" class="outline-3">
-<h3 id="org32cff38"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-orgab957b5" class="outline-3">
+<h3 id="orgab957b5"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Nous allons tout d'abord charger les données <code>fixtures</code> dans notre environnement
@@ -264,8 +264,8 @@ Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe
 </div>
 
 
-<div id="outline-container-orgf05838d" class="outline-2">
-<h2 id="orgf05838d"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div id="outline-container-orga94ce61" class="outline-2">
+<h2 id="orga94ce61"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
@@ -389,8 +389,8 @@ de 0 avec la méthode <code>.reset_index</code> :
 </div>
 </div>
 
-<div id="outline-container-org93dfeff" class="outline-2">
-<h2 id="org93dfeff"><span class="section-number-2">4.</span> Sélection des données</h2>
+<div id="outline-container-org4864a54" class="outline-2">
+<h2 id="org4864a54"><span class="section-number-2">4.</span> Sélection des données</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
@@ -436,7 +436,7 @@ Et une syntaxe implicite équivalente :
 </div></li>
 
 <li>Extraire les matchs au cours desquels l'équipe à domicile a réussi au moins 20 tirs cadrés
-(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;\=</code>.</li>
+(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;=</code>.</li>
 <li><p>
 Il est possible de construire des conditions plus complexes en utilisant les opérateurs booléens
 de <code>Pandas</code> : <code>&amp;</code> (ET logique) <code>|</code> (OU logique) et <code>~</code> (NON logique). Par exemple, nous pouvons obtenir les
@@ -473,8 +473,8 @@ Par exemple, le code suivant récupère les matchs des championnats de France :
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc0bca72" class="outline-2">
-<h2 id="orgc0bca72"><span class="section-number-2">5.</span> Typage des données</h2>
+<div id="outline-container-org7a1fdc7" class="outline-2">
+<h2 id="org7a1fdc7"><span class="section-number-2">5.</span> Typage des données</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -541,8 +541,8 @@ d'une date :
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf5e3252" class="outline-2">
-<h2 id="orgf5e3252"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
+<div id="outline-container-org30089b2" class="outline-2">
+<h2 id="org30089b2"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -615,8 +615,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-org4825971" class="outline-2">
-<h2 id="org4825971"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
+<div id="outline-container-orgc631df5" class="outline-2">
+<h2 id="orgc631df5"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
