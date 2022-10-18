@@ -5,193 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Visualisation des données avec <code>Plotly</code></title>
-<meta name="generator" content="Org mode" />
+<title>Visualisation des données avec =Plotly=</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,52 +16,6 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -266,30 +36,30 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Visualisation des données avec <code>Plotly</code></h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc92ee2a">1. Contexte et objectif</a></li>
-<li><a href="#org18bcc0a">2. Préparation des données</a></li>
-<li><a href="#org6ffaccf">3. Rappels sur les cotes et définition d'un <i>value bet</i></a></li>
-<li><a href="#org983df97">4. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></a></li>
-<li><a href="#org70822cb">5. Restructuration des données de cotes</a></li>
-<li><a href="#org9dcd830">6. Distribution des cotes</a>
+<li><a href="#orgff2001a">1. Contexte et objectif</a></li>
+<li><a href="#sec:odds_df">2. Données de cotes</a>
 <ul>
-<li><a href="#org2fa81cb">6.1. Utilisation d'un <i>boxplot</i></a></li>
-<li><a href="#org336c112">6.2. Utilisation d'un <i>histogramme</i></a></li>
+<li><a href="#orgb169c80">2.1. Présentation des données</a></li>
+<li><a href="#orge0ddcd1">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#org9dd6fc4">7. Évolution des cotes moyennes au cours des saisons</a></li>
-<li><a href="#org779190d">8. Analyse des probabilités estimées par le bookmaker</a></li>
-<li><a href="#orgde27925">9. Analyse préliminaire des <i>value bets</i></a></li>
+<li><a href="#org8d1e77d">3. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</a></li>
+<li><a href="#org001ee81">4. Distribution des cotes</a>
+<ul>
+<li><a href="#org5c1f7e8">4.1. Utilisation d'un <i>boxplot</i></a></li>
+<li><a href="#orgc84e452">4.2. Utilisation d'un histogramme</a></li>
+</ul>
+</li>
+<li><a href="#org2ccfef8">5. Analyse des probabilités estimées par le bookmaker</a></li>
 </ul>
 </div>
 </div>
@@ -299,15 +69,15 @@ for the JavaScript code in this tag.
 
 
 
-<div class="figure">
+<div id="org12874f1" class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png" alt="1920px-Minard.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Carte figurative des pertes successives en hommes de l’Armée française dans la campagne de Russie en 1812-1813. Auteur <a href="https://fr.wikipedia.org/wiki/Charles_Joseph_Minard">Charles Joseph Minard</a>.  <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png">Source</a>.</p>
 </div>
 
 
-<div id="outline-container-orgc92ee2a" class="outline-2">
-<h2 id="orgc92ee2a"><span class="section-number-2">1</span> Contexte et objectif</h2>
+<div id="outline-container-orgff2001a" class="outline-2">
+<h2 id="orgff2001a"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de ce TD est de parcourir les principales fonctionnalités de la librairie <code>Plotly</code> afin
@@ -320,38 +90,14 @@ construire aisément tous les graphiques usuels en y ajoutant des éléments d'i
 </p>
 
 <p>
-Pour ce faire, nous utiliserons de nouveau les données <code>fixtures</code> (matchs) et <code>odds</code> (cotes)
-introduites précédemment : 
-</p>
-<ul class="org-ul">
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_fixtures.csv.bz2">Données <code>fixtures</code></a>.</li>
-<li><a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/data_soccer_odds.csv.bz2">Données <code>odds</code></a>.</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org18bcc0a" class="outline-2">
-<h2 id="org18bcc0a"><span class="section-number-2">2</span> Préparation des données</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-Voici les instructions à suivre pour débuter ce TD :
-</p>
-<ul class="org-ul">
-<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1Dp7cOAC-Y0A2B-d2JaxneJ8w3Tqj0tcY?usp=sharing"><i>notebook</i></a>.</li>
-<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
-<li>Veiller à bien comprendre les étapes de préparation de données réalisées.</li>
-</ul>
-
-<p>
-Note : il n'y a rien de nouveau par rapport aux TD précédents excepté l'utilisation de la commande
-<code>!pip install</code> permettant d'installer une librairie <code>Python</code> dans votre environnement de travail.
+Pour ce faire, nous utiliserons des données sur les cotes de matchs de foot.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6ffaccf" class="outline-2">
-<h2 id="org6ffaccf"><span class="section-number-2">3</span> Rappels sur les cotes et définition d'un <i>value bet</i></h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec:odds_df" class="outline-2">
+<h2 id="sec:odds_df"><span class="section-number-2">2.</span> Données de cotes</h2>
+<div class="outline-text-2" id="text-sec:odds_df">
 <p>
 La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
 toutes deux liées :
@@ -375,326 +121,361 @@ et a pour expression :
   \]
 On a donc la relation \(c_{E} = g_{E} + 1\) permettant de relier les deux notions de cotes.</li>
 </ul>
+</div>
 
+
+<div id="outline-container-orgb169c80" class="outline-3">
+<h3 id="orgb169c80"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
-Il est important de comprendre à ce stade que la cote \(c_{E}\) fournie par un bookmaker pour un
-événement donné (e.g. l'équipe à domicile gagne le match) dépend de son estimation de la probabilité
-\(p_{E}\) de l'événement \(E\) sous-jacent. En effet, tout comme les joueurs, le bookmaker ne connaît évidement
-pas la vraie valeur de \(p_{E}\).  
+Les données de cotes, référencées dans la suite par données <code>odds</code>, contiennent les cotes proposées
+ par le bookmaker B365 pour le paris "inférieur/supérieur à 2.5 buts" pour un historique de matchs
+ de football masculin. Le Tableau  <a href="#org3f630f2">1</a> présente une description succintes des
+ variables présentes. 
 </p>
 
-<p>
-En tant que joueur, il sera donc intéressant de parier sur un événement pour lequel votre analyse
-conduit à une estimation de \(p_{E}\) plus importante que celle du bookmaker. Dans cette situation, on 
-parle de <i>value bet</i> (pari rentable). L'identification des <i>value bets</i> est le critère fondamental
-permettant de prendre la décision de parier ou non sur la réalisation d'un événement.
-</p>
-
-<p>
-Prenons un petit exemple pour illustrer ces différentes notions. Considérons le match :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
+<table id="org3f630f2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>odds</code>.</caption>
 
 <colgroup>
-<col  class="org-right" />
-
 <col  class="org-left" />
 
 <col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
 </colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Colonne</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="org-right">Date</td>
-<td class="org-left">HomeTeam</td>
-<td class="org-left">AwayTeam</td>
-<td class="org-right">B365_1X2_H</td>
-<td class="org-right">B365_1X2_D</td>
-<td class="org-right">B365_1X2_A</td>
+<td class="org-left">league_id</td>
+<td class="org-left">Identifiant du championnat</td>
 </tr>
 
 <tr>
-<td class="org-right">2021-02-10</td>
-<td class="org-left">Ath Madrid</td>
-<td class="org-left">Barcelona</td>
-<td class="org-right">1.90</td>
-<td class="org-right">3.50</td>
-<td class="org-right">4.00</td>
+<td class="org-left">season_id</td>
+<td class="org-left">Identifiant de la saison</td>
+</tr>
+
+<tr>
+<td class="org-left">Date</td>
+<td class="org-left">Date du match au format %Y-%m-%d</td>
+</tr>
+
+<tr>
+<td class="org-left">HomeTeam</td>
+<td class="org-left">Équipe à domicile (ED)</td>
+</tr>
+
+<tr>
+<td class="org-left">AwayTeam</td>
+<td class="org-left">Équipe à l'exterieur (EE)</td>
+</tr>
+
+<tr>
+<td class="org-left">FTG_2.5</td>
+<td class="org-left">Événement : '&lt;2.5' : 2 buts ou moins ont été inscrits dans le match'&gt;2.5' : au moins 3 buts ont été inscrits dans le match</td>
+</tr>
+
+<tr>
+<td class="org-left">odds</td>
+<td class="org-left">Cote de l'événement</td>
 </tr>
 </tbody>
 </table>
-
+</div>
+</div>
+<div id="outline-container-orge0ddcd1" class="outline-3">
+<h3 id="orge0ddcd1"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
-Le bookmaker B365 offre une cote de 1.90 si Ath Madrid remporte le match, de 4.00 si
-c'est Barcelona qui gagne et 3.50 en cas de match nul. Autrement dit, B365 estime les probabilités
-suivantes pour chacune des issues possibles pour la rencontre :
-</p>
-<ul class="org-ul">
-<li>\(1/1.9 \simeq 0.53\) pour la victoire de l'Ath Madrid ;</li>
-<li>\(1/4 = 0.25\) pour la victoire de Barcelona ;</li>
-<li>$1/3.5 &cong; 0.28 pour le match nul.</li>
-</ul>
-
-<p>
-De votre côté, vous avez mis au point une méthode statistique (dans laquelle vous avez toute
-confiance) qui vous donne les estimations de probabilités suivantes :
-</p>
-<ul class="org-ul">
-<li>\(0.39\) pour la victoire de l'Ath Madrid ;</li>
-<li>\(0.21\) pour la victoire de Barcelona ;</li>
-<li>\(0.40\) pour le match nul.</li>
-</ul>
-
-<p>
-Vous notez alors que votre estimation pour la réalisation du match nul est plus importante que celle
-du bookmaker. Parier sur le match nul est donc dans ce cas un <i>value bet</i> de votre point de vue.  
+Nous allons tout d'abord charger les données <code>odds</code> dans notre environnement
+<code>Python</code> en utilisant la librairie <code>Pandas</code>.
+Ces données sont accessibles <i>via</i> les liens suivants :
 </p>
 
-<p>
-Au final, il est important de comprendre que l'identification d'un <i>value bet</i> passe nécessairement par
-une comparaison entre la cote proposée par un bookmaker pour un événement donné et l'estimation de
-la probabilité de réalisation de l'événement issue de divers analyses statistiques.
-</p>
 
 <p>
-<b>Dans la suite de ce TD, nous travaillerons sur les cotes du bookmaker B365.</b>
+<b>Travail à réaliser :</b>
 </p>
+<ol class="org-ol">
+<li>Lire les données depuis le lien 
+<a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/odds.csv.bz2">https://roland-donat.github.io/ubs-lpmds-python/td/data/odds.csv.bz2</a> et stocker les dans un
+<code>DataFrame</code> nommé <code>odds_df</code>.</li>
+<li>Analyser rapidement les données avec les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code>.</li>
+
+<li>Ajuster le type des colonnes.</li>
+<li>Que remarquez-vous sur la structure de ces données ? Chaque ligne est-elle associée à un match
+différent ?</li>
+</ol>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org983df97" class="outline-2">
-<h2 id="org983df97"><span class="section-number-2">4</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes <i>a priori</i></h2>
+
+<div id="outline-container-org8d1e77d" class="outline-2">
+<h2 id="org8d1e77d"><span class="section-number-2">3.</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Importer la librairie <code>plotly.express</code> dans votre environnement.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> plotly.express <span style="color: #F0DFAF; font-weight: bold;">as</span> px
+</pre>
+</div>
+<p>
+Vous trouverez de l'aide ainsi que de nombreuses informations sur le site de <code>plotly.express</code> : <a href="https://plotly.com/python/plotly-express/">https://plotly.com/python/plotly-express/</a>.
+</p></li>
+
+<li><p>
+Afficher un diagramme en barres des cotes moyennes du pari <i>upper-under 2.5</i> avec la fonction
+<code>px.bar</code>.
+</p>
+
+<p>
+Pour ce faire, regroupons les données afin de calculer les cotes moyenne en fonction des
+événements <code>&lt;2.5</code> et <code>&gt;2.5</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">odds_ftg_mean</span> = odds_df.groupby([<span style="color: #CC9393;">"FTG_2.5"</span>])[<span style="color: #CC9393;">"odds"</span>].mean()
+</pre>
+</div>
+<p>
+Ensuite, on appelle la fonction <code>px.bar</code> sur la <code>Series</code> <code>odds_ftg_mean</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">px.bar(odds_ftg_mean)
+</pre>
+</div>
+<p>
+À noter que si une fonction <code>plotly.express</code> est utilisée avec une <code>Series</code>, alors
+<code>plotly.express</code> affichera l'index de la <code>Series</code> en abscisses et les valeurs de la <code>Series</code> en
+ordonnées. 
+</p></li>
+
+<li><p>
+Il est important de documenter vos graphes, à savoir ajouter un titre, des labels sur les axes (en
+précisant les unités si besoin), une légende si besoin, le tout en utilisant des termes lisibles
+pour les humains.
+</p>
+
+<p>
+Les fonctions <code>plotly.express</code> possèdent toutes un argument <code>title</code> pour ajouter un titre et un
+argument <code>labels</code> pour changer les légendes proposées par défaut. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python">px.bar(odds_ftg_mean, title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels={<span style="color: #CC9393;">"value"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>})
+</pre>
+</div>
+
+<p>
+La légende est dans ce cas de trop, pour la supprimer, il faut utiliser le code suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.bar(odds_ftg_mean, title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"value"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>})
+fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
+fig
+</pre>
+</div>
+
+<p>
+La taille des barres est par défaut exagérée quand il y a peu de barres à afficher. Vous pouvez
+la modifier avec la méthode <code>update_traces</code> d'un objet <code>plotly</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.bar(odds_ftg_mean, title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"value"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>})
+fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
+fig.update_traces(width=0.25)
+fig
+</pre>
+</div>
+
+<p>
+Enfin, il est possible d'ajuster la largeur et la hauteur du graphe avec les arguments <code>width</code> et
+<code>height</code> comme suit :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.bar(odds_ftg_mean, title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"value"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div></li>
+
+<li>Calculer la moyenne des cotes pour le pari <i>upper-under 2.5</i> pour chaque championnat. Le résultat
+sera mis sous la forme d'un <code>DataFrame</code> nommé <code>odds_league_id_ftg_mean_df</code> contenant une colonne
+<code>league_id</code>, une colonne <code>FTG_2.5</code> et une colonne <code>odds</code>.</li>
+<li><p>
+On peut alors réaliser un diagramme en bar pour visualiser la moyenne des cotes pour le pari <i>upper-under 2.5</i>
+pour chaque championnat :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.bar(odds_league_id_ftg_mean_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5 par championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div>
+<p>
+Points notables :
+</p>
+<ul class="org-ul">
+<li>Quand on utilise un <code>DataFrame</code> comme premier argument d'une fonction <code>plotly.express</code>, il faut
+préciser les colonnes à utiliser dans la construction du graphe.</li>
+<li>Dans cet exemple, on utilise la colonne <code>FTG_2.5</code> en abscisses ; la colonne <code>odds</code> en ordonnées
+; la colonne <code>league_id</code> pour la coloration.</li>
+</ul></li>
+
+<li>Modifier dans le graphique précédent le titre de la légende "league_id" en "Championnat".</li>
+<li>Utiliser l'argument <code>barmode</code> afin d'afficher une barre par championnat (mode <code>"group"</code>) au lieu
+de la représentation empilée (mode <code>"stack"</code>) précédente.</li>
+<li>Reprendre le graphique précédent en affichant à présent le championnat en abscisses avec une
+coloration sur la colonne du nombre de buts.</li>
+<li>Comparer les deux visualisations précédentes en termes d'informations apportées.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org001ee81" class="outline-2">
+<h2 id="org001ee81"><span class="section-number-2">4.</span> Distribution des cotes</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li>Calculer la moyenne des cotes proposées par le bookmaker B365.</li>
-<li>Afficher un diagramme en barres des cotes moyennes pour les résultats <code>H</code>, <code>D</code>, <code>A</code>. <span class="underline">Aide :</span>
-Utiliser la fonction <code>px.bar</code>.</li>
-<li>Ajouter un titre et un label à chaque axe.</li>
-<li>Transformer les colonnes <code>B365_1X2_[A, D, H]</code> en colonnes <code>[A, D, H]</code> pour améliorer la
-lisibilité et éviter des redondances d'informations.</li>
-<li>Mettre à jour le diagramme en bar.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org70822cb" class="outline-2">
-<h2 id="org70822cb"><span class="section-number-2">5</span> Restructuration des données de cotes</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-Afin de mettre en cohérence la structure des données <code>odds</code> avec celle des données <code>odds</code>, nous
-proposons de transformer les colonnes <code>A</code>, <code>D</code>, <code>H</code> sous la forme d'une colonne <code>FTR</code> et d'une
-colonne <code>cote</code> donnant respectivement, pour chaque match, une issue possible de la rencontre et la
-cote associée.
-</p>
-
-<p>
-Par exemple la ligne : 					
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-right">Date</td>
-<td class="org-left">league_id</td>
-<td class="org-right">season_id</td>
-<td class="org-left">HomeTeam</td>
-<td class="org-left">AwayTeam</td>
-<td class="org-right">A</td>
-<td class="org-right">D</td>
-<td class="org-right">H</td>
-</tr>
-
-<tr>
-<td class="org-right">2005-08-13</td>
-<td class="org-left">eng_pl</td>
-<td class="org-right">2005-2006</td>
-<td class="org-left">Aston Villa</td>
-<td class="org-left">Bolton</td>
-<td class="org-right">3.00</td>
-<td class="org-right">3.25</td>
-<td class="org-right">2.30</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-devient :
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-right">Date</td>
-<td class="org-left">league_id</td>
-<td class="org-right">season_id</td>
-<td class="org-left">HomeTeam</td>
-<td class="org-left">AwayTeam</td>
-<td class="org-left">FTR</td>
-<td class="org-right">cote</td>
-</tr>
-
-<tr>
-<td class="org-right">2005-08-13</td>
-<td class="org-left">eng_pl</td>
-<td class="org-right">2005-2006</td>
-<td class="org-left">Aston Villa</td>
-<td class="org-left">Bolton</td>
-<td class="org-left">A</td>
-<td class="org-right">3.00</td>
-</tr>
-
-<tr>
-<td class="org-right">2005-08-13</td>
-<td class="org-left">eng_pl</td>
-<td class="org-right">2005-2006</td>
-<td class="org-left">Aston Villa</td>
-<td class="org-left">Bolton</td>
-<td class="org-left">D</td>
-<td class="org-right">3.25</td>
-</tr>
-
-<tr>
-<td class="org-right">2005-08-13</td>
-<td class="org-left">eng_pl</td>
-<td class="org-right">2005-2006</td>
-<td class="org-left">Aston Villa</td>
-<td class="org-left">Bolton</td>
-<td class="org-left">H</td>
-<td class="org-right">2.30</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li>Mettre toutes les colonnes exceptées <code>H</code>, <code>D</code>, <code>A</code> en index. <span class="underline">Aide :</span> Utiliser méthode <code>.set_index</code>.</li>
-<li>Ajouter le label <code>FTR</code> au groupe de colonnes <code>H</code>, <code>D</code>, <code>A</code>. <span class="underline">Aide :</span> Changer la valeur de
-l'attribut <code>.columns.name</code>.</li>
-<li>Conversion du groupe de colonnes <code>H</code>, <code>D</code>, <code>A</code> en une colonne <code>FTR</code>. 
-<span class="underline">Aide :</span> Utiliser la méthode <code>.stack</code>.
-Vérifier le type du résultat renvoyé par la méthode <code>.stack</code>.</li>
-<li>Changer le nom de la <code>Series</code> obtenue. <span class="underline">Aide :</span> Utiliser la méthode <code>.rename</code>.</li>
-<li>Convertir la <code>Series</code> en un <code>DataFrame</code> que l'on nommera <code>data_odds_365_ev_df</code> dans la suite. <span class="underline">Aide :</span> Utiliser la méthode <code>.reset_index</code>.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org9dcd830" class="outline-2">
-<h2 id="org9dcd830"><span class="section-number-2">6</span> Distribution des cotes</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Pour représenter une distribution on utilise usuellement les boites à moustaches (boxplot) et les
+Pour représenter une distribution, on utilise usuellement les boites à moustaches (boxplot) et les
 histogrammes.
 </p>
 </div>
 
-<div id="outline-container-org2fa81cb" class="outline-3">
-<h3 id="org2fa81cb"><span class="section-number-3">6.1</span> Utilisation d'un <i>boxplot</i></h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-org5c1f7e8" class="outline-3">
+<h3 id="org5c1f7e8"><span class="section-number-3">4.1.</span> Utilisation d'un <i>boxplot</i></h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
-<li>Construire un <i>boxplot</i> afin de visualiser la distribution des cotes pour chaque issue possible des recontres. <span class="underline">Aide :</span>
-Utiliser la fonction <code>px.box</code>.</li>
-<li>Explorer les fonctionnalités de visualisation interactive sur le graphique produit.</li>
-<li>Mettre à jour le <i>boxplot</i> précédent afin de visualiser les distributions de cotes par issue et
-par championnat (couleurs différentes).</li>
-</ul>
-</div>
-</div>
+<ol class="org-ol">
+<li><p>
+Construire un <i>boxplot</i>, en utilisant la fonction <code>px.box</code>, afin de visualiser la distribution des
+cotes pour chacune des deux issues possibles du pari <i>upper-under 2.5</i>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div></li>
 
-<div id="outline-container-org336c112" class="outline-3">
-<h3 id="org336c112"><span class="section-number-3">6.2</span> Utilisation d'un <i>histogramme</i></h3>
-<div class="outline-text-3" id="text-6-2">
+<li><p>
+Afin d'analyser les valeurs extrêmes, il peut être utile d'ajouter plus d'informations dans la
+<i>tooltip</i> qui s'affiche en survolant un point du graphique. Les fonctions <code>plotly.express</code>
+possèdent en général l'argument <code>hover_data</code> permettant d'enrichir les <i>tooltips</i>. Par exemple,
+pour afficher toutes les informations disponibles sur la rencontre, il faut écrire : 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>hover_data=<span style="color: #DCDCCC; font-weight: bold;">list</span>(odds_df.columns),
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div></li>
+
+<li>Dans les <i>tooltips</i> du graphique précédent, changer le nom des colonnes en termes du langage
+naturel, par exemple : <code>"league_id"</code> en <code>"Championnat"</code>, <code>"season_id"</code> en <code>"Saison"</code>, etc.</li>
+<li>Construire un <code>boxplot</code> représentant l'évolution de la distribution des cotes de chacun des deux
+événements en fonction des saisons (en abscisses).</li>
+<li>Mettre à jour le graphique précédent pour que l'axe des abscisses soit ordonné par saison
+croissante. Aide : utiliser l'argument <a href="https://plotly.com/python/categorical-axes/"><code>category_orders</code></a>.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc84e452" class="outline-3">
+<h3 id="orgc84e452"><span class="section-number-3">4.2.</span> Utilisation d'un histogramme</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
-<li>Représenter les distributions de la section précédente à l'aide d'un histogramme. <span class="underline">Aide :</span>
-Utiliser la fonction <code>px.histogram</code>.</li>
-</ul>
-</div>
-</div>
-</div>
+<ol class="org-ol">
+<li><p>
+La fonction <code>px.histogram</code> permet de construire des histogrammes. Nous pouvons donc représenter la
+distribution des cotes pour chacun des deux événements avec le code suivant :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig_labels</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"Cote"</span>,
+}
 
-<div id="outline-container-org9dd6fc4" class="outline-2">
-<h2 id="org9dd6fc4"><span class="section-number-2">7</span> Évolution des cotes moyennes au cours des saisons</h2>
-<div class="outline-text-2" id="text-7">
+px.histogram(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels=fig_labels)
+</pre>
+</div>
 <p>
-Une carte de chaleur (<i>heatmap</i>) est un type de graphique permettant de réaliser une analyse bivariée sur un
-indicateur moyen (ici les cotes). 
+Utiliser une coloration pour afficher deux histogrammes sur le même graphique aboutit la plupart
+du temps à un résultat peu lisible. Il est donc préférable de séparer les graphiques. Pour ce
+faire, les fonctions graphiques de <code>plotly.express</code> disposent des arguments <code>facet_col</code> et
+<code>facet_row</code> permettant de créer des sous-graphiques (en colonnes et en lignes) en fonction d'une
+d'une variable catégorielle présente dans les données. Par exemple, pour créer deux sous
+graphiques en fonction des deux événements <code>&lt;2.5</code> et <code>&gt;2.5</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fig</span> = px.histogram(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  facet_row=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=fig_labels)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">La l&#233;gende devient superflue </span>
+fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
+fig
+</pre>
+</div></li>
+<li>Créer les histogrammes de cotes pour chacun des deux événements et en fonction du championnat
+avec un seul appel à la fonction <code>px.histogram</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org2ccfef8" class="outline-2">
+<h2 id="org2ccfef8"><span class="section-number-2">5.</span> Analyse des probabilités estimées par le bookmaker</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+La Section <a href="#sec:odds_df">2</a> explique comment passer de la cote proposée par un bookmaker pour un
+événement donné à son estimation de la probabilité d'occurrence dudit événement.
 </p>
 
 <p>
-<b>Travail à réaliser :</b>
-</p>
-<ul class="org-ul">
-<li>Calculer la cote moyenne pour chaque issue possible et chaque saison. <span class="underline">Aide :</span> Utiliser la
-méthode <code>.groupby</code>.</li>
-<li>Construire une <i>heatmap</i> afin de visualiser l'évolution des cotes moyennes pour chaque issue
-possible au fil des saisons. <span class="underline">Aide :</span> Utiliser la fonction <code>px.imshow</code>.</li>
-</ul>
-</div>
-</div>
-
-
-<div id="outline-container-org779190d" class="outline-2">
-<h2 id="org779190d"><span class="section-number-2">8</span> Analyse des probabilités estimées par le bookmaker</h2>
-<div class="outline-text-2" id="text-8">
-<p>
-La section de rappel sur les cotes explique comment passer d'une cote proposée par un bookmaker à
-l'estimation de la probabilité d'occurrence de l'événement sous-jacent correspondant.
-</p>
-
-<p>
-Travailler sur les probabilités estimées par le bookmaker est plus intuitif car plus facile à
+Travailler sur les probabilités estimées par le bookmaker est plus intuitif, car plus facile à
 comparer avec nos propres calculs de probabilités. Par ailleurs, une probabilité est nécessairement
 encadrée entre 0 et 1 tandis qu'une cote n'est théoriquement pas bornée à droite entraînant des
 problèmes d'échelles liés aux valeurs extrêmes.
@@ -704,46 +485,21 @@ problèmes d'échelles liés aux valeurs extrêmes.
 <p>
 <b>Travail à réaliser :</b>
 </p>
-<ul class="org-ul">
-<li>Ajouter une colonne <code>prob</code> au DataFrame <code>data_odds_365_ev_df</code> contenant la probabilité estimée de
-chaque résultat par le bookmaker. <span class="underline">Aide :</span> Utiliser l'opérateur puissance <code>**</code>.</li>
+<ol class="org-ol">
+<li>Ajouter une colonne <code>prob</code> au DataFrame <code>odds_df</code> contenant la probabilité estimée de
+chacun des deux événements <code>&lt;2.5</code> et <code>&gt;2.5</code> par le bookmaker.</li>
 <li>Représenter graphiquement la distribution des probabilités estimées calculées précédemment pour
-chaque issue et chaque championnat.</li>
-<li>Améliorer la <i>tooltip</i> lors d'un survol d'une valeur extrême de manière à afficher la date et les équipes
-impliquées dans le match associé.</li>
-<li>Représenter, sous forme de courbe, l'évolution des probabilités estimées de chaque issue possible
-au cours des saisons, et ce, pour chaque championnat. Il est demandé de faire un graphique par
-issue possible en utilisant uniquement une commande <code>plotly.express</code>.  <span class="underline">Aide :</span> Utiliser la
-fonction <code>px.line</code> et son attribut <code>facet_col</code>.</li>
-</ul>
-</div>
-</div>
+chaque événement, chaque saison et chaque championnat.</li>
+<li>Calculer pour chaque match la somme des probabilités estimées par le bookmaker des deux événements
+<code>&lt;2.5</code> et <code>&gt;2.5</code> <b>moins un</b>. Le résultat sera stocké dans un nouveau <code>DataFrame</code> nommé
+<code>marge_ftg_df</code> et la colonne contenant la somme moins un sera nommée <code>marge</code>.</li>
+<li>Que représente les valeurs de la colonne <code>marge</code> à votre avis ?</li>
 
-
-<div id="outline-container-orgde27925" class="outline-2">
-<h2 id="orgde27925"><span class="section-number-2">9</span> Analyse préliminaire des <i>value bets</i></h2>
-<div class="outline-text-2" id="text-9">
-<p>
-L'objectif est à présent de comparer les probabilités estimées par le bookmaker avec des
-statistiques <i>a priori</i> sur le résultat des matchs afin d'identifier des situations potentielles de
-<i>value bets</i>.
-</p>
-
-<p>
-<b>Travail à réaliser :</b>
-</p>
-<ul class="org-ul">
-<li>Estimer, pour chaque championnat et chaque saison, la probabilité <i>a priori</i> d'observer une
-victoire à domicile, à l'extérieur et un match nul (i.e. calcul de la proportion de <code>H</code>, <code>D</code>,
-<code>A</code>).</li>
-<li>Calculer un indicateur de <i>value bet</i> en faisant la différence entre les probabilités <i>a priori</i>
-estimées précédemment et les probabilités estimées par le bookmaker.</li>
-<li>Explorer graphiquement les résultats précédent. Que peut-on en déduire en termes de stratégie
-de pari contre ce bookmaker ?</li>
-<li>Calculer le résultat financier associé à la stratégie consistant à parier 1 unité uniquement sur les
-situations où l'indicateur de <i>value bet</i> précédent est positif. Quelle critique fondamentale
-peut-on formuler sur cette stratégie ?</li>
-</ul>
+<li>Représenter avec la fonction <code>px.scatter</code>, le nuage de points des matchs caractérisés par leur
+marge et la probabilité estimée de l'événement <code>"&lt;2.5"</code>, et ce, en créant un
+sous-graphique par championnat et par saison. On ne s'intéressera qu'aux données des saisons
+2019-2020 et 2020-2021.</li>
+</ol>
 </div>
 </div>
 </div>
