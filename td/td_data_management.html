@@ -24,18 +24,18 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org431ee27">1. Contexte et objectif</a></li>
-<li><a href="#org0c4d6d1">2. Données historiques</a>
+<li><a href="#org5087229">1. Contexte et objectif</a></li>
+<li><a href="#org8b7246c">2. Données historiques</a>
 <ul>
-<li><a href="#org601f6de">2.1. Présentation des données</a></li>
-<li><a href="#org9955555">2.2. Chargement des données</a></li>
+<li><a href="#orgb39cdd7">2.1. Présentation des données</a></li>
+<li><a href="#org78cd2b8">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#org2394b32">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
-<li><a href="#org0cf5335">4. Sélection des données</a></li>
-<li><a href="#org5a69735">5. Typage des données</a></li>
-<li><a href="#org5312cba">6. Traitement des données manquantes</a></li>
-<li><a href="#org3a6b0ff">7. Premières analyses descriptives</a></li>
+<li><a href="#orgcb28b45">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
+<li><a href="#org635c158">4. Sélection des données</a></li>
+<li><a href="#org1bd21cb">5. Typage des données</a></li>
+<li><a href="#org76d29c7">6. Traitement des données manquantes</a></li>
+<li><a href="#org91f475f">7. Premières analyses descriptives</a></li>
 </ul>
 </div>
 </div>
@@ -45,14 +45,14 @@
 
 
 
-<div id="org9118b7c" class="figure">
+<div id="orgfd290ec" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org431ee27" class="outline-2">
-<h2 id="org431ee27"><span class="section-number-2">1.</span> Contexte et objectif</h2>
+<div id="outline-container-org5087229" class="outline-2">
+<h2 id="org5087229"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Lorient de vaincre Paris en Ligue 1 compte tenu des joueurs prévus
@@ -93,20 +93,20 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-org0c4d6d1" class="outline-2">
-<h2 id="org0c4d6d1"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-org8b7246c" class="outline-2">
+<h2 id="org8b7246c"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org601f6de" class="outline-3">
-<h3 id="org601f6de"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-orgb39cdd7" class="outline-3">
+<h3 id="orgb39cdd7"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données historiques, référencées dans la suite par données <code>fixtures</code>, contiennent un historique
- de matchs sur différents championnats. Le Tableau <a href="#org8fa1ae3">1</a> présente
+ de matchs sur différents championnats. Le Tableau <a href="#orge8e99c4">1</a> présente
  une description succintes des variables présentes.
 </p>
 
-<table id="org8fa1ae3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orge8e99c4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -199,8 +199,8 @@ Les données historiques, référencées dans la suite par données <code>fixtur
 </table>
 </div>
 </div>
-<div id="outline-container-org9955555" class="outline-3">
-<h3 id="org9955555"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org78cd2b8" class="outline-3">
+<h3 id="org78cd2b8"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Nous allons tout d'abord charger les données <code>fixtures</code> dans notre environnement
@@ -264,8 +264,8 @@ Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe
 </div>
 
 
-<div id="outline-container-org2394b32" class="outline-2">
-<h2 id="org2394b32"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div id="outline-container-orgcb28b45" class="outline-2">
+<h2 id="orgcb28b45"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
@@ -351,11 +351,48 @@ dans l'attribut <code>.loc</code> :
 </pre>
 </div></li>
 
-<li>Sélectionner les 50 premiers matchs en prenant les colonnes du championnat, de la saison, de la
-date, des équipes et du score final.</li>
-<li>Quel est le type des objets suivants <code>fixtures_df.loc[:, "league_id"]</code> et
-<code>fixtures_df.loc[3]</code> ?</li>
-<li>Quelles sont les principales caractéristiques d'un objet de type <code>Series</code> ?</li>
+<li><p>
+Sélectionner les 50 premiers matchs en prenant les colonnes du championnat, de la saison, de la
+date, des équipes et du score final.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+fixtures_df.loc[:50, [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]]
+</pre>
+</div></li>
+
+<li><p>
+Quel est le type des objets suivants <code>fixtures_df.loc[:, "league_id"]</code> et
+<code>fixtures_df.loc[3]</code> ?
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df.loc[:, <span style="color: #CC9393;">"league_id"</span>])
+<span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df.loc[3])
+</pre>
+</div></li>
+
+<li><p>
+Quelles sont les principales caractéristiques d'un objet de type <code>Series</code> ?
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">game_s</span> = fixtures_df.loc[3, :]
+game_s
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- Les Series ont un attribut .index permettant d'identifier</span>
+<span style="color: #5F7F5F;">#   </span><span style="color: #7F9F7F;">chacune des valeurs de la Series. En revanche, contrairement aux DataFrame,</span>
+<span style="color: #5F7F5F;">#   </span><span style="color: #7F9F7F;">les Series n'ont pas d'attribut .columns.</span>
+game_s.index
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- Les Series ont optionnellement un nom accessible avec l'attribut .name</span>
+game_s.name
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- On acc&#232;de aux valeurs d'une Series avec l'attribut .loc mais avec une seule dimension</span>
+game_s.loc[[<span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"FTHG"</span>]]
+</pre>
+</div></li>
+
 <li><p>
 Il est possible de changer l'index d'un <code>DataFrame</code> avec la méthode <code>set_index</code>. Par exemple, on
 peut créer un nouveau <code>DataFrame</code> dans lequel les colonnes <code>"HomeTeam"</code> et <code>"AwayTeam"</code> sont
@@ -375,8 +412,19 @@ identifiées par la valeur d'une équipe à domicile et une équipe à l'extéri
 </pre>
 </div></li>
 
-<li>Créer un nouveau <code>DataFrame</code>, nommé <code>fixtures_3_df</code>, indexé par les colonnes <code>["league_id", "season_id", "Date",
-   "HomeTeam", "AwayTeam"]</code>. Quelle est la particularité de cette indexation ?</li>
+<li><p>
+Créer un nouveau <code>DataFrame</code>, nommé <code>fixtures_3_df</code>, indexé par les colonnes <code>["league_id", "season_id", "Date",
+   "HomeTeam", "AwayTeam"]</code>. Quelle est la particularité de cette indexation ?
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fixtures_3_df</span> = fixtures_df.set_index([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>])
+fixtures_3_df
+</pre>
+</div></li>
+
 <li><p>
 Vous pouvez revenir à l'indexation par défaut, c'est à dire une numérotation des lignes à partir
 de 0 avec la méthode <code>.reset_index</code> :
@@ -389,8 +437,8 @@ de 0 avec la méthode <code>.reset_index</code> :
 </div>
 </div>
 
-<div id="outline-container-org0cf5335" class="outline-2">
-<h2 id="org0cf5335"><span class="section-number-2">4.</span> Sélection des données</h2>
+<div id="outline-container-org635c158" class="outline-2">
+<h2 id="org635c158"><span class="section-number-2">4.</span> Sélection des données</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
@@ -435,8 +483,18 @@ fixtures_lorient_bis_df
 </pre>
 </div></li>
 
-<li>Extraire les matchs au cours desquels l'équipe à domicile a réussi au moins 20 tirs cadrés
-(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;=</code>.</li>
+<li><p>
+Extraire les matchs au cours desquels l'équipe à domicile a réussi au moins 20 tirs cadrés
+(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;=</code>. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt;= 20
+fixtures_df.loc[condition]
+</pre>
+</div></li>
+
 <li><p>
 Il est possible de construire des conditions plus complexes en utilisant les opérateurs booléens
 de <code>Pandas</code> : <code>&amp;</code> (ET logique) <code>|</code> (OU logique) et <code>~</code> (NON logique). Par exemple, nous pouvons obtenir les
@@ -449,10 +507,38 @@ fixtures_df.loc[condition_mi_temps &amp; condition_fin]
 </pre>
 </div></li>
 
-<li>Extraire les matchs perdus à domicile par les joueurs de Lorient alors qu'ils ont réussi
-strictement plus de tirs cadrés que leur adversaire.</li>
-<li>Extraire à présent <b>tous les matchs</b> perdus par les joueurs de Lorient alors qu'ils ont réussi
-strictement plus de tirs cadrés que leur adversaire.</li>
+<li><p>
+Extraire les matchs perdus à domicile par les joueurs de Lorient alors qu'ils ont réussi
+strictement plus de tirs cadrés que leur adversaire.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">condition_lorient_dom</span> = fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
+<span style="color: #DFAF8F;">condition_tir_dom</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"AST"</span>]
+fixtures_df.loc[condition_lorient_dom &amp; condition_tir_dom]
+</pre>
+</div></li>
+
+<li><p>
+Extraire à présent <b>tous les matchs</b> perdus par les joueurs de Lorient alors qu'ils ont réussi
+strictement plus de tirs cadrés que leur adversaire.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">condition_lorient_dom</span> = fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
+<span style="color: #DFAF8F;">condition_tir_dom</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"AST"</span>]
+<span style="color: #DFAF8F;">condition_dom</span> = condition_lorient_dom &amp; condition_tir_dom
+
+<span style="color: #DFAF8F;">condition_lorient_ext</span> = fixtures_df[<span style="color: #CC9393;">"AwayTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
+<span style="color: #DFAF8F;">condition_tir_ext</span> = fixtures_df[<span style="color: #CC9393;">"AST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"HST"</span>]
+<span style="color: #DFAF8F;">condition_ext</span> = condition_lorient_ext &amp; condition_tir_ext
+
+fixtures_df.loc[condition_dom | condition_ext]
+</pre>
+</div></li>
+
 <li><p>
 Pour éviter d'enchaîner les opérateurs OU quand il s'agit d'un filtrage sur les valeurs d'une
 même colonne, il est commode d'utiliser la méthode pour les <code>Series</code> nommée <code>.isin</code> qui va tester
@@ -469,12 +555,23 @@ fixtures_df.loc[condition]
 </pre>
 </div></li>
 
-<li>Extraire les matchs qui ne concernent pas un championnat français.</li>
+<li><p>
+Extraire les matchs qui ne concernent pas un championnat français.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">condition_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].isin([<span style="color: #CC9393;">"fra_l2"</span>, <span style="color: #CC9393;">"fra_l1"</span>])
+fixtures_df.loc[~condition_fra]
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org5a69735" class="outline-2">
-<h2 id="org5a69735"><span class="section-number-2">5.</span> Typage des données</h2>
+
+
+<div id="outline-container-org1bd21cb" class="outline-2">
+<h2 id="org1bd21cb"><span class="section-number-2">5.</span> Typage des données</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -507,7 +604,18 @@ fixtures_df[<span style="color: #CC9393;">"league_id"</span>].cat.categories
 </pre>
 </div></li>
 
-<li>Transformer les autres variables qualitatives en <code>category</code>.</li>
+<li><p>
+Transformer les autres variables qualitatives en <code>category</code>.    
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"HTR"</span>, <span style="color: #CC9393;">"FTR"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+</pre>
+</div></li>
+
 <li><p>
 Lorsque les modalités sont des labels textuels, les colonnes de type <code>category</code> ont également
 accès à l'attribut <code>.str</code> permettant de manipuler les chaînes de caractères. Cet attribut est
@@ -522,10 +630,28 @@ fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color
 </pre>
 </div></li>
 
-<li>Utiliser la méthode <code>.str.startswith</code> afin d'identifier les matchs des championnats français (à
-savoir <code>fra_l1</code> ou <code>fra_l2</code>) et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_df</code>.</li>
+<li><p>
+Utiliser la méthode <code>.str.startswith</code> afin d'identifier les matchs des championnats français (à
+savoir <code>fra_l1</code> ou <code>fra_l2</code>) et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_df</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">idx_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.startswith(<span style="color: #CC9393;">"fra"</span>)
+<span style="color: #DFAF8F;">fixtures_fra_df</span> = fixtures_df.loc[idx_fra]
+</pre>
+</div></li>
+
 <li><p>
 Convertir la colonne <code>Date</code> avec le type <code>"datetime64"</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64"</span>)
+</pre>
+</div>
+<p>
 Les colonnes de type <code>datetime64</code> possèdent un attribut <code>dt</code> apportant des fonctionnalités
 permettant de manipuler les dates. Vous pouvez, entre autres, extraire le jour, le mois ou l'année
 d'une date :
@@ -537,12 +663,23 @@ fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.year
 </pre>
 </div></li>
 
-<li>Identifier les matchs des championnats français ayant eu lieu en 2010 et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_2010_df</code>.</li>
+<li><p>
+Identifier les matchs des championnats français ayant eu lieu en 2010 et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_2010_df</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">idx_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.startswith(<span style="color: #CC9393;">"fra"</span>)
+<span style="color: #DFAF8F;">idx_2010</span> = fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.year == 2010
+<span style="color: #DFAF8F;">fixtures_fra_2010_df</span> = fixtures_df.loc[idx_fra &amp; idx_2010]
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org5312cba" class="outline-2">
-<h2 id="org5312cba"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
+
+<div id="outline-container-org76d29c7" class="outline-2">
+<h2 id="org76d29c7"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -591,9 +728,18 @@ considérée est faite sur les lignes (<code>index</code>) et <code>axis=1</code
 la valeur <code>True</code> par 1 et la valeur <code>False</code> par 0.
 </p></li>
 
-<li>Calculer à présent la proportion de données manquantes pour chaque colonne des données
-<code>fixtures_df</code> en utilisant la méthode <code>.mean</code>.</li>
+<li><p>
+Calculer à présent la proportion de données manquantes pour chaque colonne des données
+<code>fixtures_df</code> en utilisant la méthode <code>.mean</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+idx_na_df.mean(axis=0)
+</pre>
+</div></li>
 </ol>
+
 <p>
 <b>Notes :</b> 
 Le traitement des données manquantes est toujours un sujet délicat pour lequel il n'y a pas de
@@ -615,8 +761,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-org3a6b0ff" class="outline-2">
-<h2 id="org3a6b0ff"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
+<div id="outline-container-org91f475f" class="outline-2">
+<h2 id="org91f475f"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
@@ -660,14 +806,52 @@ groupes (ici <code>["league_id"]</code>) ;</li>
 souhaite traiter (ici <code>"FTHG"</code> et <code>"FTAG"</code>) et l'opération à réaliser (ici <code>mean</code>).</li>
 </ul></li>
 
-<li>Calculer le nombre moyen de buts marqués à la fin d'un match par l'équipe à domicile et l'équipe
-à l'extérieur pour chacun des championnats et chacune des saisons.</li>
-<li>Ajouter au <code>DataFrame</code> <code>fixtures_df</code> une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
-pendant chaque rencontre :</li>
-<li>Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits.
-<b>Aide</b> : Utiliser la méthode <code>.max</code>.</li>
-<li>Trier les rencontres en fonction du nombre de buts inscrits. <b>Aide</b> : Utiliser la méthode
-<code>.sort_values</code>.</li>
+<li><p>
+Calculer le nombre moyen de buts marqués à la fin d'un match par l'équipe à domicile et l'équipe
+à l'extérieur pour chacun des championnats et chacune des saisons.  
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>].mean()
+</pre>
+</div></li>
+
+<li><p>
+Ajouter au <code>DataFrame</code> <code>fixtures_df</code> une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
+pendant chaque rencontre :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"FTG"</span>] = fixtures_df[[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]].<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=1)
+</pre>
+</div></li>
+
+<li><p>
+Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits.
+<b>Aide</b> : Utiliser la méthode <code>.max</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">max_ftg</span> = fixtures_df[<span style="color: #CC9393;">"FTG"</span>].<span style="color: #DCDCCC; font-weight: bold;">max</span>()
+<span style="color: #DFAF8F;">idx_max</span> = fixtures_df[<span style="color: #CC9393;">"FTG"</span>] == max_ftg
+fixtures_df.loc[idx_max]
+</pre>
+</div></li>
+
+<li><p>
+Trier les rencontres en fonction du nombre de buts inscrits. <b>Aide</b> : Utiliser la méthode
+<code>.sort_values</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+fixtures_df.sort_values(by=<span style="color: #CC9393;">"FTG"</span>)
+</pre>
+</div></li>
+
 <li><p>
 Calculer la proportion des différents résultats d'un match (<code>H</code>, <code>A</code>, <code>D</code>) pour :
 </p>
@@ -679,7 +863,22 @@ Calculer la proportion des différents résultats d'un match (<code>H</code>, <c
 </ul>
 <p>
 <span class="underline">Aide</span> : Utiliser la méthode <code>.value_counts</code> pour le calcul des proportions (regardez l'aide)
-</p></li>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats sur tous les matchs</span>
+fixtures_df[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque championnat</span>
+fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque saison</span>
+fixtures_df.groupby([<span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque championnat et chaque saison</span>
+fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
+</pre>
+</div></li>
+
 <li><p>
 Les résultats d'un <code>groupby</code> sont indexés sur les combinaisons de modalités
 prises par les variables de regroupement. Par conséquent, quand il y a plus d'une variable dans
@@ -696,10 +895,33 @@ transférant la variable comptée de l'index en colonne. Pour ce faire, il faut 
 </pre>
 </div></li>
 
-<li>Déterminer le championnat où il y a le plus de tirs cadrés en moyenne. <b>Aide</b> : Utiliser la
-méthode <code>.idxmax</code>.</li>
-<li>Déterminer le championnat et la saison où il y a la proportion de victoire à domicile la plus
-faible. <b>Aide</b> : Utiliser la méthode <code>.idxmin</code>.</li>
+<li><p>
+Déterminer le championnat où il y a le plus de tirs cadrés en moyenne. <b>Aide</b> : Utiliser la
+méthode <code>.idxmax</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcul de la somme des tirs cadr&#233;s par match</span>
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"ST"</span>] = fixtures_df[[<span style="color: #CC9393;">"HST"</span>, <span style="color: #CC9393;">"AST"</span>]].<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=1)
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcul du championnat avec le plus de tirs cadr&#233;s moyen</span>
+fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])[<span style="color: #CC9393;">"ST"</span>].mean().idxmax()
+</pre>
+</div></li>
+
+<li><p>
+Déterminer le championnat et la saison où il y a la proportion de victoire à domicile la plus
+faible. <b>Aide</b> : Utiliser la méthode <code>.idxmin</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">ftr_prop_df</span> = fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>.value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>.unstack()
+ftr_prop_df.loc[:, <span style="color: #CC9393;">"H"</span>].idxmin()
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
