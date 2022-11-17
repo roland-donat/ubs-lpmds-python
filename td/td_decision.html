@@ -24,18 +24,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org681ddc3">1. Contexte</a></li>
-<li><a href="#orgfa3a61b">2. Données historiques</a>
+<li><a href="#orgecb3846">1. Contexte</a></li>
+<li><a href="#orgddeb8d7">2. Données historiques</a>
 <ul>
-<li><a href="#orgf0c480f">2.1. Présentation des données</a></li>
-<li><a href="#org63a64e8">2.2. Chargement des données</a></li>
+<li><a href="#orgd9a27b6">2.1. Présentation des données</a></li>
+<li><a href="#org642783a">2.2. Chargement des données</a></li>
+<li><a href="#orgfdb2901">2.3. Vérification des données glissantes</a></li>
 </ul>
 </li>
-<li><a href="#org0a8b6a5">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
-<li><a href="#org1adc760">4. Sélection des données</a></li>
-<li><a href="#org3ec7123">5. Typage des données</a></li>
-<li><a href="#org850dbbd">6. Traitement des données manquantes</a></li>
-<li><a href="#org056b5cc">7. Premières analyses descriptives</a></li>
+<li><a href="#orgbc43af7">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
+<li><a href="#orgf54366d">4. Sélection des données</a></li>
+<li><a href="#orgc7581d0">5. Typage des données</a></li>
+<li><a href="#org1206848">6. Traitement des données manquantes</a></li>
+<li><a href="#org24edb44">7. Premières analyses descriptives</a></li>
 </ul>
 </div>
 </div>
@@ -45,14 +46,14 @@
 
 
 
-<div id="org7969c2d" class="figure">
+<div id="org4be6f24" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org681ddc3" class="outline-2">
-<h2 id="org681ddc3"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-orgecb3846" class="outline-2">
+<h2 id="orgecb3846"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans les TD précédents, nous avons pris connaissance de la librairie <code>Pandas</code> en explorant certaines
@@ -86,20 +87,20 @@ Les objectifs de ce TD sont :
 </div>
 </div>
 
-<div id="outline-container-orgfa3a61b" class="outline-2">
-<h2 id="orgfa3a61b"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-orgddeb8d7" class="outline-2">
+<h2 id="orgddeb8d7"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgf0c480f" class="outline-3">
-<h3 id="orgf0c480f"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-orgd9a27b6" class="outline-3">
+<h3 id="orgd9a27b6"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Les données historiques, référencées dans la suite par données <code>fixtures</code>, contiennent un historique
- de matchs sur différents championnats. Le Tableau <a href="#org91fca86">1</a> présente
- une description succintes des variables présentes.
+Comme dans les TD précédents, les données historiques, référencées dans la suite par données
+ <code>fixtures</code>, contiennent un historique de matchs sur différents championnats. Le Tableau
+ <a href="#org9933007">1</a> présente  une description succintes des variables présentes.
 </p>
 
-<table id="org91fca86" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org9933007" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -130,135 +131,123 @@ Les données historiques, référencées dans la suite par données <code>fixtur
 </tr>
 
 <tr>
-<td class="org-left">HomeTeam</td>
-<td class="org-left">Équipe à domicile (ED)</td>
+<td class="org-left">HTeam</td>
+<td class="org-left">Équipe à domicile (ÉD)</td>
 </tr>
 
 <tr>
-<td class="org-left">AwayTeam</td>
-<td class="org-left">Équipe à l'exterieur (EE)</td>
+<td class="org-left">ATeam</td>
+<td class="org-left">Équipe à l'extérieure (ÉE)</td>
 </tr>
 
 <tr>
-<td class="org-left">HS</td>
-<td class="org-left">Nombre de tirs tentés par l'ED</td>
+<td class="org-left">HGHT</td>
+<td class="org-left">Nombre de buts inscrit à la mi-temps (ÉD)</td>
 </tr>
 
 <tr>
-<td class="org-left">AS</td>
-<td class="org-left">Nombre de tirs tentés par l'EE</td>
+<td class="org-left">AGHT</td>
+<td class="org-left">Nombre de buts inscrit à la mi-temps (ÉE)</td>
 </tr>
 
 <tr>
-<td class="org-left">HST</td>
-<td class="org-left">Nombre de tirs cadrés par l'ED</td>
+<td class="org-left">HGFT</td>
+<td class="org-left">Nombre de buts inscrit à la fin du match (ÉD)</td>
 </tr>
 
 <tr>
-<td class="org-left">AST</td>
-<td class="org-left">Nombre de tirs cadrés par l'EE</td>
+<td class="org-left">AGFT</td>
+<td class="org-left">Nombre de buts inscrit à la fin du match (ÉE)</td>
 </tr>
 
 <tr>
-<td class="org-left">HTHG</td>
-<td class="org-left">Nombre de buts de l'ED à la mi-temps</td>
-</tr>
-
-<tr>
-<td class="org-left">HTAG</td>
-<td class="org-left">Nombre de buts de l'EE à la mi-temps</td>
-</tr>
-
-<tr>
-<td class="org-left">HTR</td>
+<td class="org-left">RHT</td>
 <td class="org-left">Résultat à la mi-temps (H = ED gagne, D = match nul, A = EE gagne)</td>
 </tr>
 
 <tr>
-<td class="org-left">FTHG</td>
-<td class="org-left">Nombre de buts de l'ED à la fin du match</td>
-</tr>
-
-<tr>
-<td class="org-left">FTAG</td>
-<td class="org-left">Nombre de buts de l'EE à la fin du match</td>
-</tr>
-
-<tr>
-<td class="org-left">FTR</td>
+<td class="org-left">RFT</td>
 <td class="org-left">Résultat à la fin du match (H = ED gagne, D = match nul, A = EE gagne)</td>
+</tr>
+
+<tr>
+<td class="org-left">ASHT_MA3</td>
+<td class="org-left">Nombre de tirs cadrés moyen sur les 3 derniers matchs (ÉE)</td>
+</tr>
+
+<tr>
+<td class="org-left">HSHT_MA3</td>
+<td class="org-left">Nombre de tirs cadrés moyen sur les 3 derniers matchs (ÉD)</td>
+</tr>
+
+<tr>
+<td class="org-left">HSHT</td>
+<td class="org-left">Nombre de tirs cadrés (ÉD)</td>
+</tr>
+
+<tr>
+<td class="org-left">ASHT</td>
+<td class="org-left">Nombre de tirs cadrés (ÉE)</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-org63a64e8" class="outline-3">
-<h3 id="org63a64e8"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org642783a" class="outline-3">
+<h3 id="org642783a"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
-<p>
-Nous allons tout d'abord charger les données <code>fixtures</code> dans notre environnement
-<code>Python</code> en utilisant la librairie <code>Pandas</code>.
-Ces données sont accessibles <i>via</i> les liens suivants :
-</p>
-
-
 <p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
 <li><p>
-Importer la librairie <code>pandas</code> dans votre environnement.
+Charger les données historiques dans votre environnement :
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+<span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures_indics_all.csv.bz2"</span>
+<span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
 </pre>
 </div></li>
 
 <li><p>
-Afficher la version de la librairie <code>pandas</code> utilisée.
+Représenter graphiquement l'évolution de la variable <code>HSHT_MA3</code> pour l'équipe de Lorient au fil
+des journées et des saisons. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python">f<span style="color: #9FC59F;">"Pandas : {pd.__version__}"</span>
-</pre>
-</div></li>
+<pre class="src src-python"><span style="color: #DFAF8F;">fig_labels</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"Cote"</span>,
+}
 
-<li><p>
-Utiliser la méthode <code>Pandas</code> <code>.read_csv</code> afin de lire les données directement depuis ce lien :
-<a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2">https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2</a>
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_indics_all_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures.csv.bz2"</span>
-<span style="color: #DFAF8F;">fixtures_indics_all_df</span> = pd.read_csv(fixtures_indics_all_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
-</pre>
-</div>
-<p>
-Note : Les données sont sépérées par des points-virgules et compressées en <code>bzip2</code>. Il faut donc penser
-à utiliser les arguments <code>sep</code> et <code>compression</code> afin de tenir compte de ces deux éléments.
-</p></li>
+<span style="color: #DFAF8F;">idx_hteam</span> = fixtures_df[<span style="color: #CC9393;">"HTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
 
-<li><p>
-Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code> afin d'avoir un aperçu des données chargées.
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_indics_all_df.head()
-</pre>
-</div>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_indics_all_df.info()
-</pre>
-</div>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_indics_all_df.describe()
+<span style="color: #DFAF8F;">fixtures_sel_df</span> = fixtures_df.loc[idx_hteam]
+
+px.line(fixtures_sel_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   x=<span style="color: #CC9393;">"Date"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   labels=fig_labels)
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
+
+
+
+<div id="outline-container-orgfdb2901" class="outline-3">
+<h3 id="orgfdb2901"><span class="section-number-3">2.3.</span> Vérification des données glissantes</h3>
+</div>
 </div>
 
-
-<div id="outline-container-org0a8b6a5" class="outline-2">
-<h2 id="org0a8b6a5"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div id="outline-container-orgbc43af7" class="outline-2">
+<h2 id="orgbc43af7"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
@@ -430,8 +419,8 @@ de 0 avec la méthode <code>.reset_index</code> :
 </div>
 </div>
 
-<div id="outline-container-org1adc760" class="outline-2">
-<h2 id="org1adc760"><span class="section-number-2">4.</span> Sélection des données</h2>
+<div id="outline-container-orgf54366d" class="outline-2">
+<h2 id="orgf54366d"><span class="section-number-2">4.</span> Sélection des données</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
@@ -563,8 +552,8 @@ fixtures_df.loc[~condition_fra]
 </div>
 
 
-<div id="outline-container-org3ec7123" class="outline-2">
-<h2 id="org3ec7123"><span class="section-number-2">5.</span> Typage des données</h2>
+<div id="outline-container-orgc7581d0" class="outline-2">
+<h2 id="orgc7581d0"><span class="section-number-2">5.</span> Typage des données</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -671,8 +660,8 @@ Identifier les matchs des championnats français ayant eu lieu en 2010 et les st
 </div>
 </div>
 
-<div id="outline-container-org850dbbd" class="outline-2">
-<h2 id="org850dbbd"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
+<div id="outline-container-org1206848" class="outline-2">
+<h2 id="org1206848"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -754,8 +743,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-org056b5cc" class="outline-2">
-<h2 id="org056b5cc"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
+<div id="outline-container-org24edb44" class="outline-2">
+<h2 id="org24edb44"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
