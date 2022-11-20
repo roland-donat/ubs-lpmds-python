@@ -16,6 +16,27 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content" class="content">
@@ -24,19 +45,21 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgecb3846">1. Contexte</a></li>
-<li><a href="#orgddeb8d7">2. Données historiques</a>
+<li><a href="#org8fd3709">1. Contexte</a></li>
+<li><a href="#orga223dda">2. Données historiques</a>
 <ul>
-<li><a href="#orgd9a27b6">2.1. Présentation des données</a></li>
-<li><a href="#org642783a">2.2. Chargement des données</a></li>
-<li><a href="#orgfdb2901">2.3. Vérification des données glissantes</a></li>
+<li><a href="#orgd2049d9">2.1. Présentation des données</a></li>
+<li><a href="#org1e14940">2.2. Chargement des données</a></li>
+<li><a href="#orgf6773a8">2.3. Vérification des indicateurs glissants moyens</a></li>
 </ul>
 </li>
-<li><a href="#orgbc43af7">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
-<li><a href="#orgf54366d">4. Sélection des données</a></li>
-<li><a href="#orgc7581d0">5. Typage des données</a></li>
-<li><a href="#org1206848">6. Traitement des données manquantes</a></li>
-<li><a href="#org24edb44">7. Premières analyses descriptives</a></li>
+<li><a href="#org0594e43">3. Modélisation décisionnelle</a>
+<ul>
+<li><a href="#org2fcc7b6">3.1. Généralité</a></li>
+<li><a href="#org8089c6c">3.2. Modèle empirique <i>a priori</i></a></li>
+<li><a href="#orgb818d38">3.3. Modèle empirique <code>HSHT_MA3</code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -46,14 +69,14 @@
 
 
 
-<div id="org4be6f24" class="figure">
+<div id="org458c2dd" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-orgecb3846" class="outline-2">
-<h2 id="orgecb3846"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-org8fd3709" class="outline-2">
+<h2 id="org8fd3709"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans les TD précédents, nous avons pris connaissance de la librairie <code>Pandas</code> en explorant certaines
@@ -87,20 +110,20 @@ Les objectifs de ce TD sont :
 </div>
 </div>
 
-<div id="outline-container-orgddeb8d7" class="outline-2">
-<h2 id="orgddeb8d7"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-orga223dda" class="outline-2">
+<h2 id="orga223dda"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd9a27b6" class="outline-3">
-<h3 id="orgd9a27b6"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-orgd2049d9" class="outline-3">
+<h3 id="orgd2049d9"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Comme dans les TD précédents, les données historiques, référencées dans la suite par données
  <code>fixtures</code>, contiennent un historique de matchs sur différents championnats. Le Tableau
- <a href="#org9933007">1</a> présente  une description succintes des variables présentes.
+ <a href="#orgb9ad1e8">1</a> présente  une description succintes des variables présentes.
 </p>
 
-<table id="org9933007" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgb9ad1e8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -171,6 +194,16 @@ Comme dans les TD précédents, les données historiques, référencées dans la
 </tr>
 
 <tr>
+<td class="org-left">ARND</td>
+<td class="org-left">Numéro de journée (ÉE)</td>
+</tr>
+
+<tr>
+<td class="org-left">HRND</td>
+<td class="org-left">Numéro de journée (ÉD)</td>
+</tr>
+
+<tr>
 <td class="org-left">ASHT_MA3</td>
 <td class="org-left">Nombre de tirs cadrés moyen sur les 3 derniers matchs (ÉE)</td>
 </tr>
@@ -193,8 +226,8 @@ Comme dans les TD précédents, les données historiques, référencées dans la
 </table>
 </div>
 </div>
-<div id="outline-container-org642783a" class="outline-3">
-<h3 id="org642783a"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org1e14940" class="outline-3">
+<h3 id="org1e14940"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -205,361 +238,426 @@ Charger les données historiques dans votre environnement :
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
 <span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures_indics_all.csv.bz2"</span>
 <span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
 </pre>
 </div></li>
-
-<li><p>
-Représenter graphiquement l'évolution de la variable <code>HSHT_MA3</code> pour l'équipe de Lorient au fil
-des journées et des saisons. 
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fig_labels</span> = {
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"Cote"</span>,
-}
-
-<span style="color: #DFAF8F;">idx_hteam</span> = fixtures_df[<span style="color: #CC9393;">"HTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
-
-<span style="color: #DFAF8F;">fixtures_sel_df</span> = fixtures_df.loc[idx_hteam]
-
-px.line(fixtures_sel_df,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   color=<span style="color: #CC9393;">"FTG_2.5"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   x=<span style="color: #CC9393;">"Date"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   labels=fig_labels)
-</pre>
-</div></li>
 </ol>
 </div>
 </div>
 
+<div id="outline-container-orgf6773a8" class="outline-3">
+<h3 id="orgf6773a8"><span class="section-number-3">2.3.</span> Vérification des indicateurs glissants moyens</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+La variable <code>HSHT_MA3</code> (resp. <code>ASHT_MA3</code>) représente le nombre de tirs cadrés moyens sur les trois
+derniers matchs réalisé par l'équipe à domicile (resp. l'équipe à l'extérieur).
+</p>
 
+<p>
+Pour calculer ces variables pour une équipe à une journée donnée, il faut faire la moyenne des tirs
+cadrés de cette équipe sur les trois dernière journées passées.
+</p>
 
-<div id="outline-container-orgfdb2901" class="outline-3">
-<h3 id="orgfdb2901"><span class="section-number-3">2.3.</span> Vérification des données glissantes</h3>
+<p>
+Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers matchs de Lorient sur la saison
+2021-2022. 
+</p>
+
+<table id="orgb89fab9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Date</th>
+<th scope="col" class="org-left">HTeam</th>
+<th scope="col" class="org-left">ATeam</th>
+<th scope="col" class="org-right">HRND</th>
+<th scope="col" class="org-right">ARND</th>
+<th scope="col" class="org-right">HGFT</th>
+<th scope="col" class="org-right">AGFT</th>
+<th scope="col" class="org-left">RFT</th>
+<th scope="col" class="org-right">HSHT</th>
+<th scope="col" class="org-right">ASHT</th>
+<th scope="col" class="org-right">HSHT_MA3</th>
+<th scope="col" class="org-right">ASHT_MA3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2021-08-08</td>
+<td class="org-left">St Etienne</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">D</td>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+<td class="org-right">nan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-08-13</td>
+<td class="org-left">Lorient</td>
+<td class="org-left">Monaco</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-left">H</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">nan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-08-22</td>
+<td class="org-left">Montpellier</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+<td class="org-right">1</td>
+<td class="org-left">H</td>
+<td class="org-right">11</td>
+<td class="org-right">4</td>
+<td class="org-right">nan</td>
+<td class="org-right">nan</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-08-29</td>
+<td class="org-left">Lens</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">4</td>
+<td class="org-right">4</td>
+<td class="org-right">2</td>
+<td class="org-right">2</td>
+<td class="org-left">D</td>
+<td class="org-right">9</td>
+<td class="org-right">7</td>
+<td class="org-right">5</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-09-10</td>
+<td class="org-left">Lorient</td>
+<td class="org-left">Lille</td>
+<td class="org-right">5</td>
+<td class="org-right">5</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-left">H</td>
+<td class="org-right">7</td>
+<td class="org-right">3</td>
+<td class="org-right">4.33333</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-09-19</td>
+<td class="org-left">Reims</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">6</td>
+<td class="org-right">6</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-left">D</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">3.33333</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-09-22</td>
+<td class="org-left">Lorient</td>
+<td class="org-left">Nice</td>
+<td class="org-right">7</td>
+<td class="org-right">6</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-left">H</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">5.66667</td>
+<td class="org-right">3.66667</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-09-25</td>
+<td class="org-left">Lyon</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">8</td>
+<td class="org-right">8</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">D</td>
+<td class="org-right">2</td>
+<td class="org-right">5</td>
+<td class="org-right">6.66667</td>
+<td class="org-right">3.66667</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-10-03</td>
+<td class="org-left">Lorient</td>
+<td class="org-left">Clermont</td>
+<td class="org-right">9</td>
+<td class="org-right">9</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">D</td>
+<td class="org-right">1</td>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-right">2021-10-17</td>
+<td class="org-left">Marseille</td>
+<td class="org-left">Lorient</td>
+<td class="org-right">9</td>
+<td class="org-right">10</td>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-left">H</td>
+<td class="org-right">6</td>
+<td class="org-right">7</td>
+<td class="org-right">2.66667</td>
+<td class="org-right">2.33333</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li>Pourquoi les 3 premières valeurs des colonnes <code>HSHT_MA3</code> et <code>ASHT_MA3</code> valent <code>nan</code> ?</li>
+<li>Vérifier que la valeur de l'indicateur <code>ASHT_MA3</code> est correct en date du 29/08/2021.</li>
+<li>Calculer la valeur de l'indicateur de tirs cadrés moyen sur les 3 derniers matchs pour Lorient
+lors de sa 11ème journée.</li>
+</ol>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgbc43af7" class="outline-2">
-<h2 id="orgbc43af7"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div id="outline-container-org0594e43" class="outline-2">
+<h2 id="org0594e43"><span class="section-number-2">3.</span> Modélisation décisionnelle</h2>
 <div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org2fcc7b6" class="outline-3">
+<h3 id="org2fcc7b6"><span class="section-number-3">3.1.</span> Généralité</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
-La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
+Dans le cadre de ce TD, nous proposons de réaliser des pronostics sur le nombre total des buts
+inscrits lors d'une rencontre. Afin de simplifier la problématique, nous cherchons uniquement à
+déterminer si le nombre de buts inscrit est inférieur ou supérieur à 2.
+</p>
+
+<p>
+D'un point de vue probabiliste, on note <code>NGFT2.5</code>, la variable aléatoire représentant le nombre de
+buts inscrit sur une rencontre discrétisé au seuil de 2.5 buts. Il s'agit donc d'une variable
+binaire ayant pour valeurs <code>&lt;2.5</code> ou <code>&gt;2.5</code>.
+</p>
+
+<p>
+La variable <code>NGFT2.5</code> est appelée variable cible ou variable à expliquer du problème
+décisionnel. L'objectif est alors de prévoir/pronostiquer les valeurs de la variable cible à partir 
+d'observations de variables disponibles. Ces variables observées sont appelées variables
+explicatives.
+</p>
+
+<p>
+Formellement, notre problème de pronostic revient alors à estimer la probabilité
+</p>
+\begin{equation}
+\label{org5e8e2fa}
+P(\text{NGFT2.5} = \text{<2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n})
+\end{equation}
+<p>
+où \(x_{1}, \ldots, x_{n}\) sont des observations des variables explicatives \(X_{1}, \ldots,
+X_{n}\) que nous avons choisi d'utiliser dans nos pronostics. L'estimation de cette probabilité est
+réalisée en pratique à partir des données disponibles pour lesquelles on observe à la fois la
+variable cible et les variables explicative. Cependant, l'estimation empirique directe de cette
+probabilité s'avère souvent difficile d'un point de vue informatique, soit par manque de données,
+soit parce que le calcul n'est pas réalisable en un temps raisonnable.
+</p>
+
+<p>
+Pour contourner ce problème, on approche la probabilité \eqref{org5e8e2fa} par une fonction plus
+simple à calculer. Cette fonction est également appelée modèle décisionnel, par exemple, le modèle
+de régression logistique utilise la fonction \(\text{logit}\). 
+</p>
+
+<p>
+En notant \(\hat{p}_{\text{<2.5}}(x_{1}, \ldots, x_{n})\) l'estimation de la probabilité
+\eqref{org5e8e2fa} obtenue par le modèle décisionnel utilisé, nous pouvons déduire la règle de 
+décision \(\text{R}_{\text{NGFT2.5}}\) générale suivante :
+</p>
+\begin{equation}
+\text{R}_{\text{NGFT2.5}}(x_{1}, \ldots, x_{n}) =
+\begin{cases}
+\text{<2.5} & \text{si}~ \hat{p}_{\text{<2.5}}(x_{1}, \ldots, x_{n}) > \delta, \\
+\text{>2.5} & \text{sinon},
+\end{cases}
+\end{equation}
+<p>
+où \(\delta \in [0, 1]\) est appelé seuil de décision. Il est courant de poser dans un premier temps
+\(\delta = 0.5\). Toutefois, le seuil de décision est un paramètre fondammental du processus de
+décision qui peut notamment être optimisé en fonction :
 </p>
 <ul class="org-ul">
-<li>les tableaux de données appelés <code>DataFrame</code> ;</li>
-<li>les vecteurs de données appelés <code>Series</code>.</li>
+<li>des conséquences occasionnées par les erreurs de pronostic et des récompenses induites par les
+bons pronostics ;</li>
+<li>la probabilité <i>a priori</i> d'observer plus ou moins de 2.5 buts.</li>
 </ul>
 
 <p>
-Un <code>DataFrame</code> est composé :
-</p>
-<ul class="org-ul">
-<li>d'une ou plusieurs colonnes représentant les variables du jeu de données ;</li>
-<li>d'une ou plusieurs lignes représentant les individus du jeu de données.</li>
-</ul>
-
-<p>
-Chaque ligne et chaque colonne d'un <code>DataFrame</code> est donc un vecteur (une seule dimension) mis sous la
-forme d'une <code>Series</code>.
-</p>
-
-
-<p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
 <li><p>
-Quel est le type de la variable <code>fixtures_df</code> ?
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df)
-</pre>
-</div></li>
-
-<li><p>
-Dans un <code>DataFrame</code>, chaque valeur est identifiée grâce à un nom de ligne (appelé <code>index</code>) et
-un nom de colonne (appelé <code>column</code>). Afficher le nom des lignes et le nom des colonnes des
-données <code>fixtures</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df.index
-</pre>
-</div>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df.columns
-</pre>
-</div></li>
-
-<li><p>
-Vous pouvez accéder aux différents éléments d'un <code>DataFrame</code> en utilisant l'attribut <code>.loc</code>. Par
-exemple, pour récupérer la colonne <code>HomeTeam</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture explicite</span>
-fixtures_df.loc[:, <span style="color: #CC9393;">"HomeTeam"</span>]
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture implicite</span>
-fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>]
-</pre>
-</div>
-<p>
-La commande précédente permet de récupérer toutes les lignes (opérateur <code>:</code>) de la colonne
-appelée <code>"HomeTeam"</code>. 
-</p>
-
-<p>
-De la même manière, on peut accéder à la ligne de label <code>3</code> comme suit :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture explicite</span>
-fixtures_df.loc[3, :]
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">&#201;criture implicite</span>
-fixtures_df.loc[3]
-</pre>
-</div>
-
-<p>
-Enfin, vous pouvez accéder à plusieurs lignes et colonnes (sous-tableau) en utilisant des listes
-dans l'attribut <code>.loc</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df.loc[3:7, [<span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>]]
-</pre>
-</div></li>
-
-<li><p>
-Sélectionner les 50 premiers matchs en prenant les colonnes du championnat, de la saison, de la
-date, des équipes et du score final.
+Ajouter au <code>DataFrame</code> <code>fixtures_df</code> une nouvelle variable <code>NGFT</code> contenant le nombre de buts
+inscrits lors de chaque rencontre. 
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-fixtures_df.loc[:50, [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]]
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT"</span>] = fixtures_df[<span style="color: #CC9393;">"HGFT"</span>] + fixtures_df[<span style="color: #CC9393;">"AGFT"</span>]
 </pre>
 </div></li>
 
 <li><p>
-Quel est le type des objets suivants <code>fixtures_df.loc[:, "league_id"]</code> et
-<code>fixtures_df.loc[3]</code> ?
+Créer ensuite la variable <code>NGFT2.5</code> en discrétisant la variable <code>NGFT</code> sur les ensembles
+\([0, 2.5[\) et \([2.5, \infty[\) à l'aide de la fonction <code>pd.cut</code> :
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df.loc[:, <span style="color: #CC9393;">"league_id"</span>])
-<span style="color: #DCDCCC; font-weight: bold;">type</span>(fixtures_df.loc[3])
-</pre>
-</div></li>
-
-<li><p>
-Quelles sont les principales caractéristiques d'un objet de type <code>Series</code> ?
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">game_s</span> = fixtures_df.loc[3, :]
-game_s
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- Les Series ont un attribut .index permettant d'identifier</span>
-<span style="color: #5F7F5F;">#   </span><span style="color: #7F9F7F;">chacune des valeurs de la Series. En revanche, contrairement aux DataFrame,</span>
-<span style="color: #5F7F5F;">#   </span><span style="color: #7F9F7F;">les Series n'ont pas d'attribut .columns.</span>
-game_s.index
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- Les Series ont optionnellement un nom accessible avec l'attribut .name</span>
-game_s.name
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">- On acc&#232;de aux valeurs d'une Series avec l'attribut .loc mais avec une seule dimension</span>
-game_s.loc[[<span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"FTHG"</span>]]
-</pre>
-</div></li>
-
-<li><p>
-Il est possible de changer l'index d'un <code>DataFrame</code> avec la méthode <code>set_index</code>. Par exemple, on
-peut créer un nouveau <code>DataFrame</code> dans lequel les colonnes <code>"HomeTeam"</code> et <code>"AwayTeam"</code> sont
-utilisées en tant qu'index :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_2_df</span> = fixtures_df.set_index([<span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>])
-fixtures_2_df
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT2.5"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bins=[0, 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)])
 </pre>
 </div>
 <p>
-On obtient ainsi un index multidimensionnel. Les lignes du <code>DataFrame</code> <code>fixtures_bis_df</code> sont maintenant
-identifiées par la valeur d'une équipe à domicile et une équipe à l'extérieure :
+Le paramètre <code>bins</code> permet de spécifier les bornes des intervalles de discrétisation. Observer le
+résultat de la discrétisation, quel est le type de la <code>Series</code> obtenue ? Le résultat est-il
+conforme à l'attendu ?
+</p>
+
+<p>
+Il est important de remarquer que la fonction <code>pd.cut</code> crée des intervalles ouverts à gauche et fermés à
+droite. Il faut donc être vigilant en fixant les bornes de discrétisation en s'assurant en
+particulier que les observations égales aux bornes ne soient pas exclues ou placées dans un
+intervalle de discrétisation incorrect.
+</p>
+
+<p>
+Pour corriger le problème, discrétiser la variable <code>NGFT</code> sur les ensembles
+\([-\infty, 2.5[\) et \([2.5, \infty[\) à l'aide de la fonction <code>pd.cut</code> : 
 </p>
 <div class="org-src-container">
-<pre class="src src-python">fixtures_2_df.loc[(<span style="color: #CC9393;">"Rennes"</span>, <span style="color: #CC9393;">"Lorient"</span>), :]
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT2.5"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)])
+</pre>
+</div>
+
+<p>
+Enfin, la fonction <code>pd.cut</code> permet de discrétiser une variable en labélisant les intervalles de
+discrétisation. Par exemple, pour associer le label <code>&lt;2.5</code> à l'intervalle \([-\infty, 2.5[\) et le
+label <code>&gt;2.5</code> à l'intervalle \([2.5, \infty[\), il faut écrire :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT2.5"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   labels=[<span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>])
 </pre>
 </div></li>
 
 <li><p>
-Créer un nouveau <code>DataFrame</code>, nommé <code>fixtures_3_df</code>, indexé par les colonnes <code>["league_id", "season_id", "Date",
-   "HomeTeam", "AwayTeam"]</code>. Quelle est la particularité de cette indexation ?
+Représenter graphiquement l'évolution de la proportion de match à plus de 2.5 buts au fil des saisons, et
+ce, pour chaque championnat. Utiliser <code>px.line</code> pour construire le diagramme en lignes
+correspondant en affichant une ligne de couleur différente par championnat.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">fixtures_3_df</span> = fixtures_df.set_index([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>])
-fixtures_3_df
+<span style="color: #DFAF8F;">ngft_prop_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_df.groupby([<span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"league_id"</span>])[<span style="color: #CC9393;">"NGFT2.5"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .unstack()\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .reset_index()
+
+<span style="color: #DFAF8F;">fig</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   px.line(ngft_prop_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   x=<span style="color: #CC9393;">"season_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   y=<span style="color: #CC9393;">"&gt;2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   markers=<span style="color: #BFEBBF;">True</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   title=<span style="color: #CC9393;">"&#201;volution de la proportion de match &#224; plus de 2.5 buts au fil des saisons"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   labels={<span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>: <span style="color: #CC9393;">"Proportion"</span>, <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>})
+
+fig.update_layout(yaxis_tickformat=<span style="color: #CC9393;">".0%"</span>)
+fig
 </pre>
 </div></li>
 
-<li><p>
-Vous pouvez revenir à l'indexation par défaut, c'est à dire une numérotation des lignes à partir
-de 0 avec la méthode <code>.reset_index</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_3_df.reset_index()
-</pre>
-</div></li>
+<li>Donner des exemples de variables explicatives directement disponibles dans les données <code>fixtures</code>
+que vous pourriez utiliser pour pronostiquer s'il y aura plus ou moins de 2.5 buts dans un match.</li>
+
+<li>Dans le cadre d'un pari sportif, quelle est la conséquence d'un mauvais pronostic et quel est le
+bénéfice d'un pronostic correct ?</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgf54366d" class="outline-2">
-<h2 id="orgf54366d"><span class="section-number-2">4.</span> Sélection des données</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org8089c6c" class="outline-3">
+<h3 id="org8089c6c"><span class="section-number-3">3.2.</span> Modèle empirique <i>a priori</i></h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
-Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
-en fonction des valeurs prises par certaines colonnes. Pour ce faire, il suffit d'utiliser les
-opérateurs de comparaison <code>Python</code> appliqués aux colonnes d'un <code>DataFrame</code>. 
-</p>
-
-<p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li><p>
-Nous allons commencer par récupérer tous les matchs joués à l'extérieur par l'équipe de
-Lorient. Pour ce faire il faut dans un premier temps créer une <code>Series</code> booléenne (c'est-à-dire
-dont les valeurs sont <code>True</code> ou <code>False</code>) permettant de repérer les matchs qui nous intéressent :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"AwayTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
-</pre>
-</div>
-<p>
-La <code>Serie</code> <code>condition</code> contient la valeur <code>True</code> lorsque la colonne <code>"AwayTeam"</code>
-vaut <code>"Lorient"</code> et <code>False</code> sinon.
+Le modèle empirique <i>a priori</i> consiste à ne pas tenir compte de variables explicatives dans le
+processus décisionnel.
 </p>
 
 <p>
-Il suffit ensuite d'utiliser cette <code>Series</code> afin de récupérer les lignes du <code>DataFrame</code>
-<code>fixtures_df</code> pour lesquelles la condition est vraie. Deux syntaxes sont possibles. Une
-syntaxe explicite (recommandée) utilise l'attribut <code>.loc</code> :
+Le modèle décisionnel se formule donc simplement :
 </p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_lorient_df</span> = fixtures_df.loc[condition]
-fixtures_lorient_df
-</pre>
-</div>
+\begin{equation}
+P(\text{NGFT2.5} = \text{<2.5}) \simeq \hat{p}_{\text{<2.5}} = \hat{P}(\text{NGFT2.5} = \text{<2.5})
+\end{equation}
 <p>
-Et une syntaxe implicite équivalente :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_lorient_bis_df</span> = fixtures_df[condition]
-fixtures_lorient_bis_df
-</pre>
-</div></li>
-
-<li><p>
-Extraire les matchs au cours desquels l'équipe à domicile a réussi au moins 20 tirs cadrés
-(colonne <code>HST</code>) en utilisant l'opérateur <code>&gt;=</code>. 
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt;= 20
-fixtures_df.loc[condition]
-</pre>
-</div></li>
-
-<li><p>
-Il est possible de construire des conditions plus complexes en utilisant les opérateurs booléens
-de <code>Pandas</code> : <code>&amp;</code> (ET logique) <code>|</code> (OU logique) et <code>~</code> (NON logique). Par exemple, nous pouvons obtenir les
-matchs au cours desquels l'équipe à domicile mène à la mi-temps et perd à la fin du match :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">condition_mi_temps</span> = fixtures_df[<span style="color: #CC9393;">"HTR"</span>] == <span style="color: #CC9393;">"H"</span>
-<span style="color: #DFAF8F;">condition_fin</span> = fixtures_df[<span style="color: #CC9393;">"FTR"</span>] == <span style="color: #CC9393;">"A"</span>
-fixtures_df.loc[condition_mi_temps &amp; condition_fin]
-</pre>
-</div></li>
-
-<li><p>
-Extraire les matchs perdus à domicile par les joueurs de Lorient alors qu'ils ont réussi
-strictement plus de tirs cadrés que leur adversaire.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">condition_lorient_dom</span> = fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
-<span style="color: #DFAF8F;">condition_tir_dom</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"AST"</span>]
-fixtures_df.loc[condition_lorient_dom &amp; condition_tir_dom]
-</pre>
-</div></li>
-
-<li><p>
-Extraire à présent <b>tous les matchs</b> perdus par les joueurs de Lorient alors qu'ils ont réussi
-strictement plus de tirs cadrés que leur adversaire.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">condition_lorient_dom</span> = fixtures_df[<span style="color: #CC9393;">"HomeTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
-<span style="color: #DFAF8F;">condition_tir_dom</span> = fixtures_df[<span style="color: #CC9393;">"HST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"AST"</span>]
-<span style="color: #DFAF8F;">condition_dom</span> = condition_lorient_dom &amp; condition_tir_dom
-
-<span style="color: #DFAF8F;">condition_lorient_ext</span> = fixtures_df[<span style="color: #CC9393;">"AwayTeam"</span>] == <span style="color: #CC9393;">"Lorient"</span>
-<span style="color: #DFAF8F;">condition_tir_ext</span> = fixtures_df[<span style="color: #CC9393;">"AST"</span>] &gt; fixtures_df[<span style="color: #CC9393;">"HST"</span>]
-<span style="color: #DFAF8F;">condition_ext</span> = condition_lorient_ext &amp; condition_tir_ext
-
-fixtures_df.loc[condition_dom | condition_ext]
-</pre>
-</div></li>
-
-<li><p>
-Pour éviter d'enchaîner les opérateurs OU quand il s'agit d'un filtrage sur les valeurs d'une
-même colonne, il est commode d'utiliser la méthode pour les <code>Series</code> nommée <code>.isin</code> qui va tester
-si chaque donnée de la <code>Series</code> se trouve dans la liste de valeurs passée en argument de la
-méthode.
-</p>
-
-<p>
-Par exemple, le code suivant récupère les matchs des championnats de France :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">condition</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].isin([<span style="color: #CC9393;">"fra_l2"</span>, <span style="color: #CC9393;">"fra_l1"</span>])
-fixtures_df.loc[condition]
-</pre>
-</div></li>
-
-<li><p>
-Extraire les matchs qui ne concernent pas un championnat français.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">condition_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].isin([<span style="color: #CC9393;">"fra_l2"</span>, <span style="color: #CC9393;">"fra_l1"</span>])
-fixtures_df.loc[~condition_fra]
-</pre>
-</div></li>
-</ol>
-</div>
-</div>
-
-
-<div id="outline-container-orgc7581d0" class="outline-2">
-<h2 id="orgc7581d0"><span class="section-number-2">5.</span> Typage des données</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
-soit correctement typée. Les principaux types de données reconnus par <code>Pandas</code> sont les entiers (<code>int</code>), les
-nombres réels (<code>float</code>), les dates (<code>date</code> ou <code>datetime64</code>), les données qualitatives (<code>category</code>) et
-les chaînes de caractères (<code>object</code>).
+où \(\hat{P}(\text{NGFT2.5} = \text{<2.5})\) est la probabilité empirique de l'événement \(\{\text{NGFT2.5} = \text{<2.5}\}\).
 </p>
 
 <p>
@@ -567,188 +665,56 @@ les chaînes de caractères (<code>object</code>).
 </p>
 <ol class="org-ol">
 <li><p>
-La variable <code>league_id</code> ne prend qu'un nombre fini de valeurs, c'est donc une variable
-qualitative. Il convient de lui assigner le type <code>category</code> comme suit :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"league_id"</span>] = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].astype(<span style="color: #CC9393;">"category"</span>)
-</pre>
-</div>
-<p>
-Une variable de type <code>category</code> dispose d'un attribut spécial <code>.cat</code> apportant, entre autres, des
-fonctionnalités telles que :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Num&#233;risation des modalit&#233;s</span>
-fixtures_df[<span style="color: #CC9393;">"league_id"</span>].cat.codes
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">R&#233;cup&#233;ration de la liste des modalit&#233;s</span>
-fixtures_df[<span style="color: #CC9393;">"league_id"</span>].cat.categories
-</pre>
-</div></li>
-
-<li><p>
-Transformer les autres variables qualitatives en <code>category</code>.    
+Estimer la probabilité empirique \(\hat{P}(\text{NGFT2.5} = \text{<2.5})\) à partir des données disponibles.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"HTR"</span>, <span style="color: #CC9393;">"FTR"</span>]
-<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+<span style="color: #F0DFAF; font-weight: bold;">print</span>(fixtures_df[<span style="color: #CC9393;">"NGFT2.5"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>))
 </pre>
 </div></li>
 
 <li><p>
-Lorsque les modalités sont des labels textuels, les colonnes de type <code>category</code> ont également
-accès à l'attribut <code>.str</code> permettant de manipuler les chaînes de caractères. Cet attribut est
-également disponible sur les variables de type <code>object</code>. L'attribut <code>.str</code> donne accès à la
-plupart des fonctionnalités de traitement des chaînes offertes par <code>Python</code>, e.g. <code>strip</code>,
-<code>lower</code>, <code>upper</code>, <code>find</code>, <code>len</code>, etc. Exemple :
+En fixant la règle de pronostic suivante :
 </p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.upper()
-fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.split(<span style="color: #CC9393;">"_"</span>)
-fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.split(<span style="color: #CC9393;">"_"</span>, expand=<span style="color: #BFEBBF;">True</span>)
-</pre>
-</div></li>
-
-<li><p>
-Utiliser la méthode <code>.str.startswith</code> afin d'identifier les matchs des championnats français (à
-savoir <code>fra_l1</code> ou <code>fra_l2</code>) et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_df</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">idx_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.startswith(<span style="color: #CC9393;">"fra"</span>)
-<span style="color: #DFAF8F;">fixtures_fra_df</span> = fixtures_df.loc[idx_fra]
-</pre>
-</div></li>
-
-<li><p>
-Convertir la colonne <code>Date</code> avec le type <code>"datetime64"</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64"</span>)
-</pre>
-</div>
-<p>
-Les colonnes de type <code>datetime64</code> possèdent un attribut <code>dt</code> apportant des fonctionnalités
-permettant de manipuler les dates. Vous pouvez, entre autres, extraire le jour, le mois ou l'année
-d'une date :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.day
-fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.month
-fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.year
-</pre>
-</div></li>
-
-<li><p>
-Identifier les matchs des championnats français ayant eu lieu en 2010 et les stocker dans un nouveau <code>DataFrame</code> <code>fixtures_fra_2010_df</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">idx_fra</span> = fixtures_df[<span style="color: #CC9393;">"league_id"</span>].<span style="color: #DCDCCC; font-weight: bold;">str</span>.startswith(<span style="color: #CC9393;">"fra"</span>)
-<span style="color: #DFAF8F;">idx_2010</span> = fixtures_df[<span style="color: #CC9393;">"Date"</span>].dt.year == 2010
-<span style="color: #DFAF8F;">fixtures_fra_2010_df</span> = fixtures_df.loc[idx_fra &amp; idx_2010]
-</pre>
-</div></li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org1206848" class="outline-2">
-<h2 id="org1206848"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
-(<i>Not a Number</i>) ou <code>NaT</code> (<i>Not a Time</i>).
-</p>
+\begin{equation}
+\text{R}_{\text{NGFT2.5}} =
+\begin{cases}
+\text{<2.5} & \text{si}~ \hat{P}(\text{NGFT2.5} = \text{<2.5}) > \delta, \\
+\text{>2.5} & \text{sinon},
+\end{cases}
+\end{equation}
 
 <p>
-<b>Travail à réaliser :</b>
-</p>
-<ol class="org-ol">
-<li><p>
-Les <code>DataFrame</code> et les <code>Series</code> dispose de la méthode <code>.isnull</code> permettant de repérer les données
-manquantes. Le code suivant construit un <code>DataFrame</code> booléen ayant pour valeur <code>True</code> si
-l'élément correspondant dans le <code>DataFrame</code> <code>fixtures_df</code> est manquant et <code>False</code> sinon :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">idx_na_df</span> = fixtures_df.isnull()
-idx_na_df
-</pre>
-</div>
-
-<p>
-À partir de ce résultat brut, nous pouvons déduire par exemple le nombre de valeurs manquantes
-par colonne avec la méthode <code>.sum</code> :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">idx_na_df.<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=0)
-</pre>
-</div>
-
-<p>
-<b>Note 1</b> : L'utilisation de l'argument <code>axis</code> dans la méthode <code>.sum</code> permet d'indiquer sur quelle
-dimension est réalisée l'opération de sommation. En indiquant <code>axis=0</code>, cela signifie que les
-valeurs du <code>DataFrame</code> sont sommées le long des lignes (<code>index</code>). Avec <code>axis=1</code>, la sommation sera
-réalisée le long des colonnes (<code>columns</code>) et donnera donc le nombre de valeurs manquantes de chaque ligne.
-</p>
-
-<p>
-<b>Note 2</b> : L'argument <code>axis</code> est présent dans de nombreuses méthodes pour <code>DataFrame</code> et
-<code>Series</code>. Le mode de fonctionnement est toujours le même : <code>axis=0</code> signifie que l'opération
-considérée est faite sur les lignes (<code>index</code>) et <code>axis=1</code> sur les colonnes (<code>columns</code>).
-</p>
-
-<p>
-<b>Note 3</b> : Lorsque des opérations numériques sur des booléens sont réalisées, <code>Pandas</code> remplace
-la valeur <code>True</code> par 1 et la valeur <code>False</code> par 0.
+Quels seront vos pronostics avec \(\delta = 0.5\) ?
 </p></li>
 
-<li><p>
-Calculer à présent la proportion de données manquantes pour chaque colonne des données
-<code>fixtures_df</code> en utilisant la méthode <code>.mean</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-idx_na_df.mean(axis=0)
-</pre>
-</div></li>
+<li>Que deviennent les pronostics si on pose \(\delta = 0.4\).</li>
+
+<li>Évaluer le pourcentage de bons pronostics sur les données disponibles en utilisant la règle de
+décision avec \(\delta = 0.5\) et \(\delta = 0.4\). À quoi ressemble le graphique du pourcentage de
+bons pronostics en fonction de \(\delta\) sur les données disponibles.</li>
 </ol>
+</div>
+</div>
 
+<div id="outline-container-orgb818d38" class="outline-3">
+<h3 id="orgb818d38"><span class="section-number-3">3.3.</span> Modèle empirique <code>HSHT_MA3</code></h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
-<b>Notes :</b> 
-Le traitement des données manquantes est toujours un sujet délicat pour lequel il n'y a pas de
-réponse unique. De nombreux facteurs interviennent dans le choix de la stratégie à appliquer. Sans
-être exhaustif, nous pouvons nous poser les questions suivantes :
+Dans cette section, nous considérons le modèle empirique de pronostic de la variable <code>NGFT2.5</code>
+tenant compte de la variable explicative <code>HSHT_MA3</code> uniquement.
 </p>
-<ul class="org-ul">
-<li>Y a-t-il des colonnes pour lesquelles les données sont largement manquantes. On peut dans ce cas
-se poser la question de la suppression de ces données.</li>
-<li>L'absence de données est-il très ponctuel ? La question de la suppression de ces données peut
-également se poser dans ce cas.</li>
-<li>Quand il s'agit de traiter des séries temporelles, il peut être intéressant de renseigner les
-données manquantes par interpolation.</li>
-<li>Lorsque les données manquantes dépendent de la valeur d'autres colonnes, il existe des techniques
-plus avancées pour reconstruire les données partiellement ou non observées, cf. utilisation de
-l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation">algorithme EM</a>.</li>
-</ul>
-</div>
-</div>
 
-
-<div id="outline-container-org24edb44" class="outline-2">
-<h2 id="org24edb44"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
-<div class="outline-text-2" id="text-7">
 <p>
-Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
-d'aborder les fonctionnalités statistiques de <code>Pandas</code>.
+Le modèle décisionnel s'écrit alors comme suit :
+</p>
+\begin{equation}
+P(\text{NGFT2.5} = \text{<2.5} | \text{HSHT_MA3} = x) \simeq \hat{p}_{\text{<2.5}}(x) = \hat{P}(\text{NGFT2.5} = \text{<2.5} | \text{HSHT_MA3} = x)
+\end{equation}
+<p>
+où \(\hat{P}(\text{NGFT2.5} = \text{<2.5} | \text{HSHT_MA3} = x)\) est la probabilité conditionnelle
+empirique de l'événement \(\{\text{NGFT2.5} = \text{<2.5} | \text{HSHT_MA3} = x\}\).
 </p>
 
 <p>
@@ -756,155 +722,39 @@ d'aborder les fonctionnalités statistiques de <code>Pandas</code>.
 </p>
 <ol class="org-ol">
 <li><p>
-Calculons dans un premier temps le score moyen à la mi-temps et à la fin du match des équipes à domicile et à
-l'extérieur, tout championnat confondu :
+Remarquons tout d'abord que la variable <code>HSHT_MA3</code> est une variable continue ce qui n'est pas
+pratique pour estimer la probabilité conditionnelle empirique \(\hat{P}(\text{NGFT2.5} =
+   \text{<2.5} | \text{HSHT_MA3} = x)\). Nous proposons de simplifier le problème en discrétisant la
+variable <code>HSHT_MA3</code>.
 </p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">res_match_df</span> = fixtures_df.loc[:, [<span style="color: #CC9393;">"HTHG"</span>, <span style="color: #CC9393;">"HTAG"</span>, <span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]]
-res_match_df.mean()
-</pre>
-</div></li>
 
-<li><p>
-Il est également possible de réaliser des traitements par sous-groupes de données en utilisant la
-méthode <code>.groupby</code>. Par exemple, pour calculer le nombre moyen de buts marqués à la fin d'un
-match par l'équipe à domicile et l'équipe à
-l'extérieur sur chacun des championnats, on écrit :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Regroupement des donn&#233;es par championnat</span>
-<span style="color: #DFAF8F;">fixtures_league_id_grp</span> = fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcule des scores moyens</span>
-fixtures_league_id_grp[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>].mean()
-</pre>
-</div>
 <p>
-Le fonctionnement de la méthode <code>.groupby</code> est donc le suivant :
-</p>
-<ul class="org-ul">
-<li>on indique en argument du <code>.groupby</code> la liste des variables permettant de construire les
-groupes (ici <code>["league_id"]</code>) ;</li>
-<li>on obtient un objet de type <code>DataFrameGroupBy</code> sur lequel on va préciser les colonnes que l'on
-souhaite traiter (ici <code>"FTHG"</code> et <code>"FTAG"</code>) et l'opération à réaliser (ici <code>mean</code>).</li>
-</ul></li>
-
-<li><p>
-Calculer le nombre moyen de buts marqués à la fin d'un match par l'équipe à domicile et l'équipe
-à l'extérieur pour chacun des championnats et chacune des saisons.  
+Créer une nouvelle variable <code>HSHT_MA3d</code> correspondant à la discrétisation de la variable
+<code>HSHT_MA3d</code> sur les intervalles \(]-\infty, 3]\), \(]3, 6]\), \(]6, \infty[\).
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>].mean()
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"HSHT_MA3d"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"HSHT_MA3"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 3, 6, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)])
 </pre>
 </div></li>
 
 <li><p>
-Ajouter au <code>DataFrame</code> <code>fixtures_df</code> une nouvelle colonne <code>FTG</code> (<i>Full Time Goals</i>) donnant le nombre total de buts marqués
-pendant chaque rencontre :
+Estimer la probabilité conditionnelle empirique \(\hat{P}(\text{NGFT2.5} |
+   \text{HSHT_MA3d}\) à partir des données disponibles et stocker le résultat dans un <code>DataFrame</code>
+<code>model_msht_ma3d_df</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"FTG"</span>] = fixtures_df[[<span style="color: #CC9393;">"FTHG"</span>, <span style="color: #CC9393;">"FTAG"</span>]].<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=1)
-</pre>
-</div></li>
-
-<li><p>
-Identifier les rencontres au cours desquelles il y a eu le plus de buts inscrits.
-<b>Aide</b> : Utiliser la méthode <code>.max</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">max_ftg</span> = fixtures_df[<span style="color: #CC9393;">"FTG"</span>].<span style="color: #DCDCCC; font-weight: bold;">max</span>()
-<span style="color: #DFAF8F;">idx_max</span> = fixtures_df[<span style="color: #CC9393;">"FTG"</span>] == max_ftg
-fixtures_df.loc[idx_max]
-</pre>
-</div></li>
-
-<li><p>
-Trier les rencontres en fonction du nombre de buts inscrits. <b>Aide</b> : Utiliser la méthode
-<code>.sort_values</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-fixtures_df.sort_values(by=<span style="color: #CC9393;">"FTG"</span>)
-</pre>
-</div></li>
-
-<li><p>
-Calculer la proportion des différents résultats d'un match (<code>H</code>, <code>A</code>, <code>D</code>) pour :
-</p>
-<ul class="org-ul">
-<li>toutes les données ;</li>
-<li>chacun des championnats ;</li>
-<li>chacune des saisons ;</li>
-<li>chacun des championnats et chacune des saisons.</li>
-</ul>
-<p>
-<span class="underline">Aide</span> : Utiliser la méthode <code>.value_counts</code> pour le calcul des proportions (regardez l'aide)
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats sur tous les matchs</span>
-fixtures_df[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque championnat</span>
-fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque saison</span>
-fixtures_df.groupby([<span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>].value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Proportion des r&#233;sultats pour chaque championnat et chaque saison</span>
-fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>]\
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)
-</pre>
-</div></li>
-
-<li><p>
-Les résultats d'un <code>groupby</code> sont indexés sur les combinaisons de modalités
-prises par les variables de regroupement. Par conséquent, quand il y a plus d'une variable dans
-le <code>groupby</code>, le résultat possède un index multiple. Dans le cas, d'un <code>groupby</code> couplé avec un
-<code>value_counts</code>, la variable comptée (celle entre crochets) est ajoutée à l'index. Pour des
-raisons de présentation des résultats, il peut être intéressant de restructurer ce résultat en
-transférant la variable comptée de l'index en colonne. Pour ce faire, il faut utiliser la méthode
-<code>.unstack</code> de la manière suivante :
-</p>
-<div class="org-src-container">
-<pre class="src src-python">fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>]\
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .unstack()
-</pre>
-</div></li>
-
-<li><p>
-Déterminer le championnat où il y a le plus de tirs cadrés en moyenne. <b>Aide</b> : Utiliser la
-méthode <code>.idxmax</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcul de la somme des tirs cadr&#233;s par match</span>
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"ST"</span>] = fixtures_df[[<span style="color: #CC9393;">"HST"</span>, <span style="color: #CC9393;">"AST"</span>]].<span style="color: #DCDCCC; font-weight: bold;">sum</span>(axis=1)
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Calcul du championnat avec le plus de tirs cadr&#233;s moyen</span>
-fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>])[<span style="color: #CC9393;">"ST"</span>].mean().idxmax()
-</pre>
-</div></li>
-
-<li><p>
-Déterminer le championnat et la saison où il y a la proportion de victoire à domicile la plus
-faible. <b>Aide</b> : Utiliser la méthode <code>.idxmin</code>.
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-<span style="color: #DFAF8F;">ftr_prop_df</span> = fixtures_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>])[<span style="color: #CC9393;">"FTR"</span>]\
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>.value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>.unstack()
-ftr_prop_df.loc[:, <span style="color: #CC9393;">"H"</span>].idxmin()
+<pre class="src src-python"><span style="color: #DFAF8F;">model_msht_ma3d_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_df.groupby([<span style="color: #CC9393;">"HSHT_MA3d"</span>])[<span style="color: #CC9393;">"NGFT2.5"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .unstack()
+model_msht_ma3d_df
 </pre>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 </div>
