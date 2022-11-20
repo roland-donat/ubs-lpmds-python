@@ -45,19 +45,26 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8fd3709">1. Contexte</a></li>
-<li><a href="#orga223dda">2. Données historiques</a>
+<li><a href="#org100f969">1. Contexte</a></li>
+<li><a href="#orga0c297c">2. Données de matchs</a>
 <ul>
-<li><a href="#orgd2049d9">2.1. Présentation des données</a></li>
-<li><a href="#org1e14940">2.2. Chargement des données</a></li>
-<li><a href="#orgf6773a8">2.3. Vérification des indicateurs glissants moyens</a></li>
+<li><a href="#org51e2ad6">2.1. Présentation des données</a></li>
+<li><a href="#org91d56be">2.2. Chargement des données</a></li>
+<li><a href="#org6de5428">2.3. Vérification des indicateurs glissants moyens</a></li>
 </ul>
 </li>
-<li><a href="#org0594e43">3. Modélisation décisionnelle</a>
+<li><a href="#sec:odds_df">3. Données de cotes</a>
 <ul>
-<li><a href="#org2fcc7b6">3.1. Généralité</a></li>
-<li><a href="#org8089c6c">3.2. Modèle empirique <i>a priori</i></a></li>
-<li><a href="#orgb818d38">3.3. Modèle empirique <code>HSHT_MA3</code></a></li>
+<li><a href="#orgd0ec951">3.1. Rappels</a></li>
+<li><a href="#org113db30">3.2. Présentation des données</a></li>
+<li><a href="#org417ed67">3.3. Chargement des données</a></li>
+</ul>
+</li>
+<li><a href="#org7e3c6f6">4. Modélisation décisionnelle</a>
+<ul>
+<li><a href="#org277522c">4.1. Généralité</a></li>
+<li><a href="#org21b30b9">4.2. Modèle empirique <i>a priori</i></a></li>
+<li><a href="#org53c9977">4.3. Modèle empirique <code>HSHT_MA3</code></a></li>
 </ul>
 </li>
 </ul>
@@ -69,14 +76,14 @@
 
 
 
-<div id="org458c2dd" class="figure">
+<div id="org422332d" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org8fd3709" class="outline-2">
-<h2 id="org8fd3709"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-org100f969" class="outline-2">
+<h2 id="org100f969"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans les TD précédents, nous avons pris connaissance de la librairie <code>Pandas</code> en explorant certaines
@@ -95,9 +102,9 @@ Les objectifs de ce TD sont :
 </p>
 <ul class="org-ul">
 <li>Approfondir ses compétences en traitement des données sous <code>Python</code>.</li>
-<li>Construire un premier algorithme de pronostic.</li>
+<li>Construire vos premiers algorithmes de pronostics.</li>
 <li>Développer une méthode d'évaluation des pronostics réalisés.</li>
-<li>Chercher des idées pour améliorer votre premier algorithme.</li>
+<li>Chercher des idées pour améliorer vos premiers algorithmes.</li>
 </ul>
 
 <p>
@@ -110,20 +117,20 @@ Les objectifs de ce TD sont :
 </div>
 </div>
 
-<div id="outline-container-orga223dda" class="outline-2">
-<h2 id="orga223dda"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-orga0c297c" class="outline-2">
+<h2 id="orga0c297c"><span class="section-number-2">2.</span> Données de matchs</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd2049d9" class="outline-3">
-<h3 id="orgd2049d9"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-org51e2ad6" class="outline-3">
+<h3 id="org51e2ad6"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Comme dans les TD précédents, les données historiques, référencées dans la suite par données
+Comme dans les TD précédents, les données historiques de matchs, référencées dans la suite par données
  <code>fixtures</code>, contiennent un historique de matchs sur différents championnats. Le Tableau
- <a href="#orgb9ad1e8">1</a> présente  une description succintes des variables présentes.
+ <a href="#org89cec90">1</a> présente  une description succintes des variables présentes.
 </p>
 
-<table id="orgb9ad1e8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org89cec90" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -226,8 +233,8 @@ Comme dans les TD précédents, les données historiques, référencées dans la
 </table>
 </div>
 </div>
-<div id="outline-container-org1e14940" class="outline-3">
-<h3 id="org1e14940"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org91d56be" class="outline-3">
+<h3 id="org91d56be"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -243,12 +250,26 @@ Charger les données historiques dans votre environnement :
 <span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
 </pre>
 </div></li>
+
+<li><p>
+Réaliser les opérations de typage adéquates :
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"RHT"</span>, <span style="color: #CC9393;">"RFT"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64"</span>)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-orgf6773a8" class="outline-3">
-<h3 id="orgf6773a8"><span class="section-number-3">2.3.</span> Vérification des indicateurs glissants moyens</h3>
+
+<div id="outline-container-org6de5428" class="outline-3">
+<h3 id="org6de5428"><span class="section-number-3">2.3.</span> Vérification des indicateurs glissants moyens</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 La variable <code>HSHT_MA3</code> (resp. <code>ASHT_MA3</code>) représente le nombre de tirs cadrés moyens sur les trois
@@ -261,15 +282,15 @@ cadrés de cette équipe sur les trois dernière journées passées.
 </p>
 
 <p>
-Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers matchs de Lorient sur la saison
+Le Tableau <a href="#org82d216a">2</a> présente les données des 10 premiers matchs de Lorient sur la saison
 2021-2022. 
 </p>
 
-<table id="orgb89fab9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org82d216a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
-<col  class="org-right" />
+<col  class="org-left" />
 
 <col  class="org-left" />
 
@@ -295,7 +316,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">Date</th>
+<th scope="col" class="org-left">Date</th>
 <th scope="col" class="org-left">HTeam</th>
 <th scope="col" class="org-left">ATeam</th>
 <th scope="col" class="org-right">HRND</th>
@@ -311,7 +332,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </thead>
 <tbody>
 <tr>
-<td class="org-right">2021-08-08</td>
+<td class="org-left">2021-08-08 00:00:00</td>
 <td class="org-left">St Etienne</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">1</td>
@@ -326,7 +347,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-08-13</td>
+<td class="org-left">2021-08-13 00:00:00</td>
 <td class="org-left">Lorient</td>
 <td class="org-left">Monaco</td>
 <td class="org-right">2</td>
@@ -341,7 +362,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-08-22</td>
+<td class="org-left">2021-08-22 00:00:00</td>
 <td class="org-left">Montpellier</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">3</td>
@@ -356,7 +377,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-08-29</td>
+<td class="org-left">2021-08-29 00:00:00</td>
 <td class="org-left">Lens</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">4</td>
@@ -371,7 +392,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-09-10</td>
+<td class="org-left">2021-09-10 00:00:00</td>
 <td class="org-left">Lorient</td>
 <td class="org-left">Lille</td>
 <td class="org-right">5</td>
@@ -386,7 +407,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-09-19</td>
+<td class="org-left">2021-09-19 00:00:00</td>
 <td class="org-left">Reims</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">6</td>
@@ -401,7 +422,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-09-22</td>
+<td class="org-left">2021-09-22 00:00:00</td>
 <td class="org-left">Lorient</td>
 <td class="org-left">Nice</td>
 <td class="org-right">7</td>
@@ -416,7 +437,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-09-25</td>
+<td class="org-left">2021-09-25 00:00:00</td>
 <td class="org-left">Lyon</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">8</td>
@@ -431,7 +452,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-10-03</td>
+<td class="org-left">2021-10-03 00:00:00</td>
 <td class="org-left">Lorient</td>
 <td class="org-left">Clermont</td>
 <td class="org-right">9</td>
@@ -446,7 +467,7 @@ Le Tableau <a href="#orgb89fab9">2</a> présente les données des 10 premiers ma
 </tr>
 
 <tr>
-<td class="org-right">2021-10-17</td>
+<td class="org-left">2021-10-17 00:00:00</td>
 <td class="org-left">Marseille</td>
 <td class="org-left">Lorient</td>
 <td class="org-right">9</td>
@@ -475,13 +496,157 @@ lors de sa 11ème journée.</li>
 </div>
 </div>
 
-<div id="outline-container-org0594e43" class="outline-2">
-<h2 id="org0594e43"><span class="section-number-2">3.</span> Modélisation décisionnelle</h2>
-<div class="outline-text-2" id="text-3">
+
+<div id="outline-container-sec:odds_df" class="outline-2">
+<h2 id="sec:odds_df"><span class="section-number-2">3.</span> Données de cotes</h2>
+<div class="outline-text-2" id="text-sec:odds_df">
 </div>
-<div id="outline-container-org2fcc7b6" class="outline-3">
-<h3 id="org2fcc7b6"><span class="section-number-3">3.1.</span> Généralité</h3>
+
+<div id="outline-container-orgd0ec951" class="outline-3">
+<h3 id="orgd0ec951"><span class="section-number-3">3.1.</span> Rappels</h3>
 <div class="outline-text-3" id="text-3-1">
+<p>
+La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
+toutes deux liées :
+</p>
+<ul class="org-ul">
+<li>En probabilité, la cote, notée \(g_{E}\), associée à l'occurrence d'un événement \(E\) est défini par
+le rapport des probabilités suivantes : 
+\[
+  g_{E} = \frac{\text{Prob}(\text{l'évenement $E$ ne se réalise pas})}{\text{Prob}(\text{l'événement
+  $E$ se réalise})},
+  \]
+que l'on peut réécrire comme suit :
+\[
+  g_{E} = \frac{1 - p_{E}}{p_{E}} = \frac{1}{p_{E}} - 1,
+  \]
+en notant \(p_{E} = \text{Prob}(\text{l'événement E se réalise})\).</li>
+<li><p>
+Dans le monde des bookmakers, la cote associée à l'occurrence d'un événement \(E\) est notée \(c_{E}\)
+et a pour expression :
+</p>
+\begin{equation}
+\label{org58eca6b}
+c_{E} = \frac{1}{p_{E}}.
+\end{equation}
+<p>
+On a donc la relation \(c_{E} = g_{E} + 1\) permettant de relier les deux notions de cotes.
+</p></li>
+</ul>
+
+<p>
+Les données des cotes disponibles dans ce TD sont donc sous la forme \eqref{org58eca6b}.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org113db30" class="outline-3">
+<h3 id="org113db30"><span class="section-number-3">3.2.</span> Présentation des données</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Les données de cotes, référencées dans la suite par données <code>odds</code>, contiennent les cotes proposées
+ par le bookmaker B365 pour le paris "inférieur/supérieur à 2.5 buts" pour un historique de matchs
+ de football masculin. Le Tableau  <a href="#org9ea41ec">3</a> présente une description succintes des
+ variables présentes. 
+</p>
+
+<table id="org9ea41ec" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Tableau 3 :</span> Définition des variables du jeu de données <code>odds</code>.</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Colonne</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">league_id</td>
+<td class="org-left">Identifiant du championnat</td>
+</tr>
+
+<tr>
+<td class="org-left">season_id</td>
+<td class="org-left">Identifiant de la saison</td>
+</tr>
+
+<tr>
+<td class="org-left">Date</td>
+<td class="org-left">Date du match au format %Y-%m-%d</td>
+</tr>
+
+<tr>
+<td class="org-left">HTeam</td>
+<td class="org-left">Équipe à domicile (ED)</td>
+</tr>
+
+<tr>
+<td class="org-left">ATeam</td>
+<td class="org-left">Équipe à l'exterieur (EE)</td>
+</tr>
+
+<tr>
+<td class="org-left">FTG_2.5</td>
+<td class="org-left">Événement : '&lt;2.5' : 2 buts ou moins ont été inscrits dans le match'&gt;2.5' : au moins 3 buts ont été inscrits dans le match</td>
+</tr>
+
+<tr>
+<td class="org-left">odds</td>
+<td class="org-left">Cote de l'événement</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org417ed67" class="outline-3">
+<h3 id="org417ed67"><span class="section-number-3">3.3.</span> Chargement des données</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Charger les données depuis le lien 
+<a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2">https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2</a> et stocker les dans un
+<code>DataFrame</code> nommé <code>odds_df</code> :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">odds_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2"</span>
+<span style="color: #DFAF8F;">odds_df</span> = pd.read_csv(odds_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+</pre>
+</div></li>
+
+<li><p>
+Réaliser les opérations de typage adéquates :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">odds_df</span>[col] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64"</span>)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7e3c6f6" class="outline-2">
+<h2 id="org7e3c6f6"><span class="section-number-2">4.</span> Modélisation décisionnelle</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org277522c" class="outline-3">
+<h3 id="org277522c"><span class="section-number-3">4.1.</span> Généralité</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Dans le cadre de ce TD, nous proposons de réaliser des pronostics sur le nombre total des buts
 inscrits lors d'une rencontre. Afin de simplifier la problématique, nous cherchons uniquement à
@@ -505,7 +670,7 @@ explicatives.
 Formellement, notre problème de pronostic revient alors à estimer la probabilité
 </p>
 \begin{equation}
-\label{org5e8e2fa}
+\label{org6cd4002}
 P(\text{NGFT2.5} = \text{<2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n})
 \end{equation}
 <p>
@@ -518,14 +683,14 @@ soit parce que le calcul n'est pas réalisable en un temps raisonnable.
 </p>
 
 <p>
-Pour contourner ce problème, on approche la probabilité \eqref{org5e8e2fa} par une fonction plus
+Pour contourner ce problème, on approche la probabilité \eqref{org6cd4002} par une fonction plus
 simple à calculer. Cette fonction est également appelée modèle décisionnel, par exemple, le modèle
 de régression logistique utilise la fonction \(\text{logit}\). 
 </p>
 
 <p>
 En notant \(\hat{p}_{\text{<2.5}}(x_{1}, \ldots, x_{n})\) l'estimation de la probabilité
-\eqref{org5e8e2fa} obtenue par le modèle décisionnel utilisé, nous pouvons déduire la règle de 
+\eqref{org6cd4002} obtenue par le modèle décisionnel utilisé, nous pouvons déduire la règle de 
 décision \(\text{R}_{\text{NGFT2.5}}\) générale suivante :
 </p>
 \begin{equation}
@@ -545,6 +710,21 @@ décision qui peut notamment être optimisé en fonction :
 bons pronostics ;</li>
 <li>la probabilité <i>a priori</i> d'observer plus ou moins de 2.5 buts.</li>
 </ul>
+
+<p>
+Enfin, voici deux précisions en termes de vocabulaire :
+</p>
+<ul class="org-ul">
+<li>lorsque l'objectif du problème décisionnel est de prédire/pronostiquer/prévoir/expliquer une
+variable cible de nature catégorielle, on parle de problème de <b>classification</b>.</li>
+<li>lorsque l'on dispose de données dans lesquelles on observe à la fois les variables explicatives et
+la variable cible, on parle de problème <b>supervisé</b>.</li>
+</ul>
+
+<p>
+Par conséquent, nous sommes dans le cadre de ces TD face à un problème de <b>classification
+supervisée</b>.
+</p>
 
 <p>
 <b>Travail à réaliser :</b>
@@ -642,9 +822,9 @@ bénéfice d'un pronostic correct ?</li>
 </div>
 </div>
 
-<div id="outline-container-org8089c6c" class="outline-3">
-<h3 id="org8089c6c"><span class="section-number-3">3.2.</span> Modèle empirique <i>a priori</i></h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org21b30b9" class="outline-3">
+<h3 id="org21b30b9"><span class="section-number-3">4.2.</span> Modèle empirique <i>a priori</i></h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Le modèle empirique <i>a priori</i> consiste à ne pas tenir compte de variables explicatives dans le
 processus décisionnel.
@@ -698,9 +878,9 @@ bons pronostics en fonction de \(\delta\) sur les données disponibles.</li>
 </div>
 </div>
 
-<div id="outline-container-orgb818d38" class="outline-3">
-<h3 id="orgb818d38"><span class="section-number-3">3.3.</span> Modèle empirique <code>HSHT_MA3</code></h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org53c9977" class="outline-3">
+<h3 id="org53c9977"><span class="section-number-3">4.3.</span> Modèle empirique <code>HSHT_MA3</code></h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 Dans cette section, nous considérons le modèle empirique de pronostic de la variable <code>NGFT2.5</code>
 tenant compte de la variable explicative <code>HSHT_MA3</code> uniquement.
@@ -742,17 +922,115 @@ Créer une nouvelle variable <code>HSHT_MA3d</code> correspondant à la discrét
 
 <li><p>
 Estimer la probabilité conditionnelle empirique \(\hat{P}(\text{NGFT2.5} |
-   \text{HSHT_MA3d}\) à partir des données disponibles et stocker le résultat dans un <code>DataFrame</code>
-<code>model_msht_ma3d_df</code>
+   \text{HSHT_MA3d})\) à partir des données disponibles et stocker le résultat dans un <code>DataFrame</code>
+<code>model_hsht_ma3d_df</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">model_msht_ma3d_df</span> = \
+<pre class="src src-python"><span style="color: #DFAF8F;">model_hsht_ma3d_df</span> = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_df.groupby([<span style="color: #CC9393;">"HSHT_MA3d"</span>])[<span style="color: #CC9393;">"NGFT2.5"</span>]\
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .unstack()
-model_msht_ma3d_df
+model_hsht_ma3d_df
 </pre>
 </div></li>
+
+<li><p>
+En déduire la règle de pronostic pour \(\delta = 0.5\). La règle de pronostic est attendue sous la
+forme d'une <code>Series</code>, nommée <code>rd_hsht_ma3d_50</code>, ayant pour index les valeurs possibles de la variable <code>HSHT_MA3d</code> et pour
+valeurs les pronostics associés (<code>&lt;2.5</code> ou <code>&gt;2.5</code>). Assigner à l'attribut <code>name</code> de la <code>Series</code>
+obtenue le label <code>"NGFT2.5_pred_50"</code>.
+</p>
+
+<p>
+<b>Aide</b> : Importer <code>numpy</code> (<code>import numpy as np</code>) et consulter l'aide de la méthode <code>np.where</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> numpy <span style="color: #F0DFAF; font-weight: bold;">as</span> np
+
+<span style="color: #DFAF8F;">rd_hsht_ma3d_50</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.Series(np.where(model_hsht_ma3d_df[<span style="color: #CC9393;">"&lt;2.5"</span>] &gt; 0.5, <span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>),
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> index=model_hsht_ma3d_df.index,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> name=<span style="color: #CC9393;">"NGFT2.5_pred_50"</span>)
+rd_hsht_ma3d_50
+</pre>
+</div></li>
+
+<li><p>
+Utiliser la règle de décision précédente (\(\delta = 0.5\)) afin de pronostiquer la variable
+<code>NGFT2.5</code> sur les données disponibles. Le résultat attendu est une <code>Series</code> ayant pour index les
+variables permettant d'identifier un match de manière unique et pour valeurs le résultat du
+pronostic de chaque match.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">var_fixture_id</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>]
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
+<span style="color: #DFAF8F;">model_hsht_ma3d_pred_50</span> = fixtures_df.set_index(<span style="color: #CC9393;">"HSHT_MA3d"</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .join(rd_hsht_ma3d_50)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .set_index(var_fixture_id)[<span style="color: #CC9393;">"NGFT2.5_pred_50"</span>]
+model_hsht_ma3d_pred_50
+</pre>
+</div>
+<p>
+La méthode <code>.join</code> permet par défaut de faire une jointure à gauche entre le <code>DataFrame</code> qui
+appelle la méthode et un <code>DataFrame</code> ou une <code>Serie</code> partageant le même index (c'est-à-dire des
+lignes ayant des noms en commun).
+Ceci explique pourquoi on commence par réindexer <code>fixtures_df</code> avec la variable <code>HSHT_MA3d</code> afin
+de partager le même index que la <code>Series</code> <code>rd_hsht_ma3d_50</code>. Après la jointure, on change l'index
+avec les variables permettant d'identifier sans ambiguïté un match.
+</p></li>
+
+<li><p>
+Calculer la matrice de confusion des pronostics réalisées précédemment :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">ct_hsht_ma3d_pred_50</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.crosstab(fixtures_df.set_index(var_fixture_id)[<span style="color: #CC9393;">"NGFT2.5"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   model_hsht_ma3d_pred_50)
+ct_hsht_ma3d_pred_50
+</pre>
+</div>
+<p>
+Interpréter le tableau obtenu.
+</p></li>
+
+<li><p>
+En déduire le pourcentage de bons pronostics de la règle de décision avec \(\delta = 0.5\).
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">perf_hsht_ma3d_50</span> = (ct_hsht_ma3d_pred_50.iat[0, 0] + ct_hsht_ma3d_pred_50.iat[1, 1])/ct_hsht_ma3d_pred_50.values.<span style="color: #DCDCCC; font-weight: bold;">sum</span>()
+perf_hsht_ma3d_50
+</pre>
+</div></li>
+
+<li><p>
+Appliquer de nouveau les traitements précédents en utilisant le seuil de décision \(\delta =
+   0.52\). 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">rd_hsht_ma3d_52</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.Series(np.where(model_hsht_ma3d_df[<span style="color: #CC9393;">"&lt;2.5"</span>] &gt; 0.52, <span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>),
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> index=model_hsht_ma3d_df.index,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> name=<span style="color: #CC9393;">"NGFT2.5_pred_52"</span>)
+<span style="color: #DFAF8F;">model_hsht_ma3d_pred_52</span> = fixtures_df.set_index(<span style="color: #CC9393;">"HSHT_MA3d"</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .join(rd_hsht_ma3d_52)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .set_index(var_fixture_id)[<span style="color: #CC9393;">"NGFT2.5_pred_52"</span>]
+<span style="color: #DFAF8F;">ct_hsht_ma3d_pred_52</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.crosstab(fixtures_df.set_index(var_fixture_id)[<span style="color: #CC9393;">"NGFT2.5"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   model_hsht_ma3d_pred_52)
+<span style="color: #DFAF8F;">perf_hsht_ma3d_52</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   (ct_hsht_ma3d_pred_52.iat[0, 0] + ct_hsht_ma3d_pred_52.iat[1, 1])/ct_hsht_ma3d_pred_52.values.<span style="color: #DCDCCC; font-weight: bold;">sum</span>()
+perf_hsht_ma3d_52
+</pre>
+</div></li>
+
+<li>Analyser les résultats et comparer les caractéristiques des deux règles de pronostic mises
+en oeuvre précédemment. Selon vous, quelle règle est la plus pertinente pour un parieur ?</li>
 </ol>
 </div>
 </div>
