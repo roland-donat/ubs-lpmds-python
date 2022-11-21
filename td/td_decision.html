@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Analyses décisionnelles</title>
+<title>Modélisation décisionnelles</title>
 <meta name="author" content="Roland Donat" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
@@ -40,46 +40,46 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Analyses décisionnelles</h1>
+<h1 class="title">Modélisation décisionnelles</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org586eb61">1. Contexte</a></li>
-<li><a href="#orgc76d3ef">2. Données de matchs</a>
+<li><a href="#org9ea5552">1. Contexte</a></li>
+<li><a href="#org07fec73">2. Données de matchs</a>
 <ul>
-<li><a href="#orgf5a26f8">2.1. Présentation des données</a></li>
-<li><a href="#orga29729e">2.2. Chargement des données</a></li>
-<li><a href="#org3a3cbe1">2.3. Vérification des indicateurs glissants moyens</a></li>
+<li><a href="#org772698c">2.1. Présentation des données</a></li>
+<li><a href="#org4984796">2.2. Chargement des données</a></li>
+<li><a href="#orgcfcfbfc">2.3. Vérification des indicateurs glissants moyens</a></li>
 </ul>
 </li>
 <li><a href="#sec:odds_df">3. Données de cotes</a>
 <ul>
-<li><a href="#org68cf11c">3.1. Rappels</a></li>
-<li><a href="#org267c51a">3.2. Présentation des données</a></li>
-<li><a href="#orgfa40f59">3.3. Chargement des données</a></li>
+<li><a href="#org938c0f1">3.1. Rappels</a></li>
+<li><a href="#org7f92ea1">3.2. Présentation des données</a></li>
+<li><a href="#orgdd4b37b">3.3. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#org5621528">4. Modélisation décisionnelle</a>
+<li><a href="#orga52af26">4. Modélisation décisionnelle</a>
 <ul>
-<li><a href="#org2ca670e">4.1. Généralité</a></li>
-<li><a href="#org230cdc5">4.2. Modèle empirique <i>a priori</i></a></li>
+<li><a href="#org6aca375">4.1. Généralité</a></li>
+<li><a href="#orgc1bc47e">4.2. Modèle empirique <i>a priori</i></a></li>
 <li><a href="#sec:model_emp_hsht_ma3d">4.3. Modèle empirique <code>HSHT_MA3</code></a></li>
 </ul>
 </li>
-<li><a href="#orgf7a81ab">5. Évaluation des performances</a>
+<li><a href="#orgca3b76d">5. Évaluation des performances</a>
 <ul>
-<li><a href="#orgd01416f">5.1. Données d'apprentissage et de test</a></li>
-<li><a href="#org657f845">5.2. Apprentissage des modèles</a>
+<li><a href="#org1e02552">5.1. Données d'apprentissage et de test</a></li>
+<li><a href="#org93e4350">5.2. Apprentissage des modèles</a>
 <ul>
-<li><a href="#org5da6f6b">5.2.1. Modèle empirique <code>HSHT_MA3d</code></a></li>
-<li><a href="#org54c9c11">5.2.2. Modèle empirique <code>HSHT_ASHT_MA3d</code></a></li>
+<li><a href="#org63e0773">5.2.1. Modèle empirique <code>HSHT_MA3d</code></a></li>
+<li><a href="#orga2275a6">5.2.2. Modèle empirique <code>HSHT_ASHT_MA3d</code></a></li>
 </ul>
 </li>
-<li><a href="#orgb804f83">5.3. Évaluation des modèles</a>
+<li><a href="#org2155c8f">5.3. Évaluation des modèles</a>
 <ul>
-<li><a href="#org3dfdd8d">5.3.1. Modèle empirique <code>HSHT_MA3d</code></a></li>
-<li><a href="#org778f8e9">5.3.2. Modèle empirique <code>HSHT_ASHT_MA3d</code></a></li>
+<li><a href="#orge03d10c">5.3.1. Modèle empirique <code>HSHT_MA3d</code></a></li>
+<li><a href="#orgf652d96">5.3.2. Modèle empirique <code>HSHT_ASHT_MA3d</code></a></li>
 </ul>
 </li>
 </ul>
@@ -93,14 +93,14 @@
 
 
 
-<div id="org2616d6a" class="figure">
+<div id="org49e62d2" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org586eb61" class="outline-2">
-<h2 id="org586eb61"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-org9ea5552" class="outline-2">
+<h2 id="org9ea5552"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans les TD précédents, nous avons pris connaissance de la librairie <code>Pandas</code> en explorant certaines
@@ -134,20 +134,20 @@ Les objectifs de ce TD sont :
 </div>
 </div>
 
-<div id="outline-container-orgc76d3ef" class="outline-2">
-<h2 id="orgc76d3ef"><span class="section-number-2">2.</span> Données de matchs</h2>
+<div id="outline-container-org07fec73" class="outline-2">
+<h2 id="org07fec73"><span class="section-number-2">2.</span> Données de matchs</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgf5a26f8" class="outline-3">
-<h3 id="orgf5a26f8"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-org772698c" class="outline-3">
+<h3 id="org772698c"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Comme dans les TD précédents, les données historiques de matchs, référencées dans la suite par données
  <code>fixtures</code>, contiennent un historique de matchs sur différents championnats. Le Tableau
- <a href="#orgbba16c1">1</a> présente  une description succinctes des variables présentes.
+ <a href="#orgbe01be2">1</a> présente  une description succinctes des variables présentes.
 </p>
 
-<table id="orgbba16c1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgbe01be2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -250,8 +250,8 @@ Comme dans les TD précédents, les données historiques de matchs, référencé
 </table>
 </div>
 </div>
-<div id="outline-container-orga29729e" class="outline-3">
-<h3 id="orga29729e"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org4984796" class="outline-3">
+<h3 id="org4984796"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -285,8 +285,8 @@ Réaliser les opérations de typage adéquates :
 </div>
 
 
-<div id="outline-container-org3a3cbe1" class="outline-3">
-<h3 id="org3a3cbe1"><span class="section-number-3">2.3.</span> Vérification des indicateurs glissants moyens</h3>
+<div id="outline-container-orgcfcfbfc" class="outline-3">
+<h3 id="orgcfcfbfc"><span class="section-number-3">2.3.</span> Vérification des indicateurs glissants moyens</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 La variable <code>HSHT_MA3</code> (resp. <code>ASHT_MA3</code>) représente le nombre de tirs cadrés moyens sur les trois
@@ -299,11 +299,11 @@ cadrés de cette équipe sur les trois dernière journées passées.
 </p>
 
 <p>
-Le Tableau <a href="#org7638eba">2</a> présente les données des 10 premiers matchs de Lorient sur la saison
+Le Tableau <a href="#org04e9bdb">2</a> présente les données des 10 premiers matchs de Lorient sur la saison
 2021-2022. 
 </p>
 
-<table id="org7638eba" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org04e9bdb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 2 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -519,8 +519,8 @@ lors de sa 11ème journée.</li>
 <div class="outline-text-2" id="text-sec:odds_df">
 </div>
 
-<div id="outline-container-org68cf11c" class="outline-3">
-<h3 id="org68cf11c"><span class="section-number-3">3.1.</span> Rappels</h3>
+<div id="outline-container-org938c0f1" class="outline-3">
+<h3 id="org938c0f1"><span class="section-number-3">3.1.</span> Rappels</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 La notion de cote possède plusieurs définitions. Voici deux formulations usuelles qui sont en fait
@@ -543,7 +543,7 @@ Dans le monde des bookmakers, la cote associée à l'occurrence d'un événement
 et a pour expression :
 </p>
 \begin{equation}
-\label{org1dd20a7}
+\label{orgc486d93}
 c_{E} = \frac{1}{p_{E}}.
 \end{equation}
 <p>
@@ -552,22 +552,22 @@ On a donc la relation \(c_{E} = g_{E} + 1\) permettant de relier les deux notion
 </ul>
 
 <p>
-Les données des cotes disponibles dans ce TD sont donc sous la forme \eqref{org1dd20a7}.
+Les données des cotes disponibles dans ce TD sont donc sous la forme \eqref{orgc486d93}.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org267c51a" class="outline-3">
-<h3 id="org267c51a"><span class="section-number-3">3.2.</span> Présentation des données</h3>
+<div id="outline-container-org7f92ea1" class="outline-3">
+<h3 id="org7f92ea1"><span class="section-number-3">3.2.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les données de cotes, référencées dans la suite par données <code>odds</code>, contiennent les cotes proposées
  par le bookmaker B365 pour le pari "inférieur/supérieur à 2.5 buts" pour un historique de matchs
- de football masculin. Le Tableau  <a href="#orgdaa7245">3</a> présente une description succinctes des
+ de football masculin. Le Tableau  <a href="#orgf4b9716">3</a> présente une description succinctes des
  variables présentes. 
 </p>
 
-<table id="orgdaa7245" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgf4b9716" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 3 :</span> Définition des variables du jeu de données <code>odds</code>.</caption>
 
 <colgroup>
@@ -620,8 +620,8 @@ Les données de cotes, référencées dans la suite par données <code>odds</cod
 </table>
 </div>
 </div>
-<div id="outline-container-orgfa40f59" class="outline-3">
-<h3 id="orgfa40f59"><span class="section-number-3">3.3.</span> Chargement des données</h3>
+<div id="outline-container-orgdd4b37b" class="outline-3">
+<h3 id="orgdd4b37b"><span class="section-number-3">3.3.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 <b>Travail à réaliser :</b>
@@ -657,12 +657,12 @@ Réaliser les opérations de typage adéquates :
 </div>
 
 
-<div id="outline-container-org5621528" class="outline-2">
-<h2 id="org5621528"><span class="section-number-2">4.</span> Modélisation décisionnelle</h2>
+<div id="outline-container-orga52af26" class="outline-2">
+<h2 id="orga52af26"><span class="section-number-2">4.</span> Modélisation décisionnelle</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org2ca670e" class="outline-3">
-<h3 id="org2ca670e"><span class="section-number-3">4.1.</span> Généralité</h3>
+<div id="outline-container-org6aca375" class="outline-3">
+<h3 id="org6aca375"><span class="section-number-3">4.1.</span> Généralité</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Dans le cadre de ce TD, nous proposons de réaliser des pronostics sur le nombre total des buts
@@ -687,7 +687,7 @@ explicatives.
 Formellement, notre problème de pronostic revient alors à estimer la probabilité
 </p>
 \begin{equation}
-\label{orgde10322}
+\label{org8f78114}
 P(\text{NGFT2.5} = \text{<2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n})
 \end{equation}
 <p>
@@ -700,14 +700,14 @@ soit parce que le calcul n'est pas réalisable en un temps raisonnable.
 </p>
 
 <p>
-Pour contourner ce problème, on approche la probabilité \eqref{orgde10322} par une fonction plus
+Pour contourner ce problème, on approche la probabilité \eqref{org8f78114} par une fonction plus
 simple à calculer. Cette fonction est également appelée modèle décisionnel, par exemple, le modèle
 de régression logistique utilise la fonction \(\text{logit}\). 
 </p>
 
 <p>
 En notant \(\hat{p}_{\text{<2.5}}(x_{1}, \ldots, x_{n})\) l'estimation de la probabilité
-\eqref{orgde10322} obtenue par le modèle décisionnel utilisé, nous pouvons déduire la règle de 
+\eqref{org8f78114} obtenue par le modèle décisionnel utilisé, nous pouvons déduire la règle de 
 décision \(\text{R}_{\text{NGFT2.5}}\) générale suivante :
 </p>
 \begin{equation}
@@ -805,8 +805,8 @@ bénéfice d'un pronostic correct ?</li>
 </div>
 </div>
 
-<div id="outline-container-org230cdc5" class="outline-3">
-<h3 id="org230cdc5"><span class="section-number-3">4.2.</span> Modèle empirique <i>a priori</i></h3>
+<div id="outline-container-orgc1bc47e" class="outline-3">
+<h3 id="orgc1bc47e"><span class="section-number-3">4.2.</span> Modèle empirique <i>a priori</i></h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Le modèle empirique <i>a priori</i> consiste à ne pas tenir compte de variables explicatives dans le
@@ -958,12 +958,12 @@ en oeuvre précédemment. Selon vous, quelle règle est la plus pertinente pour 
 </div>
 </div>
 
-<div id="outline-container-orgf7a81ab" class="outline-2">
-<h2 id="orgf7a81ab"><span class="section-number-2">5.</span> Évaluation des performances</h2>
+<div id="outline-container-orgca3b76d" class="outline-2">
+<h2 id="orgca3b76d"><span class="section-number-2">5.</span> Évaluation des performances</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgd01416f" class="outline-3">
-<h3 id="orgd01416f"><span class="section-number-3">5.1.</span> Données d'apprentissage et de test</h3>
+<div id="outline-container-org1e02552" class="outline-3">
+<h3 id="org1e02552"><span class="section-number-3">5.1.</span> Données d'apprentissage et de test</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Dans la section précédente, nous avons élaboré deux modèles décisionnelles et testé différentes
@@ -1025,12 +1025,12 @@ matchs ayant eu lieu lors de la saison <code>2019-2020</code> et après.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org657f845" class="outline-3">
-<h3 id="org657f845"><span class="section-number-3">5.2.</span> Apprentissage des modèles</h3>
+<div id="outline-container-org93e4350" class="outline-3">
+<h3 id="org93e4350"><span class="section-number-3">5.2.</span> Apprentissage des modèles</h3>
 <div class="outline-text-3" id="text-5-2">
 </div>
-<div id="outline-container-org5da6f6b" class="outline-4">
-<h4 id="org5da6f6b"><span class="section-number-4">5.2.1.</span> Modèle empirique <code>HSHT_MA3d</code></h4>
+<div id="outline-container-org63e0773" class="outline-4">
+<h4 id="org63e0773"><span class="section-number-4">5.2.1.</span> Modèle empirique <code>HSHT_MA3d</code></h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 Il s'agit de reprendre le modèle décisionnel construit en Section <a href="#sec:model_emp_hsht_ma3d">4.3</a>, à
@@ -1059,8 +1059,8 @@ uniquement.
 </ol>
 </div>
 </div>
-<div id="outline-container-org54c9c11" class="outline-4">
-<h4 id="org54c9c11"><span class="section-number-4">5.2.2.</span> Modèle empirique <code>HSHT_ASHT_MA3d</code></h4>
+<div id="outline-container-orga2275a6" class="outline-4">
+<h4 id="orga2275a6"><span class="section-number-4">5.2.2.</span> Modèle empirique <code>HSHT_ASHT_MA3d</code></h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 Nous proposons d'améliorer le modèle précédent en tenant également du nombre de tirs cadrés moyen
@@ -1088,12 +1088,12 @@ avec \(x_{1}, x_{2} \in \{]-\infty, 3], ]3, 6], ]6, \infty[\}\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgb804f83" class="outline-3">
-<h3 id="orgb804f83"><span class="section-number-3">5.3.</span> Évaluation des modèles</h3>
+<div id="outline-container-org2155c8f" class="outline-3">
+<h3 id="org2155c8f"><span class="section-number-3">5.3.</span> Évaluation des modèles</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-org3dfdd8d" class="outline-4">
-<h4 id="org3dfdd8d"><span class="section-number-4">5.3.1.</span> Modèle empirique <code>HSHT_MA3d</code></h4>
+<div id="outline-container-orge03d10c" class="outline-4">
+<h4 id="orge03d10c"><span class="section-number-4">5.3.1.</span> Modèle empirique <code>HSHT_MA3d</code></h4>
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 <b>Travail à réaliser :</b>
@@ -1204,8 +1204,8 @@ fig
 </div>
 </div>
 
-<div id="outline-container-org778f8e9" class="outline-4">
-<h4 id="org778f8e9"><span class="section-number-4">5.3.2.</span> Modèle empirique <code>HSHT_ASHT_MA3d</code></h4>
+<div id="outline-container-orgf652d96" class="outline-4">
+<h4 id="orgf652d96"><span class="section-number-4">5.3.2.</span> Modèle empirique <code>HSHT_ASHT_MA3d</code></h4>
 <div class="outline-text-4" id="text-5-3-2">
 <p>
 <b>Travail à réaliser :</b>
