@@ -45,21 +45,21 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgff2001a">1. Contexte et objectif</a></li>
+<li><a href="#org6e0d59c">1. Contexte et objectif</a></li>
 <li><a href="#sec:odds_df">2. Données de cotes</a>
 <ul>
-<li><a href="#orgb169c80">2.1. Présentation des données</a></li>
-<li><a href="#orge0ddcd1">2.2. Chargement des données</a></li>
+<li><a href="#org4514649">2.1. Présentation des données</a></li>
+<li><a href="#org2907558">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#org8d1e77d">3. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</a></li>
-<li><a href="#org001ee81">4. Distribution des cotes</a>
+<li><a href="#org41df78b">3. Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</a></li>
+<li><a href="#org7a6bf92">4. Distribution des cotes</a>
 <ul>
-<li><a href="#org5c1f7e8">4.1. Utilisation d'un <i>boxplot</i></a></li>
-<li><a href="#orgc84e452">4.2. Utilisation d'un histogramme</a></li>
+<li><a href="#org4b3dcb6">4.1. Utilisation d'un <i>boxplot</i></a></li>
+<li><a href="#orgffbfb07">4.2. Utilisation d'un histogramme</a></li>
 </ul>
 </li>
-<li><a href="#org2ccfef8">5. Analyse des probabilités estimées par le bookmaker</a></li>
+<li><a href="#orgd47d047">5. Analyse des probabilités estimées par le bookmaker</a></li>
 </ul>
 </div>
 </div>
@@ -69,15 +69,15 @@
 
 
 
-<div id="org12874f1" class="figure">
+<div id="orgf6d4a27" class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png" alt="1920px-Minard.png" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Carte figurative des pertes successives en hommes de l’Armée française dans la campagne de Russie en 1812-1813. Auteur <a href="https://fr.wikipedia.org/wiki/Charles_Joseph_Minard">Charles Joseph Minard</a>.  <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Minard.png/1920px-Minard.png">Source</a>.</p>
 </div>
 
 
-<div id="outline-container-orgff2001a" class="outline-2">
-<h2 id="orgff2001a"><span class="section-number-2">1.</span> Contexte et objectif</h2>
+<div id="outline-container-org6e0d59c" class="outline-2">
+<h2 id="org6e0d59c"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 L'objectif de ce TD est de parcourir les principales fonctionnalités de la librairie <code>Plotly</code> afin
@@ -124,17 +124,17 @@ On a donc la relation \(c_{E} = g_{E} + 1\) permettant de relier les deux notion
 </div>
 
 
-<div id="outline-container-orgb169c80" class="outline-3">
-<h3 id="orgb169c80"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-org4514649" class="outline-3">
+<h3 id="org4514649"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données de cotes, référencées dans la suite par données <code>odds</code>, contiennent les cotes proposées
  par le bookmaker B365 pour le paris "inférieur/supérieur à 2.5 buts" pour un historique de matchs
- de football masculin. Le Tableau  <a href="#org3f630f2">1</a> présente une description succintes des
+ de football masculin. Le Tableau  <a href="#org5ce36d5">1</a> présente une description succintes des
  variables présentes. 
 </p>
 
-<table id="org3f630f2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org5ce36d5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>odds</code>.</caption>
 
 <colgroup>
@@ -187,8 +187,8 @@ Les données de cotes, référencées dans la suite par données <code>odds</cod
 </table>
 </div>
 </div>
-<div id="outline-container-orge0ddcd1" class="outline-3">
-<h3 id="orge0ddcd1"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-org2907558" class="outline-3">
+<h3 id="org2907558"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Nous allons tout d'abord charger les données <code>odds</code> dans notre environnement
@@ -201,12 +201,37 @@ Ces données sont accessibles <i>via</i> les liens suivants :
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Lire les données depuis le lien 
+<li><p>
+Lire les données depuis le lien 
 <a href="https://roland-donat.github.io/ubs-lpmds-python/td/data/odds.csv.bz2">https://roland-donat.github.io/ubs-lpmds-python/td/data/odds.csv.bz2</a> et stocker les dans un
-<code>DataFrame</code> nommé <code>odds_df</code>.</li>
+<code>DataFrame</code> nommé <code>odds_df</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">odds_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/odds.csv.bz2"</span>
+<span style="color: #DFAF8F;">odds_df</span> = pd.read_csv(odds_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+</pre>
+</div></li>
+
 <li>Analyser rapidement les données avec les méthodes <code>.head</code>, <code>.info</code> et <code>.describe</code>.</li>
 
-<li>Ajuster le type des colonnes.</li>
+<li><p>
+Ajuster le type des colonnes.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">odds_df</span>[col] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64"</span>)
+</pre>
+</div></li>
+
 <li>Que remarquez-vous sur la structure de ces données ? Chaque ligne est-elle associée à un match
 différent ?</li>
 </ol>
@@ -215,8 +240,8 @@ différent ?</li>
 </div>
 
 
-<div id="outline-container-org8d1e77d" class="outline-2">
-<h2 id="org8d1e77d"><span class="section-number-2">3.</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</h2>
+<div id="outline-container-org41df78b" class="outline-2">
+<h2 id="org41df78b"><span class="section-number-2">3.</span> Premiers pas avec <code>plotly.express</code> : visualisation des cotes moyennes</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <b>Travail à réaliser :</b>
@@ -313,9 +338,21 @@ fig
 </pre>
 </div></li>
 
-<li>Calculer la moyenne des cotes pour le pari <i>upper-under 2.5</i> pour chaque championnat. Le résultat
+<li><p>
+Calculer la moyenne des cotes pour le pari <i>upper-under 2.5</i> pour chaque championnat. Le résultat
 sera mis sous la forme d'un <code>DataFrame</code> nommé <code>odds_league_id_ftg_mean_df</code> contenant une colonne
-<code>league_id</code>, une colonne <code>FTG_2.5</code> et une colonne <code>odds</code>.</li>
+<code>league_id</code>, une colonne <code>FTG_2.5</code> et une colonne <code>odds</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">odds_league_id_ftg_mean_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   odds_df.groupby([<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>])[<span style="color: #CC9393;">"odds"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .mean()\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  .reset_index()
+</pre>
+</div></li>
+
 <li><p>
 On peut alors réaliser un diagramme en bar pour visualiser la moyenne des cotes pour le pari <i>upper-under 2.5</i>
 pour chaque championnat :
@@ -342,18 +379,65 @@ préciser les colonnes à utiliser dans la construction du graphe.</li>
 ; la colonne <code>league_id</code> pour la coloration.</li>
 </ul></li>
 
-<li>Modifier dans le graphique précédent le titre de la légende "league_id" en "Championnat".</li>
-<li>Utiliser l'argument <code>barmode</code> afin d'afficher une barre par championnat (mode <code>"group"</code>) au lieu
-de la représentation empilée (mode <code>"stack"</code>) précédente.</li>
-<li>Reprendre le graphique précédent en affichant à présent le championnat en abscisses avec une
-coloration sur la colonne du nombre de buts.</li>
+<li><p>
+Modifier dans le graphique précédent le titre de la légende "league_id" en "Championnat".
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fig</span> = px.bar(odds_league_id_ftg_mean_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5 par championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>, <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div></li>
+
+<li><p>
+Utiliser l'argument <code>barmode</code> afin d'afficher une barre par championnat (mode <code>"group"</code>) au lieu
+de la représentation empilée (mode <code>"stack"</code>) précédente.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+px.bar(odds_league_id_ftg_mean_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5 par championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>, <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  barmode=<span style="color: #CC9393;">"group"</span>)
+</pre>
+</div></li>
+
+<li><p>
+Reprendre le graphique précédent en affichant à présent le championnat en abscisses avec une
+coloration sur la colonne du nombre de buts. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+px.bar(odds_league_id_ftg_mean_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Cotes moyennes pour le pari upper-under 2.5 par championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels={<span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>, <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>, <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  barmode=<span style="color: #CC9393;">"group"</span>)
+</pre>
+</div></li>
+
 <li>Comparer les deux visualisations précédentes en termes d'informations apportées.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org001ee81" class="outline-2">
-<h2 id="org001ee81"><span class="section-number-2">4.</span> Distribution des cotes</h2>
+<div id="outline-container-org7a6bf92" class="outline-2">
+<h2 id="org7a6bf92"><span class="section-number-2">4.</span> Distribution des cotes</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Pour représenter une distribution, on utilise usuellement les boites à moustaches (boxplot) et les
@@ -361,8 +445,8 @@ histogrammes.
 </p>
 </div>
 
-<div id="outline-container-org5c1f7e8" class="outline-3">
-<h3 id="org5c1f7e8"><span class="section-number-3">4.1.</span> Utilisation d'un <i>boxplot</i></h3>
+<div id="outline-container-org4b3dcb6" class="outline-3">
+<h3 id="org4b3dcb6"><span class="section-number-3">4.1.</span> Utilisation d'un <i>boxplot</i></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 <b>Travail à réaliser :</b>
@@ -403,17 +487,77 @@ fig
 </pre>
 </div></li>
 
-<li>Dans les <i>tooltips</i> du graphique précédent, changer le nom des colonnes en termes du langage
-naturel, par exemple : <code>"league_id"</code> en <code>"Championnat"</code>, <code>"season_id"</code> en <code>"Saison"</code>, etc.</li>
-<li>Construire un <code>boxplot</code> représentant l'évolution de la distribution des cotes de chacun des deux
-événements en fonction des saisons (en abscisses).</li>
-<li>Mettre à jour le graphique précédent pour que l'axe des abscisses soit ordonné par saison
-croissante. Aide : utiliser l'argument <a href="https://plotly.com/python/categorical-axes/"><code>category_orders</code></a>.</li>
+<li><p>
+Dans les <i>tooltips</i> du graphique précédent, changer le nom des colonnes en termes du langage
+naturel, par exemple : <code>"league_id"</code> en <code>"Championnat"</code>, <code>"season_id"</code> en <code>"Saison"</code>, etc.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fig_labels</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"odds"</span>: <span style="color: #CC9393;">"cote"</span>,
+}
+
+<span style="color: #DFAF8F;">fig</span> = px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels=fig_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>hover_data=<span style="color: #DCDCCC; font-weight: bold;">list</span>(fig_labels.keys()),
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>width=600, height= 600)
+fig.update_traces(width=0.5)
+fig
+</pre>
+</div></li>
+
+<li><p>
+Construire un <code>boxplot</code> représentant l'évolution de la distribution des cotes de chacun des deux
+événements en fonction des saisons (en abscisses).
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"season_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5 en fonction des saisons"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=fig_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  hover_data=<span style="color: #DCDCCC; font-weight: bold;">list</span>(fig_labels.keys()))
+</pre>
+</div></li>
 </ol>
+
+
+<ul class="org-ul">
+<li><p>
+Mettre à jour le graphique précédent pour que l'axe des abscisses soit ordonné par saison
+croissante. Aide : utiliser l'argument <a href="https://plotly.com/python/categorical-axes/"><code>category_orders</code></a>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"season_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5 en fonction des saisons"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=fig_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  category_orders={<span style="color: #CC9393;">"season_id"</span>: odds_df[<span style="color: #CC9393;">"season_id"</span>].cat.categories},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  hover_data=<span style="color: #DCDCCC; font-weight: bold;">list</span>(fig_labels.keys()))
+</pre>
+</div></li>
+</ul>
 </div>
 </div>
-<div id="outline-container-orgc84e452" class="outline-3">
-<h3 id="orgc84e452"><span class="section-number-3">4.2.</span> Utilisation d'un histogramme</h3>
+
+<div id="outline-container-orgffbfb07" class="outline-3">
+<h3 id="orgffbfb07"><span class="section-number-3">4.2.</span> Utilisation d'un histogramme</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -460,14 +604,32 @@ fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
 fig
 </pre>
 </div></li>
-<li>Créer les histogrammes de cotes pour chacun des deux événements et en fonction du championnat
-avec un seul appel à la fonction <code>px.histogram</code>.</li>
+<li><p>
+Créer les histogrammes de cotes pour chacun des deux événements et en fonction du championnat
+avec un seul appel à la fonction <code>px.histogram</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fig</span> = px.histogram(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  facet_row=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  facet_col=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"odds"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des cotes pour le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=fig_labels)
+fig.update_layout(showlegend=<span style="color: #BFEBBF;">False</span>)
+fig
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-org2ccfef8" class="outline-2">
-<h2 id="org2ccfef8"><span class="section-number-2">5.</span> Analyse des probabilités estimées par le bookmaker</h2>
+
+
+<div id="outline-container-orgd47d047" class="outline-2">
+<h2 id="orgd47d047"><span class="section-number-2">5.</span> Analyse des probabilités estimées par le bookmaker</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 La Section <a href="#sec:odds_df">2</a> explique comment passer de la cote proposée par un bookmaker pour un
@@ -486,19 +648,99 @@ problèmes d'échelles liés aux valeurs extrêmes.
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Ajouter une colonne <code>prob</code> au DataFrame <code>odds_df</code> contenant la probabilité estimée de
-chacun des deux événements <code>&lt;2.5</code> et <code>&gt;2.5</code> par le bookmaker.</li>
-<li>Représenter graphiquement la distribution des probabilités estimées calculées précédemment pour
-chaque événement, chaque saison et chaque championnat.</li>
-<li>Calculer pour chaque match la somme des probabilités estimées par le bookmaker des deux événements
+<li><p>
+Ajouter une colonne <code>prob</code> au DataFrame <code>odds_df</code> contenant la probabilité estimée de
+chacun des deux événements <code>&lt;2.5</code> et <code>&gt;2.5</code> par le bookmaker.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"prob"</span>] = odds_df[<span style="color: #CC9393;">"odds"</span>]**(-1)
+</pre>
+</div></li>
+
+<li><p>
+Représenter graphiquement la distribution des probabilités estimées calculées précédemment pour
+chaque événement, chaque saison et chaque championnat.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fig_labels</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"prob"</span>: <span style="color: #CC9393;">"Probabilit&#233; estim&#233;e"</span>,
+}
+
+<span style="color: #DFAF8F;">fig</span> = px.box(odds_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"season_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>y=<span style="color: #CC9393;">"prob"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>facet_row=<span style="color: #CC9393;">"FTG_2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=<span style="color: #CC9393;">"Distribution des probabilit&#233;s estim&#233;es par le bookmaker le pari upper-under 2.5"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>category_orders={<span style="color: #CC9393;">"season_id"</span>: odds_df[<span style="color: #CC9393;">"season_id"</span>].cat.categories},
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels=fig_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>hover_data=<span style="color: #DCDCCC; font-weight: bold;">list</span>(fig_labels.keys()))
+fig
+</pre>
+</div></li>
+
+<li><p>
+Calculer pour chaque match la somme des probabilités estimées par le bookmaker des deux événements
 <code>&lt;2.5</code> et <code>&gt;2.5</code> <b>moins un</b>. Le résultat sera stocké dans un nouveau <code>DataFrame</code> nommé
-<code>marge_ftg_df</code> et la colonne contenant la somme moins un sera nommée <code>marge</code>.</li>
+<code>marge_ftg_df</code> et la colonne contenant la somme moins un sera nommée <code>marge</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">var_idx</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"Date"</span>, <span style="color: #CC9393;">"HomeTeam"</span>, <span style="color: #CC9393;">"AwayTeam"</span>]
+<span style="color: #DFAF8F;">odds_ftg_grp</span> = odds_df.set_index(var_idx).groupby(<span style="color: #CC9393;">"FTG_2.5"</span>)[<span style="color: #CC9393;">"prob"</span>]
+<span style="color: #DFAF8F;">marge_ftg_s</span> = (odds_ftg_grp.get_group(<span style="color: #CC9393;">"&lt;2.5"</span>) + odds_ftg_grp.get_group(<span style="color: #CC9393;">"&gt;2.5"</span>) - 1)
+<span style="color: #DFAF8F;">marge_ftg_s</span> = marge_ftg_s.rename(<span style="color: #CC9393;">"marge"</span>)
+<span style="color: #DFAF8F;">marge_ftg_df</span> = marge_ftg_s.reset_index()
+</pre>
+</div></li>
+
 <li>Que représente les valeurs de la colonne <code>marge</code> à votre avis ?</li>
 
-<li>Représenter avec la fonction <code>px.scatter</code>, le nuage de points des matchs caractérisés par leur
+<li><p>
+Représenter avec la fonction <code>px.scatter</code>, le nuage de points des matchs caractérisés par leur
 marge et la probabilité estimée de l'événement <code>"&lt;2.5"</code>, et ce, en créant un
 sous-graphique par championnat et par saison. On ne s'intéressera qu'aux données des saisons
-2019-2020 et 2020-2021.</li>
+2019-2020 et 2020-2021.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #5F7F5F;">#</span><span style="color: #7F9F7F;">marge_ftg_dates_df["Date_bis"] = marge_ftg_dates_df["Date"].dt.st</span>
+
+<span style="color: #DFAF8F;">fig_labels</span> = {
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"league_id"</span>: <span style="color: #CC9393;">"Championnat"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"season_id"</span>: <span style="color: #CC9393;">"Saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HomeTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; domicile"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"AwayTeam"</span>: <span style="color: #CC9393;">"&#201;quipe &#224; l'exterieur"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"FTG_2.5"</span>: <span style="color: #CC9393;">"Nombre de buts"</span>,    
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"prob"</span>: <span style="color: #CC9393;">"Probabilit&#233; estim&#233;e"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"marge"</span>: <span style="color: #CC9393;">"Marge"</span>,
+}
+
+<span style="color: #DFAF8F;">marge_prob_ftg_df</span> = pd.concat([marge_ftg_s, odds_ftg_grp.get_group(<span style="color: #CC9393;">"&lt;2.5"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> axis=1).reset_index()
+
+<span style="color: #DFAF8F;">idx_season_id</span> = marge_prob_ftg_df[<span style="color: #CC9393;">"season_id"</span>].astype(<span style="color: #DCDCCC; font-weight: bold;">str</span>) &gt;= <span style="color: #CC9393;">"2019-2020"</span>
+
+px.scatter(marge_prob_ftg_df.loc[idx_season_id],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"marge"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"prob"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  color=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  facet_row=<span style="color: #CC9393;">"season_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  facet_col=<span style="color: #CC9393;">"league_id"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=fig_labels)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
