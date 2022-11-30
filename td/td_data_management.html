@@ -24,18 +24,18 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0646cd1">1. Contexte et objectif</a></li>
-<li><a href="#orgb8bba81">2. Données historiques</a>
+<li><a href="#org630bb8c">1. Contexte et objectif</a></li>
+<li><a href="#org7e9ef9d">2. Données historiques</a>
 <ul>
-<li><a href="#orga5eb03c">2.1. Présentation des données</a></li>
-<li><a href="#org7893216">2.2. Chargement des données</a></li>
+<li><a href="#org4075639">2.1. Présentation des données</a></li>
+<li><a href="#orgc2cc34b">2.2. Chargement des données</a></li>
 </ul>
 </li>
-<li><a href="#org9ea2835">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
-<li><a href="#org7ba193d">4. Sélection des données</a></li>
-<li><a href="#org519daab">5. Typage des données</a></li>
-<li><a href="#org78a611f">6. Traitement des données manquantes</a></li>
-<li><a href="#orgdf8c975">7. Premières analyses descriptives</a></li>
+<li><a href="#orgdc2de45">3. Notions de <code>DataFrame</code> et <code>Series</code></a></li>
+<li><a href="#orgdea3657">4. Sélection des données</a></li>
+<li><a href="#org7a332dc">5. Typage des données</a></li>
+<li><a href="#org678a138">6. Traitement des données manquantes</a></li>
+<li><a href="#orgf73ffb0">7. Premières analyses descriptives</a></li>
 </ul>
 </div>
 </div>
@@ -45,14 +45,14 @@
 
 
 
-<div id="org69a54c6" class="figure">
+<div id="org0f5e385" class="figure">
 <p><img src="https://www.agent-x.com.au/wp-content/uploads/2011/06/Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" alt="Perfect-Programmer-dfe194b-e8d3b11-b960bd5.jpg" />
 </p>
 </div>
 
 
-<div id="outline-container-org0646cd1" class="outline-2">
-<h2 id="org0646cd1"><span class="section-number-2">1.</span> Contexte et objectif</h2>
+<div id="outline-container-org630bb8c" class="outline-2">
+<h2 id="org630bb8c"><span class="section-number-2">1.</span> Contexte et objectif</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Quelle est la probabilité pour Lorient de vaincre Paris en Ligue 1 compte tenu des joueurs prévus
@@ -93,20 +93,20 @@ Ce TD porte en particulier sur le premier point.
 </div>
 
 
-<div id="outline-container-orgb8bba81" class="outline-2">
-<h2 id="orgb8bba81"><span class="section-number-2">2.</span> Données historiques</h2>
+<div id="outline-container-org7e9ef9d" class="outline-2">
+<h2 id="org7e9ef9d"><span class="section-number-2">2.</span> Données historiques</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orga5eb03c" class="outline-3">
-<h3 id="orga5eb03c"><span class="section-number-3">2.1.</span> Présentation des données</h3>
+<div id="outline-container-org4075639" class="outline-3">
+<h3 id="org4075639"><span class="section-number-3">2.1.</span> Présentation des données</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Les données historiques, référencées dans la suite par données <code>fixtures</code>, contiennent un historique
- de matchs sur différents championnats. Le Tableau <a href="#org2ae0f00">1</a> présente
+ de matchs sur différents championnats. Le Tableau <a href="#orga5da26e">1</a> présente
  une description succintes des variables présentes.
 </p>
 
-<table id="org2ae0f00" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orga5da26e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Tableau 1 :</span> Définition des variables du jeu de données <code>fixtures</code>.</caption>
 
 <colgroup>
@@ -205,12 +205,22 @@ Les données historiques, référencées dans la suite par données <code>fixtur
 <td class="org-left">AY</td>
 <td class="org-left">Nombre de cartons jaunes reçus par l'EE</td>
 </tr>
+
+<tr>
+<td class="org-left">HR</td>
+<td class="org-left">Nombre de cartons rouges reçus par l'ED</td>
+</tr>
+
+<tr>
+<td class="org-left">AR</td>
+<td class="org-left">Nombre de cartons rouges reçus par l'EE</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-org7893216" class="outline-3">
-<h3 id="org7893216"><span class="section-number-3">2.2.</span> Chargement des données</h3>
+<div id="outline-container-orgc2cc34b" class="outline-3">
+<h3 id="orgc2cc34b"><span class="section-number-3">2.2.</span> Chargement des données</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Nous allons tout d'abord charger les données <code>fixtures</code> dans notre environnement
@@ -274,8 +284,8 @@ Utiliser les méthodes <code>.head</code>, <code>.info</code> et <code>.describe
 </div>
 
 
-<div id="outline-container-org9ea2835" class="outline-2">
-<h2 id="org9ea2835"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
+<div id="outline-container-orgdc2de45" class="outline-2">
+<h2 id="orgdc2de45"><span class="section-number-2">3.</span> Notions de <code>DataFrame</code> et <code>Series</code></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La librairie <code>Pandas</code> travaille principalement avec deux types d'objets :
@@ -447,8 +457,8 @@ de 0 avec la méthode <code>.reset_index</code> :
 </div>
 </div>
 
-<div id="outline-container-org7ba193d" class="outline-2">
-<h2 id="org7ba193d"><span class="section-number-2">4.</span> Sélection des données</h2>
+<div id="outline-container-orgdea3657" class="outline-2">
+<h2 id="orgdea3657"><span class="section-number-2">4.</span> Sélection des données</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Au cours de vos analyses, vous ressentirez probablement vite le besoin de filtrer les données
@@ -583,8 +593,8 @@ fixtures_df.loc[~condition_fra]
 </div>
 
 
-<div id="outline-container-org519daab" class="outline-2">
-<h2 id="org519daab"><span class="section-number-2">5.</span> Typage des données</h2>
+<div id="outline-container-org7a332dc" class="outline-2">
+<h2 id="org7a332dc"><span class="section-number-2">5.</span> Typage des données</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Afin de faciliter le traitement ultérieur des données, il convient de s'assurer que chaque colonne
@@ -691,8 +701,8 @@ Identifier les matchs des championnats français ayant eu lieu en 2010 et les st
 </div>
 </div>
 
-<div id="outline-container-org78a611f" class="outline-2">
-<h2 id="org78a611f"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
+<div id="outline-container-org678a138" class="outline-2">
+<h2 id="org678a138"><span class="section-number-2">6.</span> Traitement des données manquantes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Les données manquantes dans les <code>DataFrame</code> et les <code>Series</code> sont représentées par le terme <code>NaN</code>
@@ -774,8 +784,8 @@ l'<a href="https://fr.wikipedia.org/wiki/Algorithme_esp%C3%A9rance-maximisation"
 </div>
 
 
-<div id="outline-container-orgdf8c975" class="outline-2">
-<h2 id="orgdf8c975"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
+<div id="outline-container-orgf73ffb0" class="outline-2">
+<h2 id="orgf73ffb0"><span class="section-number-2">7.</span> Premières analyses descriptives</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Dans cette section, nous allons réaliser quelques analyses descriptives basiques permettant
