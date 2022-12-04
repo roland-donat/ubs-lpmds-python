@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mise en oeuvre de la régression logistique avec =Python= et =statsmodels=</title>
+<meta name="author" content="Roland Donat" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
+<link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Mise en oeuvre de la régression logistique avec <code>Python</code> et <code>statsmodels</code></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0beaecf">1. Contexte</a></li>
+<li><a href="#org5e855d8">2. Préparation des données</a></li>
+<li><a href="#org6ad1635">3. Modélisation</a>
+<ul>
+<li><a href="#org0fcc16e">3.1. Problématique</a></li>
+<li><a href="#org6279a2c">3.2. Préparation de la variable cible</a></li>
+<li><a href="#orge315e51">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</a></li>
+<li><a href="#org3a8a1e7">3.4. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></a></li>
+<li><a href="#org214a87f">3.5. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+
+
+
+<div id="org5c9ce18" class="figure">
+<p><img src="https://miro.medium.com/max/1000/1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" alt="1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" />
+</p>
+<p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Original comic by <a href="https://www.instagram.com/sandserifcomics/">sandserif</a></p>
+</div>
+
+
+<div id="outline-container-org0beaecf" class="outline-2">
+<h2 id="org0beaecf"><span class="section-number-2">1.</span> Contexte</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Dans cet ultime TD du module <code>Python</code>, nous allons mettre en oeuvre la méthode de régression
+logistique afin prévoir le nombre de buts d'une rencontre de football. Nous reprendrons les données
+du TD précédent et nous simplifierons donc la problématique en cherchant à pronostiquer si le nombre de buts d'une rencontre
+est inférieur ou supérieur à 2.5 buts.
+</p>
+
+<p>
+Ce problème s'apparente donc à un problème de classification supervisée dans lequel nous allons
+entraîner un modèle statistique à partir de données contenant à la fois le nombre de buts de chaque rencontre
+et des caractéristiques permettant de l'expliquer.
+</p>
+
+<p>
+<b>Rappels :</b>
+</p>
+<ul class="org-ul">
+<li>Créez un <i>notebook</i> dans le lequel vous allez écrire, exécuter et documenter votre code <code>Python</code>.</li>
+<li>Prenez le temps de bien présenter et bien rédiger votre <i>notebook</i>.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5e855d8" class="outline-2">
+<h2 id="org5e855d8"><span class="section-number-2">2.</span> Préparation des données</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Nous reprenons les données utilisées dans le <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_decision.html">TD de Modélisation décisionnelles</a>, à savoir :
+</p>
+<ul class="org-ul">
+<li>un historique de rencontre référencé par <code>fixtures</code> ;</li>
+<li>un historique de cotes référencé par <code>odds</code>.</li>
+</ul>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Charger les données historiques dans votre environnement :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures_indics_all.csv.bz2"</span>
+<span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"RHT"</span>, <span style="color: #CC9393;">"RFT"</span>, <span style="color: #CC9393;">"phase"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT"</span>] = fixtures_df[<span style="color: #CC9393;">"HGFT"</span>] + fixtures_df[<span style="color: #CC9393;">"AGFT"</span>]
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Discr&#233;tisation de la variable donnant le nombre de buts</span>
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFTd"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> labels=[<span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>])
+</pre>
+</div></li>
+
+<li><p>
+Discrétiser la variable <code>HRND</code> (numéro du match de la saison pour l'équipe à domicile)
+en quatre intervalles \(]0, 10], ]10, 20], ]20, 30], ]30, \infty[\). Labelliser ces intervalles
+<code>Q1</code>, <code>Q2</code>, <code>Q3</code> et <code>Q4</code> de manière à indiquer les quatre parties d'une saison. Le résultat de la
+discrétisation de la variable <code>HRND</code> est à stocker dans une nouvelle
+variable appelée <code>phase</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"phase"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"HRND"</span>], bins=[0, 10, 20, 30, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> labels=[<span style="color: #CC9393;">"Q1"</span>, <span style="color: #CC9393;">"Q2"</span>, <span style="color: #CC9393;">"Q3"</span>, <span style="color: #CC9393;">"Q4"</span>])
+</pre>
+</div></li>
+
+<li><p>
+Charger les données de cotes :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">odds_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2"</span>
+<span style="color: #DFAF8F;">odds_df</span> = pd.read_csv(odds_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"NGFT2.5"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">odds_df</span>[col] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6ad1635" class="outline-2">
+<h2 id="org6ad1635"><span class="section-number-2">3.</span> Modélisation</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org0fcc16e" class="outline-3">
+<h3 id="org0fcc16e"><span class="section-number-3">3.1.</span> Problématique</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Nous cherchons à pronostiquer si le nombre total des buts
+inscrits lors d'une rencontre est inférieur (ou supérieur) à 2.5 buts.
+</p>
+
+<p>
+D'un point de vue probabiliste, on note \(Y\) la variable aléatoire représentant le nombre de
+buts inscrit sur une rencontre discrétisée au seuil de 2.5 buts (c'est-à-dire la variable <code>NGFT2.5d</code>
+dans les données <code>fixtures</code>). Il s'agit donc d'une variable binaire ayant pour valeurs <code>&lt;2.5</code> ou
+<code>&gt;2.5</code>. 
+</p>
+
+<p>
+La variable \(Y\) est appelée variable cible ou variable à expliquer du problème
+décisionnel. L'objectif est alors de prévoir/pronostiquer les valeurs de la variable cible à partir 
+d'observations de variables disponibles. Ces variables observées sont appelées variables
+explicatives.
+</p>
+
+<p>
+Formellement, notre problème de pronostic revient alors à estimer la probabilité
+</p>
+\begin{equation}
+\label{orge10c0f8}
+P(Y = \text{>2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n}),
+\end{equation}
+<p>
+où :
+</p>
+<ul class="org-ul">
+<li>\(x_{1}, \ldots, x_{n}\) sont des observations des variables explicatives \(X_{1}, \ldots, X_{n}\) que
+nous avons choisi d'utiliser dans nos pronostics.</li>
+<li>La modalité <code>&gt;2.5</code> a été choisi comme modalité de référence.</li>
+</ul>
+
+<p>
+Dans ce TD, nous allons modéliser la loi conditionnelle \(Y | X_{1}, \ldots, X_{n}\) à l'aide d'une
+fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de régression logistique.  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6279a2c" class="outline-3">
+<h3 id="org6279a2c"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Installer le module <code>patsy</code> avec la commande <code>!pip install patsy</code>, puis importer le module dans
+votre environnement.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> patsy
+</pre>
+</div></li>
+<li><p>
+Le module <code>patsy</code> apporte des fonctionnalités de préparation de données afin de réaliser des
+modélisations statistiques. La fonction <code>patsy.dmatrices</code> permet en particulier de créer une
+matrice de variables d'expérience (<i>design matrix</i>) à partir de données en utilisant une syntaxe analogue aux
+<i>formulas</i> dans le logiciel <code>R</code>.  
+</p>
+
+<p>
+Observer et tenter de comprendre les sorties de la fonction <code>patsy.dmatrices</code> de l'exemple
+suivant : 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_test1_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ 1"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div>
+
+<p>
+Faire de même dans les deux cas suivants :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_test2_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ 1 + HSHT_MA3"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+
+<span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_test3_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ HSHT_MA3 + ASHT_MA3 + phase"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+<li><p>
+Réaliser une analyse graphique bivariée de la variable cible par rapport aux variables
+<code>HSHT_MA3</code>, <code>ASHT_MA3</code>, <code>phase</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> plotly.express <span style="color: #F0DFAF; font-weight: bold;">as</span> px
+
+<span style="color: #DFAF8F;">plot_labels</span>={
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"NGFTd"</span>: <span style="color: #CC9393;">"Nombre de buts inscrit"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HSHT_MA3"</span>: <span style="color: #CC9393;">"Tirs cadr&#233;s MA3 pour l'&#201;D"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"ASHT_MA3"</span>: <span style="color: #CC9393;">"Tirs cadr&#233;s MA3 pour l'&#201;E"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"phase"</span>: <span style="color: #CC9393;">"Phase de la saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"prop"</span>: <span style="color: #CC9393;">"Proportion"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   }
+
+px.box(fixtures_df, y=<span style="color: #CC9393;">"NGFTd"</span>, x=<span style="color: #CC9393;">"HSHT_MA3"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des tirs cadr&#233;s MA3 de l'&#201;D conditionnellement au nombre de buts"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=plot_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  )
+px.box(fixtures_df, y=<span style="color: #CC9393;">"NGFTd"</span>, x=<span style="color: #CC9393;">"ASHT_MA3"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution des tirs cadr&#233;s MA3 de l'&#201;E conditionnellement au nombre de buts"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=plot_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  )
+
+<span style="color: #DFAF8F;">ngftd_phase_df</span> = fixtures_df.groupby([<span style="color: #CC9393;">"phase"</span>])[<span style="color: #CC9393;">"NGFTd"</span>]\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .rename(<span style="color: #CC9393;">"prop"</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .reset_index()
+px.bar(ngftd_phase_df, x=<span style="color: #CC9393;">"phase"</span>, y=<span style="color: #CC9393;">"prop"</span>, color=<span style="color: #CC9393;">"NGFTd"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  title=<span style="color: #CC9393;">"Distribution du nombre de buts par rapport &#224; la phase de la saison"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=plot_labels,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  barmode=<span style="color: #CC9393;">"relative"</span>)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orge315e51" class="outline-3">
+<h3 id="orge315e51"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
+explicative pour expliquer la variable cible \(Y\).
+</p>
+
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Donner l'expression de l'estimation de \(\beta_{0}\), notée \(\hat{\beta}_{0}\), dans ce
+modèle. Interpréter la valeur de ce paramètre.</li>
+<li>Installer la librairie <code>statsmodels</code> qui donne accès à différentes techniques de modélisation
+statistique. Commande : <code>!pip install statsmodels</code>.</li>
+<li><p>
+Importer le module <code>statsmodels.api</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> statsmodels.api <span style="color: #F0DFAF; font-weight: bold;">as</span> sm
+</pre>
+</div></li>
+<li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
+<li><p>
+Préparer les données en utilisant la fonction <code>patsy.dmatrices</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_mod0_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ 1"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+<li><p>
+Utiliser la fonction <code>Logit</code> pour entraîner votre modèle trivial et interpréter les résultats
+obtenus.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">D&#233;claration du mod&#232;le</span>
+<span style="color: #DFAF8F;">mod0</span> = sm.Logit(NGFTd_df[<span style="color: #CC9393;">"NGFTd[&gt;2.5]"</span>], features_mod0_df) 
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apprentissage du mod&#232;le</span>
+<span style="color: #DFAF8F;">mod0</span> = mod0.fit()
+mod0.summary()
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3a8a1e7" class="outline-3">
+<h3 id="org3a8a1e7"><span class="section-number-3">3.4.</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li><p>
+Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_mod1_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ 1 + HSHT_MA3"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+
+<li><p>
+Utiliser la fonction <code>Logit</code> pour entraîner le modèle.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">mod1</span> = sm.Logit(NGFTd_df[<span style="color: #CC9393;">"NGFTd[&gt;2.5]"</span>], features_mod1_df) 
+<span style="color: #DFAF8F;">mod1</span> = mod1.fit()
+mod1.summary()
+</pre>
+</div></li>
+
+<li>Interpréter les caractéristiques du modèle.</li>
+<li><p>
+Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} = 0) = \pi_{1}(0)\),
+\(P(Y=\text{>2.5} | X_{1} = 6) = \pi_{1}(6)\) et \(P(Y=\text{>2.5} | X_{1} = -10) = \pi_{1}(-10)\) dans le modèle
+\(\mathcal{M}_{1}\) en utilisant la méthode <code>.predict</code> du modèle. Interpréter ces probabilités en français.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">features_mod1_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"HSHT_M3"</span>, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.DataFrame({<span style="color: #CC9393;">"HSHT_M3"</span>: [0, 6, -10]}), 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+<span style="color: #DFAF8F;">pi_mod1_ex</span> = mod1.predict(features_mod1_ex_df)
+</pre>
+</div></li>
+
+<li><p>
+Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} =
+   x_{1}) = \pi(x_{1})\) avec \(x_{1}\) variant de -50 à 50 dans le modèle
+\(\mathcal{M}_{1}\).
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">features_mod1_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"HSHT_M3"</span>, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.DataFrame({<span style="color: #CC9393;">"HSHT_M3"</span>: <span style="color: #DCDCCC; font-weight: bold;">range</span>(-50,50,1)}), 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+<span style="color: #DFAF8F;">pi_mod1_ex</span> = mod1.predict(features_mod1_ex_df)
+</pre>
+</div></li>
+
+<li><p>
+Représenter graphiquement les probabilités de la question précédente et interpréter ce graphique.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+px.line(x=features_mod1_ex_df[<span style="color: #CC9393;">"HSHT_M3"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   y=pi_mod1_ex,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   title=<span style="color: #CC9393;">"&#201;volution de la probabilit&#233; a posteriori en fonction de la variable HSHT_M3 dans le mod&#232;le M1"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   label={<span style="color: #CC9393;">"x"</span>: <span style="color: #CC9393;">"Tirs cadr&#233;s MA3 pour l'&#201;D"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"y"</span>: <span style="color: #CC9393;">"Probabilit&#233; a posteriori"</span>})
+</pre>
+</div></li>
+
+<li><p>
+Calculer le rapport de cotes (<i>odds ratio</i>) associé à la variable <code>HSHT_M3</code>. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> numpy <span style="color: #F0DFAF; font-weight: bold;">as</span> np
+np.exp(model.params)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org214a87f" class="outline-3">
+<h3 id="org214a87f"><span class="section-number-3">3.5.</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+<b>Travail à réaliser :</b> 
+</p>
+<ol class="org-ol">
+<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li><p>
+Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">NGFTd_df</span>, <span style="color: #DFAF8F;">features_mod2_df</span> = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(<span style="color: #CC9393;">"NGFTd ~ 1 + HSHT_MA3 + ASHT_MA3 + phase"</span>, data=fixtures_df, 
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+</pre>
+</div></li>
+
+<li><p>
+Utiliser la fonction <code>Logit</code> pour entraîner le modèle.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #DFAF8F;">mod2</span> = sm.Logit(NGFTd_df[<span style="color: #CC9393;">"NGFTd[&gt;2.5]"</span>], features_mod2_df) 
+<span style="color: #DFAF8F;">mod2</span> = mod2.fit()
+mod2.summary()
+</pre>
+</div></li>
+
+<li>Interpréter les caractéristiques du modèle.</li>
+<li><p>
+Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1}=0, X_{2}=0, X_{3}=\text{Q1}) = \pi_{2}(0, 0, \text{Q1})\),
+\(P(Y=\text{>2.5} | X_{1} = 6, X_{2} = 2, X_{3}=\text{Q4}) = \pi_{2}(6, 2, \text{Q4})\) et
+\(P(Y=\text{>2.5} | X_{1}=2, X_{2} = 6, X_{3}=\text{Q4}) = \pi_{2}(2, 6, \text{Q4})\) dans le modèle
+\(\mathcal{M}_{2}\) en utilisant la méthode <code>.predict</code> du modèle. Interpréter ces probabilités en français.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">features_raw_df</span> = pd.DataFrame({
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"HSHT_M3"</span>: [0, 6, 2],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"ASHT_M3"</span>: [0, 2, 6],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #CC9393;">"phase"</span>: [<span style="color: #CC9393;">"Q1"</span>, <span style="color: #CC9393;">"Q4"</span>, <span style="color: #CC9393;">"Q4"</span>]})
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">On renseigne la nature de la variable phase en pr&#233;cisant les modalit&#233;s possibles</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Important pour utiliser dmatrix par la suite</span>
+<span style="color: #DFAF8F;">features_raw_df</span>[<span style="color: #CC9393;">"phase"</span>] = \
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   features_raw_df[<span style="color: #CC9393;">"phase"</span>].astype(<span style="color: #CC9393;">"category"</span>)\
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .cat.set_categories(fixtures_df[<span style="color: #CC9393;">"phase"</span>].cat.categories)
+
+<span style="color: #DFAF8F;">features_mod2_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"1 + HSHT_M3 + ASHT_M3 + phase"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   features_raw_df,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
+<span style="color: #DFAF8F;">pi_mod2_ex</span> = mod2.predict(features_mod2_ex_df)
+</pre>
+</div></li>
+<li><p>
+Calculer les rapports de cotes du modèle. 
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
+<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
+<span style="color: #F0DFAF; font-weight: bold;">import</span> numpy <span style="color: #F0DFAF; font-weight: bold;">as</span> np
+np.exp(model.params)
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

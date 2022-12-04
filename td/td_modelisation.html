@@ -5,180 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mise en oeuvre de la démarche de modélisation décisionnelle avec <code>Python</code></title>
-<meta name="generator" content="Org mode" />
+<title>Introduction à la modélisation décisionnelle avec =Python=</title>
 <meta name="author" content="Roland Donat" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -187,52 +16,6 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -253,25 +36,22 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
-<h1 class="title">Mise en oeuvre de la démarche de modélisation décisionnelle avec <code>Python</code></h1>
-<div id="table-of-contents">
+<div id="content" class="content">
+<h1 class="title">Introduction à la modélisation décisionnelle avec <code>Python</code></h1>
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org99b8ea6">1. Objectif</a></li>
-<li><a href="#org1790e79">2. Préparation des données</a></li>
-<li><a href="#org7c7ff07">3. Modélisation statistique</a></li>
-<li><a href="#orgdd2899f">4. Analyse exploratoire</a></li>
-<li><a href="#orgf26f94f">5. Modélisation logistique</a>
+<li><a href="#org0da7f4c">1. Contexte</a></li>
+<li><a href="#org9cd005f">2. Préparation des données</a></li>
+<li><a href="#org0421056">3. Modélisation</a>
 <ul>
-<li><a href="#orgb6d325e">5.1. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
-<li><a href="#org6b0fda4">5.2. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</a></li>
-<li><a href="#orgf7c6921">5.3. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</a></li>
+<li><a href="#orga612258">3.1. Problématique</a></li>
+<li><a href="#orgd692328">3.2. Préparation de la variable cible</a></li>
+<li><a href="#org48a44f9">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</a></li>
 </ul>
 </li>
 </ul>
@@ -283,170 +63,162 @@ for the JavaScript code in this tag.
 
 
 
-<div class="figure">
+<div id="org5e7f5da" class="figure">
 <p><img src="https://miro.medium.com/max/1000/1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" alt="1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Original comic by <a href="https://www.instagram.com/sandserifcomics/">sandserif</a></p>
 </div>
 
 
-<div id="outline-container-org99b8ea6" class="outline-2">
-<h2 id="org99b8ea6"><span class="section-number-2">1</span> Objectif</h2>
+<div id="outline-container-org0da7f4c" class="outline-2">
+<h2 id="org0da7f4c"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Dans ce TD, nous allons mettre en oeuvre la méthode de régression logistique afin prévoir
-l'occurrence des résultats d'une rencontre de football.
+Dans cet ultime TD du module <code>Python</code>, nous allons mettre en oeuvre la méthode de régression
+logistique afin prévoir le nombre de buts d'une rencontre de football. Nous reprendrons les données
+du TD précédent et nous simplifierons donc la problématique en cherchant à pronostiquer si le nombre de buts d'une rencontre
+est inférieur ou supérieur à 2.5 buts.
 </p>
 
 <p>
-Suite aux travaux exploratoires menés dans les TD précédents, nous avons remarqué les points
-suivants :
+Ce problème s'apparente donc à un problème de classification supervisée dans lequel nous allons
+entraîner un modèle statistique à partir de données contenant à la fois le nombre de buts de chaque rencontre
+et des caractéristiques permettant de l'expliquer.
+</p>
+
+<p>
+<b>Rappels :</b>
 </p>
 <ul class="org-ul">
-<li>la variance des cotes des matchs nuls est plus faible comparée à celles des autres résultats ;</li>
-<li>les statistiques a priori montrent plus souvent des situations de <i>value bets</i> pour le match nul et
-la victoire à domicile.</li>
+<li>Créez un <i>notebook</i> dans le lequel vous allez écrire, exécuter et documenter votre code <code>Python</code>.</li>
+<li>Prenez le temps de bien présenter et bien rédiger votre <i>notebook</i>.</li>
 </ul>
-
-<p>
-Pour ces raisons, nous nous intéresserons en priorité à la prévision des matchs nuls et des
-victoires à domicile.
-</p>
-
-<p>
-La problématique s'apparente donc à un problème de classification supervisée dans lequel nous allons
-entraîner un modèle statistique à partir de données contenant à la fois le résultat des rencontres
-et des caractéristiques permettant d'expliquer les résultats observés.
-</p>
 </div>
 </div>
 
-<div id="outline-container-org1790e79" class="outline-2">
-<h2 id="org1790e79"><span class="section-number-2">2</span> Préparation des données</h2>
+
+<div id="outline-container-org9cd005f" class="outline-2">
+<h2 id="org9cd005f"><span class="section-number-2">2.</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Voici les instructions à suivre pour débuter ce TD :
+Nous reprenons les données utilisées dans le <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_decision.html">TD de Modélisation décisionnelles</a>, à savoir :
 </p>
 <ul class="org-ul">
-<li>Ouvrir ce <a href="https://colab.research.google.com/drive/1tFgkh9QywaFj6k5DVyG1oeggoI4dfT8J?usp=sharing"><i>notebook</i></a>.</li>
-<li>Créer en une copie dans votre Drive <i>via</i> le menu <code>Fichier/Enregistrer une copie dans Drive</code>.</li>
+<li>un historique de rencontre référencé par <code>fixtures</code> ;</li>
+<li>un historique de cotes référencé par <code>odds</code>.</li>
 </ul>
 
 <p>
-Nous travaillerons à partir d'un historique de rencontres (<code>fixtures</code>) contenant, en plus des
-données de contexte bien connues à présent, une liste d'indicateurs caractérisant la rencontre.
-</p>
-
-<p>
-On rappelle que le nom des indicateurs est préfixé par les lettres <code>H</code> et <code>A</code> :
-</p>
-<ul class="org-ul">
-<li>le préfixe <code>H</code> désigne un indicateur concernant l'équipe à domicile ;</li>
-<li>le préfixe <code>A</code> désigne un indicateur concernant l'équipe à l'extérieur.</li>
-</ul>
-
-<p>
-Les indicateurs suivants sont disponibles à l'issue d'une rencontre :
-</p>
-<ul class="org-ul">
-<li><code>HS</code>, <code>AS</code> : nombre de tirs ;</li>
-<li><code>HST</code>, <code>AST</code> : nombre de tirs cadrés réalisés ;</li>
-<li><code>HDB</code>, <code>ADB</code> : nombre d'arrêts décisifs ;</li>
-<li><code>HGT</code>, <code>AGT</code> : nombre de tirs cadrés de l'adversaire ;</li>
-<li><code>HSTR</code>, <code>ASTR</code> : taux de tirs cadrés ;</li>
-<li><code>HDBR</code>, <code>ADBR</code> : taux d'arrêts décisifs.</li>
-</ul>
-
-<p>
-Nous disposons également d'une version "moyenne glissante" des indicateurs précédents permettant
-d'avoir une information sur l'état de performance moyen des équipes avant chaque rencontre. Chaque
-indicateur glissant est suffixé par <code>_M[N]</code> où N indique le nombre de rencontres passées utilisées
-pour calculer l'indicateur. 
-</p>
-
-<p>
-Enfin, nous utiliserons les données de cotes (<code>odds</code>) disponibles afin d'évaluer les
-performances de nos modèles et éventuellement affiner les prises de décision.
-</p>
-</div>
-</div>
-
-<div id="outline-container-org7c7ff07" class="outline-2">
-<h2 id="org7c7ff07"><span class="section-number-2">3</span> Modélisation statistique</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-Nous nous plaçons dans le cadre probabiliste et considérons le résultat d'une rencontre, ainsi que
-les faits de jeu observés (e.g. nombre moyen de tirs cadrés, corners, fautes, etc.) comme des
-réalisations de variables aléatoires.
-</p>
-
-<p>
-Dans notre étude, nous cherchons à expliquer/prévoir les réalisations d'une variable aléatoire
-\(Y_{\text{res}}\) indiquant un des résultats possibles de la rencontre. Par exemple :
-</p>
-<ul class="org-ul">
-<li>\(Y_{\text{D}}\) est une variable aléatoire binaire qui vaut 1 s'il y a eu match nul et 0 sinon ;</li>
-<li>\(Y_{\text{H}}\) est une variable aléatoire binaire qui vaut 1 s'il y a eu victoire à domicile et 0 sinon.</li>
-</ul>
-
-<p>
-Nous cherchons donc à estimer la probabilité \(P(Y_{\text{res}} = 1| X_{1} = x_{1}, \ldots,
-X_{n} = x_{n})\) à partir de l'observation d'une série de réalisations de variables explicatives,
-notées \(x_{1}, \ldots, x_{n}\). Nous pourrons ainsi comparer nos estimation de \(\hat{P}(Y_{\text{res}} = 1| X_{1} = x_{1}, \ldots,
-X_{n} = x_{n})\) avec la cote du résultat correspondant du bookmaker afin d'identifier éventuellement une situation de <i>value
-bet</i>.
-</p>
-
-<p>
-Dans ce TD, nous allons modéliser la loi conditionnelle \(Y_{\text{res}} | X_{1}, \ldots, X_{n}\) à l'aide d'une fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de
-régression logistique. 
-</p>
-
-<p>
-<b>Attention :</b>
-On rappelle qu'il est important d'utiliser des variables explicatives observables avant la rencontre étudiée. En
-effet, il n'est par exemple pas possible de se servir des faits de jeu observés à la fin d'une
-rencontre pour prédire les résultats de cette même rencontre. 
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgdd2899f" class="outline-2">
-<h2 id="orgdd2899f"><span class="section-number-2">4</span> Analyse exploratoire</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-<b>Travail à réaliser :</b> 
+<b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Identifier et analyser rapidement la variable à expliquer. Quel est le problème ? Faites un choix
-sur les modalités \(y_{-}\) et \(y_{+}\) à considérer dans votre étude.</li>
 <li><p>
-Réaliser une binarisation de la variable à expliquer à l'aide du module <code>patsy</code> et en particulier
-en utilisant la fonction <code>dmatrices</code> :
+Charger les données historiques dans votre environnement :
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">FTR_bin_df</span>, <span style="color: #DFAF8F;">tmp</span> = patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, return_type=<span style="color: #CC9393;">"dataframe"</span>)
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
+
+<span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures_indics_all.csv.bz2"</span>
+<span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"RHT"</span>, <span style="color: #CC9393;">"RFT"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT"</span>] = fixtures_df[<span style="color: #CC9393;">"HGFT"</span>] + fixtures_df[<span style="color: #CC9393;">"AGFT"</span>]
+<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT2.5"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   labels=[<span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>])
 </pre>
 </div></li>
-<li>Produire une ou deux visualisations de variables explicatives potentielles conditionnellement à
-la variable cible considérée.</li>
+
+<li><p>
+Charger les données de cotes :
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #DFAF8F;">odds_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2"</span>
+<span style="color: #DFAF8F;">odds_df</span> = pd.read_csv(odds_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
+
+<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"NGFT2.5"</span>]
+<span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">odds_df</span>[col] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+
+<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orgf26f94f" class="outline-2">
-<h2 id="orgf26f94f"><span class="section-number-2">5</span> Modélisation logistique</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org0421056" class="outline-2">
+<h2 id="org0421056"><span class="section-number-2">3.</span> Modélisation</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orga612258" class="outline-3">
+<h3 id="orga612258"><span class="section-number-3">3.1.</span> Problématique</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
-Pour mettre en oeuvre la régression logistique, nous allons utiliser la librairie <code>statsmodels</code> qui donne
-accès à la fonction <code>Logit</code> permettant de créer un modèle logistique.
+Nous cherchons à pronostiquer si le nombre total des buts
+inscrits lors d'une rencontre est inférieur (ou supérieur) à 2.5 buts.
+</p>
+
+<p>
+D'un point de vue probabiliste, on note \(Y\) la variable aléatoire représentant le nombre de
+buts inscrit sur une rencontre discrétisée au seuil de 2.5 buts (c'est-à-dire la variable <code>NGFT2.5d</code>
+dans les données <code>fixtures</code>). Il s'agit donc d'une variable binaire ayant pour valeurs <code>&lt;2.5</code> ou
+<code>&gt;2.5</code>. 
+</p>
+
+<p>
+La variable <code>NGFT2.5</code> est appelée variable cible ou variable à expliquer du problème
+décisionnel. L'objectif est alors de prévoir/pronostiquer les valeurs de la variable cible à partir 
+d'observations de variables disponibles. Ces variables observées sont appelées variables
+explicatives.
+</p>
+
+<p>
+Formellement, notre problème de pronostic revient alors à estimer la probabilité
+</p>
+\begin{equation}
+\label{orgf643e62}
+P(\text{NGFT2.5} = \text{<2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n})
+\end{equation}
+<p>
+où \(x_{1}, \ldots, x_{n}\) sont des observations des variables explicatives \(X_{1}, \ldots,
+X_{n}\) que nous avons choisi d'utiliser dans nos pronostics.
+</p>
+
+<p>
+Dans ce TD, nous allons modéliser la loi conditionnelle \(Y | X_{1}, \ldots, X_{n}\) à l'aide d'une
+fonction <i>Logit</i>. Autrement dit, nous allons mettre en oeuvre la technique de régression logistique.  
 </p>
 </div>
+</div>
 
-<div id="outline-container-orgb6d325e" class="outline-3">
-<h3 id="orgb6d325e"><span class="section-number-3">5.1</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-orgd692328" class="outline-3">
+<h3 id="orgd692328"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<b>Travail à réaliser :</b>
+</p>
+<ol class="org-ol">
+<li><p>
+Installer le module <code>patsy</code> avec la commande <code>!pip install patsy</code>, puis importer le module dans
+votre environnement.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> patsy
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org48a44f9" class="outline-3">
+<h3 id="org48a44f9"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}(\beta_{0})\) (modèle trivial)</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
 explicative pour expliquer la variable cible \(Y\).
@@ -459,73 +231,25 @@ explicative pour expliquer la variable cible \(Y\).
 <li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
 <li>Donner l'expression de l'estimation de \(\beta_{0}\), notée \(\hat{\beta}_{0}\), dans ce
 modèle. Interpréter la valeur de ce paramètre.</li>
-<li>Importer le module <code>statsmodels.api</code>.</li>
+<li><p>
+Importer le module <code>statsmodels.api</code> qui donne accès à différentes techniques de modélisation
+statistique.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> statsmodels.api
+</pre>
+</div></li>
+
 <li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
 <li><p>
 Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Pr&#233;paration des donn&#233;es</span>
+<pre class="src src-python">
 <span style="color: #DFAF8F;">FTR_bin_df</span>, <span style="color: #DFAF8F;">data_train_mod0_df</span> = patsy.dmatrices(<span style="color: #CC9393;">"FTR ~ 1"</span>, data=data_fixtures_train_df, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>return_type=<span style="color: #CC9393;">"dataframe"</span>)
 </pre>
 </div></li>
-
-<li><p>
-Utiliser la fonction <code>Logit</code> pour entraîner votre modèle trivial :
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">D&#233;claration du mod&#232;le</span>
-<span style="color: #DFAF8F;">mod0</span> = sm.Logit(FTR_bin_df[<span style="color: #CC9393;">"FTR[H]"</span>], data_train_mod0_df)
-<span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Apprentissage du mod&#232;le</span>
-<span style="color: #DFAF8F;">mod0</span> = mod0.fit()
-mod0.summary()
-</pre>
-</div></li>
-<li>Interpréter les résultats.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org6b0fda4" class="outline-3">
-<h3 id="org6b0fda4"><span class="section-number-3">5.2</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}(\beta_{0}, \beta_{1})\), \(X_{1} =\) HS_M3</h3>
-<div class="outline-text-3" id="text-5-2">
-<p>
-<b>Travail à réaliser :</b> 
-</p>
-<ol class="org-ol">
-<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
-<li>Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>. Que
-remarquez vous par rapport aux données préparées du modèle \(\mathcal{M}_{0}\).</li>
-<li>Utiliser la fonction <code>Logit</code> pour entraîner le modèle.</li>
-<li>Interpréter les paramètres et les résultats.</li>
-<li><p>
-Représenter graphiquement l'évolution de la probabilité <i>a posteriori</i> \(P(Y=y_{+} | X_{1} =
-   x_{1} = \pi(x_{1})\) en fonction de valeurs de \(x_{1}\) dans le modèle \(\mathcal{M}_{1}\).
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span style="color: #DFAF8F;">data_test_mod1</span> = patsy.dmatrix(<span style="color: #CC9393;">"HS_M3"</span>, 
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  pd.DataFrame({<span style="color: #CC9393;">"HS_M3"</span>: <span style="color: #DCDCCC; font-weight: bold;">range</span>(0,50,1)}), 
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  return_type=<span style="color: #CC9393;">"dataframe"</span>)
-mod1.predict(data_test_mod1)
-</pre>
-</div></li>
-<li>Tenter d'expliquer la valeur de \(\pi(0)\).</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-orgf7c6921" class="outline-3">
-<h3 id="orgf7c6921"><span class="section-number-3">5.3</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2} \sim \text{logit}(\beta_{0}, \beta_{1}, \beta_{2})\), \(X_{1} =\) HS_M3 et \(X_{2} =\) HTG_M3</h3>
-<div class="outline-text-3" id="text-5-3">
-<p>
-<b>Travail à réaliser :</b> 
-</p>
-<ol class="org-ol">
-<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
-<li>Entraîner le modèle.</li>
-<li>Interpréter les paramètres et les résultats.</li>
-<li>Réaliser quelques prévisions à l'aide de la méthode <code>.predict</code>.</li>
 </ol>
 </div>
 </div>
