@@ -45,25 +45,25 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org814355d">1. Contexte</a></li>
-<li><a href="#org1d0a1b7">2. Préparation des données</a></li>
-<li><a href="#orgb3c17b6">3. Modélisation</a>
+<li><a href="#org3b62565">1. Contexte</a></li>
+<li><a href="#orga322cc3">2. Préparation des données</a></li>
+<li><a href="#orgbb53afa">3. Modélisation</a>
 <ul>
-<li><a href="#org967924c">3.1. Problématique</a></li>
-<li><a href="#orgee2f199">3.2. Préparation de la variable cible</a></li>
-<li><a href="#org3c5c31f">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</a></li>
-<li><a href="#org8e120a1">3.4. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></a></li>
-<li><a href="#org5eaf037">3.5. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></a></li>
+<li><a href="#orgf91054e">3.1. Problématique</a></li>
+<li><a href="#orgabb38ab">3.2. Préparation de la variable cible</a></li>
+<li><a href="#org80730d5">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</a></li>
+<li><a href="#org7788a8d">3.4. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></a></li>
+<li><a href="#orgc2d5dc8">3.5. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></a></li>
 </ul>
 </li>
-<li><a href="#org8016fec">4. Évaluation des performances</a>
+<li><a href="#orgd6fdea8">4. Évaluation des performances</a>
 <ul>
-<li><a href="#orgafbad65">4.1. Données d'apprentissage et de test</a></li>
-<li><a href="#org31c1dcd">4.2. Évaluation du modèle \(\mathcal{M}_{1}\)</a></li>
-<li><a href="#orgced3078">4.3. Évaluation du modèle \(\mathcal{M}_{2}\)</a></li>
+<li><a href="#orgb749fe3">4.1. Données d'apprentissage et de test</a></li>
+<li><a href="#orgbfcc020">4.2. Évaluation du modèle \(\mathcal{M}_{1}\)</a></li>
+<li><a href="#orge9b0d02">4.3. Évaluation du modèle \(\mathcal{M}_{2}\)</a></li>
 </ul>
 </li>
-<li><a href="#orgf709f29">5. Pistes pour aller plus loin</a></li>
+<li><a href="#org2ccc909">5. Pistes pour aller plus loin</a></li>
 </ul>
 </div>
 </div>
@@ -73,15 +73,15 @@
 
 
 
-<div id="orgc6c5c61" class="figure">
+<div id="org7b93260" class="figure">
 <p><img src="https://miro.medium.com/max/1000/1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" alt="1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Original comic by <a href="https://www.instagram.com/sandserifcomics/">sandserif</a></p>
 </div>
 
 
-<div id="outline-container-org814355d" class="outline-2">
-<h2 id="org814355d"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-org3b62565" class="outline-2">
+<h2 id="org3b62565"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Dans cet ultime TD du module <code>Python</code>, nous allons mettre en oeuvre la méthode de régression
@@ -107,8 +107,8 @@ et des caractéristiques permettant de l'expliquer.
 </div>
 
 
-<div id="outline-container-org1d0a1b7" class="outline-2">
-<h2 id="org1d0a1b7"><span class="section-number-2">2.</span> Préparation des données</h2>
+<div id="outline-container-orga322cc3" class="outline-2">
+<h2 id="orga322cc3"><span class="section-number-2">2.</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Nous reprenons les données utilisées dans le <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_decision.html">TD de Modélisation décisionnelles</a>, à savoir :
@@ -172,12 +172,12 @@ odds_df.rename(columns={<span style="color: #CC9393;">"NGFT2.5"</span>: <span st
 </div>
 </div>
 
-<div id="outline-container-orgb3c17b6" class="outline-2">
-<h2 id="orgb3c17b6"><span class="section-number-2">3.</span> Modélisation</h2>
+<div id="outline-container-orgbb53afa" class="outline-2">
+<h2 id="orgbb53afa"><span class="section-number-2">3.</span> Modélisation</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org967924c" class="outline-3">
-<h3 id="org967924c"><span class="section-number-3">3.1.</span> Problématique</h3>
+<div id="outline-container-orgf91054e" class="outline-3">
+<h3 id="orgf91054e"><span class="section-number-3">3.1.</span> Problématique</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous cherchons à pronostiquer si le nombre total des buts
@@ -202,7 +202,7 @@ explicatives.
 Formellement, notre problème de pronostic revient alors à estimer la probabilité
 </p>
 \begin{equation}
-\label{org4b2dce3}
+\label{orgffb9e78}
 P(Y = \text{>2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n}),
 \end{equation}
 <p>
@@ -219,7 +219,7 @@ Dans ce TD, nous allons modéliser la loi conditionnelle \(Y | X_{1}, \ldots, X_
 suivante :
 </p>
 \begin{equation}
-\label{org2010db7}
+\label{org264a5f9}
 P(Y = \text{>2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n}) = \pi(x_{1},\ldots, x_{n}) = \frac{e^{\beta_{0} + x_{1}\beta_{1} + \ldots + x_{n}\beta_{n}}}{1 + e^{\beta_{0} + x_{1}\beta_{1} + \ldots + x_{n}\beta_{n}}}
 \end{equation}
 <p>
@@ -233,8 +233,8 @@ appelée régression logistique.
 </div>
 </div>
 
-<div id="outline-container-orgee2f199" class="outline-3">
-<h3 id="orgee2f199"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
+<div id="outline-container-orgabb38ab" class="outline-3">
+<h3 id="orgabb38ab"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <b>Travail à réaliser :</b>
@@ -284,8 +284,8 @@ Faire de même dans les deux cas suivants :
 </ol>
 </div>
 </div>
-<div id="outline-container-org3c5c31f" class="outline-3">
-<h3 id="org3c5c31f"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</h3>
+<div id="outline-container-org80730d5" class="outline-3">
+<h3 id="org80730d5"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
@@ -326,8 +326,8 @@ mod0.summary()
 </div>
 </div>
 
-<div id="outline-container-org8e120a1" class="outline-3">
-<h3 id="org8e120a1"><span class="section-number-3">3.4.</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></h3>
+<div id="outline-container-org7788a8d" class="outline-3">
+<h3 id="org7788a8d"><span class="section-number-3">3.4.</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 <b>Travail à réaliser :</b> 
@@ -358,8 +358,8 @@ Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} = 0) = 
 </ol>
 </div>
 </div>
-<div id="outline-container-org5eaf037" class="outline-3">
-<h3 id="org5eaf037"><span class="section-number-3">3.5.</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></h3>
+<div id="outline-container-orgc2d5dc8" class="outline-3">
+<h3 id="orgc2d5dc8"><span class="section-number-3">3.5.</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 <b>Travail à réaliser :</b> 
@@ -540,12 +540,12 @@ Quelle(s) critique(s) peut-on formuler sur ce résultat visuel ?
 </div>
 
 
-<div id="outline-container-org8016fec" class="outline-2">
-<h2 id="org8016fec"><span class="section-number-2">4.</span> Évaluation des performances</h2>
+<div id="outline-container-orgd6fdea8" class="outline-2">
+<h2 id="orgd6fdea8"><span class="section-number-2">4.</span> Évaluation des performances</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgafbad65" class="outline-3">
-<h3 id="orgafbad65"><span class="section-number-3">4.1.</span> Données d'apprentissage et de test</h3>
+<div id="outline-container-orgb749fe3" class="outline-3">
+<h3 id="orgb749fe3"><span class="section-number-3">4.1.</span> Données d'apprentissage et de test</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Pour évaluer nos différents modèles, nous mettons en oeuvre l'approche classique consistant à
@@ -593,8 +593,8 @@ matchs ayant eu lieu lors de la saison <code>2019-2020</code> et après.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org31c1dcd" class="outline-3">
-<h3 id="org31c1dcd"><span class="section-number-3">4.2.</span> Évaluation du modèle \(\mathcal{M}_{1}\)</h3>
+<div id="outline-container-orgbfcc020" class="outline-3">
+<h3 id="orgbfcc020"><span class="section-number-3">4.2.</span> Évaluation du modèle \(\mathcal{M}_{1}\)</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 L'objectif de cette section est d'appliquer l'approche apprentissage/test afin d'évaluer la
@@ -725,8 +725,8 @@ fig
 </div>
 
 
-<div id="outline-container-orgced3078" class="outline-3">
-<h3 id="orgced3078"><span class="section-number-3">4.3.</span> Évaluation du modèle \(\mathcal{M}_{2}\)</h3>
+<div id="outline-container-orge9b0d02" class="outline-3">
+<h3 id="orge9b0d02"><span class="section-number-3">4.3.</span> Évaluation du modèle \(\mathcal{M}_{2}\)</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 L'objectif de cette section est d'appliquer l'approche apprentissage/test afin d'évaluer la
@@ -755,8 +755,8 @@ savoir :
 </div>
 </div>
 
-<div id="outline-container-orgf709f29" class="outline-2">
-<h2 id="orgf709f29"><span class="section-number-2">5.</span> Pistes pour aller plus loin</h2>
+<div id="outline-container-org2ccc909" class="outline-2">
+<h2 id="org2ccc909"><span class="section-number-2">5.</span> Pistes pour aller plus loin</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li>Analyser les scores obtenus sur vos modèles en fonction du seuil de décision. Le seuil de 0.5
