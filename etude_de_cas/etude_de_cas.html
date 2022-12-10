@@ -6,192 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LP MDS : Étude de cas</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Roland Donat et Chloé Friguet" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,77 +16,37 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs/Charte_graphique/IUT/ubs_iut_vannes.css" />
 <link rel="stylesheet" type="text/css" href="https://roland-donat.github.io/ubs-lpmds-python/custom.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">LP MDS : Étude de cas</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga618ad2">1. Objectifs</a></li>
-<li><a href="#org10a1912">2. Constitution des groupes et attribution des sujets</a></li>
-<li><a href="#org79da9ae">3. Travail demandé</a></li>
-<li><a href="#orgfcd65ec">4. Livrables</a></li>
-<li><a href="#org8d3365c">5. Déroulement de l'étude</a></li>
-<li><a href="#org9da2010">6. Évaluation</a>
+<li><a href="#orgd7d2e0a">1. Objectifs</a></li>
+<li><a href="#orgecdda27">2. Constitution des groupes et attribution des sujets</a></li>
+<li><a href="#orgfd76fef">3. Travail demandé</a></li>
+<li><a href="#org3f4a040">4. Livrables</a></li>
+<li><a href="#orgf60eac4">5. Déroulement de l'étude</a></li>
+<li><a href="#org71fcd14">6. Évaluation</a>
 <ul>
-<li><a href="#org8580e2c">6.1. Évaluation technique</a></li>
-<li><a href="#org113b85d">6.2. Évaluation de la restitution orale</a></li>
+<li><a href="#orgb516551">6.1. Évaluation technique</a></li>
+<li><a href="#org2a0a3a2">6.2. Évaluation de la restitution orale</a></li>
 </ul>
 </li>
-<li><a href="#org735f735">7. Données</a>
+<li><a href="#orgaa13f9b">7. Données</a>
 <ul>
-<li><a href="#org8166ee3">7.1. Données <code>bank</code></a></li>
-<li><a href="#orgdc0b2b8">7.2. Données <code>census_income</code></a></li>
-<li><a href="#org21421db">7.3. Données <code>weather_australia</code></a></li>
-<li><a href="#orgc51ad68">7.4. Données <code>diabetes</code></a></li>
+<li><a href="#org41b1082">7.1. Données <code>bank</code></a></li>
+<li><a href="#org43dd748">7.2. Données <code>census_income</code></a></li>
+<li><a href="#org5e6b7a0">7.3. Données <code>weather_australia</code></a></li>
+<li><a href="#orga144121">7.4. Données <code>diabetes</code></a></li>
+</ul>
+</li>
+<li><a href="#orgd5297af">8. Conseils</a>
+<ul>
+<li><a href="#org6e96b7c">8.1. Support de présentation</a></li>
+<li><a href="#orge06fa54">8.2. Rapport Notebook</a></li>
 </ul>
 </li>
 </ul>
@@ -278,25 +54,24 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orga618ad2" class="outline-2">
-<h2 id="orga618ad2"><span class="section-number-2">1</span> Objectifs</h2>
+<div id="outline-container-orgd7d2e0a" class="outline-2">
+<h2 id="orgd7d2e0a"><span class="section-number-2">1.</span> Objectifs</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Cette étude de cas a pour objectif de mettre en oeuvre une démarche d'analyse de données afin de
-répondre à un problème de classification supervisée. Dans un tel problème, vous construisez vos
-modèles de classification à partir de données dans lesquelles la classe<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> des individus est observée<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Par exemple, la régression logistique fait
-donc partie des méthodes de classification supervisée. 
+répondre à un problème de classification supervisée. Dans un tel problème, vous construisez des
+modèles de classification à partir de données dans lesquelles la classe<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> des individus est observée<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Par exemple et comme vous le savez à
+présent, la régression logistique fait partie des méthodes de classification supervisée. 
 </p>
 
 <p>
-Ce travail sera effectué par groupe de trois ou
-quatre étudiant-e-s et se déroulera sur une journée et demi à partir du jeudi 16 décembre après-midi
-et jusqu'au vendredi 17 décembre à 17h30. <b>L'ensemble du travail technique sera réalisé avec le
-langage <code>Python</code>.</b>
+Ce travail sera effectué par groupe de trois étudiant.e.s et se déroulera sur une journée et demi à
+partir du jeudi 15 décembre après-midi, jusqu'au vendredi 16 décembre à 17h30 environ. <b>L'ensemble
+du travail technique sera réalisé avec le langage <code>Python</code>.</b>
 </p>
 
 <p>
-Vous allez donc devoir vous organiser afin de répondre au mieux à votre problématique tout en ayant
+Vous allez devoir vous organiser afin de répondre au mieux à votre problématique tout en ayant
 une contrainte temporelle forte. Il vous faudra donc faire preuve de lucidité dans le
 dimensionnement de vos travaux de façon à trouver un compromis entre ambition et pragmatisme. À
 titre indicatif, les conditions de cet exercice sont proches de celles d'un <i>hackathon</i>.
@@ -304,83 +79,21 @@ titre indicatif, les conditions de cet exercice sont proches de celles d'un <i>h
 </div>
 </div>
 
-<div id="outline-container-org10a1912" class="outline-2">
-<h2 id="org10a1912"><span class="section-number-2">2</span> Constitution des groupes et attribution des sujets</h2>
+<div id="outline-container-orgecdda27" class="outline-2">
+<h2 id="orgecdda27"><span class="section-number-2">2.</span> Constitution des groupes et attribution des sujets</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Le tableau suivant présente l'affectation des groupes sur chacun des sujets. Chaque sujet est traité
-par deux groupes.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Id Sujet</th>
-<th scope="col" class="org-left">Équipe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">Weather Australia - I</td>
-<td class="org-left">Manon Corbel, Thierno Abdoulaye Sow, Pauline Dervieux, Giovanni Le Duigou</td>
-</tr>
-
-<tr>
-<td class="org-left">Weather Australia - II</td>
-<td class="org-left">Amine Neggal, Perrine Baudet, Paul Debuire</td>
-</tr>
-
-<tr>
-<td class="org-left">diabetes - I</td>
-<td class="org-left">Adrien Caradec, Tiphaine Delavet, Axel Le Guiner, Maxime Le Fur</td>
-</tr>
-
-<tr>
-<td class="org-left">diabetes - II</td>
-<td class="org-left">Mélanie Orellana, Gaëtan Sorin, Justine Cantus, Maxime Charrier</td>
-</tr>
-
-<tr>
-<td class="org-left">Bank - I</td>
-<td class="org-left">Amandine Le Bolloch, Pierre Sinquin, Alban Daniel, Loann Denis</td>
-</tr>
-
-<tr>
-<td class="org-left">Bank - II</td>
-<td class="org-left">Dylan Rungette, Clara Sturma, Bastien Guillet, Enora Nowak</td>
-</tr>
-
-<tr>
-<td class="org-left">Census Income - I</td>
-<td class="org-left">Kilian Jouannel, Floriane Okom'essono, Maxence Jégou</td>
-</tr>
-
-<tr>
-<td class="org-left">Census Income - II</td>
-<td class="org-left">Alban Hubert, Gwendal Boédec, Romain Castellani, Audrey Dos Santos</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-La constitution des groupes et l'attribution des sujets ont été réalisées de manière aléatoire. 
+La constitution des groupes et l'attribution des sujets sont réalisées de manière aléatoire. 
 </p>
 
 <p>
-Une brève description des données de chaque sujet est présentée dans la Section <a href="#orgb44c6d8">7</a>.
+Une brève description des données de chaque sujet est présentée dans la Section <a href="#org607ef8e">7</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org79da9ae" class="outline-2">
-<h2 id="org79da9ae"><span class="section-number-2">3</span> Travail demandé</h2>
+<div id="outline-container-orgfd76fef" class="outline-2">
+<h2 id="orgfd76fef"><span class="section-number-2">3.</span> Travail demandé</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Votre étude de cas s'articulera autour des grandes phases suivantes :
@@ -389,7 +102,7 @@ Votre étude de cas s'articulera autour des grandes phases suivantes :
 <li>Analyse exploratoire des données :
 <ul class="org-ul">
 <li>Comprendre la signification des variables.</li>
-<li>Réaliser quelques statistiques descriptives pertinentes pour votre étude.</li>
+<li>Réaliser quelques statistiques descriptives centrées autour de la variable d'intérêt de votre étude.</li>
 </ul></li>
 <li>Préparation des données si nécessaire (nettoyage, mise en forme, gestion des valeurs manquantes).</li>
 <li>Réalisation d'un premier modèle de classification supervisée :
@@ -430,8 +143,8 @@ exemple <a href="https://deepnote.com/">Deepnote</a> (solution recommandée) ou 
 </div>
 </div>
 
-<div id="outline-container-orgfcd65ec" class="outline-2">
-<h2 id="orgfcd65ec"><span class="section-number-2">4</span> Livrables</h2>
+<div id="outline-container-org3f4a040" class="outline-2">
+<h2 id="org3f4a040"><span class="section-number-2">4.</span> Livrables</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les deux livrables demandés sont :
@@ -443,13 +156,13 @@ Les deux livrables demandés sont :
 
 <p>
 <b>Ces éléments seront transmis à Chloé Friguet et Roland Donat par mail avec pour objet "Étude de
-cas &lt;Id sujet&gt;" le 17/12 à 15h30 au plus tard.</b> 
+cas &lt;Id sujet&gt;" le 16/12 à 15h30 au plus tard.</b> 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8d3365c" class="outline-2">
-<h2 id="org8d3365c"><span class="section-number-2">5</span> Déroulement de l'étude</h2>
+<div id="outline-container-orgf60eac4" class="outline-2">
+<h2 id="orgf60eac4"><span class="section-number-2">5.</span> Déroulement de l'étude</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li>Jeudi 16/12 :
@@ -469,8 +182,8 @@ cas &lt;Id sujet&gt;" le 17/12 à 15h30 au plus tard.</b>
 </div>
 </div>
 
-<div id="outline-container-org9da2010" class="outline-2">
-<h2 id="org9da2010"><span class="section-number-2">6</span> Évaluation</h2>
+<div id="outline-container-org71fcd14" class="outline-2">
+<h2 id="org71fcd14"><span class="section-number-2">6.</span> Évaluation</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Votre travail sera évalué à la fois sur la partie technique (<i>notebooks</i>) et sur la partie
@@ -478,32 +191,31 @@ restitution orale.
 </p>
 </div>
 
-<div id="outline-container-org8580e2c" class="outline-3">
-<h3 id="org8580e2c"><span class="section-number-3">6.1</span> Évaluation technique</h3>
+<div id="outline-container-orgb516551" class="outline-3">
+<h3 id="orgb516551"><span class="section-number-3">6.1.</span> Évaluation technique</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Les principaux critères d'évaluation de vos <i>notebooks</i> sont :
 </p>
 <ul class="org-ul">
 <li>la qualité de la démarche d'analyse de données et de modélisation mise en oeuvre ;</li>
-<li>la clarté de vos explications ;</li>
-<li>la qualité et la reproductibilité de vos développements ;</li>
 <li>la qualité de mise en forme de votre <i>notebooks</i> :
 <ul class="org-ul">
 <li>rédiger de manière factuelle et impersonnelle ;</li>
 <li>fournir une aide de lecture à chaque tableau et figure présentés ;</li>
 <li>commenter (et interpréter si cela est pertinent) chaque indicateur et figure présentés ;</li>
-<li>faire en sorte que le <i>notebook</i> puisse se lire en masquant les blocs de code.</li>
+<li><b>faire en sorte que le <i>notebook</i> puisse se lire en masquant les blocs de code ;</b></li>
 </ul></li>
+<li>la reproductibilité de vos développements ;</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org113b85d" class="outline-3">
-<h3 id="org113b85d"><span class="section-number-3">6.2</span> Évaluation de la restitution orale</h3>
+<div id="outline-container-org2a0a3a2" class="outline-3">
+<h3 id="org2a0a3a2"><span class="section-number-3">6.2.</span> Évaluation de la restitution orale</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
-Lors de la restitution orale, vous serez principalement évaluer sur :
+Lors de la restitution orale, vous serez principalement évalués sur :
 </p>
 <ul class="org-ul">
 <li>votre capacité à transmettre les éléments clés et les points forts de votre étude, à savoir 
@@ -522,11 +234,11 @@ Lors de la restitution orale, vous serez principalement évaluer sur :
 </div>
 </div>
 
-<div id="outline-container-org735f735" class="outline-2">
-<h2 id="org735f735"><span class="section-number-2">7</span> Données</h2>
+<div id="outline-container-orgaa13f9b" class="outline-2">
+<h2 id="orgaa13f9b"><span class="section-number-2">7.</span> Données</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-<a id="orgb44c6d8"></a>
+<a id="org607ef8e"></a>
 </p>
 
 <p>
@@ -535,7 +247,7 @@ données associées est fournie dans les sections suivantes.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Tableau 1 :</span> Récapitulatif des jeux de données. <div id="tab_data"></div></caption>
+<caption class="t-above"><span class="table-number">Tableau 1 :</span> Récapitulatif des jeux de données. <a href="tab_data">tab_data</a></caption>
 
 <colgroup>
 <col  class="org-left" />
@@ -579,8 +291,8 @@ données associées est fournie dans les sections suivantes.
 </table>
 </div>
 
-<div id="outline-container-org8166ee3" class="outline-3">
-<h3 id="org8166ee3"><span class="section-number-3">7.1</span> Données <code>bank</code></h3>
+<div id="outline-container-org41b1082" class="outline-3">
+<h3 id="org41b1082"><span class="section-number-3">7.1.</span> Données <code>bank</code></h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Ces données sont liées à des campagnes de marketing d'une institution bancaire portugaise basées sur 
@@ -592,25 +304,29 @@ contactées ouvrent un compte de dépôt.
 L'objectif de l'étude est donc de prévoir si un client est susceptible d'ouvrir ou non un compte de
 dépôt (variable <code>y</code>).
 </p>
+
+<p>
+Source : <a href="./data/bank.csv">bank.csv</a>
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgdc0b2b8" class="outline-3">
-<h3 id="orgdc0b2b8"><span class="section-number-3">7.2</span> Données <code>census_income</code></h3>
+<div id="outline-container-org43dd748" class="outline-3">
+<h3 id="org43dd748"><span class="section-number-3">7.2.</span> Données <code>census_income</code></h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Ces données fournissent des informations sur des ménages américains issues d'un recensement.
 </p>
 
 <p>
-L'objectif est de prévoir si le revenu annuel des ménages (variable <code>income</code>) est inférieur ou
+L'objectif est de prédire si le revenu annuel des ménages (variable <code>income</code>) est inférieur ou
 supérieur à $50k à partir de leurs caractéristiques sociales et économiques.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org21421db" class="outline-3">
-<h3 id="org21421db"><span class="section-number-3">7.3</span> Données <code>weather_australia</code></h3>
+<div id="outline-container-org5e6b7a0" class="outline-3">
+<h3 id="org5e6b7a0"><span class="section-number-3">7.3.</span> Données <code>weather_australia</code></h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Ce jeu de données contient des indicateurs météorologiques journaliers issus de différentes stations
@@ -622,8 +338,9 @@ L'objectif est de prévoir si oui ou non il va pleuvoir le lendemain (variable <
 </p>
 </div>
 </div>
-<div id="outline-container-orgc51ad68" class="outline-3">
-<h3 id="orgc51ad68"><span class="section-number-3">7.4</span> Données <code>diabetes</code></h3>
+
+<div id="outline-container-orga144121" class="outline-3">
+<h3 id="orga144121"><span class="section-number-3">7.4.</span> Données <code>diabetes</code></h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 Ces données proviennent du <i>National Institute of Diabetes and Digestive and Kidney Diseases</i> et
@@ -637,15 +354,52 @@ base de caractéristiques physiques et médicales.
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgd5297af" class="outline-2">
+<h2 id="orgd5297af"><span class="section-number-2">8.</span> Conseils</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org6e96b7c" class="outline-3">
+<h3 id="org6e96b7c"><span class="section-number-3">8.1.</span> Support de présentation</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>Choisir un titre permettant d'avoir une idée du travail réalisé (ex : ne pas choisir un titre
+comme "Étude" ou "Régression").</li>
+<li>Attention aux matrices de corrélations faisant intervenir des variables qualitatives.</li>
+<li>L'analyse exploratoire présentée doit servir d'argumentation pour votre stratégie d'étude.</li>
+<li>Éviter le plus possible de présenter des sorties logicielles brutes. Penser à retravailler vos
+résultats pour en faciliter la lecture et l'interprétation.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge06fa54" class="outline-3">
+<h3 id="orge06fa54"><span class="section-number-3">8.2.</span> Rapport Notebook</h3>
+<div class="outline-text-3" id="text-8-2">
+<ul class="org-ul">
+<li><b>Rappel fondamental : Faire en sorte que le <i>notebook</i> puisse se lire en masquant les blocs de code.</b></li>
+<li>Si vous n'avez rien à dire de pertinent pour votre étude sur la sortie d'un bloc de code alors ces
+deux options sont recommandées :
+<ol class="org-ol">
+<li>supprimer le bloc si le traitement effectué n'est pas important pour l'étude ;</li>
+<li>ne pas afficher de sortie si le bloc est nécessaire pour la suite de l'étude.</li>
+</ol></li>
+<li>Si vous avez développé un code réutilisable dont vous êtes fiers, créez un fichier <code>Python</code> "à
+côté" de votre notebook et importer le dans le notebook avec la commande <code>import</code>. N'hésitez pas à
+présenter ce travail de développement dans une section "Annexe" à la fin du notebook.</li>
+</ul>
+</div>
+</div>
+</div>
 <div id="footnotes">
 <h2 class="footnotes">Notes de bas de page: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">Le terme classe s'entend
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Le terme classe s'entend
 ici de manière générique. Dans un problème de classification binaire, les classes peuvent par
 exemple être non/oui ; malade/sain ; achat/pas d'achat, etc.</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">Par
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Par
 opposition au problème de classification non supervisée dans lequel il faut segmenter/regrouper des
 individus sans information <i>a priori</i> sur ces groupes.</p></div></div>
 
