@@ -45,25 +45,25 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org81637f9">1. Contexte</a></li>
-<li><a href="#org54362a6">2. Préparation des données</a></li>
-<li><a href="#org5bc310c">3. Modélisation</a>
+<li><a href="#orgfbf3a5b">1. Contexte</a></li>
+<li><a href="#org7d3d119">2. Préparation des données</a></li>
+<li><a href="#org1f3985e">3. Modélisation</a>
 <ul>
-<li><a href="#orge4fa628">3.1. Problématique</a></li>
-<li><a href="#org6f11fe4">3.2. Préparation de la variable cible</a></li>
-<li><a href="#orgd4ec403">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</a></li>
-<li><a href="#orgeac3027">3.4. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></a></li>
-<li><a href="#orgd82cf99">3.5. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></a></li>
+<li><a href="#org8d6655a">3.1. Problématique</a></li>
+<li><a href="#org6610a12">3.2. Préparation de la variable cible</a></li>
+<li><a href="#org55d38ef">3.3. Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</a></li>
+<li><a href="#orge07f93e">3.4. Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></a></li>
+<li><a href="#orgf12110c">3.5. Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></a></li>
 </ul>
 </li>
-<li><a href="#orgaccc2cc">4. Évaluation des performances</a>
+<li><a href="#orgef82ceb">4. Évaluation des performances</a>
 <ul>
-<li><a href="#org35b0a1e">4.1. Données d'apprentissage et de test</a></li>
-<li><a href="#org826a01b">4.2. Évaluation du modèle \(\mathcal{M}_{1}\)</a></li>
-<li><a href="#org79fb03c">4.3. Évaluation du modèle \(\mathcal{M}_{2}\)</a></li>
+<li><a href="#org1679580">4.1. Données d'apprentissage et de test</a></li>
+<li><a href="#org757bcd9">4.2. Évaluation du modèle \(\mathcal{M}_{1}\)</a></li>
+<li><a href="#org5c9ef23">4.3. Évaluation du modèle \(\mathcal{M}_{2}\)</a></li>
 </ul>
 </li>
-<li><a href="#orgdf02d05">5. Pistes pour aller plus loin</a></li>
+<li><a href="#org9d57ab5">5. Pistes pour aller plus loin</a></li>
 </ul>
 </div>
 </div>
@@ -73,27 +73,27 @@
 
 
 
-<div id="org658e533" class="figure">
+<div id="org3cfe4f5" class="figure">
 <p><img src="https://miro.medium.com/max/1000/1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" alt="1*x7P7gqjo8k2_bj2rTQWAfg.jpeg" />
 </p>
 <p><span class="figure-number">Figure&nbsp;1&nbsp;: </span>Original comic by <a href="https://www.instagram.com/sandserifcomics/">sandserif</a></p>
 </div>
 
 
-<div id="outline-container-org81637f9" class="outline-2">
-<h2 id="org81637f9"><span class="section-number-2">1.</span> Contexte</h2>
+<div id="outline-container-orgfbf3a5b" class="outline-2">
+<h2 id="orgfbf3a5b"><span class="section-number-2">1.</span> Contexte</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Dans cet ultime TD du module <code>Python</code>, nous allons mettre en oeuvre la méthode de régression
-logistique afin prévoir le nombre de buts d'une rencontre de football. Nous reprendrons les données
-du TD précédent et nous simplifierons donc la problématique en cherchant à pronostiquer si le nombre de buts d'une rencontre
-est inférieur ou supérieur à 2.5 buts.
+Dans cet ultime TD du module <code>Python</code>, nous allons mettre en œuvre la méthode de régression
+logistique pour prédire le nombre de buts dans une rencontre de football. Nous utiliserons les données
+du TD précédent et simplifierons la problématique en cherchant à prédire si le nombre de buts d'une
+rencontre est inférieur ou supérieur à 2.5 buts.
 </p>
 
 <p>
 Ce problème s'apparente donc à un problème de classification supervisée dans lequel nous allons
-entraîner un modèle statistique à partir de données contenant à la fois le nombre de buts de chaque rencontre
-et des caractéristiques permettant de l'expliquer.
+entraîner un modèle statistique à partir de données contenant à la fois le nombre de buts de chaque
+rencontre et des caractéristiques permettant de l'expliquer.
 </p>
 
 <p>
@@ -101,17 +101,17 @@ et des caractéristiques permettant de l'expliquer.
 </p>
 <ul class="org-ul">
 <li>Créez un <i>notebook</i> dans le lequel vous allez écrire, exécuter et documenter votre code <code>Python</code>.</li>
-<li>Prenez le temps de bien présenter et bien rédiger votre <i>notebook</i>.</li>
+<li>Prenez le temps de bien présenter et rédiger votre <i>notebook</i>.</li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org54362a6" class="outline-2">
-<h2 id="org54362a6"><span class="section-number-2">2.</span> Préparation des données</h2>
+<div id="outline-container-org7d3d119" class="outline-2">
+<h2 id="org7d3d119"><span class="section-number-2">2.</span> Préparation des données</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Nous reprenons les données utilisées dans le <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_decision.html">TD de Modélisation décisionnelles</a>, à savoir :
+Nous reprenons les données utilisées dans le <a href="https://roland-donat.github.io/ubs-lpmds-python/td/td_decision.html">TD de Modélisation décisionnelle</a>, à savoir :
 </p>
 <ul class="org-ul">
 <li>un historique de rencontre référencé par <code>fixtures</code> ;</li>
@@ -123,7 +123,7 @@ Nous reprenons les données utilisées dans le <a href="https://roland-donat.git
 </p>
 <ol class="org-ol">
 <li><p>
-Charger les données historiques dans votre environnement :
+Chargez les données historiques dans votre environnement :
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> pandas <span style="color: #F0DFAF; font-weight: bold;">as</span> pd
@@ -131,23 +131,23 @@ Charger les données historiques dans votre environnement :
 <span style="color: #DFAF8F;">fixtures_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/fixtures_indics_all.csv.bz2"</span>
 <span style="color: #DFAF8F;">fixtures_df</span> = pd.read_csv(fixtures_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
 
-<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"RHT"</span>, <span style="color: #CC9393;">"RFT"</span>]
+col_cats = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"RHT"</span>, <span style="color: #CC9393;">"RFT"</span>]
 <span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">fixtures_df</span>[col] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> fixtures_df[<span style="color: #DFAF8F;">col</span>] = fixtures_df[col].astype(<span style="color: #CC9393;">"category"</span>)
 
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+fixtures_df[<span style="color: #CC9393;">"Date"</span>] = fixtures_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
 
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFT"</span>] = fixtures_df[<span style="color: #CC9393;">"HGFT"</span>] + fixtures_df[<span style="color: #CC9393;">"AGFT"</span>]
+fixtures_df[<span style="color: #CC9393;">"NGFT"</span>] = fixtures_df[<span style="color: #CC9393;">"HGFT"</span>] + fixtures_df[<span style="color: #CC9393;">"AGFT"</span>]
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Discr&#233;tisation de la variable donnant le nombre de buts</span>
-<span style="color: #DFAF8F;">fixtures_df</span>[<span style="color: #CC9393;">"NGFTd"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
+fixtures_df[<span style="color: #CC9393;">"NGFTd"</span>] = pd.cut(fixtures_df[<span style="color: #CC9393;">"NGFT"</span>],
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> bins=[-<span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>), 2.5, <span style="color: #DCDCCC; font-weight: bold;">float</span>(<span style="color: #CC9393;">"inf"</span>)],
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> labels=[<span style="color: #CC9393;">"&lt;2.5"</span>, <span style="color: #CC9393;">"&gt;2.5"</span>])
 </pre>
 </div></li>
 
 <li><p>
-Discrétiser la variable <code>HRND</code> (numéro du match de la saison pour l'équipe à domicile)
-en quatre intervalles \(]0, 10], ]10, 20], ]20, 30], ]30, \infty[\). Labelliser ces intervalles
+Discrétisez la variable <code>HRND</code> (numéro du match de la saison pour l'équipe à domicile)
+en quatre intervalles \(]0, 10], ]10, 20], ]20, 30], ]30, \infty[\). Labellisez ces intervalles
 <code>Q1</code>, <code>Q2</code>, <code>Q3</code> et <code>Q4</code> de manière à indiquer les quatre parties d'une saison. Le résultat de la
 discrétisation de la variable <code>HRND</code> est à stocker dans une nouvelle
 variable appelée <code>phase</code>.
@@ -161,17 +161,17 @@ variable appelée <code>phase</code>.
 </div></li>
 
 <li><p>
-Charger les données de cotes :
+Chargez les données de cotes :
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">odds_url</span> = <span style="color: #CC9393;">"https://roland-donat.github.io/ubs-lpmds-python/td/data/odds_bis.csv.bz2"</span>
 <span style="color: #DFAF8F;">odds_df</span> = pd.read_csv(odds_url, sep=<span style="color: #CC9393;">";"</span>, compression=<span style="color: #CC9393;">"bz2"</span>)
 
-<span style="color: #DFAF8F;">col_cats</span> = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"NGFT2.5"</span>]
+col_cats = [<span style="color: #CC9393;">"league_id"</span>, <span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"HTeam"</span>, <span style="color: #CC9393;">"ATeam"</span>, <span style="color: #CC9393;">"NGFT2.5"</span>]
 <span style="color: #F0DFAF; font-weight: bold;">for</span> col <span style="color: #F0DFAF; font-weight: bold;">in</span> col_cats:
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #DFAF8F;">odds_df</span>[col] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> odds_df[<span style="color: #DFAF8F;">col</span>] = odds_df[col].astype(<span style="color: #CC9393;">"category"</span>)
 
-<span style="color: #DFAF8F;">odds_df</span>[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
+odds_df[<span style="color: #CC9393;">"Date"</span>] = odds_df[<span style="color: #CC9393;">"Date"</span>].astype(<span style="color: #CC9393;">"datetime64[ns]"</span>)
 
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">Renommage de la variable "NGFT2.5" en "NGFTd" pour &#234;tre en coh&#233;rence</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">avec les donn&#233;es fixtures</span>
@@ -182,12 +182,12 @@ odds_df.rename(columns={<span style="color: #CC9393;">"NGFT2.5"</span>: <span st
 </div>
 </div>
 
-<div id="outline-container-org5bc310c" class="outline-2">
-<h2 id="org5bc310c"><span class="section-number-2">3.</span> Modélisation</h2>
+<div id="outline-container-org1f3985e" class="outline-2">
+<h2 id="org1f3985e"><span class="section-number-2">3.</span> Modélisation</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orge4fa628" class="outline-3">
-<h3 id="orge4fa628"><span class="section-number-3">3.1.</span> Problématique</h3>
+<div id="outline-container-org8d6655a" class="outline-3">
+<h3 id="org8d6655a"><span class="section-number-3">3.1.</span> Problématique</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous cherchons à pronostiquer si le nombre total des buts
@@ -196,7 +196,7 @@ inscrits lors d'une rencontre est inférieur (ou supérieur) à 2.5 buts.
 
 <p>
 D'un point de vue probabiliste, on note \(Y\) la variable aléatoire représentant le nombre de
-buts inscrit sur une rencontre discrétisée au seuil de 2.5 buts (c'est-à-dire la variable <code>NGFT2.5d</code>
+buts inscrit sur une rencontre, discrétisée au seuil de 2.5 buts (c'est-à-dire la variable <code>NGFT2.5d</code>
 dans les données <code>fixtures</code>). Il s'agit donc d'une variable binaire ayant pour valeurs <code>&lt;2.5</code> ou
 <code>&gt;2.5</code>. 
 </p>
@@ -212,16 +212,16 @@ explicatives.
 Formellement, notre problème de pronostic revient alors à estimer la probabilité
 </p>
 \begin{equation}
-\label{org8965525}
+\label{orgbd19e62}
 P(Y = \text{>2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n}),
 \end{equation}
 <p>
 où :
 </p>
 <ul class="org-ul">
-<li>\(x_{1}, \ldots, x_{n}\) sont des observations des variables explicatives \(X_{1}, \ldots, X_{n}\) que
-nous avons choisi d'utiliser dans nos pronostics.</li>
-<li>La modalité <code>&gt;2.5</code> a été choisi comme modalité de référence.</li>
+<li>\(x_{1}, \ldots, x_{n}\) sont les observations des variables explicatives \(X_{1}, \ldots, X_{n}\) que
+nous avons choisies d'utiliser dans nos pronostics.</li>
+<li>La modalité <code>&gt;2.5</code> a été choisie comme modalité de référence.</li>
 </ul>
 
 <p>
@@ -229,7 +229,7 @@ Dans ce TD, nous allons modéliser la loi conditionnelle \(Y | X_{1}, \ldots, X_
 suivante :
 </p>
 \begin{equation}
-\label{org5846da6}
+\label{org8addcce}
 P(Y = \text{>2.5} | X_{1} = x_{1}, \ldots, X_{n} = x_{n}) = \pi(x_{1},\ldots, x_{n}) = \frac{e^{\beta_{0} + x_{1}\beta_{1} + \ldots + x_{n}\beta_{n}}}{1 + e^{\beta_{0} + x_{1}\beta_{1} + \ldots + x_{n}\beta_{n}}}
 \end{equation}
 <p>
@@ -237,21 +237,21 @@ où les coefficients \(\beta_{0}, \ldots, \beta_{n} \in \mathbb{R}\) sont les pa
 </p>
 
 <p>
-L'action d'estimer la valeur des paramètres \(\beta_{0}, \ldots, \beta_{n}\) à partir de données est
-appelée régression logistique.  
+La technique de régression logistique permet de calculer une estimation de la valeur des paramètres
+\(\beta_{0}, \ldots, \beta_{n}\) à partir de données.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6f11fe4" class="outline-3">
-<h3 id="org6f11fe4"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
+<div id="outline-container-org6610a12" class="outline-3">
+<h3 id="org6610a12"><span class="section-number-3">3.2.</span> Préparation de la variable cible</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
 <li><p>
-Installer le module <code>patsy</code> avec la commande <code>!pip install patsy</code>, puis importer le module dans
+Installez le module <code>patsy</code> avec la commande <code>!pip install patsy</code>, puis importez le module dans
 votre environnement.
 </p>
 <div class="org-src-container">
@@ -266,7 +266,7 @@ matrice de variables d'expériences (<i>design matrix</i>) à partir d'une <i>fo
 </p>
 
 <p>
-Observer et tenter de comprendre les sorties de la fonction <code>patsy.dmatrices</code> de l'exemple
+Observez et tentez de comprendre les sorties de la fonction <code>patsy.dmatrices</code> de l'exemple
 suivant : 
 </p>
 <div class="org-src-container">
@@ -290,7 +290,7 @@ Faire de même dans les deux cas suivants :
 </pre>
 </div></li>
 <li><p>
-Réaliser une analyse graphique bivariée de la variable cible par rapport aux variables
+Réalisez une analyse graphique bivariée de la variable cible par rapport aux variables
 <code>HSHT_MA3</code>, <code>ASHT_MA3</code>, <code>phase</code>.
 </p>
 <div class="org-src-container">
@@ -315,7 +315,7 @@ px.box(fixtures_df, y=<span style="color: #CC9393;">"NGFTd"</span>, x=<span styl
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  labels=plot_labels,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  )
 
-<span style="color: #DFAF8F;">ngftd_phase_df</span> = fixtures_df.groupby([<span style="color: #CC9393;">"phase"</span>])[<span style="color: #CC9393;">"NGFTd"</span>]\
+ngftd_phase_df = fixtures_df.groupby([<span style="color: #CC9393;">"phase"</span>])[<span style="color: #CC9393;">"NGFTd"</span>]\
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .value_counts(normalize=<span style="color: #BFEBBF;">True</span>)\
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .rename(<span style="color: #CC9393;">"prop"</span>)\
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   .reset_index()
@@ -330,8 +330,8 @@ px.bar(ngftd_phase_df, x=<span style="color: #CC9393;">"phase"</span>, y=<span s
 </div>
 
 
-<div id="outline-container-orgd4ec403" class="outline-3">
-<h3 id="orgd4ec403"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</h3>
+<div id="outline-container-org55d38ef" class="outline-3">
+<h3 id="org55d38ef"><span class="section-number-3">3.3.</span> Modèle \(\mathcal{M}_{0}\) : \(Y \sim \text{logit}\) (modèle trivial)</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 On rappelle que le modèle trivial est le modèle consistant à ne tenir compte d'aucune variable
@@ -342,21 +342,21 @@ explicative pour expliquer la variable cible \(Y\).
 <b>Travail à réaliser :</b>
 </p>
 <ol class="org-ol">
-<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
-<li>Donner l'expression de l'estimation de \(\beta_{0}\), notée \(\hat{\beta}_{0}\), dans ce
-modèle. Interpréter la valeur de ce paramètre.</li>
-<li>Installer la librairie <code>statsmodels</code> qui donne accès à différentes techniques de modélisation
+<li>Rappelez l'expression mathématique de la modélisation réalisée.</li>
+<li>Donnez l'expression de l'estimation de \(\beta_{0}\), notée \(\hat{\beta}_{0}\), dans ce
+modèle. Interprétez la valeur de ce paramètre.</li>
+<li>Installez la librairie <code>statsmodels</code> qui donne accès à différentes techniques de modélisation
 statistique. Commande : <code>!pip install statsmodels</code>.</li>
 <li><p>
-Importer le module <code>statsmodels.api</code>.
+Importez le module <code>statsmodels.api</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F0DFAF; font-weight: bold;">import</span> statsmodels.api <span style="color: #F0DFAF; font-weight: bold;">as</span> sm
 </pre>
 </div></li>
-<li>Regarder l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
+<li>Regardez l'aide de la fonction <code>Logit</code> du module <code>statsmodels.api</code>.</li>
 <li><p>
-Préparer les données en utilisant la fonction <code>patsy.dmatrices</code>.
+Préparez les données en utilisant la fonction <code>patsy.dmatrices</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -367,7 +367,7 @@ Préparer les données en utilisant la fonction <code>patsy.dmatrices</code>.
 </pre>
 </div></li>
 <li><p>
-Utiliser la fonction <code>Logit</code> pour entraîner votre modèle trivial et interpréter les résultats
+Utilisez la fonction <code>Logit</code> pour entraîner votre modèle trivial et interprétez les résultats
 obtenus.
 </p>
 <div class="org-src-container">
@@ -382,16 +382,16 @@ mod0.summary()
 </div>
 </div>
 
-<div id="outline-container-orgeac3027" class="outline-3">
-<h3 id="orgeac3027"><span class="section-number-3">3.4.</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></h3>
+<div id="outline-container-orge07f93e" class="outline-3">
+<h3 id="orge07f93e"><span class="section-number-3">3.4.</span> Modèle \(\mathcal{M}_{1}\) : \(Y | X_{1} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code></h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
-<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Rappelez l'expression mathématique de la modélisation réalisée.</li>
 <li><p>
-Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
+Préparez les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -403,7 +403,7 @@ Préparer les données en utilisant la formule adéquate avec la fonction <code>
 </div></li>
 
 <li><p>
-Utiliser la fonction <code>Logit</code> pour entraîner le modèle.
+Utilisez la fonction <code>Logit</code> pour entraîner le modèle.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -414,22 +414,22 @@ mod1.summary()
 </pre>
 </div></li>
 
-<li>Interpréter les caractéristiques du modèle.</li>
+<li>Interprétez les caractéristiques du modèle.</li>
 <li><p>
-Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} = 0) = \pi_{1}(0)\),
+Calculez les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} = 0) = \pi_{1}(0)\),
 \(P(Y=\text{>2.5} | X_{1} = 6) = \pi_{1}(6)\) et \(P(Y=\text{>2.5} | X_{1} = -10) = \pi_{1}(-10)\) dans le modèle
-\(\mathcal{M}_{1}\) en utilisant la méthode <code>.predict</code> du modèle. Interpréter ces probabilités en français.
+\(\mathcal{M}_{1}\) en utilisant la méthode <code>.predict</code> du modèle. Interprétez ces probabilités en français.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">features_mod1_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"HSHT_M3"</span>, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.DataFrame({<span style="color: #CC9393;">"HSHT_M3"</span>: [0, 6, -10]}), 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
-<span style="color: #DFAF8F;">pi_mod1_ex</span> = mod1.predict(features_mod1_ex_df)
+pi_mod1_ex = mod1.predict(features_mod1_ex_df)
 </pre>
 </div></li>
 
 <li><p>
-Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} =
+Calculez les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} =
    x_{1}) = \pi(x_{1})\) avec \(x_{1}\) variant de -50 à 50 dans le modèle
 \(\mathcal{M}_{1}\).
 </p>
@@ -439,26 +439,29 @@ Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1} =
 <span style="color: #DFAF8F;">features_mod1_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"HSHT_M3"</span>, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   pd.DataFrame({<span style="color: #CC9393;">"HSHT_M3"</span>: <span style="color: #DCDCCC; font-weight: bold;">range</span>(-50,50,1)}), 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
-<span style="color: #DFAF8F;">pi_mod1_ex</span> = mod1.predict(features_mod1_ex_df)
+pi_mod1_ex = mod1.predict(features_mod1_ex_df)
 </pre>
 </div></li>
 
 <li><p>
-Représenter graphiquement les probabilités de la question précédente et interpréter ce graphique.
+Représentez graphiquement les probabilités de la question précédente et interprétez ce graphique.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
-px.line(x=features_mod1_ex_df[<span style="color: #CC9393;">"HSHT_M3"</span>],
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   y=pi_mod1_ex,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   title=<span style="color: #CC9393;">"&#201;volution de la probabilit&#233; a posteriori en fonction de la variable HSHT_M3 dans le mod&#232;le M1"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   label={<span style="color: #CC9393;">"x"</span>: <span style="color: #CC9393;">"Tirs cadr&#233;s MA3 pour l'&#201;D"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  <span style="color: #CC9393;">"y"</span>: <span style="color: #CC9393;">"Probabilit&#233; a posteriori"</span>})
+<span style="color: #DFAF8F;">fig</span> = px.line(x=features_mod1_ex_df[<span style="color: #CC9393;">"HSHT_M3"</span>],
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> y=pi_mod1_ex,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> title=<span style="color: #CC9393;">"&#201;volution de la probabilit&#233; a posteriori en fonction de la variable HSHT_M3 dans le mod&#232;le M1"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> labels={<span style="color: #CC9393;">"x"</span>: <span style="color: #CC9393;">"Tirs cadr&#233;s MA3 pour l'&#201;D"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span> <span style="color: #CC9393;">"y"</span>: <span style="color: #CC9393;">"Probabilit&#233; a posteriori"</span>})
+fig
 </pre>
-</div></li>
+</div>
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>                <div id="c61a1198-3097-45f6-bc35-8c9e2507fb17" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c61a1198-3097-45f6-bc35-8c9e2507fb17")) {                    Plotly.newPlot(                        "c61a1198-3097-45f6-bc35-8c9e2507fb17",                        [{"hovertemplate":"Tirs cadr\u00e9s MA3 pour l'\u00c9D=%{x}<br>Probabilit\u00e9 a posteriori=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"","orientation":"v","showlegend":false,"x":[-50.0,-49.0,-48.0,-47.0,-46.0,-45.0,-44.0,-43.0,-42.0,-41.0,-40.0,-39.0,-38.0,-37.0,-36.0,-35.0,-34.0,-33.0,-32.0,-31.0,-30.0,-29.0,-28.0,-27.0,-26.0,-25.0,-24.0,-23.0,-22.0,-21.0,-20.0,-19.0,-18.0,-17.0,-16.0,-15.0,-14.0,-13.0,-12.0,-11.0,-10.0,-9.0,-8.0,-7.0,-6.0,-5.0,-4.0,-3.0,-2.0,-1.0,0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0],"xaxis":"x","y":[0.009446736484216895,0.010278001978317387,0.011181588970169297,0.012163638204121344,0.013230784141897925,0.014390189574123325,0.015649581702917817,0.01701728956084946,0.0185022825791681,0.020114210056097717,0.02186344120279231,0.02376110535910657,0.025819131872337298,0.02805028901835745,0.030468221215027385,0.03308748363159838,0.03592357313454873,0.03899295432995902,0.04231307926589381,0.045902399147009575,0.04978036619066111,0.053967423523562416,0.058484980786864094,0.06335537289385378,0.06860179917946538,0.07424824000840952,0.08031934778620328,0.086840309265187,0.09383667607954313,0.10133416060608016,0.10935839456006426,0.11793464822769416,0.12708750893830909,0.13684051831647912,0.1472157690471204,0.15823346334639324,0.1699114370542024,0.18226465522915114,0.19530468728966793,0.20903917203525024,0.22347128520015677,0.23859922441022813,0.25441572837723675,0.27090764869945905,0.2880555935571926,0.30583366271707213,0.324209292430436,0.34314322691147736,0.3625896300549177,0.38249634692415335,0.4028053194245552,0.4234531546840748,0.44437183829582905,0.4654895781091711,0.4867317581063599,0.5080219764997685,0.5292831379262453,0.5504385668252463,0.5714131079834923,0.5921341808983902,0.6125327570023521,0.6325442327130697,0.6521091764297483,0.6711739335997748,0.6896910804098585,0.7076197230850193,0.7249256458195719,0.7415813156951302,0.7575657573272582,0.7728643132857855,0.7874683085086204,0.8013746380126225,0.8145852973015646,0.8271068741308574,0.8389500188885601,0.850128908977496,0.8606607204124423,0.8705651175396378,0.8798637694783438,0.8885798996823022,0.8967378730000846,0.904362822827821,0.9114803194223213,0.9181160791844211,0.9242957137238267,0.9300445167594473,0.935387286367989,0.9403481797395461,0.9449505974020134,0.9492170938070166,0.9531693112013793,0.9568279338153726,0.9602126595608061,0.9633421866304102,0.9662342126101644,0.9689054439464438,0.9713716138409739,0.9736475068718093,0.9757469888529943,0.9776830406460164],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Tirs cadr\u00e9s MA3 pour l'\u00c9D"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Probabilit\u00e9 a posteriori"}},"legend":{"tracegroupgap":0},"title":{"text":"\u00c9volution de la probabilit\u00e9 a posteriori en fonction de la variable HSHT_M3 dans le mod\u00e8le M1"}},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></li>
 
 <li><p>
-Calculer le rapport de cotes (<i>odds ratio</i>) associé à la variable <code>HSHT_M3</code>. 
+Calculez le rapport de cotes (<i>odds ratio</i>) associé à la variable <code>HSHT_M3</code>. 
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -471,16 +474,16 @@ np.exp(mod1.params)
 </div>
 </div>
 
-<div id="outline-container-orgd82cf99" class="outline-3">
-<h3 id="orgd82cf99"><span class="section-number-3">3.5.</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></h3>
+<div id="outline-container-orgf12110c" class="outline-3">
+<h3 id="orgf12110c"><span class="section-number-3">3.5.</span> Modèle \(\mathcal{M}_{2}\) : \(Y | X_{1}, X_{2}, X_{3} \sim \text{logit}\), \(X_{1} =\) <code>HSHT_M3</code>, \(X_{2} =\) <code>ASHT_M3</code>, \(X_{3} =\) <code>phase</code></h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 <b>Travail à réaliser :</b> 
 </p>
 <ol class="org-ol">
-<li>Rappeler l'expression mathématique de la modélisation réalisée.</li>
+<li>Rappelez l'expression mathématique de la modélisation réalisée.</li>
 <li><p>
-Préparer les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
+Préparez les données en utilisant la formule adéquate avec la fonction <code>patsy.dmatrices</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -492,7 +495,7 @@ Préparer les données en utilisant la formule adéquate avec la fonction <code>
 </div></li>
 
 <li><p>
-Utiliser la fonction <code>Logit</code> pour entraîner le modèle.
+Utilisez la fonction <code>Logit</code> pour entraîner le modèle.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -503,12 +506,12 @@ mod2.summary()
 </pre>
 </div></li>
 
-<li>Interpréter les caractéristiques du modèle.</li>
+<li>Interprétez les caractéristiques du modèle.</li>
 <li><p>
-Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1}=0, X_{2}=0, X_{3}=\text{Q1}) = \pi_{2}(0, 0, \text{Q1})\),
+Calculez les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1}=0, X_{2}=0, X_{3}=\text{Q1}) = \pi_{2}(0, 0, \text{Q1})\),
 \(P(Y=\text{>2.5} | X_{1} = 6, X_{2} = 2, X_{3}=\text{Q4}) = \pi_{2}(6, 2, \text{Q4})\) et
 \(P(Y=\text{>2.5} | X_{1}=2, X_{2} = 6, X_{3}=\text{Q4}) = \pi_{2}(2, 6, \text{Q4})\) dans le modèle
-\(\mathcal{M}_{2}\) en utilisant la méthode <code>.predict</code> du modèle. Interpréter ces probabilités en français.
+\(\mathcal{M}_{2}\) en utilisant la méthode <code>.predict</code> du modèle. Interprétez ces probabilités en français.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">features_raw_df</span> = pd.DataFrame({
@@ -524,11 +527,11 @@ Calculer les probabilités <i>a posteriori</i> \(P(Y=\text{>2.5} | X_{1}=0, X_{2
 <span style="color: #DFAF8F;">features_mod2_ex_df</span> = patsy.dmatrix(<span style="color: #CC9393;">"1 + HSHT_M3 + ASHT_M3 + phase"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   features_raw_df,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
-<span style="color: #DFAF8F;">pi_mod2_ex</span> = mod2.predict(features_mod2_ex_df)
+pi_mod2_ex = mod2.predict(features_mod2_ex_df)
 </pre>
 </div></li>
 <li><p>
-Calculer les rapports de cotes du modèle. 
+Calculez les rapports de cotes du modèle. 
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -539,7 +542,7 @@ np.exp(mod2.params)
 </div></li>
 
 <li><p>
-Créer une fonction <code>odds_ratio</code> prenant en argument un modèle et qui calcule un <code>DataFrame</code>
+Créez une fonction <code>odds_ratio</code> prenant en argument un modèle et qui calcule un <code>DataFrame</code>
 donnant pour chaque variable : l'<i>odds ratio</i>, l'intervalle de confiance à 5%, la <i>p-values</i> et un indicateur qui
 vaut <code>True</code> si le paramètre est significatif au seuil de 5% et <code>False</code> sinon.
 </p>
@@ -562,10 +565,10 @@ vaut <code>True</code> si le paramètre est significatif au seuil de 5% et <code
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">params_df</span> = pd.concat([
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   model.params,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   model.conf_int()], axis=1)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">or_df</span> = np.exp(params_df)
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">or_df.columns</span> = [<span style="color: #CC9393;">"OR"</span>, <span style="color: #CC9393;">"2.5%"</span>, <span style="color: #CC9393;">"97.5%"</span>]
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">or_df</span>[<span style="color: #CC9393;">"pvalues"</span>] = model.pvalues
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">or_df</span>[<span style="color: #CC9393;">"signif_5%"</span>] = or_df[<span style="color: #CC9393;">"pvalues"</span>] &lt; 0.05                       
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   or_df = np.exp(params_df)
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   or_df.columns = [<span style="color: #CC9393;">"OR"</span>, <span style="color: #CC9393;">"2.5%"</span>, <span style="color: #CC9393;">"97.5%"</span>]
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   or_df[<span style="color: #CC9393;">"pvalues"</span>] = model.pvalues
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   or_df[<span style="color: #CC9393;">"signif_5%"</span>] = or_df[<span style="color: #CC9393;">"pvalues"</span>] &lt; 0.05                       
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #F0DFAF; font-weight: bold;">return</span> or_df
 </pre>
 </div>
@@ -671,7 +674,7 @@ confiance en utilisant les fonctions <code>odds_ratio</code> et <code>px.scatter
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">or_df</span>[<span style="color: #CC9393;">"d97.5%"</span>] = or_df[<span style="color: #CC9393;">"97.5%"</span>] - or_df[<span style="color: #CC9393;">"OR"</span>]
 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">model_name</span> = f<span style="color: #CC9393;">"{model.model.endog_names} ~ logit({', '.join(model.model.exog_names)})"</span>
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">model_name</span> = f<span style="color: #CC9393;">"</span>{model.model.endog_names}<span style="color: #CC9393;"> ~ logit(</span>{', '.join(model.model.exog_names)}<span style="color: #CC9393;">)"</span>
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DFAF8F;">fig</span> = px.scatter(or_df,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>x=<span style="color: #CC9393;">"OR"</span>,
@@ -679,7 +682,7 @@ confiance en utilisant les fonctions <code>odds_ratio</code> et <code>px.scatter
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>color=<span style="color: #CC9393;">"signif_5%"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>error_x_minus=<span style="color: #CC9393;">"d2.5%"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>error_x=<span style="color: #CC9393;">"d97.5%"</span>,
-<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=f<span style="color: #CC9393;">"Odds ratio du mod&#232;le {model_name}"</span>,
+<span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>title=f<span style="color: #CC9393;">"Odds ratio du mod&#232;le </span>{model_name}<span style="color: #CC9393;">"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>labels={<span style="color: #CC9393;">"index"</span>: <span style="color: #CC9393;">"Variable"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #CC9393;">"signif_5%"</span>: <span style="color: #CC9393;">"Significativit&#233; &#224; 5%"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span><span style="color: #CC9393;">"OR"</span>: <span style="color: #CC9393;">"Odds ratio"</span>,
@@ -690,6 +693,9 @@ confiance en utilisant les fonctions <code>odds_ratio</code> et <code>px.scatter
 or_visu(mod2)
 </pre>
 </div>
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>                <div id="c9a3e7a5-b6e3-446b-9094-4fd777d21124" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c9a3e7a5-b6e3-446b-9094-4fd777d21124")) {                    Plotly.newPlot(                        "c9a3e7a5-b6e3-446b-9094-4fd777d21124",                        [{"error_x":{"array":[0.06618615092539071,0.09757790707723202,0.016549186575889552,0.015236387196831958],"arrayminus":[0.05960027743781404,0.08975893163533333,0.016299743378753506,0.015014369642045278]},"hovertemplate":"Significativit\u00e9 \u00e0 5%=True<br>Odds ratio=%{x}<br>Variable=%{y}<extra></extra>","legendgroup":"True","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"True","orientation":"h","showlegend":true,"x":[0.5989657962813038,1.1201581019849596,1.0813984803413959,1.0303903653132824],"xaxis":"x","y":["Intercept","phase[T.Q4]","HSHT_MA3","ASHT_MA3"],"yaxis":"y","type":"scatter"},{"error_x":{"array":[0.07995347992983781,0.07523039180725943],"arrayminus":[0.07406005058809029,0.06967256643986819]},"hovertemplate":"Significativit\u00e9 \u00e0 5%=False<br>Odds ratio=%{x}<br>Variable=%{y}<extra></extra>","legendgroup":"False","marker":{"color":"#EF553B","symbol":"circle"},"mode":"markers","name":"False","orientation":"h","showlegend":true,"x":[1.0047390788843564,0.9430836928129085],"xaxis":"x","y":["phase[T.Q2]","phase[T.Q3]"],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Odds ratio"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Variable"}},"legend":{"title":{"text":"Significativit\u00e9 \u00e0 5%"},"tracegroupgap":0},"title":{"text":"Odds ratio du mod\u00e8le NGFTd[>2.5] ~ logit(Intercept, phase[T.Q2], phase[T.Q3], phase[T.Q4], HSHT_MA3, ASHT_MA3)"}},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div>
+
 <p>
 Quelle(s) critique(s) peut-on formuler sur ce résultat visuel ?
 </p></li>
@@ -699,15 +705,15 @@ Quelle(s) critique(s) peut-on formuler sur ce résultat visuel ?
 </div>
 
 
-<div id="outline-container-orgaccc2cc" class="outline-2">
-<h2 id="orgaccc2cc"><span class="section-number-2">4.</span> Évaluation des performances</h2>
+<div id="outline-container-orgef82ceb" class="outline-2">
+<h2 id="orgef82ceb"><span class="section-number-2">4.</span> Évaluation des performances</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org35b0a1e" class="outline-3">
-<h3 id="org35b0a1e"><span class="section-number-3">4.1.</span> Données d'apprentissage et de test</h3>
+<div id="outline-container-org1679580" class="outline-3">
+<h3 id="org1679580"><span class="section-number-3">4.1.</span> Données d'apprentissage et de test</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
-Pour évaluer nos différents modèles, nous mettons en oeuvre l'approche classique consistant à
+Pour évaluer nos différents modèles, nous mettons en œuvre l'approche classique consistant à
 séparer nos données en deux échantillons : 
 </p>
 <ol class="org-ol">
@@ -717,7 +723,7 @@ modèle étudié.</li>
 </ol>
 
 <p>
-La proportion entre données d'apprentissage et données de test est usuellement de 2/3, 1/3 mais tout
+La proportion entre données d'apprentissage et données de test est généralement de 2/3, 1/3 mais tout
 dépend en pratique de l'application considérée.  
 </p>
 
@@ -728,7 +734,7 @@ dépend en pratique de l'application considérée.
 <li>Si les données étudiées dépendent du temps (comme c'est le cas pour les pronostics
 sportifs), il est important de veiller à ce que les données d'apprentissage soient bien
 antérieures aux données de test.</li>
-<li>Si les données sont quelconques, il est souvent pertinent de conserver la même proportion entre
+<li>Si les données sont quelconques, pensez à conserver la même proportion entre
 les modalités de la variable cible dans les données d'apprentissage et de test.</li>
 </ul>
 
@@ -737,7 +743,7 @@ les modalités de la variable cible dans les données d'apprentissage et de test
 </p>
 <ol class="org-ol">
 <li><p>
-Créer un échantillon d'apprentissage <code>fixtures_train_df</code> en prenant les rencontres ayant eu lieu
+Créez un échantillon d'apprentissage <code>fixtures_train_df</code> en prenant les rencontres ayant eu lieu
 avant la saison <code>2019-2020</code> et en supprimant les matchs ayant au moins une variable manquante.
 </p>
 <div class="org-src-container">
@@ -747,7 +753,7 @@ avant la saison <code>2019-2020</code> et en supprimant les matchs ayant au moin
 </div></li>
 
 <li><p>
-Créer l'échantillon de test <code>fixtures_test_df</code> en prenant le reste des données (en supprimant
+Créez l'échantillon de test <code>fixtures_test_df</code> en prenant le reste des données (en supprimant
 également les matchs possédant des valeurs manquantes), à savoir les
 matchs ayant eu lieu lors de la saison <code>2019-2020</code> et après.
 </p>
@@ -761,8 +767,8 @@ matchs ayant eu lieu lors de la saison <code>2019-2020</code> et après.
 </div>
 </div>
 
-<div id="outline-container-org826a01b" class="outline-3">
-<h3 id="org826a01b"><span class="section-number-3">4.2.</span> Évaluation du modèle \(\mathcal{M}_{1}\)</h3>
+<div id="outline-container-org757bcd9" class="outline-3">
+<h3 id="org757bcd9"><span class="section-number-3">4.2.</span> Évaluation du modèle \(\mathcal{M}_{1}\)</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 L'objectif de cette section est d'appliquer l'approche apprentissage/test afin d'évaluer la
@@ -775,7 +781,7 @@ modélisation logistique de la loi \(Y | \text{HSHT_M3}\)
 
 <ol class="org-ol">
 <li><p>
-Préparer les données d'apprentissage et de test en utilisant la formule adéquate avec la fonction
+Préparez les données d'apprentissage et de test en utilisant la formule adéquate avec la fonction
 <code>patsy.dmatrices</code>.
 </p>
 <div class="org-src-container">
@@ -785,14 +791,14 @@ Préparer les données d'apprentissage et de test en utilisant la formule adéqu
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(mod1_formula_str, data=fixtures_train_df, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
 
-<span style="color: #DFAF8F;">NGFTd_test_df</span>, <span style="color: #DFAF8F;">features_mod1_test_df</span> = \
+NGFTd_test_df, features_mod1_test_df = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(mod1_formula_str, data=fixtures_test_df, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
 </pre>
 </div></li>
 
 <li><p>
-Estimer les paramètres du modèle \(\mathcal{M}_{1}\) à partir des données d'apprentissage et
+Estimez les paramètres du modèle \(\mathcal{M}_{1}\) à partir des données d'apprentissage et
 stocker l'objet modèle ainsi créé dans la variable <code>mod1_train</code>.
 </p>
 <div class="org-src-container">
@@ -805,7 +811,7 @@ mod1_train.summary()
 </div></li>
 
 <li><p>
-Calculer la probabilité <i>a posteriori</i> de l'événement d'intérêt \(Y=\text{>2.5}\) à partir des
+Calculez la probabilité <i>a posteriori</i> de l'événement d'intérêt \(Y=\text{>2.5}\) à partir des
 données de test.  
 </p>
 <div class="org-src-container">
@@ -815,7 +821,7 @@ données de test.
 </div></li>
 
 <li><p>
-Pronostiquer la variable cible sur les données de test à partir des probabilités <i>a posteriori</i>
+Pronostiquez la variable cible sur les données de test à partir des probabilités <i>a posteriori</i>
 calculées précédemment en utilisant un seuil de décision \(\delta = 0.5\).
 </p>
 <div class="org-src-container">
@@ -826,7 +832,7 @@ calculées précédemment en utilisant un seuil de décision \(\delta = 0.5\).
 </div></li>
 
 <li><p>
-Calculer la matrice de confusion et le taux de bons pronostics obtenus. Cette matrice de
+Calculez la matrice de confusion et le taux de bons pronostics obtenus. Cette matrice de
 confusion apporte-t-elle des éléments pertinents quant à l'évaluation de notre modèle ?
 </p>
 <div class="org-src-container">
@@ -837,7 +843,7 @@ confusion apporte-t-elle des éléments pertinents quant à l'évaluation de not
 
 <li><p>
 Nous allons à présent évaluer les pronostics réalisés par le modèle en utilisant les cotes. Pour
-ce faire, créer tout d'abord un nouveau <code>DataFrame</code> <code>fixtures_test_odds_df</code> en effectuant une
+ce faire, créez tout d'abord un nouveau <code>DataFrame</code> <code>fixtures_test_odds_df</code> en effectuant une
 jointure entre les 
 <code>DataFrames</code> <code>fixtures_test_df</code> et <code>odds_df</code> afin d'obtenir la cote associée aux
 valeurs de la variable <code>NGFTd</code> pour chacune des rencontres :
@@ -854,7 +860,7 @@ valeurs de la variable <code>NGFTd</code> pour chacune des rencontres :
 </div></li>
 
 <li><p>
-Ajouter une colonne <code>score_mod1_50</code> au <code>DataFrame</code> <code>fixtures_test_odds_df</code> contenant, pour
+Ajoutez une colonne <code>score_mod1_50</code> au <code>DataFrame</code> <code>fixtures_test_odds_df</code> contenant, pour
 chaque rencontre :
 </p>
 <ul class="org-ul">
@@ -864,14 +870,14 @@ chaque rencontre :
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">idx_pronostic_ok</span> = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd"</span>] == fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd_mod1_pred_50"</span>]
-<span style="color: #DFAF8F;">fixtures_test_odds_df</span>[<span style="color: #CC9393;">"score_mod1_pred_50"</span>] = fixtures_test_odds_df[<span style="color: #CC9393;">"odds"</span>] - 1
-<span style="color: #DFAF8F;">fixtures_test_odds_df.loc</span>[~idx_pronostic_ok, <span style="color: #CC9393;">"score_mod1_pred_50"</span>] = -1
+fixtures_test_odds_df[<span style="color: #CC9393;">"score_mod1_pred_50"</span>] = fixtures_test_odds_df[<span style="color: #CC9393;">"odds"</span>] - 1
+fixtures_test_odds_df.loc[~idx_pronostic_ok, <span style="color: #CC9393;">"score_mod1_pred_50"</span>] = -1
 </pre>
 </div></li>
 
 <li><p>
 En déduire la performance du modèle \(\mathcal{M}_{1}\) évaluée sur les données de
-test considérées. Interpréter le résultat obtenu ?
+test considérées. Interprétez le résultat obtenu.
 </p>
 <div class="org-src-container">
 <pre class="src src-python">fixtures_test_odds_df[<span style="color: #CC9393;">"score_mod1_pred_50"</span>].<span style="color: #DCDCCC; font-weight: bold;">sum</span>()
@@ -879,14 +885,14 @@ test considérées. Interpréter le résultat obtenu ?
 </div></li>
 
 <li><p>
-Représenter graphiquement la performance moyenne du modèle par saison et
+Représentez graphiquement la performance moyenne du modèle par saison et
 par championnat. Question : À quoi sert l'argument <code>observed</code> dans la méthode <code>groupby</code> ?
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #DFAF8F;">mod1_pred_50_grp_avg</span> = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_test_odds_df.groupby([<span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"league_id"</span>], observed=<span style="color: #BFEBBF;">True</span>)[<span style="color: #CC9393;">"score_mod1_pred_50"</span>].mean()
 
-<span style="color: #DFAF8F;">fig</span> = \
+fig = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   px.bar(mod1_pred_50_grp_avg.reset_index(),
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"season_id"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"score_mod1_pred_50"</span>,
@@ -896,16 +902,21 @@ par championnat. Question : À quoi sert l'argument <code>observed</code> dans l
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  barmode=<span style="color: #CC9393;">"group"</span>)
 fig
 </pre>
-</div></li>
+</div>
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>                <div id="dc8cb35c-56d7-43ac-9c2f-86a82c5b845c" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("dc8cb35c-56d7-43ac-9c2f-86a82c5b845c")) {                    Plotly.newPlot(                        "dc8cb35c-56d7-43ac-9c2f-86a82c5b845c",                        [{"alignmentgroup":"True","hovertemplate":"Championnat=eng_pl<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"eng_pl","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"eng_pl","offsetgroup":"eng_pl","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[0.05219298245614036,-0.13333333333333333],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=fra_l1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"fra_l1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"fra_l1","offsetgroup":"fra_l1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020"],"xaxis":"x","y":[0.027482993197278916],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=fra_l2<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"fra_l2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"fra_l2","offsetgroup":"fra_l2","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[0.05301775147928994,0.057627118644067804],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=ger_b1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"ger_b1","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"ger_b1","offsetgroup":"ger_b1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[-0.07265700483091786,0.3672222222222223],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=spa_l1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"spa_l1","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"spa_l1","offsetgroup":"spa_l1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[-0.06378260869565218,-0.05656250000000001],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Saison"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Score M1 delta 0.5"}},"legend":{"title":{"text":"Championnat"},"tracegroupgap":0},"title":{"text":"Performances du mod\u00e8le M1"},"barmode":"group"},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></li>
+</ol>
 
+
+<ol class="org-ol">
 <li>Selon vous, comment pourrait-on améliorer la performance de nos pronostics ?</li>
 </ol>
 </div>
 </div>
 
 
-<div id="outline-container-org79fb03c" class="outline-3">
-<h3 id="org79fb03c"><span class="section-number-3">4.3.</span> Évaluation du modèle \(\mathcal{M}_{2}\)</h3>
+<div id="outline-container-org5c9ef23" class="outline-3">
+<h3 id="org5c9ef23"><span class="section-number-3">4.3.</span> Évaluation du modèle \(\mathcal{M}_{2}\)</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 L'objectif de cette section est d'appliquer l'approche apprentissage/test afin d'évaluer la
@@ -917,8 +928,10 @@ modélisation logistique de la loi \(Y | \text{HSHT_M3}, \text{ASHT_M3}, \text{p
 </p>
 
 <ol class="org-ol">
-<li>Reprendre le travail de la section précédente afin de l'appliquer au modèle \(\mathcal{M}_{2}\), à
+<li><p>
+Reprendre le travail de la section précédente afin de l'appliquer au modèle \(\mathcal{M}_{2}\), à
 savoir :
+</p>
 <ol class="org-ol">
 <li><p>
 Préparation des données avec <code>patsy</code>.
@@ -932,7 +945,7 @@ Préparation des données avec <code>patsy</code>.
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(mod2_formula_str, data=fixtures_train_df, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
 
-<span style="color: #DFAF8F;">NGFTd_test_df</span>, <span style="color: #DFAF8F;">features_mod2_test_df</span> = \
+NGFTd_test_df, features_mod2_test_df = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   patsy.dmatrices(mod2_formula_str, data=fixtures_test_df, 
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   return_type=<span style="color: #CC9393;">"dataframe"</span>)
 </pre>
@@ -950,7 +963,7 @@ mod2_train.summary()
 </div></li>
 
 <li><p>
-Calculer des probabilités <i>a posteriori</i> de l'événement d'intérêt sur les données de test.
+Calcul des probabilités <i>a posteriori</i> de l'événement d'intérêt sur les données de test.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -961,7 +974,7 @@ fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd[&gt;2.5]_mod2_pap"</s
 </div></li>
 
 <li><p>
-Pronostiquer la variable cible avec un seuil de décision \(\delta = 0.5\).
+Pronostic de la variable cible avec un seuil de décision \(\delta = 0.5\).
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -984,22 +997,22 @@ pd.crosstab(fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd"</span>],
 </div></li>
 
 <li><p>
-Évaluer la performance du modèle à partir des cotes.
+Évaluation de la performance du modèle à partir des cotes.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
 <span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">--------</span>
 <span style="color: #DFAF8F;">idx_pronostic_ok</span> = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd"</span>] == fixtures_test_odds_df[<span style="color: #CC9393;">"NGFTd_mod2_pred_50"</span>]
-<span style="color: #DFAF8F;">fixtures_test_odds_df</span>[<span style="color: #CC9393;">"score_mod2_pred_50"</span>] = fixtures_test_odds_df[<span style="color: #CC9393;">"odds"</span>] - 1
-<span style="color: #DFAF8F;">fixtures_test_odds_df.loc</span>[~idx_pronostic_ok, <span style="color: #CC9393;">"score_mod2_pred_50"</span>] = -1
+fixtures_test_odds_df[<span style="color: #CC9393;">"score_mod2_pred_50"</span>] = fixtures_test_odds_df[<span style="color: #CC9393;">"odds"</span>] - 1
+fixtures_test_odds_df.loc[~idx_pronostic_ok, <span style="color: #CC9393;">"score_mod2_pred_50"</span>] = -1
 
 fixtures_test_odds_df[<span style="color: #CC9393;">"score_mod2_pred_50"</span>].<span style="color: #DCDCCC; font-weight: bold;">sum</span>()
 </pre>
 </div></li>
 
 <li><p>
-Représenter graphiquement la performance moyenne du modèle par saison et par championnat.
+Représentation graphique de la performance moyenne du modèle par saison et par championnat.
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #7F9F7F;">SOLUTION</span>
@@ -1007,7 +1020,7 @@ Représenter graphiquement la performance moyenne du modèle par saison et par c
 <span style="color: #DFAF8F;">mod2_pred_50_grp_avg</span> = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   fixtures_test_odds_df.groupby([<span style="color: #CC9393;">"season_id"</span>, <span style="color: #CC9393;">"league_id"</span>], observed=<span style="color: #BFEBBF;">True</span>)[<span style="color: #CC9393;">"score_mod2_pred_50"</span>].mean()
 
-<span style="color: #DFAF8F;">fig</span> = \
+fig = \
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   px.bar(mod2_pred_50_grp_avg.reset_index(),
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  x=<span style="color: #CC9393;">"season_id"</span>,
 <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>   <span style="color: #DCDCCC; background-color: #4F4F4F;"> </span>  y=<span style="color: #CC9393;">"score_mod2_pred_50"</span>,
@@ -1018,28 +1031,30 @@ Représenter graphiquement la performance moyenne du modèle par saison et par c
 fig
 </pre>
 </div></li>
-</ol></li>
+</ol>
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>                <div id="6b287e2c-bbde-4fc5-a389-fc0d8d562fbc" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("6b287e2c-bbde-4fc5-a389-fc0d8d562fbc")) {                    Plotly.newPlot(                        "6b287e2c-bbde-4fc5-a389-fc0d8d562fbc",                        [{"alignmentgroup":"True","hovertemplate":"Championnat=eng_pl<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"eng_pl","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"eng_pl","offsetgroup":"eng_pl","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[0.08122807017543861,-0.04999999999999999],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=fra_l1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"fra_l1","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"fra_l1","offsetgroup":"fra_l1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020"],"xaxis":"x","y":[0.016326530612244906],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=fra_l2<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"fra_l2","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"fra_l2","offsetgroup":"fra_l2","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[-0.06739644970414202,0.19135593220338984],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=ger_b1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"ger_b1","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"ger_b1","offsetgroup":"ger_b1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[-0.10565217391304346,0.2638888888888889],"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"Championnat=spa_l1<br>Saison=%{x}<br>Score M1 delta 0.5=%{y}<extra></extra>","legendgroup":"spa_l1","marker":{"color":"#FFA15A","pattern":{"shape":""}},"name":"spa_l1","offsetgroup":"spa_l1","orientation":"v","showlegend":true,"textposition":"auto","x":["2019-2020","2020-2021"],"xaxis":"x","y":[-0.03956521739130434,-0.050624999999999996],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Saison"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Score M1 delta 0.5"}},"legend":{"title":{"text":"Championnat"},"tracegroupgap":0},"title":{"text":"Performances du mod\u00e8le M1"},"barmode":"group"},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></li>
 
-<li>Comparer les performances obtenues avec le modèle $\mathcal{M}<sub>1</sub>.</li>
+<li>Comparaison des performances obtenues avec le modèle $\mathcal{M}<sub>1</sub>.</li>
 </ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgdf02d05" class="outline-2">
-<h2 id="orgdf02d05"><span class="section-number-2">5.</span> Pistes pour aller plus loin</h2>
+<div id="outline-container-org9d57ab5" class="outline-2">
+<h2 id="org9d57ab5"><span class="section-number-2">5.</span> Pistes pour aller plus loin</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
-<li>Analyser les scores obtenus sur vos modèles en fonction du seuil de décision. Le seuil de 0.5
-n'est vraisemblablement optimal.</li>
-<li>Tenter d'identifier des situations où il semble plus pertinentes que d'autres de parier, penser
-en particulier aux cas où la probabilité <i>a posteriori</i> de l'événement estimée par le modèle
-est plus importante que la probabilité estimée par le bookmaker (cf. notion de <i>value bet</i>).</li>
-<li>Ajuster votre mise en fonction la probabilité <i>a posteriori</i> de l'événement estimée par le
+<li>Analysez les scores obtenus sur vos modèles en fonction du seuil de décision. Le seuil de 0.5
+n'est vraisemblablement pas optimal.</li>
+<li>Tentez d'identifier des situations où il semble plus pertinent de parier, en pensant
+notamment aux cas où la probabilité <i>a posteriori</i> de l'événement estimée par le modèle
+est plus élevée que la probabilité estimée par le bookmaker (cf. notion de <i>value bet</i>).</li>
+<li>Ajustez votre mise en fonction de la probabilité <i>a posteriori</i> de l'événement estimée par le
 modèle.</li>
-<li>Travailler sur les variables explicatives afin d'améliorer le pouvoir prédictif de vos
+<li>Travaillez sur les variables explicatives pour améliorer le pouvoir prédictif de vos
 modèles.</li>
-<li>Si vous trouvez un algorithme miracle, n'hésitez pas à en parler avec moi ;)</li>
+<li>Si vous trouvez un algorithme miracle, n'hésitez pas à m'en parler ;)</li>
 </ul>
 </div>
 </div>
